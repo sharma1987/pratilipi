@@ -26,7 +26,7 @@
 		About: <i>Suryakant Tripathi 'Nirala' is one of the best writers the world has ever seen, He pioneered Free 
 		Verse in Hindi literature and is one of the founding pillors of the Chhayavaad movement. 'Ram Ki Shakti 
 		Pooja' is one of his signature poems. We believe that every one should read it and then re-read it, so feel 
-		free to share this book with as many people as you can.<i>
+		free to share this book with as many people as you can.</i>
 	</span>
 	<br/>
 	<span class="downaload">
@@ -45,7 +45,7 @@
 		novel novels which raises challenging, uncomfortable and controversial questions about Indian identity. To 
 		enhance it's reach to non-Bengali community, 'Agyeya' a noted literary figure in Hindi translated it to 
 		Hindi. We believe that every one should read it and then re-read it, so feel free to share this book with as 
-		many people as you can.<i>
+		many people as you can.</i>
 	</span>
 	<br/>
 	<span class="downaload">
@@ -62,7 +62,7 @@
 		About: <i>Suryakant Tripathi 'Nirala' is one of the best writers the world has ever seen, He pioneered Free 
 		Verse in Hindi literature and is one of the founding pillors of the Chhayavaad movement. 'Kukurmutta' is 
 		one of his signature poems. We believe that every one should read it and then re-read it, so feel free to
-		share this book with as many people as you can.<i>
+		share this book with as many people as you can.</i>
 	</span>
 	<br/>
 	<span class="downaload">
@@ -76,7 +76,7 @@
 	</span>
 	<br/>
 	<span class="about">
-		About: <i>A collection of some of the most beautiful Hindi poems covering a range of genres and emotions.<i>
+		About: <i>A collection of some of the most beautiful Hindi poems covering a range of genres and emotions.</i>
 	</span>
 	<br/>
 	<span class="downaload">
