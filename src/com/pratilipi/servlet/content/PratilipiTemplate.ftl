@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="alexaVerifyID" content="hJ9poKys-7Yn71oXsuOI0_c6zP4"/>
 		<link type="text/css" rel="stylesheet" href="/theme.default/style.css">
 		<link type="text/css" rel="stylesheet" href="/theme.pratilipi/style.css">
 
