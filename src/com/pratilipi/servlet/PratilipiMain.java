@@ -423,19 +423,19 @@ public class PratilipiMain extends ClaymusMain {
 		poemIdList.add( 5675983562604544L );
 		
 		List<Long> storyIdList = new LinkedList<>();
-		storyIdList.add( 4914755504439296L );
-		storyIdList.add( 5713391385575424L );
+		storyIdList.add( 6329330900664320L );
+		storyIdList.add( 5630498248327168L );
+		storyIdList.add( 5651934161666048L );
 		storyIdList.add( 5079448978194432L );
 		storyIdList.add( 5642398931615744L );
 		storyIdList.add( 5694454337896448L );
-		storyIdList.add( 5634165009547264L );
 
 		
 		HomeContent homeContent = HomeContentFactory.newHomeContent();
 		homeContent.setBookIdList( bookIdList );
 		homeContent.setPoemIdList( poemIdList );
 		homeContent.setStoryIdList( storyIdList );
-		homeContent.setLastUpdated( new Date( 38 ) );
+		homeContent.setLastUpdated( new Date( 39 ) );
 		return homeContent;
 	}
 
