@@ -3,7 +3,7 @@
 
   <application>prod-pratilipi</application>
   <module>default</module>
-  <version>mark-3p38</version>
+  <version>mark-3p41</version>
 
   <threadsafe>true</threadsafe>
   <sessions-enabled>true</sessions-enabled>
@@ -11,7 +11,7 @@
   <instance-class>B2</instance-class>
 
   <manual-scaling>
-    <instances>3</instances>
+    <instances>4</instances>
   </manual-scaling>
     
   <static-files>
