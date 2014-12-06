@@ -407,35 +407,34 @@ public class PratilipiMain extends ClaymusMain {
 			HttpServletRequest request ) throws IOException {
 		
 		List<Long> bookIdList = new LinkedList<>();
-		bookIdList.add( 5345197126844416L );
-		bookIdList.add( 5673309542809600L );
-		bookIdList.add( 5144374119759872L );
-		bookIdList.add( 5764878782431232L );
-		bookIdList.add( 5091659838652416L );
-		bookIdList.add( 5921201096491008L );
-		
+		bookIdList.add( 5123639896702976L );
+		bookIdList.add( 5331129229901824L );
+		bookIdList.add( 5702351037923328L );
+		bookIdList.add( 5706316634914816L );
+		bookIdList.add( 5140467847004160L );
+		bookIdList.add( 5169145746292736L );
+
 		List<Long> poemIdList = new LinkedList<>();
-		poemIdList.add( 5654228479508480L );
-		poemIdList.add( 5636432282517504L );
-		poemIdList.add( 5145805753155584L );
-		poemIdList.add( 5740058837516288L );
-		poemIdList.add( 5097739230642176L );
-		poemIdList.add( 5736829290545152L );
+		poemIdList.add( 5757972340801536L );
+		poemIdList.add( 5708388017111040L );
+		poemIdList.add( 5720499824885760L );
+		poemIdList.add( 5638721432977408L );
+		poemIdList.add( 5709092660183040L );
+		poemIdList.add( 5192158986371072L );
 		
 		List<Long> storyIdList = new LinkedList<>();
-		storyIdList.add( 6257159746617344L );
-		storyIdList.add( 5097024655458304L );
-		storyIdList.add( 5101919777325056L );
-		storyIdList.add( 5657751292215296L );
-		storyIdList.add( 5671464854355968L );
-		storyIdList.add( 5681589568667648L );
-
+		storyIdList.add( 5735865741475840L );
+		storyIdList.add( 5722532686594048L );
+		storyIdList.add( 5082600544665600L );
+		storyIdList.add( 5654907889647616L );
+		storyIdList.add( 5663812699029504L );
+		storyIdList.add( 5692158946312192L );
 
 		HomeContent homeContent = HomeContentFactory.newHomeContent();
 		homeContent.setBookIdList( bookIdList );
 		homeContent.setPoemIdList( poemIdList );
 		homeContent.setStoryIdList( storyIdList );
-		homeContent.setLastUpdated( new Date( 46 ) );
+		homeContent.setLastUpdated( new Date( 57 ) );
 		return homeContent;
 	}
 
