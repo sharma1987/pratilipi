@@ -201,17 +201,20 @@
 <script>
 
 	var pageStartTime;	//Initialized in window onload function
+	var clickEventSend = Boolean( 0 );
 	
 	function readForFreeOnClick(){
-	
-		ga( 'send', 'event',
-			'Pratilipi:' + '${ pratilipiData.getId()?c }',	// Event Category
-			'ABTesting : Old Read For Free Click',				// Event Action
-			'${ pratilipiData.getLanguageData().getNameEn() } ${ pratilipiData.getType() }', // Event Label
-			1 );									// Event Value
-			
-		window.location.replace( '${ pratilipiData.getReaderPageUrl() }' );
-			
+
+		if( !clickEventSend ){
+			ga( 'send', 'event',
+				'Pratilipi:' + '${ pratilipiData.getId()?c }',	// Event Category
+				'ABTesting : Old Read For Free Click',				// Event Action
+				'${ pratilipiData.getLanguageData().getNameEn() } ${ pratilipiData.getType() }', // Event Label
+				1 );									// Event Value
+		}
+		
+		clickEventSend = Boolean( 1 );	
+		window.location.replace( '${ pratilipiData.getReaderPageUrl() }' );	
 	}
 	
 	function recordPageTime(){
