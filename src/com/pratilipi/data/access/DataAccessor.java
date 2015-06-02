@@ -5,6 +5,7 @@ import java.util.List;
 import com.claymus.data.access.DataListCursorTuple;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
+import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Author;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
@@ -133,6 +134,8 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	UserPratilipi getUserPratilipi( Long userId, Long pratilipiId );
 
 	List<UserPratilipi> getUserPratilipiList( Long pratilipiId );
+	
+	List<UserPratilipi> getUserPratilipiList( UserPratilipiFilter userPratilipiFilter );
 	
 	List<Long> getPurchaseList( Long userId );
 

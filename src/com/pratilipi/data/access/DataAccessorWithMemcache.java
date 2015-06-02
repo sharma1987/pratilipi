@@ -9,6 +9,7 @@ import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.Memcache;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
+import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Author;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
@@ -571,6 +572,24 @@ public class DataAccessorWithMemcache
 		}
 		return userPratilipiList;
 	}
+	
+	@Override
+	public List<UserPratilipi> getUserPratilipiList(
+			UserPratilipiFilter userPratilipiFilter) {
+		if( userPratilipiFilter.getUserId() != null )
+			return dataAccessor.getUserPratilipiList( userPratilipiFilter );
+		
+		List<UserPratilipi> userPratilipiList = 
+					memcache.get( PREFIX_USER_PRATILIPI_LIST + userPratilipiFilter.getPratilipiId() );
+		if( userPratilipiList == null ){
+			userPratilipiList =
+				dataAccessor.getUserPratilipiList( userPratilipiFilter );
+			memcache.put(
+					PREFIX_USER_PRATILIPI_LIST + userPratilipiFilter.getPratilipiId(),
+					new ArrayList<>( userPratilipiList ) );
+		}
+		return userPratilipiList;
+	}
 
 	@Override
 	public List<Long> getPurchaseList( Long userId ) {
@@ -598,6 +617,5 @@ public class DataAccessorWithMemcache
 				PREFIX_USER_PRATILIPI_PURCHASE_LIST + userPratilipi.getUserId() );
 		return userPratilipi;
 	}
-
 
 }

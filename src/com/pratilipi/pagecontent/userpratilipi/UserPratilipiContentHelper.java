@@ -1,25 +1,38 @@
 package com.pratilipi.pagecontent.userpratilipi;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.ClaymusHelper;
+import com.claymus.commons.shared.NotificationType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.data.transfer.AccessToken;
 import com.claymus.data.transfer.User;
 import com.claymus.pagecontent.PageContentHelper;
+import com.claymus.taskqueue.Task;
+import com.claymus.taskqueue.TaskQueue;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.pratilipi.commons.shared.BookmarkRequestType;
+import com.pratilipi.commons.shared.UserPratilipiFilter;
+import com.pratilipi.commons.shared.UserReviewState;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.UserPratilipi;
 import com.pratilipi.data.transfer.shared.UserPratilipiData;
+import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.userpratilipi.gae.UserPratilipiContentEntity;
 import com.pratilipi.pagecontent.userpratilipi.shared.UserPratilipiContentData;
+import com.pratilipi.taskqueue.TaskQueueFactory;
 
 public class UserPratilipiContentHelper extends PageContentHelper<
 		UserPratilipiContent,
@@ -91,12 +104,48 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		AccessToken accessToken = ( AccessToken ) request.getAttribute( ClaymusHelper.REQUEST_ATTRIB_ACCESS_TOKEN );
+		
+		Pratilipi pratilipi = dataAccessor.getPratilipi( userPratilipiData.getPratilipiId() );
+		if( pratilipi == null )
+			throw new InvalidArgumentException( "Pratilipi Id is not valid" );
+		
 		UserPratilipi userPratilipi = dataAccessor.getUserPratilipi( accessToken.getUserId(), userPratilipiData.getPratilipiId() );
 		
 		if( userPratilipi == null ) {	//new record
 			userPratilipi = dataAccessor.newUserPratilipi();
 			userPratilipi.setUserId( accessToken.getUserId() );
 			userPratilipi.setPratilipiId( userPratilipiData.getPratilipiId() );
+		}
+		
+		if( userPratilipiData.hasReview() ){
+			
+			if( !PratilipiContentHelper.hasRequestAccessToAddPratilipiReview( request, pratilipi ) )
+				throw new InsufficientAccessException();
+
+			String notificationType = null;
+	
+			if( userPratilipi.getReviewDate() == null ){
+				userPratilipi.setReviewDate( new Date() );
+				userPratilipi.setReviewState( UserReviewState.PENDING_APPROVAL );
+				
+				notificationType  = NotificationType.REVIEW_ADD.toString();
+			} else
+				notificationType = NotificationType.REVIEW_UPDATE.toString();
+			
+			userPratilipi.setReview( userPratilipiData.getReview() );
+			userPratilipi.setReviewLastUpdatedDate( new Date() );
+	
+			userPratilipi = dataAccessor.createOrUpdateUserPratilipi( userPratilipi );
+			
+			Task task = TaskQueueFactory.newTask();
+			Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
+			task.addParam( "userId", userPratilipi.getUserId().toString() );
+			task.addParam( "recipientId", author.getUserId().toString() );
+			task.addParam( "pratilipiId", pratilipi.getId().toString() );
+			task.addParam( "notificationType", notificationType );
+			
+			TaskQueue taskQueue = TaskQueueFactory.getNotificationTaskQueue();
+			taskQueue.add( task );
 		}
 		
 		if( userPratilipiData.hasBookmarks() ) {
@@ -148,4 +197,18 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 		return createUserPratilipiData( userPratilipi, request );
 	}
 	
+	public static List<UserPratilipiData> getReviewDataList( UserPratilipiFilter userPratilipiFilter, HttpServletRequest request ){
+		
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
+		List<UserPratilipi> userPratilipiList = dataAccessor.getUserPratilipiList( userPratilipiFilter );
+		
+		List<UserPratilipiData> userPratilipiDataList = new ArrayList<>();
+		
+		for( UserPratilipi userPratilipi : userPratilipiList ){
+			if( userPratilipi.getReview() != null && !userPratilipi.getReview().isEmpty() )
+				userPratilipiDataList.add( createUserPratilipiData( userPratilipi, request ) );
+		}
+		
+		return userPratilipiDataList;
+	}
 }

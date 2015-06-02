@@ -13,10 +13,12 @@ import javax.jdo.Query;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.GaeQueryBuilder;
 import com.claymus.data.access.GaeQueryBuilder.Operator;
+import com.claymus.data.access.gae.CommentEntity;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
+import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.gae.AuthorEntity;
 import com.pratilipi.data.access.gae.EventEntity;
 import com.pratilipi.data.access.gae.EventPratilipiEntity;
@@ -546,6 +548,29 @@ public class DataAccessorGaeImpl
 		List<UserPratilipi> userPratilipiList = (List<UserPratilipi>) query.execute( pratilipiId );
 		return (List<UserPratilipi>) pm.detachCopyAll( userPratilipiList );
 		
+	}
+	
+	@Override
+	public List<UserPratilipi> getUserPratilipiList(
+			UserPratilipiFilter userPratilipiFilter) {
+		
+		GaeQueryBuilder gaeQueryBuilder =
+				new GaeQueryBuilder( pm.newQuery( CommentEntity.class ) );
+		
+		if( userPratilipiFilter.getPratilipiId() != null )
+			gaeQueryBuilder.addFilter( "pratilipiId", userPratilipiFilter.getPratilipiId() );
+		if( userPratilipiFilter.getUserId() != null )
+			gaeQueryBuilder.addFilter( "userId", userPratilipiFilter.getUserId() );
+		if( userPratilipiFilter.getOrderByReviewDate() != null )
+			gaeQueryBuilder.addOrdering( "reviewDate", userPratilipiFilter.getOrderByReviewDate() );
+		
+		Query query = gaeQueryBuilder.build();
+		
+		@SuppressWarnings("unchecked")
+		List<UserPratilipi> userPratilipiList = 
+							( List<UserPratilipi> ) query.executeWithMap( gaeQueryBuilder.getParamNameValueMap() );
+		
+		return ( List<UserPratilipi> ) pm.detachCopy( userPratilipiList );
 	}
 
 	@SuppressWarnings("unchecked")

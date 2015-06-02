@@ -30,7 +30,7 @@ public class UserPratilipiData implements IsSerializable {
 	private boolean hasBookmarks;
 	private BookmarkRequestType bookmarkRequestType;
 	
-	private boolean addedToLib;
+	private Boolean addedToLib;
 	private boolean hasAddedToLib;
 	
 	public Long getUserId() {
