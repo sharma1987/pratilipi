@@ -9,10 +9,18 @@ import com.pratilipi.data.transfer.shared.PratilipiData;
 public class GetMobileInitResponse extends GenericResponse {
 
 	// TODO : PROPER NAMING BASED ON USE OF THE LIST
-	List<PratilipiData> topReadPratilipiDataList;
+	List<PratilipiData> topReadsPratilipiDataList;
+	List<PratilipiData> featuredPratilipiDataList;
+	List<PratilipiData> newReleasesPratilipiDataList;
 	
-	public GetMobileInitResponse( List<PratilipiData> topReadPratilipiDataList ){
-		this.topReadPratilipiDataList = topReadPratilipiDataList;
+	public GetMobileInitResponse( 
+			List<PratilipiData> topReadPratilipiDataList,
+			List<PratilipiData> featuredPratilipiDataList,
+			List<PratilipiData> newReleasePratilipiDataList ){
+		
+		this.topReadsPratilipiDataList = topReadPratilipiDataList;
+		this.featuredPratilipiDataList = featuredPratilipiDataList;
+		this.newReleasesPratilipiDataList = newReleasePratilipiDataList;
 	}
 
 }
