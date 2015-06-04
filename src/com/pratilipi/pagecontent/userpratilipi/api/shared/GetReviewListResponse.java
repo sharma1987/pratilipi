@@ -10,9 +10,9 @@ import com.pratilipi.data.transfer.shared.UserPratilipiData;
 public class GetReviewListResponse extends GenericResponse {
 
 	@SuppressWarnings( "unused" )
-	private List<UserPratilipiData> userPratilipiDataList;
+	private List<UserPratilipiData> reviewDataList;
 	
-	public GetReviewListResponse( List<UserPratilipiData> userPratilipiDataList ){
-		this.userPratilipiDataList = userPratilipiDataList;
+	public GetReviewListResponse( List<UserPratilipiData> reviewDataList ){
+		this.reviewDataList = reviewDataList;
 	}
 }
