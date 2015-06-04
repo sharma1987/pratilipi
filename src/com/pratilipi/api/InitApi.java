@@ -22,10 +22,8 @@ import com.claymus.taskqueue.Task;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.PratilipiPageType;
-import com.pratilipi.commons.shared.PratilipiType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
@@ -49,8 +47,8 @@ public class InitApi extends GenericApi {
 	private void updateHomePageContent( GenericRequest request ) throws InvalidArgumentException, UnexpectedServerException {
 
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
-		SearchAccessor searchAccessor = DataAccessorFactory.getSearchAccessor();
-		PratilipiFilter pratilipiFilter = new PratilipiFilter();
+//		SearchAccessor searchAccessor = DataAccessorFactory.getSearchAccessor();
+//		PratilipiFilter pratilipiFilter = new PratilipiFilter();
 		
 		
 		List<Long> bookIdList = new ArrayList<>( 6 );
@@ -70,8 +68,8 @@ public class InitApi extends GenericApi {
 		bookIdList.add( 5704013609697280L );
 		bookIdList.add( 5699942098141184L );
 		//Tamil Book
-		bookIdList.add( 4884018084446208L );
-		bookIdList.add( 4939005778984960L );
+		bookIdList.add( 6248623985655808L );
+		bookIdList.add( 6280739603611648L );
 
 		
 		List<Long> storyIdList = new ArrayList<>( 6 );
@@ -91,8 +89,8 @@ public class InitApi extends GenericApi {
 		storyIdList.add( 5710282332569600L );
 		storyIdList.add( 5686637379977216L );
 		//Tamil Story
-		storyIdList.add( 5763271743242240L );
-		storyIdList.add( 4778271828869120L );
+		storyIdList.add( 6257113743491072L );
+		storyIdList.add( 5760765059399680L );
 
 		
 		List<Long> poemIdList = new ArrayList<>( 6 );
