@@ -39,6 +39,7 @@
 					<label style="font-size: 14px;">Rating: -/5</label>
 				</#if>
 			</div>
+			<!-- <button type="button" class="btn btn-success" onclick="readForFreeOnClick()" style="width: 91%">Read For Free</button> -->
 		</div>
 		
 		<#-- Title, Author Name, Genre List, Summary and Buttons -->
