@@ -17,9 +17,11 @@ import com.claymus.data.access.gae.CommentEntity;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.pratilipi.commons.shared.AuthorFilter;
+import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.gae.AuthorEntity;
+import com.pratilipi.data.access.gae.CategoryEntity;
 import com.pratilipi.data.access.gae.EventEntity;
 import com.pratilipi.data.access.gae.EventPratilipiEntity;
 import com.pratilipi.data.access.gae.GenreEntity;
@@ -32,6 +34,7 @@ import com.pratilipi.data.access.gae.PublisherEntity;
 import com.pratilipi.data.access.gae.TagEntity;
 import com.pratilipi.data.access.gae.UserPratilipiEntity;
 import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
 import com.pratilipi.data.transfer.Genre;
@@ -428,6 +431,47 @@ public class DataAccessorGaeImpl
 
 
 	@Override
+	public Category newCategory() {
+		return new CategoryEntity();
+	}
+
+	@Override
+	public Category getCategory(Long id) {
+		return getEntity( CategoryEntity.class, id );
+	}
+
+	@Override
+	public List<Category> getCategoryList() {
+		Query query = 
+				new GaeQueryBuilder( pm.newQuery( CategoryEntity.class ))
+						.addOrdering( "name", true )
+						.build();
+		
+		@SuppressWarnings( "unchecked" )
+		List<Category> categoryEntityList = ( List<Category> ) query.execute();
+		return ( List<Category> ) pm.detachCopyAll( categoryEntityList );
+	}
+	
+	@Override
+	public List<Category> getCategoryListByType( CategoryType type ) {
+		Query query = 
+				new GaeQueryBuilder( pm.newQuery( CategoryEntity.class ))
+						.addFilter( "type", type )
+						.addOrdering( "name", true )
+						.build();
+		
+		@SuppressWarnings( "unchecked" )
+		List<Category> categoryEntityList = ( List<Category> ) query.execute();
+		return ( List<Category> ) pm.detachCopyAll( categoryEntityList );
+	}
+
+	@Override
+	public Category createOrUpdateCategory(Category category) {
+		return createOrUpdateEntity( category );
+	}
+
+
+	@Override
 	public Tag newTag() {
 		return new TagEntity();
 	}
@@ -590,6 +634,5 @@ public class DataAccessorGaeImpl
 		( (UserPratilipiEntity) userPratilipi ).setId( userPratilipi.getUserId() + "-" + userPratilipi.getPratilipiId() );
 		return createOrUpdateEntity( userPratilipi );
 	}
-
 
 }

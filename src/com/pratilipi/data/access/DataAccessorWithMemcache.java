@@ -8,9 +8,11 @@ import java.util.Map;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.Memcache;
 import com.pratilipi.commons.shared.AuthorFilter;
+import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
 import com.pratilipi.data.transfer.Genre;
@@ -39,6 +41,10 @@ public class DataAccessorWithMemcache
 	private static final String PREFIX_GENRE_LIST = "GenreList-";
 	private static final String PREFIX_PRATILIPI_GENRE = "PratilipiGenre-";
 	private static final String PREFIX_PRATILIPI_GENRE_LIST = "PratilipiGenreList-";
+	private static final String PREFIX_CATEGORY = "Category-";
+	private static final String PREFIX_CATEGORY_LIST = "CategoryList-";
+	private static final String PREFIX_PRATILIPI_CATEGORY = "PratilipiCategory-";
+	private static final String PREFIX_PRATILIPI_CATEGORY_LIST = "PratilipiCategoryList-";
 	private static final String PREFIX_USER_PRATILIPI = "UserPratilipi-";
 	private static final String PREFIX_USER_PRATILIPI_LIST = "UserPratilipiList-";
 	private static final String PREFIX_USER_PRATILIPI_PURCHASE_LIST = "UserPratilipiPurchaseList-";
@@ -427,6 +433,51 @@ public class DataAccessorWithMemcache
 
 
 	@Override
+	public Category newCategory() {
+		return dataAccessor.newCategory();
+	}
+
+	@Override
+	public Category getCategory(Long id) {
+		Category category = memcache.get( PREFIX_CATEGORY + id );
+		if( category == null ){
+			category = dataAccessor.getCategory( id );
+			if( category != null )
+				memcache.put( PREFIX_CATEGORY + id, category );
+		}
+		return category;
+	}
+
+	@Override
+	public List<Category> getCategoryList() {
+		List<Category> categoryList = memcache.get( PREFIX_CATEGORY_LIST );
+		if( categoryList == null ){
+			categoryList = dataAccessor.getCategoryList();
+			memcache.put( PREFIX_CATEGORY_LIST, new ArrayList<>( categoryList ) );
+		}
+		return categoryList;
+	}
+	
+	@Override
+	public List<Category> getCategoryListByType( CategoryType type ) {
+		List<Category> categoryListByType = memcache.get( PREFIX_CATEGORY_LIST + type );
+		if( categoryListByType == null ){
+			categoryListByType = dataAccessor.getCategoryListByType( type );
+			memcache.put( PREFIX_CATEGORY_LIST + type, new ArrayList<>( categoryListByType ) );
+		}
+		return categoryListByType;
+	}
+
+	@Override
+	public Category createOrUpdateCategory( Category category ) {
+		category = dataAccessor.createOrUpdateCategory( category );
+		memcache.put( PREFIX_CATEGORY + category.getId(), category);
+		memcache.remove( PREFIX_CATEGORY_LIST );
+		return category;
+	}
+
+
+	@Override
 	public Tag newTag() {
 		return dataAccessor.newTag();
 	}
@@ -617,5 +668,6 @@ public class DataAccessorWithMemcache
 				PREFIX_USER_PRATILIPI_PURCHASE_LIST + userPratilipi.getUserId() );
 		return userPratilipi;
 	}
+
 
 }

@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.claymus.data.access.DataListCursorTuple;
 import com.pratilipi.commons.shared.AuthorFilter;
+import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
 import com.pratilipi.data.transfer.Genre;
@@ -97,6 +99,17 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	List<Genre> getGenreList();
 
 	Genre createOrUpdateGenre( Genre genre );
+
+
+	Category newCategory();
+	
+	Category getCategory( Long id );
+	
+	List<Category> getCategoryList();
+	
+	List<Category> getCategoryListByType( CategoryType type );
+	
+	Category createOrUpdateCategory( Category category );
 
 
 	Tag newTag();
