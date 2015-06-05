@@ -81,12 +81,15 @@ public class MobileInitApi extends GenericApi {
 			
 		}
 		
+		GetMobileInitResponse response = new GetMobileInitResponse();
+		
 		List<PratilipiData> topReadsPratilipiDataList = 
 					PratilipiContentHelper.createPratilipiDataList( 
 								topReadsPratilipiIdList,
 								true,
 								true,
 								this.getThreadLocalRequest() );
+		response.attachToResponse( "Top Reads", "topReadsPratilipiDataList", topReadsPratilipiDataList );
 		
 		
 		List<PratilipiData> featuredPratilipiDataList = 
@@ -95,6 +98,7 @@ public class MobileInitApi extends GenericApi {
 							true,
 							true,
 							this.getThreadLocalRequest() );
+		response.attachToResponse( "Featured", "featuredPratilipiDataList", featuredPratilipiDataList );
 		
 		List<PratilipiData> newReleasesPratilipiDataList = 
 				PratilipiContentHelper.createPratilipiDataList( 
@@ -102,7 +106,8 @@ public class MobileInitApi extends GenericApi {
 							true,
 							true,
 							this.getThreadLocalRequest() );
+		response.attachToResponse( "New Releases", "newReleasesPratilipiDataList", newReleasesPratilipiDataList );
 		
-		return new GetMobileInitResponse( topReadsPratilipiDataList, featuredPratilipiDataList, newReleasesPratilipiDataList );
+		return response;
 	}
 }
