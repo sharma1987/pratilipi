@@ -9,9 +9,9 @@ public interface Category  extends Serializable {
 	
 	Long getId();
 	
-	String getCategoryName();
+	String getName();
 	
-	void setCategoryName( String name);
+	void setName( String name );
 	
 	Long getLanguageId();
 	

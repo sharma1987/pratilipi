@@ -36,12 +36,12 @@ public class CategoryEntity implements Category {
 	}
 
 	@Override
-	public String getCategoryName() {
+	public String getName() {
 		return name;
 	}
 
 	@Override
-	public void setCategoryName(String categoryName) {
+	public void setName(String categoryName) {
 		this.name = categoryName;
 	}
 
