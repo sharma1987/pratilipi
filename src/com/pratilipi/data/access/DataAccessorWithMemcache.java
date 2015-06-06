@@ -8,7 +8,7 @@ import java.util.Map;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.Memcache;
 import com.pratilipi.commons.shared.AuthorFilter;
-import com.pratilipi.commons.shared.CategoryType;
+import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Author;
@@ -459,13 +459,8 @@ public class DataAccessorWithMemcache
 	}
 	
 	@Override
-	public List<Category> getCategoryListByType( CategoryType type ) {
-		List<Category> categoryListByType = memcache.get( PREFIX_CATEGORY_LIST + type );
-		if( categoryListByType == null ){
-			categoryListByType = dataAccessor.getCategoryListByType( type );
-			memcache.put( PREFIX_CATEGORY_LIST + type, new ArrayList<>( categoryListByType ) );
-		}
-		return categoryListByType;
+	public List<Category> getCategoryList( CategoryFilter categoryFilter ) {
+		return dataAccessor.getCategoryList( categoryFilter );
 	}
 
 	@Override

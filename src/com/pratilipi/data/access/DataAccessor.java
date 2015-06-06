@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.claymus.data.access.DataListCursorTuple;
 import com.pratilipi.commons.shared.AuthorFilter;
-import com.pratilipi.commons.shared.CategoryType;
+import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Author;
@@ -107,7 +107,7 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	
 	List<Category> getCategoryList();
 	
-	List<Category> getCategoryListByType( CategoryType type );
+	List<Category> getCategoryList( CategoryFilter categoryFilter );
 	
 	Category createOrUpdateCategory( Category category );
 

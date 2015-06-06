@@ -17,7 +17,7 @@ import com.claymus.data.access.gae.CommentEntity;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.pratilipi.commons.shared.AuthorFilter;
-import com.pratilipi.commons.shared.CategoryType;
+import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.gae.AuthorEntity;
@@ -453,12 +453,19 @@ public class DataAccessorGaeImpl
 	}
 	
 	@Override
-	public List<Category> getCategoryListByType( CategoryType type ) {
-		Query query = 
-				new GaeQueryBuilder( pm.newQuery( CategoryEntity.class ))
-						.addFilter( "type", type )
-						.addOrdering( "name", true )
-						.build();
+	public List<Category> getCategoryList( CategoryFilter categoryFilter ) {
+		
+		GaeQueryBuilder gaeQueryBuilder = new GaeQueryBuilder( pm.newQuery( CategoryEntity.class ) );
+		
+		if( categoryFilter.getType() != null )
+			gaeQueryBuilder.addFilter( "type", categoryFilter.getType() );
+		
+		if( categoryFilter.getLanguageId() != null )
+			gaeQueryBuilder.addFilter( "languageId", categoryFilter.getLanguageId() );
+		
+		gaeQueryBuilder.addOrdering( "name", true );
+		
+		Query query = gaeQueryBuilder.build();
 		
 		@SuppressWarnings( "unchecked" )
 		List<Category> categoryEntityList = ( List<Category> ) query.execute();
