@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.claymus.commons.shared.NotificationType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
@@ -452,7 +454,9 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 			Task task = TaskQueueFactory.newTask();
 			Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
 			task.addParam( "userId", userPratilipi.getUserId().toString() );
-			task.addParam( "recipientId", author.getUserId().toString() );
+			if( author.getUserId() != null )
+				task.addParam( "recipientId", author.getUserId().toString() );
+			
 			task.addParam( "pratilipiId", pratilipi.getId().toString() );
 			task.addParam( "notificationType", notificationType );
 			
