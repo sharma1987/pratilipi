@@ -12,23 +12,20 @@ import com.pratilipi.data.transfer.shared.PratilipiData;
 @SuppressWarnings( "serial" )
 public class GetMobileInitResponse extends GenericResponse {
 
-	private String response;
+	private JsonArray response;
 	
 	public GetMobileInitResponse(){
-		response = new String();
+		response = new JsonArray();
 	}
 
 	public void attachToResponse( String name, String id, List<PratilipiData> content ){
 		Gson gson = new GsonBuilder().create();
-		JsonArray jsonArray = new JsonArray();
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty( "name", name );
 		jsonObject.addProperty( "id", id );
 		
 		jsonObject.addProperty( "content",  gson.toJson( content ));
 
-		jsonArray.add( jsonObject );
-		
-		response = response + gson.toJson( jsonArray );
+		response.add( jsonObject );
 	}
 }
