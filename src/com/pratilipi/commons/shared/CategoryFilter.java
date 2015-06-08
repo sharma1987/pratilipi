@@ -6,6 +6,7 @@ public class CategoryFilter {
 	
 	private CategoryType type;
 	
+	private Boolean hidden;
 	
 	public Long getLanguageId() {
 		return languageId;
@@ -23,4 +24,12 @@ public class CategoryFilter {
 		this.type = type;
 	}
 	
+	public Boolean getHidden(){
+		return hidden;
+	}
+	
+	public void setHidden( Boolean hidden ){
+		this.hidden = hidden;
+	}
+
 }

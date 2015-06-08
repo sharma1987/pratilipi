@@ -30,6 +30,9 @@ public class CategoryEntity implements Category {
 	@Persistent( column = "CREATION_DATE" )
 	private Date creationDate;
 	
+	@Persistent( column = "HIDDEN" )
+	private Boolean hidden;
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -73,6 +76,16 @@ public class CategoryEntity implements Category {
 	@Override
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	@Override
+	public Boolean isHidden(){
+		return hidden;
+	}
+	
+	@Override
+	public void setHidden( Boolean hidden ){
+		this.hidden = hidden;
 	}
 
 }

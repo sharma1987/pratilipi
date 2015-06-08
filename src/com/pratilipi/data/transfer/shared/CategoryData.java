@@ -11,15 +11,18 @@ public class CategoryData implements Serializable {
 	private Long id;
 	
 	private String name;
-	private Boolean hasName;
+	private boolean hasName;
 	
 	private Long languageId;
-	private Boolean hasLanguageId;
+	private boolean hasLanguageId;
 	
 	private CategoryType type;
-	private Boolean hasType;
+	private boolean hasType;
 	
 	private Date creationDate;
+	
+	private Boolean hidden;
+	private boolean hasHidden;
 
 	public Long getId() {
 		return id;
@@ -38,7 +41,7 @@ public class CategoryData implements Serializable {
 		this.hasName = true;
 	}
 
-	public Boolean hasName() {
+	public boolean hasName() {
 		return hasName;
 	}
 
@@ -51,7 +54,7 @@ public class CategoryData implements Serializable {
 		this.hasLanguageId = true;
 	}
 
-	public Boolean getHasLanguageId() {
+	public boolean getHasLanguageId() {
 		return hasLanguageId;
 	}
 
@@ -64,7 +67,7 @@ public class CategoryData implements Serializable {
 		this.hasType = true;
 	}
 
-	public Boolean getHasType() {
+	public boolean getHasType() {
 		return hasType;
 	}
 
@@ -76,4 +79,16 @@ public class CategoryData implements Serializable {
 		this.creationDate = creationDate;
 	}
 	
+	public Boolean isHidden(){
+		return hidden;
+	}
+	
+	public void setHidden( Boolean hidden ){
+		this.hidden = hidden;
+		this.hasHidden = true;
+	}
+	
+	public boolean hasHidden(){
+		return hasHidden;
+	}
 }

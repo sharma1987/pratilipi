@@ -25,4 +25,7 @@ public interface Category  extends Serializable {
 	
 	void setCreationDate( Date creationDate );
 	
+	Boolean isHidden();
+	
+	void setHidden( Boolean hidden );
 }

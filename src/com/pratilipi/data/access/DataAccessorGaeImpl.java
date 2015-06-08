@@ -13,7 +13,6 @@ import javax.jdo.Query;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.GaeQueryBuilder;
 import com.claymus.data.access.GaeQueryBuilder.Operator;
-import com.claymus.data.access.gae.CommentEntity;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.pratilipi.commons.shared.AuthorFilter;
@@ -437,7 +436,10 @@ public class DataAccessorGaeImpl
 
 	@Override
 	public Category getCategory(Long id) {
-		return getEntity( CategoryEntity.class, id );
+		if( id == null )
+			return null;
+		else
+			return getEntity( CategoryEntity.class, id );
 	}
 
 	@Override
@@ -462,6 +464,9 @@ public class DataAccessorGaeImpl
 		
 		if( categoryFilter.getLanguageId() != null )
 			gaeQueryBuilder.addFilter( "languageId", categoryFilter.getLanguageId() );
+		
+		if( categoryFilter.getHidden() != null )
+			gaeQueryBuilder.addFilter( "hidden", categoryFilter.getHidden() );
 		
 		gaeQueryBuilder.addOrdering( "name", true );
 		
@@ -606,7 +611,7 @@ public class DataAccessorGaeImpl
 			UserPratilipiFilter userPratilipiFilter) {
 		
 		GaeQueryBuilder gaeQueryBuilder =
-				new GaeQueryBuilder( pm.newQuery( CommentEntity.class ) );
+				new GaeQueryBuilder( pm.newQuery( UserPratilipiEntity.class ) );
 		
 		if( userPratilipiFilter.getPratilipiId() != null )
 			gaeQueryBuilder.addFilter( "pratilipiId", userPratilipiFilter.getPratilipiId() );
@@ -621,7 +626,7 @@ public class DataAccessorGaeImpl
 		List<UserPratilipi> userPratilipiList = 
 							( List<UserPratilipi> ) query.executeWithMap( gaeQueryBuilder.getParamNameValueMap() );
 		
-		return ( List<UserPratilipi> ) pm.detachCopy( userPratilipiList );
+		return ( List<UserPratilipi> ) pm.detachCopyAll( userPratilipiList );
 	}
 
 	@SuppressWarnings("unchecked")

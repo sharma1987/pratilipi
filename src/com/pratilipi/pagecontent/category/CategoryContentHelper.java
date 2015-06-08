@@ -3,9 +3,15 @@ package com.pratilipi.pagecontent.category;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.claymus.commons.server.ClaymusHelper;
+import com.claymus.commons.shared.exception.InsufficientAccessException;
+import com.claymus.data.transfer.AccessToken;
+import com.claymus.data.transfer.UserRole;
 import com.claymus.pagecontent.PageContentHelper;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.data.access.DataAccessor;
@@ -29,6 +35,17 @@ public class CategoryContentHelper extends PageContentHelper<
 		return 5.3;
 	}
 	
+	public static Boolean hasRequestAccessToAddOrUpdateCategory( HttpServletRequest request ){
+		AccessToken accessToken = ( AccessToken ) request.getAttribute( ClaymusHelper.REQUEST_ATTRIB_ACCESS_TOKEN );
+		List<UserRole> userRoleList = DataAccessorFactory.getDataAccessor( request ).getUserRoleList( accessToken.getUserId() );
+		
+		for( UserRole userRole : userRoleList ){
+			if( userRole.getRoleId().equals( "administrator" ))
+				return true;
+		}
+		return false;
+	}
+	
 	public static CategoryData createCategoryData( Long categoryId, HttpServletRequest request ){
 		
 		Category category = DataAccessorFactory.getDataAccessor( request )
@@ -39,6 +56,7 @@ public class CategoryContentHelper extends PageContentHelper<
 	public static CategoryData createCategoryData( Category category ){
 		CategoryData categoryData = new CategoryData();
 		categoryData.setId( category.getId() );
+		categoryData.setName( category.getName() );
 		categoryData.setLanguageId( category.getLanguageId() );
 		categoryData.setType( category.getType() );
 		categoryData.setCreationDate( category.getCreationData() );
@@ -69,7 +87,14 @@ public class CategoryContentHelper extends PageContentHelper<
 		return categoryDataList;
 	}
 	
-	public static CategoryData addCategory( CategoryData categoryData, HttpServletRequest request ){
+	public static CategoryData saveCategory( CategoryData categoryData, HttpServletRequest request )
+			throws InsufficientAccessException{
+		
+		if( !hasRequestAccessToAddOrUpdateCategory( request )){
+			Logger.getLogger( CategoryContentHelper.class.getName() ).log( Level.SEVERE, "Insufficient Access Exception" );
+			throw new InsufficientAccessException( "Insufficient Access"  );
+		}
+		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		Category category = dataAccessor.getCategory( categoryData.getId() );
 		
@@ -84,6 +109,8 @@ public class CategoryContentHelper extends PageContentHelper<
 			category.setLangugeId( categoryData.getLanguageId() );
 		if( categoryData.getHasType() )
 			category.setType( categoryData.getType() );
+		if( categoryData.hasHidden() )
+			category.setHidden( categoryData.isHidden() );
 		
 		category = dataAccessor.createOrUpdateCategory( category );
 		
