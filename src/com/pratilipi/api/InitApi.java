@@ -62,14 +62,14 @@ public class InitApi extends GenericApi {
 //		bookIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Book
-		bookIdList.add( 4747639635574784L );
-		bookIdList.add( 5298850789064704L );
+		bookIdList.add( 5345197126844416L );
+		bookIdList.add( 6319699436503040L );
 		//Gujarati Book
-		bookIdList.add( 5989321811165184L );
-		bookIdList.add( 5997080149491712L );
+		bookIdList.add( 6214904767840256L );
+		bookIdList.add( 5196828823781376L );
 		//Tamil Book
-		bookIdList.add( 5745947606777856L );
-		bookIdList.add( 6490562639167488L );
+		bookIdList.add( 5981494652698624L );
+		bookIdList.add( 4803319927144448L );
 
 		
 		List<Long> storyIdList = new ArrayList<>( 6 );
@@ -83,14 +83,14 @@ public class InitApi extends GenericApi {
 //		storyIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Story
-		storyIdList.add( 4782247173423104L );
-		storyIdList.add( 5699266529984512L );
+		storyIdList.add( 5717424225648640L );
+		storyIdList.add( 5120605368090624L );
 		//Gujarati Story
 		storyIdList.add( 5766270452498432L );
 		storyIdList.add( 5724919044243456L );
 		//Tamil Story
-		storyIdList.add( 5137832800681984L );
-		storyIdList.add( 5681942578069504L );
+		storyIdList.add( 6284388614537216L );
+		storyIdList.add( 4778271828869120L );
 
 		
 		List<Long> poemIdList = new ArrayList<>( 6 );
@@ -104,14 +104,14 @@ public class InitApi extends GenericApi {
 //		poemIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Poem
-		poemIdList.add( 5121659782561792L );
-		poemIdList.add( 5146503249133568L );
+		poemIdList.add( 5744125232021504L );
+		poemIdList.add( 4865917464870912L );
 		//Gujarati Poem
-		poemIdList.add( 4802840954404864L );
-		poemIdList.add( 5459249698177024L );
+		poemIdList.add( 5669744468295680L );
+		poemIdList.add( 4792359355154432L );
 		//Tamil Poem
+		poemIdList.add( 5741157191516160L );
 		poemIdList.add( 6070096455794688L );
-		poemIdList.add( 5160639144132608L );
 
 		
 		PratilipisContent pratilipisContent = (PratilipisContent) dataAccessor.getPageContent( 5197655504322560L );
