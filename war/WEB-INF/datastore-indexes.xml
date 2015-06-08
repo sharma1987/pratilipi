@@ -87,4 +87,16 @@
     <property name="PURCHASED_FROM" direction="asc"/>
   </datastore-index>
   
+  <!-- Required by PratilipiService.getUserPratilipiList -->
+  <datastore-index kind="USER_PRATILIPI" ancestor="false" source="manual">
+    <property name="PRATILIPI_ID" direction="asc"/>
+    <property name="REVIEW_DATE" direction="desc"/>
+  </datastore-index>
+  
+  <datastore-index kind="USER_PRATILIPI" ancestor="false" source="manual">
+    <property name="PRATILIPI_ID" direction="asc"/>
+    <property name="USER_ID" direction="asc"/>
+    <property name="REVIEW_DATE" direction="desc"/>
+  </datastore-index>
+  
 </datastore-indexes>
