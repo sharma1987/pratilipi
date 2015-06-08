@@ -26,6 +26,7 @@ import com.pratilipi.data.access.gae.EventPratilipiEntity;
 import com.pratilipi.data.access.gae.GenreEntity;
 import com.pratilipi.data.access.gae.LanguageEntity;
 import com.pratilipi.data.access.gae.PratilipiAuthorEntity;
+import com.pratilipi.data.access.gae.PratilipiCategoryEntity;
 import com.pratilipi.data.access.gae.PratilipiEntity;
 import com.pratilipi.data.access.gae.PratilipiGenreEntity;
 import com.pratilipi.data.access.gae.PratilipiTagEntity;
@@ -40,6 +41,7 @@ import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.PratilipiAuthor;
+import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
 import com.pratilipi.data.transfer.Publisher;
@@ -546,6 +548,51 @@ public class DataAccessorGaeImpl
 	public void deletePratilipiGenre( Long pratilipiId, Long genreId ) {
 		try {
 			deleteEntity( PratilipiGenreEntity.class, pratilipiId + "-" + genreId );
+		} catch( JDOObjectNotFoundException e ) {
+			// Do nothing
+		}
+	}
+
+	
+	@Override
+	public PratilipiCategory newPratilipiCategory() {
+		return new PratilipiCategoryEntity();
+	}
+
+	@Override
+	public PratilipiCategory getPratilipiCategory(Long pratilipiId, Long categoryId) {
+		try{
+			return getEntity( PratilipiCategoryEntity.class, pratilipiId + "-" + categoryId );
+		} catch ( JDOObjectNotFoundException e ){
+			return null;
+		}
+	}
+
+	@Override
+	public List<PratilipiCategory> getPratilipiCategoryList(Long pratilipiId) {
+		if( pratilipiId == null )
+			return null;
+		
+		Query query = 
+				new GaeQueryBuilder( pm.newQuery( PratilipiCategoryEntity.class ))
+					.addFilter( "pratilipiId", pratilipiId )
+					.build();
+		
+		@SuppressWarnings( "unchecked" )
+		List<PratilipiCategory> pratilipiCategoryEntityList = ( List<PratilipiCategory> ) query.execute( pratilipiId );
+		return (List<PratilipiCategory>) pm.detachCopyAll( pratilipiCategoryEntityList );
+	}
+
+	@Override
+	public PratilipiCategory createPratilipiCategory( PratilipiCategory pratilipiCategory) {
+		( (PratilipiCategoryEntity) pratilipiCategory ).setId( pratilipiCategory.getPratilipiId() + "-" + pratilipiCategory.getCategoryId() );
+		return createOrUpdateEntity( pratilipiCategory );
+	}
+
+	@Override
+	public void deletePratilipiCategory(Long pratilipiId, Long categoryId) {
+		try {
+			deleteEntity( PratilipiCategoryEntity.class, pratilipiId + "-" + categoryId );
 		} catch( JDOObjectNotFoundException e ) {
 			// Do nothing
 		}

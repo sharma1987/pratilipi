@@ -15,6 +15,7 @@ import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.PratilipiAuthor;
+import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
 import com.pratilipi.data.transfer.Publisher;
@@ -133,6 +134,17 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	PratilipiGenre createPratilipiGenre( PratilipiGenre pratilipiGenre );
 
 	void deletePratilipiGenre( Long pratilipiId, Long genreId );
+	
+	
+	PratilipiCategory newPratilipiCategory();
+	
+	PratilipiCategory getPratilipiCategory( Long pratilipiId, Long categoryId );
+	
+	List<PratilipiCategory> getPratilipiCategoryList( Long pratilipiId );
+	
+	PratilipiCategory createPratilipiCategory( PratilipiCategory pratilipiCategory );
+	
+	void deletePratilipiCategory( Long pratilipiId, Long categoryId );
 
 
 	PratilipiTag newPratilipiTag();

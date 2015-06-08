@@ -19,6 +19,7 @@ import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.PratilipiAuthor;
+import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
 import com.pratilipi.data.transfer.Publisher;
@@ -555,6 +556,61 @@ public class DataAccessorWithMemcache
 				PREFIX_PRATILIPI_GENRE + pratilipiId + "-" + genreId );
 		memcache.remove(
 				PREFIX_PRATILIPI_GENRE_LIST + pratilipiId );
+	}
+
+	
+	@Override
+	public PratilipiCategory newPratilipiCategory() {
+		return dataAccessor.newPratilipiCategory();
+	}
+
+	@Override
+	public PratilipiCategory getPratilipiCategory( Long pratilipiId, Long categoryId ) {
+		PratilipiCategory pratilipiCategory = memcache.get(
+				PREFIX_PRATILIPI_CATEGORY + pratilipiId + "-" + categoryId );
+		if( pratilipiCategory == null ) {
+			pratilipiCategory =
+					dataAccessor.getPratilipiCategory( pratilipiId, categoryId );
+			if( pratilipiCategory != null )
+				memcache.put(
+						PREFIX_PRATILIPI_CATEGORY + pratilipiId + "-" + categoryId,
+						pratilipiCategory );
+		}
+		return pratilipiCategory;
+	}
+
+	@Override
+	public List<PratilipiCategory> getPratilipiCategoryList( Long pratilipiId ) {
+		List<PratilipiCategory> pratilipiCategoryList =
+				memcache.get( PREFIX_PRATILIPI_CATEGORY_LIST + pratilipiId );
+		if( pratilipiCategoryList == null ) {
+			pratilipiCategoryList =
+					dataAccessor.getPratilipiCategoryList( pratilipiId );
+			memcache.put(
+					PREFIX_PRATILIPI_CATEGORY_LIST + pratilipiId,
+					new ArrayList<>( pratilipiCategoryList ) );
+		}
+		return pratilipiCategoryList;
+	}
+
+	@Override
+	public PratilipiCategory createPratilipiCategory( PratilipiCategory pratilipiCategory ) {
+		pratilipiCategory = dataAccessor.createPratilipiCategory( pratilipiCategory );
+		memcache.put(
+				PREFIX_PRATILIPI_CATEGORY + pratilipiCategory.getId(),
+				pratilipiCategory );
+		memcache.remove(
+				PREFIX_PRATILIPI_CATEGORY_LIST + pratilipiCategory.getPratilipiId() );
+		return pratilipiCategory;
+	}
+
+	@Override
+	public void deletePratilipiCategory( Long pratilipiId, Long categoryId ) {
+		dataAccessor.deletePratilipiCategory( pratilipiId, categoryId );
+		memcache.remove(
+				PREFIX_PRATILIPI_CATEGORY + pratilipiId + "-" + categoryId );
+		memcache.remove(
+				PREFIX_PRATILIPI_CATEGORY_LIST + pratilipiId );
 	}
 
 	
