@@ -38,9 +38,9 @@
     <property name="devo-pratilipi.domain" value="devo.pratilipi.com"/>
     <property name="prod-pratilipi.domain" value="www.pratilipi.com"/>
 
-    <property name="dev-pratilipi.domain.cdn"  value="devo.pratilipi.info"/>
-    <property name="devo-pratilipi.domain.cdn" value="devo.pratilipi.info"/>
-    <property name="prod-pratilipi.domain.cdn" value="pratilipi.info"/>
+    <property name="dev-pratilipi.domain.cdn"  value="devo.pratilipi.cdssolutions.in"/>
+    <property name="devo-pratilipi.domain.cdn" value="devo.pratilipi.cdssolutions.in"/>
+    <property name="prod-pratilipi.domain.cdn" value="prod.pratilipi.cdssolutions.in"/>
 
 	<!-- Configure Resource Path -->
     <property name="dev-pratilipi.resource" value="/resource."/>
