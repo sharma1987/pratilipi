@@ -64,14 +64,14 @@ public class CategoryContentHelper extends PageContentHelper<
 		return categoryData;
 	}
 	
-	public static List<CategoryData> createCategoryDataList( HttpServletRequest request ){
+	public static List<CategoryData> getCategoryDataList( HttpServletRequest request ){
 		
 		List<Category> categoryList = DataAccessorFactory.getDataAccessor( request )
 											.getCategoryList();
 		return createCategoryDataList( categoryList );
 	}
 	
-	public static List<CategoryData> createCategoryDataList( CategoryFilter categoryFilter, HttpServletRequest request ){
+	public static List<CategoryData> getCategoryDataList( CategoryFilter categoryFilter, HttpServletRequest request ){
 		
 		List<Category> categoryList = DataAccessorFactory.getDataAccessor( request )
 											.getCategoryList( categoryFilter );
