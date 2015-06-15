@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.claymus.commons.shared.NotificationType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
@@ -28,12 +26,14 @@ import com.pratilipi.data.transfer.Author;
 import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
-import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.UserPratilipi;
+import com.pratilipi.data.transfer.shared.CategoryData;
+import com.pratilipi.data.transfer.shared.PratilipiCategoryData;
 import com.pratilipi.pagecontent.author.AuthorContentHelper;
 import com.pratilipi.pagecontent.authors.AuthorsContentProcessor;
 import com.pratilipi.pagecontent.genres.GenresContentProcessor;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
+import com.pratilipi.pagecontent.pratilipicategory.PratilipiCategoryContentHelper;
 import com.pratilipi.service.client.PratilipiService;
 import com.pratilipi.service.shared.AddPratilipiGenreRequest;
 import com.pratilipi.service.shared.AddPratilipiGenreResponse;
@@ -296,27 +296,38 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 	public GetGenreListResponse getGenreList( GetGenreListRequest request )
 			throws InvalidArgumentException, InsufficientAccessException {
 		
-		PratilipiHelper pratilipiHelper =
-				PratilipiHelper.get( this.getThreadLocalRequest() );
+//		PratilipiHelper pratilipiHelper =
+//				PratilipiHelper.get( this.getThreadLocalRequest() );
+//		
+//		if( ! pratilipiHelper.hasUserAccess( GenresContentProcessor.ACCESS_ID_GENRE_LIST, false ) )
+//			throw new InsufficientAccessException();
+//
+//		boolean sendMetaData = pratilipiHelper.hasUserAccess(
+//				GenresContentProcessor.ACCESS_ID_GENRE_READ_META_DATA, false );
+//
+//		
+//		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+//		List<Genre> genreList = dataAccessor.getGenreList();
+//		
+//		
+//		ArrayList<GenreData> genreDataList = new ArrayList<>( genreList.size() );
+//		for( Genre genre : genreList ) {
+//			GenreData genreData = new GenreData();
+//			genreData.setId( genre.getId() );
+//			genreData.setName( genre.getName() );
+//			if( sendMetaData )
+//				genreData.setCreationDate( genre.getCreationDate() );
+//			
+//			genreDataList.add( genreData );
+//		}
 		
-		if( ! pratilipiHelper.hasUserAccess( GenresContentProcessor.ACCESS_ID_GENRE_LIST, false ) )
-			throw new InsufficientAccessException();
-
-		boolean sendMetaData = pratilipiHelper.hasUserAccess(
-				GenresContentProcessor.ACCESS_ID_GENRE_READ_META_DATA, false );
-
-		
-		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
-		List<Genre> genreList = dataAccessor.getGenreList();
-		
-		
-		ArrayList<GenreData> genreDataList = new ArrayList<>( genreList.size() );
-		for( Genre genre : genreList ) {
+		List<CategoryData> categoryDataList = 
+				PratilipiCategoryContentHelper.getCategoryList( this.getThreadLocalRequest() );
+		ArrayList<GenreData> genreDataList = new ArrayList<>( categoryDataList.size() );
+		for( CategoryData categoryData : categoryDataList ){
 			GenreData genreData = new GenreData();
-			genreData.setId( genre.getId() );
-			genreData.setName( genre.getName() );
-			if( sendMetaData )
-				genreData.setCreationDate( genre.getCreationDate() );
+			genreData.setId( categoryData.getId() );
+			genreData.setName( categoryData.getName() );
 			
 			genreDataList.add( genreData );
 		}
@@ -329,19 +340,26 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 	public AddPratilipiGenreResponse addPratilipiGenre( AddPratilipiGenreRequest request )
 			throws InvalidArgumentException, InsufficientAccessException {
 		
-		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
-
-		Pratilipi pratilipi = dataAccessor.getPratilipi( request.getPratilipiId() );
-
-		if( ! PratilipiContentHelper.hasRequestAccessToUpdatePratilipiData( this.getThreadLocalRequest(), pratilipi ) )
-			throw new InsufficientAccessException();
+//		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+//
+//		Pratilipi pratilipi = dataAccessor.getPratilipi( request.getPratilipiId() );
+//
+//		if( ! PratilipiContentHelper.hasRequestAccessToUpdatePratilipiData( this.getThreadLocalRequest(), pratilipi ) )
+//			throw new InsufficientAccessException();
+//		
+//		
+//		PratilipiGenre pratilipiGenre = dataAccessor.newPratilipiGenre();
+//		pratilipiGenre.setPratilipiId( request.getPratilipiId() );
+//		pratilipiGenre.setGenreId( request.getGenreId() );
+//		
+//		dataAccessor.createPratilipiGenre( pratilipiGenre );
 		
+		PratilipiCategoryData pratilipiCategoryData = new PratilipiCategoryData();
+		pratilipiCategoryData.setCategoryId( request.getGenreId() ); 
+		pratilipiCategoryData.setPratilipiId( request.getPratilipiId() );
 		
-		PratilipiGenre pratilipiGenre = dataAccessor.newPratilipiGenre();
-		pratilipiGenre.setPratilipiId( request.getPratilipiId() );
-		pratilipiGenre.setGenreId( request.getGenreId() );
-		
-		dataAccessor.createPratilipiGenre( pratilipiGenre );
+		pratilipiCategoryData = 
+				PratilipiCategoryContentHelper.addPratilipiCategory( pratilipiCategoryData, this.getThreadLocalRequest() );
 
 		
 		// Updating search index
@@ -358,15 +376,20 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 	public DeletePratilipiGenreResponse deletePratilipiGenre( DeletePratilipiGenreRequest request )
 			throws InvalidArgumentException, InsufficientAccessException {
 
-		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
-
-		Pratilipi pratilipi = dataAccessor.getPratilipi( request.getPratilipiId() );
-
-		if( ! PratilipiContentHelper.hasRequestAccessToUpdatePratilipiData( this.getThreadLocalRequest(), pratilipi ) )
-			throw new InsufficientAccessException();
-
+//		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+//
+//		Pratilipi pratilipi = dataAccessor.getPratilipi( request.getPratilipiId() );
+//
+//		if( ! PratilipiContentHelper.hasRequestAccessToUpdatePratilipiData( this.getThreadLocalRequest(), pratilipi ) )
+//			throw new InsufficientAccessException();
+//
+//		
+//		dataAccessor.deletePratilipiGenre( request.getPratilipiId(), request.getGenreId() );
 		
-		dataAccessor.deletePratilipiGenre( request.getPratilipiId(), request.getGenreId() );
+		PratilipiCategoryData pratilipiCategoryData = new PratilipiCategoryData();
+		pratilipiCategoryData.setCategoryId( request.getGenreId() );
+		pratilipiCategoryData.setPratilipiId( request.getPratilipiId() );
+		PratilipiCategoryContentHelper.removePratilipiCategory( pratilipiCategoryData, this.getThreadLocalRequest() );
 		
 		
 		// Updating search index

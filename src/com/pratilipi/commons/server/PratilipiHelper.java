@@ -16,11 +16,11 @@ import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
-import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
-import com.pratilipi.data.transfer.PratilipiGenre;
+import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.service.shared.data.AuthorData;
 import com.pratilipi.service.shared.data.EventData;
@@ -133,18 +133,18 @@ public class PratilipiHelper extends ClaymusHelper {
 	public List<PratilipiData> createPratilipiDataList(
 			List<Pratilipi> pratilipiList,
 			boolean includeLanguageData, boolean includeAuthorData,
-			boolean includeGenreData ) { 
+			boolean includeCategoryData ) { 
 		
 		return createPratilipiDataList(
 				pratilipiList, includeLanguageData,
-				includeAuthorData, includeGenreData, false );
+				includeAuthorData, includeCategoryData, false );
 	}
 	
 	@Deprecated
 	public List<PratilipiData> createPratilipiDataList(
 			List<Pratilipi> pratilipiList,
 			boolean includeLanguageData, boolean includeAuthorData,
-			boolean includeGenreData, boolean includeMetaData ) {
+			boolean includeCategoryData, boolean includeMetaData ) {
 
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 
@@ -159,11 +159,11 @@ public class PratilipiHelper extends ClaymusHelper {
 		for( Pratilipi pratilipi : pratilipiList ) {
 
 			PratilipiData pratilipiData = null;
-			if( includeGenreData ) {
-				List<PratilipiGenre> pratilipiGenreList = dataAccessor.getPratilipiGenreList( pratilipi.getId() );
-				List<Genre> genreList = new ArrayList<>( pratilipiGenreList.size() );
-				for( PratilipiGenre pratilipiGenre : pratilipiGenreList )
-					genreList.add( dataAccessor.getGenre( pratilipiGenre.getGenreId() ) );
+			if( includeCategoryData ) {
+				List<PratilipiCategory> pratilipiCategoryList = dataAccessor.getPratilipiCategoryList( pratilipi.getId() );
+				List<Category> categoryList = new ArrayList<>( pratilipiCategoryList.size() );
+				for( PratilipiCategory pratilipiCategory : pratilipiCategoryList )
+					categoryList.add( dataAccessor.getCategory( pratilipiCategory.getCategoryId() ) );
 			} else {
 				pratilipiData = createPratilipiData( pratilipi, null, null, null );
 			}
@@ -209,34 +209,32 @@ public class PratilipiHelper extends ClaymusHelper {
 		Pratilipi pratilipi = dataAccessor.getPratilipi( pratilipiId );
 		Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
 		Language language = dataAccessor.getLanguage( pratilipi.getLanguageId() );
-		List<PratilipiGenre> pratilipiGenreList = dataAccessor.getPratilipiGenreList( pratilipiId );
+		List<PratilipiCategory> pratilipiCategoryList = dataAccessor.getPratilipiCategoryList( pratilipiId );
+		List<Category> categoryList = new ArrayList<>( pratilipiCategoryList.size() );
+		for( PratilipiCategory pratilipiCategory : pratilipiCategoryList )
+			categoryList.add( dataAccessor.getCategory( pratilipiCategory.getCategoryId() ) );
 		
-		List<Genre> genreList = new ArrayList<>( pratilipiGenreList.size() );
-		for( PratilipiGenre pratilipiGenre : pratilipiGenreList )
-			genreList.add( dataAccessor.getGenre( pratilipiGenre.getGenreId() ) );
-		
-		
-		return createPratilipiData( pratilipi, language, author, genreList, includeMetaData );
+		return createPratilipiData( pratilipi, language, author, categoryList, includeMetaData );
 	}
 
 		
 	@Deprecated
 	public PratilipiData createPratilipiData(
 			Pratilipi pratilipi, Language language,
-			Author author, List<Genre> genreList ) {
+			Author author, List<Category> categoryList ) {
 		
-		return createPratilipiData( pratilipi, language, author, genreList, false );
+		return createPratilipiData( pratilipi, language, author, categoryList, false );
 	}
 	
 	@Deprecated
 	public PratilipiData createPratilipiData(
 			Pratilipi pratilipi, Language language,
-			Author author, List<Genre> genreList, boolean includeMetaData ) {
+			Author author, List<Category> categoryList, boolean includeMetaData ) {
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		Page pratilipiPage = dataAccessor.getPage( PratilipiPageType.PRATILIPI.toString(), pratilipi.getId() );
-		if( genreList == null )
-			genreList = new ArrayList<Genre>( 0 );
+		if( categoryList == null )
+			categoryList = new ArrayList<Category>( 0 );
 		
 		PratilipiData pratilipiData = new PratilipiData();
 
@@ -293,14 +291,14 @@ public class PratilipiHelper extends ClaymusHelper {
 		pratilipiData.setContentType( pratilipi.getContentType() );
 		pratilipiData.setState( pratilipi.getState() );
 
-		List<Long> genreIdList = new ArrayList<>( genreList.size() );
-		List<String> genreNameList = new ArrayList<>( genreList.size() );
-		for( Genre genre : genreList ) {
-			genreIdList.add( genre.getId() );
-			genreNameList.add( genre.getName() );
+		List<Long> categoryIdList = new ArrayList<>( categoryList.size() );
+		List<String> categoryNameList = new ArrayList<>( categoryList.size() );
+		for( Category category : categoryList ) {
+			categoryIdList.add( category.getId() );
+			categoryNameList.add( category.getName() );
 		}
-		pratilipiData.setGenreIdList( genreIdList );
-		pratilipiData.setGenreNameList( genreNameList );
+		pratilipiData.setGenreIdList( categoryIdList );
+		pratilipiData.setGenreNameList( categoryNameList );
 		
 		return pratilipiData;
 	}

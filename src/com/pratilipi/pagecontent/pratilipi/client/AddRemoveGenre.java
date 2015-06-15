@@ -46,7 +46,8 @@ public class AddRemoveGenre extends Composite implements HasValueChangeHandlers<
 		modal.setTitle( "Add/Remove Genre" );
 		
 		
-		pratilipiService.getGenreList( new GetGenreListRequest(), new AsyncCallback<GetGenreListResponse>() {
+		pratilipiService.getGenreList( new GetGenreListRequest(),
+										new AsyncCallback<GetGenreListResponse>() {
 			
 			@Override
 			public void onSuccess( GetGenreListResponse response ) {

@@ -186,6 +186,7 @@ public class PratilipiContentEditOptions implements EntryPoint, ClickHandler {
 							.createStreamReader( pratilipiDataEncodedStr );
 			pratilipiData = (PratilipiData) streamReader.readObject();
 			setPratilipiData( pratilipiData );
+			addRemoveGenre.setPratilipiData( pratilipiData );
 		} catch( SerializationException e ) {
 			Window.Location.reload();
 		}
