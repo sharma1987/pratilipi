@@ -17,9 +17,12 @@ public class GetPratilipiListRequest extends GenericRequest {
 	@Validate( required = true )
 	private PratilipiState state;
 
+	private String category;
+	
 	private String cursor;
 	
 	private Integer resultCount;
+	
 
 	
 	public PratilipiType getType() {
@@ -36,6 +39,10 @@ public class GetPratilipiListRequest extends GenericRequest {
 
 	public PratilipiState getState() {
 		return state;
+	}
+	
+	public String getCategory(){
+		return category;
 	}
 
 	public String getCursor() {
