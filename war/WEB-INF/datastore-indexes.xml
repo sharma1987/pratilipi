@@ -99,4 +99,21 @@
     <property name="REVIEW_DATE" direction="desc"/>
   </datastore-index>
   
+  
+  <!-- Required by CategoryContentHelper.createCategoryDataList -->
+  <datastore-index kind="CATEGORY" ancestor="false" source="manual">
+    <property name="CATEGORY_TYPE" direction="asc"/>
+    <property name="CATEGORY_NAME" direction="asc"/>
+  </datastore-index>
+  
+  <datastore-index kind="CATEGORY" ancestor="false" source="manual">
+    <property name="HIDDEN" direction="asc"/>
+    <property name="CATEGORY_NAME" direction="asc"/>
+  </datastore-index>
+  
+  <datastore-index kind="CATEGORY" ancestor="false" source="manual">
+    <property name="CATEGORY_TYPE" direction="asc"/>
+    <property name="CATEGORY_NAME" direction="asc"/>
+    <property name="HIDDEN" direction="asc"/>
+  </datastore-index>
 </datastore-indexes>
