@@ -47,8 +47,10 @@ import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
+import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.UserPratilipi;
 import com.pratilipi.data.transfer.shared.AuthorData;
@@ -58,6 +60,7 @@ import com.pratilipi.pagecontent.author.AuthorContentHelper;
 import com.pratilipi.pagecontent.language.LanguageContentHelper;
 import com.pratilipi.pagecontent.pratilipi.gae.PratilipiContentEntity;
 import com.pratilipi.pagecontent.pratilipi.shared.PratilipiContentData;
+import com.pratilipi.pagecontent.pratilipicategory.PratilipiCategoryContentHelper;
 
 public class PratilipiContentHelper extends PageContentHelper<
 		PratilipiContent,
@@ -360,7 +363,12 @@ public class PratilipiContentHelper extends PageContentHelper<
 	}
 
 	
-	public static PratilipiData createPratilipiData( Pratilipi pratilipi, Language language, Author author, HttpServletRequest request ) {
+	public static PratilipiData createPratilipiData( 
+						Pratilipi pratilipi, 
+						Language language, 
+						Author author, 
+						List<Category> categoryList, 
+						HttpServletRequest request ) {
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		Page pratilipiPage = dataAccessor.getPage( PratilipiPageType.PRATILIPI.toString(), pratilipi.getId() );
@@ -401,12 +409,30 @@ public class PratilipiContentHelper extends PageContentHelper<
 		
 		pratilipiData.setContentType( pratilipi.getContentType() );
 		pratilipiData.setState( pratilipi.getState() );
+		
+		if( categoryList == null )
+			categoryList = new ArrayList<Category>( 0 );
+		
+		List<Long> genreIdList = new ArrayList<Long>( categoryList.size() );
+		List<String> genreNameList = new ArrayList<String>( categoryList.size() );
+		for( Category category : categoryList ){
+			genreIdList.add( category.getId() );
+			genreNameList.add( category.getName() );
+		}
+		
+		pratilipiData.setGenreIdList( genreIdList );
+		pratilipiData.setGenreNameList( genreNameList );
 
 		return pratilipiData;
 		
 	}
 
-	public static List<PratilipiData> createPratilipiDataList( List<Long> pratilipiIdList, boolean includeLanguageData, boolean includeAuthorData, HttpServletRequest request ) {
+	public static List<PratilipiData> createPratilipiDataList( 
+											List<Long> pratilipiIdList, 
+											boolean includeLanguageData, 
+											boolean includeAuthorData,
+											boolean includeCategoryData,
+											HttpServletRequest request ) {
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 
@@ -439,11 +465,14 @@ public class PratilipiContentHelper extends PageContentHelper<
 			for( Author author : authorList )
 				authorIdToDataMap.put( author.getId(), AuthorContentHelper.createAuthorData( author, null, request ) );	
 		}
-
 		
 		List<PratilipiData> pratilipiDataList = new ArrayList<>( pratilipiList.size() );
 		for( Pratilipi pratilipi : pratilipiList ) {
-			PratilipiData pratilipiData = createPratilipiData( pratilipi, null, null, request );
+			List<Category> categoryList = null;
+			if( includeCategoryData )
+				categoryList = PratilipiCategoryContentHelper.getPratilipiCategoryList( pratilipi.getId(), request );
+
+			PratilipiData pratilipiData = createPratilipiData( pratilipi, null, null, categoryList, request );
 			if( includeLanguageData )
 				pratilipiData.setLanguage( languageIdToDataMap.get( pratilipi.getLanguageId() ) );
 			if( includeAuthorData && pratilipi.getAuthorId() != null )
@@ -471,6 +500,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 				pratilipiIdListCursorTuple.getDataList(),
 				pratilipiFilter.getLanguageId() == null,
 				pratilipiFilter.getAuthorId() == null,
+				false,
 				request );
 		
 		return new DataListCursorTuple<PratilipiData>( pratilipiDataList, pratilipiIdListCursorTuple.getCursor() );
@@ -654,6 +684,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 				pratilipi,
 				dataAccessor.getLanguage( pratilipi.getLanguageId() ),
 				dataAccessor.getAuthor( pratilipi.getAuthorId() ),
+				null,
 				request );
 	}
 	
@@ -890,13 +921,13 @@ public class PratilipiContentHelper extends PageContentHelper<
 			if( pratilipi.getState() == PratilipiState.PUBLISHED ) {
 				Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
 				Language language = dataAccessor.getLanguage( pratilipi.getLanguageId() );
-/*				List<PratilipiGenre> pratilipiGenreList = dataAccessor.getPratilipiGenreList( pratilipi.getId() );
+				List<PratilipiCategory> pratilipiCategoryList = dataAccessor.getPratilipiCategoryList( pratilipi.getId() );
 				
-				List<Genre> genreList = new ArrayList<>( pratilipiGenreList.size() );
-				for( PratilipiGenre pratilipiGenre : pratilipiGenreList )
-					genreList.add( dataAccessor.getGenre( pratilipiGenre.getGenreId() ) );
-TODO: Add Genres in PratilipiData */
-				pratilipiDataList.add( createPratilipiData( pratilipi, language, author, request ) );
+				List<Category> genreList = new ArrayList<>( pratilipiCategoryList.size() );
+				for( PratilipiCategory pratilipiCategory : pratilipiCategoryList )
+					genreList.add( dataAccessor.getCategory( pratilipiCategory.getCategoryId() ) );
+
+				pratilipiDataList.add( createPratilipiData( pratilipi, language, author, genreList, request ) );
 				
 			} else {
 				searchAccessor.deletePratilipiDataIndex( pratilipi.getId() );

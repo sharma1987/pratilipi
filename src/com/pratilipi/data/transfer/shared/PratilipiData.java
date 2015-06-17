@@ -2,6 +2,7 @@ package com.pratilipi.data.transfer.shared;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.pratilipi.commons.shared.PratilipiContentType;
 import com.pratilipi.commons.shared.PratilipiState;
@@ -63,6 +64,9 @@ public class PratilipiData implements Serializable {
 	
 	private PratilipiState state;
 	private boolean hasState;
+	
+	private List<Long> genreIdList;
+	private List<String> genreNameList;
 	
 	private Long readCount;
 	
@@ -319,6 +323,23 @@ public class PratilipiData implements Serializable {
 	
 	public boolean hasState() {
 		return hasState;
+	}
+	
+	
+	public List<Long> getGenreIdList() {
+		return genreIdList;
+	}
+
+	public void setGenreIdList( List<Long> genreIdList ) {
+		this.genreIdList = genreIdList;
+	}
+	
+	public List<String> getGenreNameList() {
+		return genreNameList;
+	}
+
+	public void setGenreNameList( List<String> genreNameList ) {
+		this.genreNameList = genreNameList;
 	}
 	
 	

@@ -64,7 +64,7 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 				.getDataAccessor( request )
 				.getLanguage( pratilipi.getLanguageId() );
 		com.pratilipi.data.transfer.shared.PratilipiData pratilipiData =
-				PratilipiContentHelper.createPratilipiData( pratilipi, language, author, request );
+				PratilipiContentHelper.createPratilipiData( pratilipi, language, author, null, request );
 
 		
 		String ogFbAppId = FacebookApi.getAppId( request );

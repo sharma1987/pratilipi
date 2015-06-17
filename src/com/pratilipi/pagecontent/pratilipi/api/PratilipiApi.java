@@ -1,5 +1,7 @@
 package com.pratilipi.pagecontent.pratilipi.api;
 
+import java.util.List;
+
 import com.claymus.api.GenericApi;
 import com.claymus.api.annotation.Bind;
 import com.claymus.api.annotation.Get;
@@ -11,6 +13,7 @@ import com.claymus.taskqueue.Task;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.shared.PratilipiData;
@@ -19,6 +22,7 @@ import com.pratilipi.pagecontent.pratilipi.api.shared.GetPratilipiRequest;
 import com.pratilipi.pagecontent.pratilipi.api.shared.GetPratilipiResponse;
 import com.pratilipi.pagecontent.pratilipi.api.shared.PutPratilipiRequest;
 import com.pratilipi.pagecontent.pratilipi.api.shared.PutPratilipiResponse;
+import com.pratilipi.pagecontent.pratilipicategory.PratilipiCategoryContentHelper;
 import com.pratilipi.taskqueue.TaskQueueFactory;
 
 @SuppressWarnings("serial")
@@ -33,11 +37,13 @@ public class PratilipiApi extends GenericApi {
 		Pratilipi pratilipi = dataAccessor.getPratilipi( request.getPratilipiId() );
 		Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
 		Language language = dataAccessor.getLanguage( pratilipi.getLanguageId() );
+		List<Category> category = PratilipiCategoryContentHelper.getPratilipiCategoryList( pratilipi.getId(), this.getThreadLocalRequest() );
 		
 		PratilipiData pratilipiData = PratilipiContentHelper.createPratilipiData(
 											pratilipi,
 											language,
 											author,
+											category,
 											this.getThreadLocalRequest() 
 											);
 		
