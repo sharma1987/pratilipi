@@ -7,16 +7,16 @@ import com.pratilipi.commons.shared.CategoryType;
 public class GetCategoryListRequest extends GenericRequest {
 
 	private Long languageId;
-	private Boolean hasLanguageId;
+	private boolean hasLanguageId;
 	
 	private CategoryType type;
-	private Boolean hasType;
+	private boolean hasType;
 	
 	public Long getLanguageId(){
 		return languageId;
 	}
 	
-	public Boolean hasLanguageId(){
+	public boolean hasLanguageId(){
 		return hasLanguageId;
 	}
 	
@@ -24,7 +24,7 @@ public class GetCategoryListRequest extends GenericRequest {
 		return type;
 	}
 	
-	public Boolean hasType(){
+	public boolean hasType(){
 		return hasType;
 	}
 }

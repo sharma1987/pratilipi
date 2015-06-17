@@ -14,6 +14,13 @@ import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 @SuppressWarnings( "serial" )
 @Bind( uri= "/mobileinit" )
 public class MobileInitApi extends GenericApi {
+	
+	public static String TOP_READS_CATEGORY_ID = "topReadsPratilipiDataList";
+	public static String TOP_READS_CATEGORY_NAME = "Top Reads";
+	public static String FEATURED_CATEGORY_ID = "featuredPratilipiDataList";
+	public static String FEATURED_CATEGORY_NAME = "Featured";
+	public static String NEW_RELEASES_CATEGORY_ID = "newReleasesPratilipiDataList";
+	public static String NEW_RELEASES_CATEGORY_NAME = "New Releases";
 
 	@Get
 	public GetMobileInitResponse getMobileInit( GetMobileInitRequest request ){
@@ -88,8 +95,9 @@ public class MobileInitApi extends GenericApi {
 								topReadsPratilipiIdList,
 								true,
 								true,
+								true,
 								this.getThreadLocalRequest() );
-		response.attachToResponse( "Top Reads", "topReadsPratilipiDataList", topReadsPratilipiDataList );
+		response.attachToResponse( TOP_READS_CATEGORY_NAME, TOP_READS_CATEGORY_ID, topReadsPratilipiDataList );
 		
 		
 		List<PratilipiData> featuredPratilipiDataList = 
@@ -97,16 +105,18 @@ public class MobileInitApi extends GenericApi {
 						featuredPratilipiIdList,
 							true,
 							true,
+							true,
 							this.getThreadLocalRequest() );
-		response.attachToResponse( "Featured", "featuredPratilipiDataList", featuredPratilipiDataList );
+		response.attachToResponse( FEATURED_CATEGORY_NAME, FEATURED_CATEGORY_ID, featuredPratilipiDataList );
 		
 		List<PratilipiData> newReleasesPratilipiDataList = 
 				PratilipiContentHelper.createPratilipiDataList( 
 						newReleasesPratilipiIdList,
 							true,
 							true,
+							true,
 							this.getThreadLocalRequest() );
-		response.attachToResponse( "New Releases", "newReleasesPratilipiDataList", newReleasesPratilipiDataList );
+		response.attachToResponse( NEW_RELEASES_CATEGORY_NAME, NEW_RELEASES_CATEGORY_ID, newReleasesPratilipiDataList );
 		
 		return response;
 	}

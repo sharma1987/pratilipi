@@ -30,7 +30,7 @@ public class CategoryApi extends GenericApi {
 		
 		categoryFilter.setHidden( false );
 		
-		List<CategoryData> categoryDataList = CategoryContentHelper.createCategoryDataList( categoryFilter, this.getThreadLocalRequest() );
+		List<CategoryData> categoryDataList = CategoryContentHelper.getCategoryDataList( categoryFilter, this.getThreadLocalRequest() );
 		
 		return new GetCategoryListResponse( categoryDataList );
 	}
