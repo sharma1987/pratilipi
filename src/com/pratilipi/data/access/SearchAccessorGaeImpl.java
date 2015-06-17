@@ -96,7 +96,8 @@ public class SearchAccessorGaeImpl
 		
 		String[] queryWords = query.split( " " );
 		
-		for( String word : queryWords ){
+		for( int i = 0; i < queryWords.length; ++i ){
+			String word = queryWords[i];
 			if( word.toLowerCase().equals( "book" ) || word.toLowerCase().equals( "books" )
 					|| word.toLowerCase().equals( "poem" ) || word.toLowerCase().equals( "poems" )
 					|| word.toLowerCase().equals( "story" ) || word.toLowerCase().equals( "stories" ) ) {
@@ -107,8 +108,15 @@ public class SearchAccessorGaeImpl
 			} else if( !word.toLowerCase().equals( "and" ) && !word.toLowerCase().equals( "or" ) ){
 				if( queryString == null )
 					queryString = word;
-				else
-					queryString = queryString + " OR " + word;
+				else{
+					if( queryWords[i-1].equals( "AND" ) || queryWords[i-1].equals( "OR" ) )
+						queryString = queryString + word;
+					else
+						queryString = queryString + " OR " + word;
+				}
+			} else if( word.equals( "AND" ) || word.equals( "OR" )){
+				if( queryString != null )
+					queryString = queryString + " " + word + " ";
 			}
 		}
 		
@@ -212,18 +220,18 @@ public class SearchAccessorGaeImpl
 					.addField( Field.newBuilder().setName( "author" ).setText( pratilipiData.getAuthor().getFullNameEn() ) )
 					.addField( Field.newBuilder().setName( "author" ).setText( pratilipiData.getAuthor().getFullNameEn() ) )
 					.addField( Field.newBuilder().setName( "author" ).setText( pratilipiData.getAuthor().getFullNameEn() ) );
-/* TODO: Index Pratilipi genres
+
 		for( Long genreId : pratilipiData.getGenreIdList() )
 			docBuilder.addField( Field.newBuilder().setName( "genre" ).setAtom( genreId.toString() ) );
 
 		for( String genreName : pratilipiData.getGenreNameList() ) {
 			// 4x weightage to Genre
-			docBuilder.addField( Field.newBuilder().setName( "genre" ).setAtom( genreName ) );
-			docBuilder.addField( Field.newBuilder().setName( "genre" ).setAtom( genreName ) );
-			docBuilder.addField( Field.newBuilder().setName( "genre" ).setAtom( genreName ) );
-			docBuilder.addField( Field.newBuilder().setName( "genre" ).setAtom( genreName ) );
+			docBuilder.addField( Field.newBuilder().setName( "genre" ).setText( genreName ) );
+			docBuilder.addField( Field.newBuilder().setName( "genre" ).setText( genreName ) );
+			docBuilder.addField( Field.newBuilder().setName( "genre" ).setText( genreName ) );
+			docBuilder.addField( Field.newBuilder().setName( "genre" ).setText( genreName ) );
 		}
-*/		
+	
 		return docBuilder.build();
 	}
 	
