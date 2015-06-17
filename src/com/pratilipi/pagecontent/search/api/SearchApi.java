@@ -37,7 +37,8 @@ public class SearchApi extends GenericApi {
 		List<PratilipiData> pratilipiDataList = PratilipiContentHelper.createPratilipiDataList( 
 															pratilipiIdListCursorTuple.getDataList(),
 															false,
-															false,
+															true,
+															true,
 															this.getThreadLocalRequest() );
 		
 		return new GetSearchResultsResponse( pratilipiDataList, pratilipiIdListCursorTuple.getCursor() );
