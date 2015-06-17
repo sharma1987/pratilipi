@@ -3,7 +3,7 @@
 
   <application>prod-pratilipi</application>
   <module>default</module>
-  <version>mark-4p225</version>
+  <version>mark-4p264</version>
 
   <threadsafe>true</threadsafe>
   <sessions-enabled>false</sessions-enabled>
