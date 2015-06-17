@@ -475,7 +475,7 @@ public class DataAccessorGaeImpl
 		Query query = gaeQueryBuilder.build();
 		
 		@SuppressWarnings( "unchecked" )
-		List<Category> categoryEntityList = ( List<Category> ) query.execute();
+		List<Category> categoryEntityList = ( List<Category> ) query.executeWithMap( gaeQueryBuilder.getParamNameValueMap() );
 		return ( List<Category> ) pm.detachCopyAll( categoryEntityList );
 	}
 
@@ -530,7 +530,7 @@ public class DataAccessorGaeImpl
 	public List<PratilipiGenre> getPratilipiGenreList( Long pratilipiId ) {
 		Query query =
 				new GaeQueryBuilder( pm.newQuery( PratilipiGenreEntity.class ) )
-						.addFilter( "pratilipiId", pratilipiId )
+						.addFilter( "genreId", pratilipiId )
 						.build();
 		
 		@SuppressWarnings("unchecked")
@@ -581,6 +581,36 @@ public class DataAccessorGaeImpl
 		@SuppressWarnings( "unchecked" )
 		List<PratilipiCategory> pratilipiCategoryEntityList = ( List<PratilipiCategory> ) query.execute( pratilipiId );
 		return (List<PratilipiCategory>) pm.detachCopyAll( pratilipiCategoryEntityList );
+	}
+	
+	@Override
+	public DataListCursorTuple<PratilipiCategory> getCategoryPratilipiList( Long categoryId, Integer resultCount, String cursorStr ) {
+		if( categoryId == null )
+			return null;
+		
+		GaeQueryBuilder gaeQueryBuilder = 
+				new GaeQueryBuilder( pm.newQuery( PratilipiCategoryEntity.class ))
+					.addFilter( "categoryId", categoryId );
+		
+		if( resultCount != null )
+					gaeQueryBuilder.setRange( 0, resultCount );
+		
+		Query query = gaeQueryBuilder.build();
+		
+		if( cursorStr != null ) {
+			Cursor cursor = Cursor.fromWebSafeString( cursorStr );
+			Map<String, Object> extensionMap = new HashMap<String, Object>();
+			extensionMap.put( JDOCursorHelper.CURSOR_EXTENSION, cursor );
+			query.setExtensions(extensionMap);
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<PratilipiCategory> pratilipiCategoryEntityList = (List<PratilipiCategory>) query.execute( categoryId );
+		Cursor cursor = JDOCursorHelper.getCursor( pratilipiCategoryEntityList );
+		
+		return new DataListCursorTuple<>(
+				(List<PratilipiCategory>) pm.detachCopyAll( pratilipiCategoryEntityList ),
+				cursor == null ? null : cursor.toWebSafeString() );
 	}
 
 	@Override

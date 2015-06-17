@@ -592,6 +592,11 @@ public class DataAccessorWithMemcache
 		}
 		return pratilipiCategoryList;
 	}
+	
+	@Override
+	public DataListCursorTuple<PratilipiCategory> getCategoryPratilipiList( Long categoryId, Integer resultCount, String cursorStr ) {
+		return dataAccessor.getCategoryPratilipiList( categoryId, resultCount, cursorStr );
+	}
 
 	@Override
 	public PratilipiCategory createPratilipiCategory( PratilipiCategory pratilipiCategory ) {

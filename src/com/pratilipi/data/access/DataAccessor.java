@@ -142,6 +142,8 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	
 	List<PratilipiCategory> getPratilipiCategoryList( Long pratilipiId );
 	
+	DataListCursorTuple<PratilipiCategory> getCategoryPratilipiList( Long categoryId, Integer resultCount, String cursorStr );
+	
 	PratilipiCategory createPratilipiCategory( PratilipiCategory pratilipiCategory );
 	
 	void deletePratilipiCategory( Long pratilipiId, Long categoryId );
