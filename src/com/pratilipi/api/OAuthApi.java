@@ -4,15 +4,15 @@ import java.util.Date;
 
 import com.claymus.api.GenericApi;
 import com.claymus.api.annotation.Bind;
-import com.claymus.api.annotation.Get;
+import com.claymus.api.annotation.Post;
 import com.claymus.commons.server.EncryptPassword;
 import com.claymus.commons.shared.ClaymusAccessTokenType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.data.transfer.AccessToken;
 import com.claymus.data.transfer.User;
-import com.pratilipi.api.shared.GetOAuthRequest;
-import com.pratilipi.api.shared.GetOAuthResponse;
+import com.pratilipi.api.shared.PostOAuthRequest;
+import com.pratilipi.api.shared.PostOAuthResponse;
 import com.pratilipi.commons.shared.PratilipiAccessTokenType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
@@ -26,12 +26,11 @@ public class OAuthApi extends GenericApi {
 	private static final long ACCESS_TOKEN_VALIDITY = 60 * 60 * 1000; // 1 Hr
 	
 
-	@Get
-	public GetOAuthResponse getOAuth( GetOAuthRequest request )
+	@Post
+	public PostOAuthResponse getOAuth( PostOAuthRequest request )
 			throws InvalidArgumentException, InsufficientAccessException {
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
-
 
 		// Validating minimum requirements
 		if( request.getUserId() == null && request.getPublisherId() == null ) {
@@ -91,7 +90,7 @@ public class OAuthApi extends GenericApi {
 		accessToken = dataAccessor.createAccessToken( accessToken );
 
 		
-		return new GetOAuthResponse( accessToken.getId() , accessToken.getExpiry().getTime() );
+		return new PostOAuthResponse( accessToken.getId() , accessToken.getExpiry().getTime() );
 	}
 	
 }
