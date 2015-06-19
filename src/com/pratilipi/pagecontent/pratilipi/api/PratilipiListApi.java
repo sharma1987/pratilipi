@@ -193,7 +193,12 @@ public class PratilipiListApi extends GenericApi {
 			tempPratilipiDataList.add( pratilipiData );
 		}
 		
-		return new DataListCursorTuple<>( tempPratilipiDataList, String.valueOf( endIndex ) );
+		if( endIndex == listSize )
+			cursor = null;
+		else
+			cursor = String.valueOf( endIndex );
+		
+		return new DataListCursorTuple<>( tempPratilipiDataList, cursor );
 	}
 
 }
