@@ -446,17 +446,21 @@ public class UserForms implements EntryPoint {
 				public void onSuccess( LoginUserResponse response ) {
 					hideLoginModal();
 					String currentUrl = Window.Location.getHref();
-					String action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
-					if( !action.isEmpty() &&  ( action.toLowerCase().equals( "review" ) 
-														|| action.toLowerCase().equals( "rate" ) 
-														|| action.toLowerCase().equals( "comment" )) )
-						// Not redirected to profile page after login.
-						Window.Location.reload();
+					String action = "";
+					if( currentUrl.indexOf( "#" ) != -1 ){
+						action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
+						currentUrl = currentUrl.substring( 0, currentUrl.indexOf( "#" ) );
+					}
+					String newUrl = null;
+					if( currentUrl.indexOf( "?" ) == -1 )
+						newUrl = currentUrl + "?action=login" ;
 					else
-						if( currentUrl.indexOf( "?" ) == -1 )
-							Window.Location.assign( currentUrl + "?action=login" );
-						else
-							Window.Location.assign( currentUrl + "&action=login" );
+						newUrl = currentUrl + "&action=login" ;
+					
+					if( !action.isEmpty() )
+						newUrl = newUrl + "#" + action;
+					Window.Location.assign( newUrl );
+					
 				}
 				
 				@Override
@@ -525,15 +529,20 @@ public class UserForms implements EntryPoint {
 							FacebookLoginUserResponse result) {
 						hideLoginModal();
 						String currentUrl = Window.Location.getHref();
-						String action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
-						if( !action.isEmpty() &&  ( action.toLowerCase().equals( "review" ) || action.toLowerCase().equals( "rate" ) ) )
-							// Not redirected to profile page after login.
-							Window.Location.reload();
+						String action = "";
+						if( currentUrl.indexOf( "#" ) != -1 ){
+							action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
+							currentUrl = currentUrl.substring( 0, currentUrl.indexOf( "#" ) );
+						}
+						String newUrl = null;
+						if( currentUrl.indexOf( "?" ) == -1 )
+							newUrl = currentUrl + "?action=login" ;
 						else
-							if( currentUrl.indexOf( "?" ) == -1 )
-								Window.Location.assign( currentUrl + "?action=login" );
-							else
-								Window.Location.assign( currentUrl + "&action=login" );
+							newUrl = currentUrl + "&action=login" ;
+						
+						if( !action.isEmpty() )
+							newUrl = newUrl + "#" + action;
+						Window.Location.assign( newUrl );
 					}});
 		
 	}
