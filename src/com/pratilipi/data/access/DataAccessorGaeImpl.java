@@ -675,6 +675,7 @@ public class DataAccessorGaeImpl
 		Query query =
 				new GaeQueryBuilder( pm.newQuery( UserPratilipiEntity.class ) )
 						.addFilter( "pratilipiId", pratilipiId )
+						.addOrdering( "reviewDate", false )
 						.build();
 		
 		@SuppressWarnings("unchecked")
