@@ -25,6 +25,7 @@ import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Event;
+import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipis.PratilipisContent;
@@ -244,4 +245,16 @@ public class InitApi extends GenericApi {
 		
 		userRole = dataAccessor.createOrUpdateUserRole( userRole );
 	}
+
+	@SuppressWarnings( "unused" )
+	private void createLanguage( String name ){
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		Language language = dataAccessor.newLanguage();
+		language.setHidden( false );
+		language.setCreationDate( new Date() );
+		language.setNameEn( name );
+		
+		language = dataAccessor.createOrUpdateLanguage( language );
+	}
+	
 }
