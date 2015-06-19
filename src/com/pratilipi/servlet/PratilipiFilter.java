@@ -34,7 +34,7 @@ public class PratilipiFilter implements Filter {
 	private final Pattern validHostRegEx = Pattern.compile(
 			"(www|embed|devo|alpha)\\.pratilipi\\.com"
 			+ "|"
-			+ "((mark-4p26\\d|default)\\.prod-pratilipi|.+\\.(dev|devo)-pratilipi)\\.appspot\\.com"
+			+ "((mark-4p27\\d|default)\\.prod-pratilipi|.+\\.(dev|devo)-pratilipi)\\.appspot\\.com"
 			+ "|"
 			+ "localhost|127.0.0.1" );
 	
@@ -138,19 +138,6 @@ public class PratilipiFilter implements Filter {
 		} else if( requestUri.equals( "/_ah/start" ) || requestUri.equals( "/_ah/stop" ) ) {
 			response.setStatus( HttpServletResponse.SC_NO_CONTENT );
 			
-			
-		} else if( action != null && action.equals( "login" ) ) { // Redirecting to profile page on login
-			
-			PratilipiHelper pratilipiHelper = PratilipiHelper.get( request );
-
-			Long currentUserId = pratilipiHelper.getCurrentUserId();
-			Author author = dataAccessor.getAuthorByUserId( currentUserId );
-			
-			if( author != null )
-				response.sendRedirect( PratilipiPageType.AUTHOR.getUrlPrefix() + author.getId() );
-			else
-				chain.doFilter( request, response );
-		
 			
 		} else if( requestUri.startsWith( "/blog/" ) ) { // Redirecting author interviews to /author-interview/*
 			String blogIdStr = requestUri.substring( 6 );
