@@ -466,9 +466,15 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 				userPratilipi.setReviewState( UserReviewState.PENDING_APPROVAL );
 				
 				notificationType  = NotificationType.REVIEW_ADD.toString();
+			}
+				
+			
+			if( userPratilipi.getReviewDate() == null ){
+				notificationType  = NotificationType.REVIEW_ADD.toString();
+				userPratilipi.setReviewDate( new Date() );
 			} else
 				notificationType = NotificationType.REVIEW_UPDATE.toString();
-			
+				
 			userPratilipi.setReview( userPratilipiData.getReview() );
 			userPratilipi.setReviewLastUpdatedDate( new Date() );
 	
