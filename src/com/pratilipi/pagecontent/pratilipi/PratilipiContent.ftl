@@ -122,7 +122,7 @@
 			<#if review.getReview()??>
 				<div class="hr-below">
 					<h4 style="display:inline-block">${ userIdNameMap[ review.getUserId()?c ] } Says,</h4>
-					<span class="pull-right"> ${ ( review.getReviewLastUpdateDate() ! review.getReviewDate() )?date }</span>
+					<span class="pull-right"> ${ review.getReviewDate()?date }</span>
 					<p>
 						${ review.getReview() }
 					</p>
