@@ -21,10 +21,13 @@ public class RegisterApi extends GenericApi {
 		UserData userData = new UserData();
 		userData.setName( request.getName() );
 		userData.setEmail( request.getEmail() );
-		userData.setCampaign( request.getCampaign() );
-		userData.setStatus( request.getStatus() );
 		userData.setPassword( request.getPassword() );
-		userData.setReferer( request.getReferer() );
+		if( request.hasCampaign() )
+			userData.setCampaign( request.getCampaign() );
+		if( request.hasStatus() )
+			userData.setStatus( request.getStatus() );
+		if( request.hasReferer() )
+			userData.setReferer( request.getReferer() );
 		
 		AccessToken accessToken = UserContentHelper.registerUser( userData, this.getThreadLocalRequest() );
 
