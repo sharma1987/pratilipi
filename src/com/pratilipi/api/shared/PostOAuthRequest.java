@@ -4,7 +4,7 @@ import com.claymus.api.annotation.Validate;
 import com.claymus.api.shared.GenericRequest;
 
 @SuppressWarnings("serial")
-public class GetOAuthRequest extends GenericRequest {
+public class PostOAuthRequest extends GenericRequest {
 
 	@Validate( regEx = REGEX_EMAIL )
 	private String userId;
