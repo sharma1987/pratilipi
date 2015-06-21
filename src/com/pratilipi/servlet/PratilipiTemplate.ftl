@@ -205,60 +205,99 @@
 		
 		<!-- pop-up for marketing -->
 		<div  id ="backdrop">
-			<div id="popup">
-				<p></p>
-				<button id="popupCloseButton" onclick="closePopup(event)">OK</button><br>
+			<div id="popup" onclick="event.stopPropagation();">
+				<div id="popup_heading" style="text-align: left;">
+					<span>Sign up for Pratilipi</span><span id="popupCloseButton" onclick="closePopup()">x</span>
+				</div>
+				<div id="popup_body">
+					<h2 style="margin-bottom: 40px;">Enjoy Reading?</h2>
+					<p>Sign up to <strong>rate and review</strong> your favorite stories, books, poems and more!</p>
+					<div id="popup_action" onclick="signUpButtonClick()">Sign up</div>
+					<p>Already a member?</p>
+					<a href="#" onclick="loginLinkClick()" style="color: #0000FF; text-decoration: underline;">Sign In</a>
+				</div>
 			</div> 
-			<script defer>
-				function showPopup ( innerHtml ) {
-					jQuery( "#backdrop" ).addClass( "backDrop" );
-					var popup = jQuery( "#popup" );
-					popup.html( innerHtml );
-					popup.show();
-				}
-				function closePopup( event ) {
-					jQuery( "#popup" ).hide()
-					jQuery( "#backdrop" ).removeClass( "backDrop" );
-				}
-				
-				if( window.attachEvent) {//for IE8 and below
-					window.attachEvent( 'onload', function( event ){
-						var visitNumber = getVisitCount();
-						var language = getCookie( "user_language" );
-						var innerHtml = "Visit Number : " + visitNumber + '<br/> User Language = ' + language;
-						//showPopup( innerHtml );
-					});
-					
-					window.attachEvent( 'onclick', function( event ){
-						closePopup( event );
-					});
-					
-					window.attachEvent( 'onkeyup', function( event ){
-						if (event.keyCode == 27) {
-							closePopup( event );
-						}
-					});
-				}
-				else {
-					window.addEventListener( 'load', function( event ){
-						var visitNumber = getVisitCount();
-						var language = getCookie( "user_language" );
-						var innerHtml = "Visit Number : " + visitNumber + '<br/> User Language = ' + language;
-						//showPopup( innerHtml );
-					});
-					
-					window.addEventListener( 'click',function( event ){
-						closePopup( event );
-							
-					});
-					window.addEventListener( 'keyup', function ( event ) {
-						if (event.keyCode == 27) {
-							closePopup( event );
-						}
-					});
-				}
-			</script>
 		</div>
+		<script>
+			var clickEventSend = Boolean( 0 );
+			var userId = ${ userId };
+			function showPopup () {
+				jQuery( "#backdrop" ).addClass( "backDrop" );
+				var popup = jQuery( "#popup" );
+				popup.show();
+				setCookie( "rate_review_notification", Boolean(1), 365, "/" );
+				ga( 'send', 'event',
+					'Encourage Users to Rate/Review',	// Event Category
+					'Users Prompted',				// Event Action
+					'Number of Users Prompted', // Event Label
+					1 );									// Event Value
+			}
+			function closePopup() {
+				jQuery( "#popup" ).hide()
+				jQuery( "#backdrop" ).removeClass( "backDrop" );
+			}
+			function signUpButtonClick(){
+				closePopup();
+				jQuery( "#signupModal" ).modal('show');
+				if( !clickEventSend ){
+					ga( 'send', 'event',
+						'Encourage Users to Rate/Review',	// Event Category
+						'User Action',				// Event Action
+						'User Signed Up', // Event Label
+						1 );									// Event Value
+				}
+				clickEventSend = Boolean( 1 );
+			}
+			function loginLinkClick(){
+				closePopup();
+				jQuery( "#loginModal" ).modal('show');
+				if( !clickEventSend ){
+					ga( 'send', 'event',
+						'Encourage Users to Rate/Review',	// Event Category
+						'User Action',				// Event Action
+						'User Signed In', // Event Label
+						1 );									// Event Value
+				}
+				clickEventSend = Boolean( 1 );	
+			}
+			function showNotification(){
+				var visitNumber = getVisitCount();
+				var hasReceivedNotification = getCookie( "rate_review_notification" );
+				if( parseInt( userId ) == 0 && !hasReceivedNotification &&  parseInt( visitNumber ) >= 2 )
+					showPopup();
+			}
+			
+			if( window.attachEvent) {//for IE8 and below
+				window.attachEvent( 'onload', function( event ){
+					showNotification();
+				});
+				
+				window.attachEvent( 'onclick', function( event ){
+					closePopup( event );
+				});
+				
+				window.attachEvent( 'onkeyup', function( event ){
+					if (event.keyCode == 27) {
+						closePopup( event );
+					}
+				});
+			}
+			else {
+				window.addEventListener( 'load', function( event ){
+					showNotification();
+				});
+				
+				window.addEventListener( 'click',function( event ){
+					closePopup( event );
+						
+				});
+				window.addEventListener( 'keyup', function ( event ) {
+					if (event.keyCode == 27) {
+						closePopup( event );
+					}
+				});
+			}
+		</script>
 
 	</body>
 </html>
