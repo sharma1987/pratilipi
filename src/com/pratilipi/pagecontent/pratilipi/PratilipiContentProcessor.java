@@ -68,11 +68,13 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 
 		
 		String ogFbAppId = FacebookApi.getAppId( request );
-		String ogLocale = pratilipiData.getLanguage() == null ? 
-								"hi_IN" : 
-								pratilipiData.getLanguage().getNameEn().toLowerCase().substring( 0,2 ) + "_IN";
 		String ogType = "books.book";
-		String ogAuthor = author == null ? null : pratilipiData.getAuthor().getFullNameEn();
+		String ogAuthor = null;
+		if( author != null ){
+			ogAuthor = "http://" + DOMAIN + 
+							( pratilipiData.getAuthor().getPageUrlAlias() == null ? 
+									pratilipiData.getAuthor().getPageUrl() : pratilipiData.getAuthor().getPageUrlAlias() );
+		}
 		String ogBooksIsbn = pratilipi.getId() + "";
 		String ogUrl = "http://" + DOMAIN + 
 							( pratilipiData.getPageUrlAlias() == null ? pratilipiData.getPageUrl() : pratilipiData.getPageUrlAlias() );
@@ -80,13 +82,27 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 		String ogImage = "http://" + DOMAIN + "/api/pratilipi/cover?pratilipiId=" + pratilipi.getId();
 		if( ! ogImage.startsWith( "http:" ) )
 			ogImage = "http:" + ogImage;
+		
 		String ogPublisher = null;
-		if( pratilipiData.getLanguage() != null && pratilipiData.getLanguage().getNameEn().equals( "Tamil" ))
+		String ogLocale = null;
+		if( pratilipiData.getLanguage() != null && pratilipiData.getLanguage().getId() == 6319546696728576L ){
+			//LANGUAGE : TAMIL
+			ogLocale = "ta_IN";
 			ogPublisher = "https://www.facebook.com/pages/%E0%AE%AA%E0%AF%8D%E0%AE%B0%E0%AE%A4%E0%AE%BF%E0%AE%B2%E0%AE%BF%E0%AE%AA%E0%AE%BF/448203822022932";
-		else if( pratilipiData.getLanguage() != null && pratilipiData.getLanguage().getNameEn().equals( "Gujarati" ))
+		} else if( pratilipiData.getLanguage() != null && pratilipiData.getLanguage().getId() == 5965057007550464L ){
+			//LANGUAGE : GUJARATI
+			ogLocale = "gu_IN";
 			ogPublisher = "https://www.facebook.com/pratilipiGujarati";
-		else
+		} else if( pratilipiData.getLanguage() != null && pratilipiData.getLanguage().getId() == 5173513199550464L ){
+			//LANGUAGE : MARATHI
+			ogLocale = "mr_IN";
+			ogPublisher = "https://www.facebook.com/pages/Pratilipi-Marathi/1456803991281092";
+		} else {
+			//LANGUAGE : HINDI
+			ogLocale = "hi_IN";
 			ogPublisher = "https://www.facebook.com/Pratilipidotcom";
+		}
+		
 		String summarySubstr = pratilipi.getSummary();
 		if( summarySubstr != null ){
 			Pattern htmlPattern = Pattern.compile( "<[^>]+>" );
