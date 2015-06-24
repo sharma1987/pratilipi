@@ -35,6 +35,7 @@
 							['NumberedList','BulletedList'],
 							['Blockquote','Smiley','HorizontalRule'],
 							['Link','Unlink']];	
+				 	CKEDITOR.env.isCompatible = true;
 					
 				}				
 			</script>
@@ -50,10 +51,10 @@
 		<meta property="og:image" content="http://www.pratilipi.com/theme.pratilipi/logo-200x200.png">
 
 		<#if basicMode>
-			<link type="text/css" rel="stylesheet" href="/theme.pratilipi/style.basicmode.min.css">
+			<link type="text/css" rel="stylesheet" href="/theme.pratilipi/style.basicmode.min.css?21062015">
 			<script type="text/javascript" language="javascript" src="/theme.pratilipi/script.basicmode.min.js" defer></script>
 		<#else>
-			<link type="text/css" rel="stylesheet" href="/theme.pratilipi/style.min.css">
+			<link type="text/css" rel="stylesheet" href="/theme.pratilipi/style.min.css?21062015">
 		</#if>
 		<script type="text/javascript" language="javascript" src="/theme.pratilipi/script.min.js?24052015" defer></script>
 
@@ -218,7 +219,7 @@
 		</div>
 		<script>
 			var clickEventSend = Boolean( 0 );
-			var userId = ${ userId };
+			var userId = ${ userId?c };
 			function showPopup () {
 				jQuery( "#backdrop" ).addClass( "backDrop" );
 				var popup = jQuery( "#popup" );
