@@ -129,7 +129,6 @@ public class PratilipiListApi extends GenericApi {
 			//LANGUAGE : GUJARATI
 			topReadsPratilipiDataList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
 			topReadsPratilipiDataList.add( "/p-p-kuntanpuri-yogi/akbar-ane-birbalni-ramuji-vartao" );
-			topReadsPratilipiDataList.add( "/nimisha-dalal/page-39" );
 			topReadsPratilipiDataList.add( "/dalpatraam/mithybhiman" );
 			topReadsPratilipiDataList.add( "/nimisha-dalal/kone-kahu-1" );
 			topReadsPratilipiDataList.add( "/lalit-parikh/bhed-abhed" );
