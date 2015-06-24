@@ -62,9 +62,11 @@
 		heading="Enable Transliteration"
 		transition="core-transition-top"
 		layered="true">
+	<core-icon-button icon="translate" on-tap="{{enableGujaratiTransliteration}}">&nbsp; Enable Gujarati Transliteration</core-icon-button>
+	<br/>
 	<core-icon-button icon="translate" on-tap="{{enableHindiTransliteration}}">&nbsp; Enable Hindi Transliteration</core-icon-button>
 	<br/>
-	<core-icon-button icon="translate" on-tap="{{enableGujaratiTransliteration}}">&nbsp; Enable Gujarati Transliteration</core-icon-button>
+	<core-icon-button icon="translate" on-tap="{{enableMarathiTransliteration}}">&nbsp; Enable Marathi Transliteration</core-icon-button>
 	<br/>
 	<core-icon-button icon="translate" on-tap="{{enableTamilTransliteration}}">&nbsp; Enable Tamil Transliteration</core-icon-button>
 	<paper-button affirmative autofocus>Close</paper-button>
@@ -359,6 +361,11 @@
 
 	scope.enableTamilTransliteration = function( e ) {
 		enableTransliteration( "Tamil" );
+		transliterationDialog.close();
+	}
+	
+	scope.enableMarathiTransliteration = function( e ) {
+		enableTransliteration( "Marathi" );
 		transliterationDialog.close();
 	}
 	

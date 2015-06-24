@@ -29,6 +29,7 @@
 							<ul id="PratilipiContent-writer-Languages-SubMenu" style="position: absolute; width: 60%; top: 0px; right: 100%;">
 								<li class="subMenuItem" onclick="enableTransliteration( this );">Gujarati</li>
 								<li class="subMenuItem" onclick="enableTransliteration( this );">Hindi</li>
+								<li class="subMenuItem" onclick="enableTransliteration( this );">Marathi</li>
 								<li class="subMenuItem" onclick="enableTransliteration( this );">Tamil</li>
 							</ul> 
 						</div>
