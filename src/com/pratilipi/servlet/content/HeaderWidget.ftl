@@ -64,8 +64,9 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/books">All</a></li>
-                  <li><a href="/books/hindi">Hindi</a></li>
                   <li><a href="/books/gujarati">Gujarati</a></li>
+                  <li><a href="/books/hindi">Hindi</a></li>
+                  <li><a href="/books/marathi">Marathi</a></li>
                   <li><a href="/books/tamil">Tamil</a></li>
                 </ul>
           	</li>
@@ -73,8 +74,9 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Poems<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/poems">All</a></li>
-                  <li><a href="/poems/hindi">Hindi</a></li>
                   <li><a href="/poems/gujarati">Gujarati</a></li>
+                  <li><a href="/poems/hindi">Hindi</a></li>
+                  <li><a href="/poems/marathi">Marathi</a></li>
                   <li><a href="/poems/tamil">Tamil</a></li>
                 </ul>
           	</li>
@@ -82,8 +84,9 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stories<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/stories">All</a></li>
-                  <li><a href="/stories/hindi">Hindi</a></li>
                   <li><a href="/stories/gujarati">Gujarati</a></li>
+                  <li><a href="/stories/hindi">Hindi</a></li>
+                  <li><a href="/stories/marathi">Marathi</a></li>
                   <li><a href="/stories/tamil">Tamil</a></li>
                 </ul>
           	</li>
@@ -91,8 +94,9 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Articles<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/articles">All</a></li>
-                  <li><a href="/articles/hindi">Hindi</a></li>
                   <li><a href="/articles/gujarati">Gujarati</a></li>
+                  <li><a href="/articles/hindi">Hindi</a></li>
+                  <li><a href="/articles/marathi">Marathi</a></li>
                   <li><a href="/articles/tamil">Tamil</a></li>
                 </ul>
           	</li>
