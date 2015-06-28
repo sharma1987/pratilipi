@@ -6,16 +6,16 @@ import com.claymus.api.shared.GenericRequest;
 public class GetReviewListRequest extends GenericRequest {
 	
 	private Long pratilipiId;
-	private Boolean hasPratilipiId;
+	private boolean hasPratilipiId;
 	
 	private Long userId;
-	private Boolean hasUserId;
+	private boolean hasUserId;
 	
 	public Long getPratilipiId(){
 		return pratilipiId;
 	}
 	
-	public Boolean hasPratilipiId(){
+	public boolean hasPratilipiId(){
 		return hasPratilipiId;
 	}
 	
@@ -23,7 +23,7 @@ public class GetReviewListRequest extends GenericRequest {
 		return userId;
 	}
 	
-	public Boolean hasUserId(){
+	public boolean hasUserId(){
 		return hasUserId;
 	}
 	
