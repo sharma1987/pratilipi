@@ -19,6 +19,9 @@ public class PutUserUpdateRequest extends GenericRequest {
 	private String email;
 	private boolean hasEmail;
 	
+	private String password;
+	private boolean hasPassword;
+	
 	private Date dateOfBirth;
 	private boolean hasDateOfBirth;
 	
@@ -44,6 +47,14 @@ public class PutUserUpdateRequest extends GenericRequest {
 	
 	public boolean hasEmail() {
 		return hasEmail;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public boolean hasPassword(){
+		return hasPassword;
 	}
 	
 	public Date getDateOfBirth() {
