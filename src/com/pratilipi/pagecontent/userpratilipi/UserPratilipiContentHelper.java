@@ -211,4 +211,19 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 		
 		return userPratilipiDataList;
 	}
+	
+	public static List<Long> getUserLibrary( UserPratilipiFilter userPratilipiFilter, HttpServletRequest request ){
+		
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
+		List<UserPratilipi> userPratilipiList = dataAccessor.getUserPratilipiList( userPratilipiFilter );
+		
+		List<Long> pratilipiIdList = new ArrayList<>();
+		
+		for( UserPratilipi userPratilipi : userPratilipiList ){
+			if( userPratilipi.isAddedtoLib() != null && userPratilipi.isAddedtoLib() )
+				pratilipiIdList.add( userPratilipi.getPratilipiId() );
+		}
+		
+		return pratilipiIdList;
+	}
 }
