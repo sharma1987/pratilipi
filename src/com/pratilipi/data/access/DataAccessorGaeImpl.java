@@ -685,8 +685,7 @@ public class DataAccessorGaeImpl
 	}
 	
 	@Override
-	public List<UserPratilipi> getUserPratilipiList(
-			UserPratilipiFilter userPratilipiFilter) {
+	public List<UserPratilipi> getUserPratilipiList( UserPratilipiFilter userPratilipiFilter) {
 		
 		GaeQueryBuilder gaeQueryBuilder =
 				new GaeQueryBuilder( pm.newQuery( UserPratilipiEntity.class ) );
