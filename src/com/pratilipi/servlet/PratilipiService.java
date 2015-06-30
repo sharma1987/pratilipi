@@ -7,7 +7,7 @@ import com.pratilipi.api.MobileInitApi;
 import com.pratilipi.api.OAuthApi;
 import com.pratilipi.api.PurchaseApi;
 import com.pratilipi.api.RegisterApi;
-import com.pratilipi.api.UpdateUserProfileApi;
+import com.pratilipi.api.UserProfileApi;
 import com.pratilipi.pagecontent.author.api.AuthorApi;
 import com.pratilipi.pagecontent.author.api.AuthorImageApi;
 import com.pratilipi.pagecontent.author.api.AuthorListApi;
@@ -24,6 +24,7 @@ import com.pratilipi.pagecontent.pratilipi.api.PratilipiResourceApi;
 import com.pratilipi.pagecontent.pratilipicategory.api.CategoryPratilipiApi;
 import com.pratilipi.pagecontent.search.api.SearchApi;
 import com.pratilipi.pagecontent.userpratilipi.api.ReviewApi;
+import com.pratilipi.pagecontent.userpratilipi.api.UserLibraryApi;
 import com.pratilipi.pagecontent.userpratilipi.api.UserPratilipiApi;
 
 @SuppressWarnings("serial")
@@ -35,7 +36,7 @@ public class PratilipiService extends ClaymusService {
 		ApiRegistry.register( OAuthApi.class );
 		ApiRegistry.register( PurchaseApi.class );
 		ApiRegistry.register( RegisterApi.class );
-		ApiRegistry.register( UpdateUserProfileApi.class );
+		ApiRegistry.register( UserProfileApi.class );
 		
 		ApiRegistry.register( PratilipiApi.class );
 		ApiRegistry.register( PratilipiListApi.class );
@@ -59,6 +60,7 @@ public class PratilipiService extends ClaymusService {
 
 		ApiRegistry.register( UserPratilipiApi.class );
 		ApiRegistry.register( ReviewApi.class );
+		ApiRegistry.register( UserLibraryApi.class );
 	}
 
 }
