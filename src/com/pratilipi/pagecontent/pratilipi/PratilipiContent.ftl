@@ -27,7 +27,9 @@
 				<div id="PageContent-Pratilipi-CoverImage-EditOptions"></div>
 			</#if>
 			<div style="margin-top:10px; margin-bottom:10px;">
-				<@social.vToolbar shareUrl=shareUrl/>
+				<#if pratilipiData.getState() == 'PUBLISHED'>
+					<@social.vToolbar shareUrl=shareUrl/>
+				</#if>
 				<#if pratilipiData.getStarCount() gt 0 && pratilipiData.getRatingCount() gt 0>
 					<label itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" style="font-size: 14px;">
 						Rating: 

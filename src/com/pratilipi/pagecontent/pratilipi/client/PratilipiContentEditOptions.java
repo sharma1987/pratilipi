@@ -362,8 +362,7 @@ public class PratilipiContentEditOptions implements EntryPoint, ClickHandler {
 
 						@Override
 						public void onSuccess( SavePratilipiResponse response ) {
-							publishAnchor.setEnabled( true );
-							setPratilipiData( response.getPratilipiData() );
+							Window.Location.reload();
 						}
 			
 						@Override
@@ -384,7 +383,7 @@ public class PratilipiContentEditOptions implements EntryPoint, ClickHandler {
 
 						@Override
 						public void onSuccess( SavePratilipiResponse response ) {
-							setPratilipiData( response.getPratilipiData() );
+							Window.Location.reload();
 						}
 
 						@Override
