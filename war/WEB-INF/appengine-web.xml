@@ -2,7 +2,7 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
   <application>prod-pratilipi</application>
-  <module>default</module>
+  <module>www</module>
   <version>mark-4p264</version>
 
   <threadsafe>true</threadsafe>
