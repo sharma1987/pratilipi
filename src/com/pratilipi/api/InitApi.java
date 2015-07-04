@@ -105,14 +105,14 @@ public class InitApi extends GenericApi {
 //		poemIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Poem
-		poemIdList.add( 6267973098536960L );
-		poemIdList.add( 5121659782561792L );
+		poemIdList.add( 5437103169077248L );
+		poemIdList.add( 5126815622365184L );
 		//Gujarati Poem
-		poemIdList.add( 5133015994859520L );
-		poemIdList.add( 5469550472593408L );
+		poemIdList.add( 5733593619890176L );
+		poemIdList.add( 6577280218300416L );
 		//Tamil Poem
-		poemIdList.add( 5125274341474304L );
-		poemIdList.add( 5661705489088512L );
+		poemIdList.add( 5696029458432000L );
+		poemIdList.add( 5056668077391872L );
 
 		
 		PratilipisContent pratilipisContent = (PratilipisContent) dataAccessor.getPageContent( 5197655504322560L );
