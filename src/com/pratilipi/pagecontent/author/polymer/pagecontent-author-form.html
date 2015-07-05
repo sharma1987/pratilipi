@@ -11,7 +11,6 @@
 			}
 			
 			paper-dropdown-menu{
-				width : 50%;
 				padding-top: 12px;
 				padding-bottom: 6px;
 				margin-top: 0px;
@@ -36,16 +35,18 @@
 			<paper-input id="PenNameEn" label="Pen Name (English)" value="{{ authorData.penNameEn }}"></paper-input>
 		</div>
 		<div center horizontal layout class="formRow">
-			<paper-dropdown-menu label="Select Language" tabindex="0">
-		        <paper-dropdown class="dropdown core-transition core-closed" tabindex="-1" style="outline: none; display: none;">
-					<core-menu id="LanguageId" class="menu" selected="{{ authorData.languageId }}"   valueattr="value">
+			<paper-input id="Email" label="Email" value="{{ authorData.email }}" style="width: 100%;"></paper-input>
+		</div>
+		<div center horizontal layout class="formRow">
+			<paper-dropdown-menu label="Select Language" tabindex="0" style="width: 100%;">
+		        <paper-dropdown class="dropdown core-transition core-closed" tabindex="-1" style="outline: none; display: none; width: 100%;">
+					<core-menu id="LanguageId" class="menu" selected="{{ authorData.languageId }}" valueattr="value" style="width: 100%;">
 						<template repeat="{{ languageData in languageDataList }}">
-							<paper-item value="{{ languageData.id }}">{{ languageData.nameEn }}</paper-item>
+							<paper-item value="{{ languageData.id }}" style="width: 100%;">{{ languageData.nameEn }}</paper-item>
 						</template>
 					</core-menu>
 				</paper-dropdown>
 			</paper-dropdown-menu>
-			<paper-input id="Email" label="Email" value="{{ authorData.email }}"></paper-input>
 		</div>
 		<div center horizontal layout class="formRow">
 			<paper-toast id="Error" text=""></paper-toast>
