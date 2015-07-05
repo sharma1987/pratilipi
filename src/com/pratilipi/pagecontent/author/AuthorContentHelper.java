@@ -31,6 +31,7 @@ import com.claymus.pagecontent.PageContentHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pratilipi.commons.server.PratilipiHelper;
+import com.pratilipi.commons.server.SystemProperty;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.PratilipiPageType;
@@ -161,12 +162,18 @@ public class AuthorContentHelper extends PageContentHelper<
 	
 	public static String creatAuthorImageUrl( Author author ) {
 		if( author.hasCustomCover() ) {
-			String domain = "//" + author.getId() % 10 + "." + ClaymusHelper.getSystemProperty( "domain.cdn" );
-			String uri = "/author-image/150/" + author.getId() + "?" + author.getLastUpdated().getTime();
+//			String domain = "//" + author.getId() % 10 + "." + ClaymusHelper.getSystemProperty( "domain.cdn" );
+//			String uri = "/author-image/150/" + author.getId() + "?" + author.getLastUpdated().getTime();
+//			return domain + uri;
+			String domain = "//" + author.getId() % 10 + "." + SystemProperty.get( "cdn" );
+			String uri = "/author/image?authorId=" + author.getId() + "&width=150&version=" + author.getLastUpdated().getTime();
 			return domain + uri;
 		} else {
-			String domain = "//10." + ClaymusHelper.getSystemProperty( "domain.cdn" );
-			String uri = "/author-image/150/author";
+//			String domain = "//10." + ClaymusHelper.getSystemProperty( "domain.cdn" );
+//			String uri = "/author-image/150/author";
+//			return domain + uri;
+			String domain = "//10." + SystemProperty.get( "cdn" );
+			String uri = "/author/image?width=150";
 			return domain + uri;
 		}
 	}

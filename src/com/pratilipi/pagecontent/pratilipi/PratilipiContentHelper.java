@@ -37,6 +37,7 @@ import com.google.api.services.analytics.model.GaData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pratilipi.commons.server.PratilipiHelper;
+import com.pratilipi.commons.server.SystemProperty;
 import com.pratilipi.commons.shared.PratilipiAccessTokenType;
 import com.pratilipi.commons.shared.PratilipiContentType;
 import com.pratilipi.commons.shared.PratilipiFilter;
@@ -345,12 +346,12 @@ public class PratilipiContentHelper extends PageContentHelper<
 
 	public static String createCoverImageUrl( Pratilipi pratilipi ) {
 		if( pratilipi.hasCustomCover() ) {
-			String domain = "//" + pratilipi.getId() % 10 + "." + ClaymusHelper.getSystemProperty( "domain.cdn" );
-			String uri = "/pratilipi-cover/150/" + pratilipi.getId() + "?" + pratilipi.getLastUpdated().getTime();
+			String domain = "//" + pratilipi.getId() % 10 + "." + SystemProperty.get( "cdn" );
+			String uri = "/pratilipi/cover?pratilipiId=" + pratilipi.getId() + "&width=150&version=" + pratilipi.getLastUpdated().getTime();
 			return domain + uri;
 		} else {
-			String domain = "//10." + ClaymusHelper.getSystemProperty( "domain.cdn" );
-			String uri = "/pratilipi-cover/150/pratilipi";
+			String domain = "//10." + SystemProperty.get( "cdn" );
+			String uri = "/pratilipi/cover?width=150";
 			return domain + uri;
 		}
 	}

@@ -245,13 +245,13 @@ public class PratilipiHelper extends ClaymusHelper {
 		
 		String coverImageUrl;
 		if( pratilipi.hasCustomCover() ) {
-			String domain = "//" + pratilipi.getId() % 10 + "." + ClaymusHelper.getSystemProperty( "domain.cdn" );
-			String uri = "/pratilipi-cover/150/" + pratilipi.getId() + "?" + pratilipi.getLastUpdated().getTime();
+			String domain = "//" + pratilipi.getId() % 10 + "." + SystemProperty.get( "cdn" );
+			String uri = "/pratilipi/cover?pratilipiId=" + pratilipi.getId() + "&width=150&version=" + pratilipi.getLastUpdated().getTime();
 			coverImageUrl = domain + uri;
 		} else {
-			String domain = "//10." + ClaymusHelper.getSystemProperty( "domain.cdn" );
-			String uri = "/pratilipi-cover/150/pratilipi";
-			coverImageUrl = domain + uri;
+			String domain = "//10." + SystemProperty.get( "cdn" );
+			String uri = "/pratilipi/cover?width=150";
+			coverImageUrl =  domain + uri;
 		}
 
 		pratilipiData.setCoverImageUrl( coverImageUrl );
