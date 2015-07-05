@@ -3,7 +3,7 @@
 
   <application>prod-pratilipi</application>
   <module>www</module>
-  <version>mark-4p264</version>
+  <version>mark-4p4</version>
 
   <threadsafe>true</threadsafe>
   <sessions-enabled>false</sessions-enabled>
@@ -74,6 +74,15 @@
     <property name="dev-pratilipi.searchservice.gae.index" value="GLOBAL_INDEX"/>
     <property name="devo-pratilipi.searchservice.gae.index" value="GLOBAL_INDEX"/>
     <property name="prod-pratilipi.searchservice.gae.index" value="GLOBAL_INDEX"/>
+    
+    <!-- Configure CDN -->
+	<property name="localhost.cdn" value="localhost:8080"/>
+	<property name="devo-pratilipi.cdn" value="devo.pratilipi.cdssolutions.in"/>
+	<property name="prod-pratilipi.cdn" value="prod.pratilipi.cdssolutions.in"/>
+
+	<property name="localhost.cdn.3p" value="localhost:8080/third-party"/>
+	<property name="devo-pratilipi.cdn.3p" value="lib.cdssolutions.in"/>
+	<property name="prod-pratilipi.cdn.3p" value="lib.cdssolutions.in"/>
   </system-properties>
 
 </appengine-web-app>
