@@ -57,7 +57,7 @@ public class UserProfileApi extends GenericApi {
 		if( request.hasDateOfBirth() )
 			userData.setDateOfBirth( request.getDateOfBirth() );
 		if( request.hasSex() )
-			userData.setSex( request.getSex() );
+			userData.setGender( request.getSex() );
 
 		userData = UserContentHelper.updateUserProfile( userData, this.getThreadLocalRequest() );
 		

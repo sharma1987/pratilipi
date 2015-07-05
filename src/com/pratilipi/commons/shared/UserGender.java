@@ -2,9 +2,10 @@ package com.pratilipi.commons.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public enum UserSex implements IsSerializable {
+public enum UserGender implements IsSerializable {
 
 	MALE,
-	FEMALE
+	FEMALE,
+	TRANSGENDER
 	
 }
