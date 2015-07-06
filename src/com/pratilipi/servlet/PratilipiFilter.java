@@ -18,11 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.pagecontent.blogpost.BlogPostContent;
-import com.pratilipi.commons.server.PratilipiHelper;
-import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Author;
 
 public class PratilipiFilter implements Filter {
 	
@@ -77,7 +74,6 @@ public class PratilipiFilter implements Filter {
 		
 		String host = request.getServerName();
 		String requestUri = request.getRequestURI();
-		String action = request.getParameter( "action" );
 		String userAgent = request.getHeader( "user-agent" );
 
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
