@@ -15,22 +15,12 @@ public class PostOAuthRequest extends GenericRequest {
 	private Long publisherId;
 	private String publisherSecret;
 	
-	private String firstName;
-	private boolean hasFirstName;
-	
-	private String lastName;
-	private boolean hasLastName;
-	
-	private String campaign;
-	private boolean hasCampaign;
-	
-	private String referer;
-	private boolean hasReferer;
-	
 	private String loginType;
 	
-	private String accessToken;
-	private boolean hasAccessToken;
+	private String socialId;
+	
+	private String token;
+	private boolean hasToken;
 	
 
 	public String getUserId() {
@@ -53,48 +43,20 @@ public class PostOAuthRequest extends GenericRequest {
 		return publisherSecret;
 	}
 	
-	public String getFirstName(){
-		return firstName;
-	}
-	
-	public boolean hasFirstName(){
-		return hasFirstName;
-	}
-	
-	public String getLastName(){
-		return lastName;
-	}
-	
-	public boolean hasLastName(){
-		return hasLastName;
-	}
-	
-	public String getCampaign(){
-		return campaign;
-	}
-	
-	public boolean hasCampaign(){
-		return hasCampaign;
-	}
-	
-	public String getReferer(){
-		return referer;
-	}
-	
-	public boolean hasReferer(){
-		return hasReferer;
-	}
-	
 	public String getLoginType(){
 		return loginType;
 	}
 	
-	public String getAccessToken(){
-		return accessToken;
+	public String getSocialId(){
+		return socialId;
 	}
 	
-	public boolean hasAccessToken(){
-		return hasAccessToken;
+	public String getToken(){
+		return token;
+	}
+	
+	public boolean hasToken(){
+		return hasToken;
 	}
 	
 }
