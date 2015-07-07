@@ -20,10 +20,12 @@ import com.claymus.data.transfer.PageContent;
 import com.claymus.data.transfer.UserRole;
 import com.claymus.taskqueue.Task;
 import com.pratilipi.commons.shared.AuthorFilter;
+import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.Pratilipi;
@@ -257,4 +259,15 @@ public class InitApi extends GenericApi {
 		language = dataAccessor.createOrUpdateLanguage( language );
 	}
 	
+	@SuppressWarnings( "unused" )
+	private void createCategory( String name, String plural, CategoryType categoryType, Boolean isHidden ){
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		Category category = dataAccessor.newCategory();
+		category.setName( name );
+		category.setPlural( plural );
+		category.setType( categoryType );
+		category.setCreationDate( new Date() );
+		category.setHidden( isHidden );
+		dataAccessor.createOrUpdateCategory( category );
+	}
 }
