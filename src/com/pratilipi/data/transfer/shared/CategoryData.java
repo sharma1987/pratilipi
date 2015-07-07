@@ -13,6 +13,9 @@ public class CategoryData implements Serializable {
 	private String name;
 	private boolean hasName;
 	
+	private String plural;
+	private boolean hasPlural;
+	
 	private Long languageId;
 	private boolean hasLanguageId;
 	
@@ -43,6 +46,19 @@ public class CategoryData implements Serializable {
 
 	public boolean hasName() {
 		return hasName;
+	}
+	
+	public String getPlural(){
+		return plural;
+	}
+	
+	public void setPlural( String plural ){
+		this.plural = plural;
+		this.hasPlural = true;
+	}
+	
+	public boolean hasPlural(){
+		return hasPlural;
 	}
 
 	public Long getLanguageId() {

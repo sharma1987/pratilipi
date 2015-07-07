@@ -57,6 +57,7 @@ public class CategoryContentHelper extends PageContentHelper<
 		CategoryData categoryData = new CategoryData();
 		categoryData.setId( category.getId() );
 		categoryData.setName( category.getName() );
+		categoryData.setPlural( category.getPlural() );
 		categoryData.setLanguageId( category.getLanguageId() );
 		categoryData.setType( category.getType() );
 		categoryData.setCreationDate( category.getCreationData() );
@@ -105,6 +106,8 @@ public class CategoryContentHelper extends PageContentHelper<
 		
 		if( categoryData.hasName() )
 			category.setName( categoryData.getName() );
+		if( categoryData.hasPlural() )
+			category.setPlural( categoryData.getPlural() );
 		if( categoryData.getHasLanguageId() )
 			category.setLangugeId( categoryData.getLanguageId() );
 		if( categoryData.getHasType() )

@@ -13,6 +13,10 @@ public interface Category  extends Serializable {
 	
 	void setName( String name );
 	
+	String getPlural();
+	
+	void setPlural( String plural );
+	
 	Long getLanguageId();
 	
 	void setLangugeId( Long languageId );

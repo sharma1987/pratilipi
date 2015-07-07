@@ -21,6 +21,9 @@ public class CategoryEntity implements Category {
 	@Persistent( column = "CATEGORY_NAME")
 	private String name;
 	
+	@Persistent( column = "CATEGORY_PLURAL" )
+	private String plural;
+	
 	@Persistent( column = "LANGUAGE_ID" )
 	private Long languageId;
 	
@@ -44,8 +47,18 @@ public class CategoryEntity implements Category {
 	}
 
 	@Override
-	public void setName(String categoryName) {
+	public void setName( String categoryName ) {
 		this.name = categoryName;
+	}
+	
+	@Override
+	public String getPlural() {
+		return plural;
+	}
+
+	@Override
+	public void setPlural( String plural ) {
+		this.plural = plural;
 	}
 
 	@Override
