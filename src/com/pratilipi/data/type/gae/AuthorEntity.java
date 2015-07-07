@@ -1,4 +1,4 @@
-package com.pratilipi.data.access.gae;
+package com.pratilipi.data.type.gae;
 
 import java.util.Date;
 
@@ -8,12 +8,14 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Text;
-import com.pratilipi.data.transfer.Author;
+import com.pratilipi.common.type.Language;
+import com.pratilipi.data.type.Author;
 
-@SuppressWarnings("serial")
 @PersistenceCapable( table = "AUTHOR" )
 public class AuthorEntity implements Author {
 	
+	private static final long serialVersionUID = -3668863380117991344L;
+
 	@PrimaryKey
 	@Persistent( column = "AUTHOR_ID", valueStrategy = IdGeneratorStrategy.IDENTITY )
 	private Long id;
@@ -21,9 +23,6 @@ public class AuthorEntity implements Author {
 	@Persistent( column = "USER_ID" )
 	private Long userId;
 	
-	@Persistent( column = "LANGUAGE_ID" )
-	private Long languageId;
-
 	@Persistent( column = "FIRST_NAME" )
 	private String firstName;
 	
@@ -42,14 +41,22 @@ public class AuthorEntity implements Author {
 	@Persistent( column = "PEN_NAME_EN" )
 	private String penNameEn;
 	
-	@Persistent( column = "CUSTOM_COVER" )
-	private Boolean customCover;
+	@Persistent( column = "EMAIL" )
+	private String email;
+
+	@Persistent( column = "LANGUAGE" )
+	private Language language;
+
+	@Deprecated
+	@Persistent( column = "LANGUAGE_ID" )
+	private Long languageId;
 
 	@Persistent( column = "SUMMARY" )
 	private Text summary;
 	
-	@Persistent( column = "EMAIL" )
-	private String email;
+
+	@Persistent( column = "CUSTOM_COVER" )
+	private Boolean customCover;
 
 	@Persistent( column = "REGISTRATION_DATE" )
 	private Date registrationDate;
@@ -59,18 +66,25 @@ public class AuthorEntity implements Author {
 
 	
 	@Persistent( column = "CONTENT_PUBLISHED" )
-	private Long contentPublished;
-
+	private Integer contentPublished;
 	
 	@Persistent( column = "TOTAL_READ_COUNT" )
 	private Long totalReadCount;
-	
+
+
 	@Persistent( column = "LAST_PROCESS_DATE" )
 	private Date lastProcessDate;
 
 	@Persistent( column = "NEXT_PROCESS_DATE" )
 	private Date nextProcessDate;
 	
+	
+	public AuthorEntity() {}
+	
+	public AuthorEntity( Long id ) {
+		this.id = id;
+	}
+
 	
 	@Override
 	public Long getId() {
@@ -85,16 +99,6 @@ public class AuthorEntity implements Author {
 	@Override
 	public void setUserId( Long userId ) {
 		this.userId = userId;
-	}
-
-	@Override
-	public Long getLanguageId() {
-		return languageId;
-	}
-
-	@Override
-	public void setLanguageId( Long languageId ) {
-		this.languageId = languageId;
 	}
 
 	@Override
@@ -157,27 +161,6 @@ public class AuthorEntity implements Author {
 		this.penNameEn = penNameEn;
 	}
 
-
-	@Override
-	public Boolean hasCustomCover() {
-		return customCover == null ? false : customCover;
-	}
-
-	@Override
-	public void setCustomCover( Boolean customCover ) {
-		this.customCover = customCover;
-	}
-	
-	@Override
-	public String getSummary() {
-		return summary == null ? null : summary.getValue();
-	}
-
-	@Override
-	public void setSummary( String summary ) {
-		this.summary = summary == null ? null : new Text( summary );
-	}
-	
 	@Override
 	public String getEmail() {
 		return email;
@@ -188,6 +171,59 @@ public class AuthorEntity implements Author {
 		this.email = email;
 	}
 
+	@Override
+	public Language getLanguage() {
+		if( language == null ) {
+			if( languageId == 6213615354904576L || languageId == 5688424874901504L )
+				return Language.ENGLISH;
+			else if( languageId == 5130467284090880L || languageId == 5750790484393984L )
+				return Language.HINDI;
+			else if( languageId == 5965057007550464L || languageId == 5746055551385600L )
+				return Language.GUJARATI;
+			else if( languageId == 6319546696728576L || languageId == 5719238044024832L )
+				return Language.TAMIL;
+			else if( languageId == 5173513199550464L )
+				return Language.MARATHI;
+		}
+		return language;
+	}
+
+	@Override
+	public void setLanguage( Language language ) {
+		this.language = language;
+	}
+
+	@Override
+	public Long getLanguageId() {
+		return languageId;
+	}
+
+	@Override
+	public void setLanguageId( Long languageId ) {
+		this.languageId = languageId;
+	}
+
+	@Override
+	public String getSummary() {
+		return summary == null ? null : summary.getValue();
+	}
+
+	@Override
+	public void setSummary( String summary ) {
+		this.summary = summary == null ? null : new Text( summary );
+	}
+
+	
+	@Override
+	public Boolean hasCustomCover() {
+		return customCover == null ? false : customCover;
+	}
+
+	@Override
+	public void setCustomCover( Boolean customCover ) {
+		this.customCover = customCover;
+	}
+	
 	@Override
 	public Date getRegistrationDate() {
 		return registrationDate;
@@ -211,12 +247,12 @@ public class AuthorEntity implements Author {
 	
 	@Override
 	public Long getContentPublished() {
-		return contentPublished == null ? 0L : contentPublished;
+		return contentPublished == null ? 0L : (long) contentPublished;
 	}
 	
 	@Override
 	public void setContentPublished( Long contentPublished ) {
-		this.contentPublished = contentPublished;
+		this.contentPublished = (int) (long) contentPublished;
 	}
 	
 	@Override
@@ -228,6 +264,7 @@ public class AuthorEntity implements Author {
 	public void setTotalReadCount( Long totalReadCount ) {
 		this.totalReadCount = totalReadCount;
 	}
+	
 	
 	@Override
 	public Date getLastProcessDate() {

@@ -23,9 +23,9 @@ import com.pratilipi.commons.shared.PratilipiState;
 import com.pratilipi.commons.shared.PratilipiType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Author;
 import com.pratilipi.data.transfer.Language;
-import com.pratilipi.data.transfer.Pratilipi;
+import com.pratilipi.data.type.Author;
+import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.service.shared.data.AuthorData;
 import com.pratilipi.service.shared.data.PratilipiData;
 

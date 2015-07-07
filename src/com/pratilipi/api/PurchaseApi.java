@@ -17,8 +17,8 @@ import com.pratilipi.commons.shared.PratilipiAccessTokenType;
 import com.pratilipi.commons.shared.SellerType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.UserPratilipi;
+import com.pratilipi.data.type.Pratilipi;
 
 @SuppressWarnings("serial")
 @Bind( uri = "/purchase" )

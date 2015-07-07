@@ -1,8 +1,9 @@
-package com.pratilipi.data.transfer;
+package com.pratilipi.data.type;
 
 import java.io.Serializable;
 import java.util.Date;
 
+import com.pratilipi.common.type.Language;
 import com.pratilipi.commons.shared.PratilipiContentType;
 import com.pratilipi.commons.shared.PratilipiState;
 import com.pratilipi.commons.shared.PratilipiType;
@@ -11,51 +12,68 @@ public interface Pratilipi extends Serializable {
 
 	Long getId();
 	
-	PratilipiType getType();
-	
-	void setType( PratilipiType pratilipiType );
-	
-	boolean isPublicDomain();
-	
-	void setPublicDomain( boolean isPublicDomain );
-
 	String getTitle();
 	
 	void setTitle( String title );
 	
 	public String getTitleEn();
 	
-	public void setTitleEn(String titleEn);
+	public void setTitleEn( String titleEn );
+	
+	Language getLanguage();
+	
+	void setLanguage( Language language );
 	
 	Long getLanguageId();
-	
+
 	void setLanguageId( Long languageId );
-	
+
 	Long getAuthorId();
 	
 	void setAuthorId( Long authorId );
 	
 	Long getPublisherId();
-	
+
 	void setPublisherId( Long publisherId );
 	
+	String getSummary();
+	
+	void setSummary( String summary );
+
 	Long getPublicationYear();
 	
 	void setPublicationYear( Long publicationYear );
+
+
+	boolean isPublicDomain();
 	
-	Date getListingDate();
+	void setPublicDomain( boolean isPublicDomain );
 	
-	void setListingDate( Date listingDate );
+	PratilipiType getType();
 	
+	void setType( PratilipiType pratilipiType );
+	
+	PratilipiContentType getContentType();
+	
+	void setContentType( PratilipiContentType contentType );
+
+	PratilipiState getState();
+	
+	void setState( PratilipiState state );
 	
 	Boolean hasCustomCover();
 
 	void setCustomCover( Boolean customCover );
 
-	String getSummary();
+	Date getListingDate();
 	
-	void setSummary( String summary );
+	void setListingDate( Date listingDate );
+
+	Date getLastUpdated();
 	
+	void setLastUpdated( Date lastUpdated );
+
+
 	String getIndex();
 	
 	void setIndex( String index );
@@ -68,6 +86,7 @@ public interface Pratilipi extends Serializable {
 	
 	void setPageCount( Integer pageCount );
 	
+	
 	Long getReviewCount();
 	
 	void setReviewCount( Long reviewCount );
@@ -77,26 +96,18 @@ public interface Pratilipi extends Serializable {
 	void setRatingCount( Long ratingCount );
 	
 	Long getStarCount();
-	
+
 	void setStarCount( Long starCount );
 	
+	Long getTotalRating();
+	
+	void setTotalRating( Long totalRating );
+
 	Long getRelevanceOffset();
 
 	void setRelevanceOffset( Long relevanceOffset );
 	
-	PratilipiContentType getContentType();
 	
-	void setContentType( PratilipiContentType contentType );
-	
-	PratilipiState getState();
-	
-	void setState( PratilipiState state );
-	
-	Date getLastUpdated();
-	
-	void setLastUpdated( Date lastUpdated );
-
-
 	Long getReadCount();
 	
 	void setReadCount( Long readCount );
@@ -104,6 +115,7 @@ public interface Pratilipi extends Serializable {
 	Long getFbLikeShareCount();
 
 	void setFbLikeShareCount( Long fbLikeShareCount );
+
 	
 	Date getLastProcessDate();
 

@@ -28,7 +28,7 @@ import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Language;
-import com.pratilipi.data.transfer.Pratilipi;
+import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipis.PratilipisContent;
 import com.pratilipi.taskqueue.TaskQueueFactory;

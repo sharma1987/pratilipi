@@ -19,7 +19,7 @@ import com.claymus.taskqueue.Task;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Author;
+import com.pratilipi.data.type.Author;
 import com.pratilipi.pagecontent.author.AuthorContentHelper;
 import com.pratilipi.pagecontent.author.api.shared.AuthorProcessPostRequest;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;

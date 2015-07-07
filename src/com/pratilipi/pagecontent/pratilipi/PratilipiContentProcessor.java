@@ -34,11 +34,11 @@ import com.pratilipi.commons.shared.PratilipiType;
 import com.pratilipi.commons.shared.UserReviewState;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Author;
 import com.pratilipi.data.transfer.Language;
-import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.UserPratilipi;
 import com.pratilipi.data.transfer.shared.AuthorData;
+import com.pratilipi.data.type.Author;
+import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.author.AuthorContentHelper;
 import com.pratilipi.service.shared.data.PratilipiData;
 

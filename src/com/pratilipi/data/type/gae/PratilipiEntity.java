@@ -1,4 +1,4 @@
-package com.pratilipi.data.access.gae;
+package com.pratilipi.data.type.gae;
 
 import java.util.Date;
 
@@ -8,24 +8,20 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Text;
+import com.pratilipi.common.type.Language;
 import com.pratilipi.commons.shared.PratilipiContentType;
 import com.pratilipi.commons.shared.PratilipiState;
 import com.pratilipi.commons.shared.PratilipiType;
-import com.pratilipi.data.transfer.Pratilipi;
+import com.pratilipi.data.type.Pratilipi;
 
-@SuppressWarnings("serial")
 @PersistenceCapable( table = "PRATILIPI" )
 public class PratilipiEntity implements Pratilipi {
+	
+	private static final long serialVersionUID = -3740558387788310210L;
 
 	@PrimaryKey
 	@Persistent( column = "PRATILIPI_ID", valueStrategy = IdGeneratorStrategy.IDENTITY )
 	private Long id;
-	
-	@Persistent( column = "PRATILIPI_TYPE" )
-	private PratilipiType type;
-	
-	@Persistent( column = "PUBLIC_DOMAIN" )
-	private Boolean publicDomain;
 	
 	@Persistent( column = "TITLE" )
 	private String title;
@@ -33,30 +29,50 @@ public class PratilipiEntity implements Pratilipi {
 	@Persistent( column = "TITLE_EN" )
 	private String titleEn;
 	
-	
+	@Persistent( column = "LANGUAGE" )
+	private Language language;
+
+	@Deprecated
 	@Persistent( column = "LANGUAGE_ID" )
 	private Long languageId;
 
-	
 	@Persistent( column = "AUTHOR_ID" )
 	private Long authorId;
 	
+	@Deprecated
 	@Persistent( column = "PUBLISHER_ID" )
 	private Long publisherId;
-
-	@Persistent( column = "PUBLICATION_YEAR" )
-	private Long publicationYear;
-
-	@Persistent( column = "LISTING_DATE" )
-	private Date listingDate;
-
-	
-	@Persistent( column = "CUSTOM_COVER" )
-	private Boolean customCover;
 
 	@Persistent( column = "SUMMARY" )
 	private Text summary;
 
+	@Persistent( column = "PUBLICATION_YEAR" )
+	private Integer publicationYear;
+
+	
+	@Deprecated
+	@Persistent( column = "PUBLIC_DOMAIN" )
+	private Boolean publicDomain;
+	
+	@Persistent( column = "PRATILIPI_TYPE" )
+	private PratilipiType type;
+	
+	@Persistent( column = "CONTENT_TYPE" )
+	private PratilipiContentType contentType;
+	
+	@Persistent( column = "STATE" )
+	private PratilipiState state;
+	
+	@Persistent( column = "CUSTOM_COVER" )
+	private Boolean customCover;
+
+	@Persistent( column = "LISTING_DATE" )
+	private Date listingDate;
+
+	@Persistent( column = "LAST_UPDATED" )
+	private Date lastUpdated;
+
+	
 	@Persistent( column = "INDEX" )
 	private Text index;
 
@@ -66,29 +82,24 @@ public class PratilipiEntity implements Pratilipi {
 	@Persistent( column = "PAGE_COUNT" )
 	private Integer pageCount;
 	
+	
 	@Persistent( column = "REVIEW_COUNT" )
 	private Long reviewCount;
 	
 	@Persistent( column = "RATING_COUNT" )
 	private Long ratingCount;
 	
+	@Deprecated
 	@Persistent( column = "STAR_COUNT" )
 	private Long starCount;
+
+	@Persistent( column = "TOTAL_RATING" )
+	private Long totalRating;
 
 	@Persistent( column = "RELEVANCE_OFFSET" )
 	private Long relevanceOffset;
 	
 
-	@Persistent( column = "CONTENT_TYPE" )
-	private PratilipiContentType contentType;
-	
-	@Persistent( column = "STATE" )
-	private PratilipiState state;
-	
-	@Persistent( column = "LAST_UPDATED" )
-	private Date lastUpdated;
-
-	
 	@Persistent( column = "READ_COUNT_OFFSET" )
 	private Long readCountOffset;
 	
@@ -97,6 +108,7 @@ public class PratilipiEntity implements Pratilipi {
 	
 	@Persistent( column = "FB_LIKE_SHARE_COUNT" )
 	private Long fbLikeShareCount;
+
 	
 	@Persistent( column = "LAST_PROCESS_DATE" )
 	private Date lastProcessDate;
@@ -105,31 +117,18 @@ public class PratilipiEntity implements Pratilipi {
 	private Date nextProcessDate;
 
 	
+	public PratilipiEntity() {}
+	
+	public PratilipiEntity( Long id ) {
+		this.id = id;
+	}
+
+	
 	@Override
 	public Long getId() {
 		return id;
 	}
 
-	@Override
-	public PratilipiType getType() {
-		return type;
-	}
-	
-	@Override
-	public void setType( PratilipiType pratilipiType ) {
-		this.type = pratilipiType;
-	}
-
-	@Override
-	public boolean isPublicDomain() {
-		return publicDomain == null ? false : publicDomain;
-	}
-	
-	@Override
-	public void setPublicDomain( boolean isPublicDomain ) {
-		this.publicDomain = isPublicDomain;
-	}
-	
 	@Override
 	public String getTitle() {
 		return title;
@@ -150,6 +149,28 @@ public class PratilipiEntity implements Pratilipi {
 		this.titleEn = titleEn;
 	}
 	
+	@Override
+	public Language getLanguage() {
+		if( language == null ) {
+			if( languageId == 6213615354904576L || languageId == 5688424874901504L )
+				language = Language.ENGLISH;
+			else if( languageId == 5130467284090880L || languageId == 5750790484393984L )
+				language = Language.HINDI;
+			else if( languageId == 5965057007550464L || languageId == 5746055551385600L )
+				language = Language.GUJARATI;
+			else if( languageId == 6319546696728576L || languageId == 5719238044024832L )
+				language = Language.TAMIL;
+			else if( languageId == 5173513199550464L )
+				return Language.MARATHI;
+		}
+		return language;
+	}
+
+	@Override
+	public void setLanguage( Language language ) {
+		this.language = language;
+	}
+
 	@Override
 	public Long getLanguageId() {
 		return languageId;
@@ -181,26 +202,66 @@ public class PratilipiEntity implements Pratilipi {
 	}
 	
 	@Override
+	public String getSummary() {
+		return summary == null ? null : summary.getValue();
+	}
+
+	@Override
+	public void setSummary( String summary ) {
+		this.summary = summary == null ? null : new Text( summary );
+	}
+	
+	@Override
 	public Long getPublicationYear() {
-		return publicationYear;
+		return (long) publicationYear;
 	}
 
 	@Override
 	public void setPublicationYear( Long publicationYear ) {
-		this.publicationYear = publicationYear;
+		this.publicationYear = (int) (long) publicationYear;
+	}
+
+	
+	@Override
+	public boolean isPublicDomain() {
+		return publicDomain == null ? false : publicDomain;
+	}
+	
+	@Override
+	public void setPublicDomain( boolean isPublicDomain ) {
+		this.publicDomain = isPublicDomain;
+	}
+	
+	@Override
+	public PratilipiType getType() {
+		return type;
+	}
+	
+	@Override
+	public void setType( PratilipiType pratilipiType ) {
+		this.type = pratilipiType;
 	}
 
 	@Override
-	public Date getListingDate() {
-		return listingDate;
+	public PratilipiContentType getContentType() {
+		return contentType;
 	}
-
+	
 	@Override
-	public void setListingDate( Date listingDate ) {
-		this.listingDate = listingDate;
+	public void setContentType( PratilipiContentType contentType ) {
+		this.contentType = contentType;
 	}
-
-
+	
+	@Override
+	public PratilipiState getState() {
+		return state;
+	}
+	
+	@Override
+	public void setState( PratilipiState state ) {
+		this.state = state;
+	}
+	
 	@Override
 	public Boolean hasCustomCover() {
 		return customCover == null ? false : customCover;
@@ -212,14 +273,25 @@ public class PratilipiEntity implements Pratilipi {
 	}
 	
 	@Override
-	public String getSummary() {
-		return summary == null ? null : summary.getValue();
+	public Date getListingDate() {
+		return listingDate;
 	}
 
 	@Override
-	public void setSummary( String summary ) {
-		this.summary = summary == null ? null : new Text( summary );
+	public void setListingDate( Date listingDate ) {
+		this.listingDate = listingDate;
 	}
+
+	@Override
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+
+	@Override
+	public void setLastUpdated( Date lastUpdated ) {
+		this.lastUpdated = lastUpdated;
+	}
+
 	
 	@Override
 	public String getIndex() {
@@ -250,6 +322,7 @@ public class PratilipiEntity implements Pratilipi {
 	public void setPageCount( Integer pageCount ) {
 		this.pageCount = pageCount;
 	}
+	
 	
 	@Override
 	public Long getReviewCount() {
@@ -282,6 +355,16 @@ public class PratilipiEntity implements Pratilipi {
 	}
 	
 	@Override
+	public Long getTotalRating() {
+		return totalRating == null ? starCount : totalRating;
+	}
+
+	@Override
+	public void setTotalRating( Long totalRating ) {
+		this.totalRating = totalRating;
+	}
+	
+	@Override
 	public Long getRelevanceOffset() {
 		return relevanceOffset == null ? 0L : relevanceOffset;
 	}
@@ -290,38 +373,8 @@ public class PratilipiEntity implements Pratilipi {
 	public void setRelevanceOffset( Long relevanceOffset ) {
 		this.relevanceOffset = relevanceOffset;
 	}
-	
-	@Override
-	public PratilipiContentType getContentType() {
-		return contentType;
-	}
-	
-	@Override
-	public void setContentType( PratilipiContentType contentType ) {
-		this.contentType = contentType;
-	}
-	
-	@Override
-	public PratilipiState getState() {
-		return state;
-	}
-	
-	@Override
-	public void setState( PratilipiState state ) {
-		this.state = state;
-	}
-	
-	@Override
-	public Date getLastUpdated() {
-		return lastUpdated;
-	}
 
-	@Override
-	public void setLastUpdated( Date lastUpdated ) {
-		this.lastUpdated = lastUpdated;
-	}
-
-
+	
 	@Override
 	public Long getReadCount() {
 		return readCount == null
@@ -343,6 +396,7 @@ public class PratilipiEntity implements Pratilipi {
 	public void setFbLikeShareCount( Long fbLikeShareCount ) {
 		this.fbLikeShareCount = fbLikeShareCount;
 	}
+
 	
 	@Override
 	public Date getLastProcessDate() {

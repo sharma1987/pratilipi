@@ -20,7 +20,7 @@ import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.PratilipiType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Pratilipi;
+import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipi.api.shared.PostPratilipiProcessRequest;
 import com.pratilipi.taskqueue.TaskQueueFactory;

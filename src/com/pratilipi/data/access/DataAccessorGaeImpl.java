@@ -19,7 +19,6 @@ import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
-import com.pratilipi.data.access.gae.AuthorEntity;
 import com.pratilipi.data.access.gae.CategoryEntity;
 import com.pratilipi.data.access.gae.EventEntity;
 import com.pratilipi.data.access.gae.EventPratilipiEntity;
@@ -27,19 +26,16 @@ import com.pratilipi.data.access.gae.GenreEntity;
 import com.pratilipi.data.access.gae.LanguageEntity;
 import com.pratilipi.data.access.gae.PratilipiAuthorEntity;
 import com.pratilipi.data.access.gae.PratilipiCategoryEntity;
-import com.pratilipi.data.access.gae.PratilipiEntity;
 import com.pratilipi.data.access.gae.PratilipiGenreEntity;
 import com.pratilipi.data.access.gae.PratilipiTagEntity;
 import com.pratilipi.data.access.gae.PublisherEntity;
 import com.pratilipi.data.access.gae.TagEntity;
 import com.pratilipi.data.access.gae.UserPratilipiEntity;
-import com.pratilipi.data.transfer.Author;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
 import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
-import com.pratilipi.data.transfer.Pratilipi;
 import com.pratilipi.data.transfer.PratilipiAuthor;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
@@ -47,6 +43,10 @@ import com.pratilipi.data.transfer.PratilipiTag;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.Tag;
 import com.pratilipi.data.transfer.UserPratilipi;
+import com.pratilipi.data.type.Author;
+import com.pratilipi.data.type.Pratilipi;
+import com.pratilipi.data.type.gae.AuthorEntity;
+import com.pratilipi.data.type.gae.PratilipiEntity;
 
 @SuppressWarnings("serial")
 public class DataAccessorGaeImpl

@@ -19,7 +19,7 @@ import com.pratilipi.commons.shared.PratilipiType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Language;
-import com.pratilipi.data.transfer.Pratilipi;
+import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.service.shared.data.PratilipiData;
 
 public class PratilipisContentProcessor extends PageContentProcessor<PratilipisContent> {
