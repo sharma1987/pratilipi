@@ -10,7 +10,7 @@ import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.data.access.DataAccessorFactory;
 import com.claymus.data.transfer.BlobEntry;
-import com.pratilipi.commons.shared.PratilipiContentType;
+import com.pratilipi.common.type.PratilipiContentType;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipi.api.shared.GetPratilipiContentImageRequest;
 import com.pratilipi.pagecontent.pratilipi.api.shared.PostPratilipiContentImageRequest;

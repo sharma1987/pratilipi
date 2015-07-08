@@ -6,9 +6,9 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 import com.claymus.data.access.gae.PageContentEntity;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.commons.shared.PratilipiFilter;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
 import com.pratilipi.pagecontent.pratilipis.PratilipisContent;
 
 @SuppressWarnings("serial")

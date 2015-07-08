@@ -1,4 +1,4 @@
-package com.pratilipi.commons.shared;
+package com.pratilipi.common.type;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

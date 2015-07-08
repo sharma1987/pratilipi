@@ -3,6 +3,8 @@ package com.pratilipi.commons.shared;
 import java.util.Date;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 
 public class PratilipiFilter implements IsSerializable {
 	

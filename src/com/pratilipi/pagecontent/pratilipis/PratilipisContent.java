@@ -3,9 +3,9 @@ package com.pratilipi.pagecontent.pratilipis;
 import java.util.List;
 
 import com.claymus.data.transfer.PageContent;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.commons.shared.PratilipiFilter;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
 
 public interface PratilipisContent extends PageContent {
 	

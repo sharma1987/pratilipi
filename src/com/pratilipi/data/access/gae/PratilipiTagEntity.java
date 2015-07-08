@@ -5,7 +5,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.data.transfer.PratilipiTag;
 
 @SuppressWarnings("serial")

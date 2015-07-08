@@ -2,8 +2,8 @@ package com.pratilipi.pagecontent.pratilipi.api.shared;
 
 import com.claymus.api.annotation.Validate;
 import com.claymus.api.shared.GenericRequest;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 
 @SuppressWarnings("serial")
 public class GetPratilipiListRequest extends GenericRequest {

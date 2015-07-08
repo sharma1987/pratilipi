@@ -6,7 +6,7 @@ import com.claymus.commons.client.ui.formfield.TextInputFormField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Panel;
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.service.shared.data.LanguageData;
 import com.pratilipi.service.shared.data.PratilipiData;
 

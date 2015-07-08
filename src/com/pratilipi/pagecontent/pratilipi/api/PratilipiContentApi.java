@@ -8,7 +8,7 @@ import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.taskqueue.Task;
-import com.pratilipi.commons.shared.PratilipiContentType;
+import com.pratilipi.common.type.PratilipiContentType;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipi.api.shared.GetPratilipiContentRequest;
 import com.pratilipi.pagecontent.pratilipi.api.shared.GetPratilipiContentResponse;

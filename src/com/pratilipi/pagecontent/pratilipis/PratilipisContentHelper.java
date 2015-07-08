@@ -2,8 +2,8 @@ package com.pratilipi.pagecontent.pratilipis;
 
 import com.claymus.commons.server.Access;
 import com.claymus.pagecontent.PageContentHelper;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.pagecontent.pratilipis.gae.PratilipisContentEntity;
 import com.pratilipi.pagecontent.pratilipis.shared.PratilipisContentData;
 

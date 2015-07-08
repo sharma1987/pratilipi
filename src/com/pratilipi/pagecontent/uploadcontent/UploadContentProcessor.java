@@ -9,8 +9,8 @@ import com.claymus.commons.server.FreeMarkerUtil;
 import com.claymus.commons.server.SerializationUtil;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.pagecontent.PageContentProcessor;
+import com.pratilipi.common.type.PratilipiContentType;
 import com.pratilipi.commons.server.PratilipiHelper;
-import com.pratilipi.commons.shared.PratilipiContentType;
 import com.pratilipi.service.shared.data.PratilipiData;
 
 public class UploadContentProcessor extends PageContentProcessor<UploadContent> {

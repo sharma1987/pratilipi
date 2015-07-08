@@ -9,9 +9,9 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Text;
 import com.pratilipi.common.type.Language;
-import com.pratilipi.commons.shared.PratilipiContentType;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiContentType;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.data.type.Pratilipi;
 
 @PersistenceCapable( table = "PRATILIPI" )
@@ -213,7 +213,7 @@ public class PratilipiEntity implements Pratilipi {
 	
 	@Override
 	public Long getPublicationYear() {
-		return (long) publicationYear;
+		return publicationYear == null ? null : (long) publicationYear;
 	}
 
 	@Override

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.pratilipi.commons.shared.PratilipiContentType;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiContentType;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 
 @SuppressWarnings("serial")
 public class PratilipiData implements Serializable {

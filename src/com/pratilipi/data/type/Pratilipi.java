@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.pratilipi.common.type.Language;
-import com.pratilipi.commons.shared.PratilipiContentType;
-import com.pratilipi.commons.shared.PratilipiState;
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiContentType;
+import com.pratilipi.common.type.PratilipiState;
+import com.pratilipi.common.type.PratilipiType;
 
 public interface Pratilipi extends Serializable {
 

@@ -2,7 +2,7 @@ package com.pratilipi.data.transfer;
 
 import java.io.Serializable;
 
-import com.pratilipi.commons.shared.PratilipiType;
+import com.pratilipi.common.type.PratilipiType;
 
 public interface PratilipiTag extends Serializable {
 
