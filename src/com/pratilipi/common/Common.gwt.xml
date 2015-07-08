@@ -1,0 +1,3 @@
+<module rename-to='common'>
+  <source path='type'/>
+</module>

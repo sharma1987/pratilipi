@@ -1,4 +1,5 @@
 <module rename-to='pratilipi'>
   <source path='client'/>
   <source path='shared'/>
+  <inherits name='com.pratilipi.common.Common'/>
 </module>
