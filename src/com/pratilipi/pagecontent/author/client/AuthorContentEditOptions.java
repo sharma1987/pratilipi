@@ -120,7 +120,8 @@ public class AuthorContentEditOptions implements EntryPoint, ClickHandler {
 				String src = imgElement.getAttribute( "src" );
 				if( src.indexOf( '?' ) != -1 )
 					src = src.substring( 0, src.indexOf( '?' ) );
-				src = src + "?" + new Date().getTime();
+				String urlParameters = "?authorId=" + authorData.getId() + "&width=150&version=" + new Date().getTime(); 
+				src = src + urlParameters;
 				imgElement.setAttribute( "src", src );
 			}
 			
