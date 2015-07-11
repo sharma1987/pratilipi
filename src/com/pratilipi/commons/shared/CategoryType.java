@@ -6,6 +6,8 @@ public enum CategoryType implements IsSerializable  {
 	
 	GENRE,
 	TAG,
-	GENERAL
+	GENERAL,
+	AUTHOR,
+	PRATILIPI_TYPE
 	
 }
