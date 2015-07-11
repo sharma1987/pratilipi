@@ -225,6 +225,30 @@ public class DataAccessorGaeImpl
 	}
 	
 	@Override
+	public Author getAuthorByName( String nameEn ){
+		String firstNameEn = null;
+		String lastNameEn = null;
+		if( nameEn.lastIndexOf( " " ) != -1 ){
+			firstNameEn = nameEn.substring( 0, nameEn.lastIndexOf( " " ));
+			lastNameEn = nameEn.substring( nameEn.lastIndexOf( " " ) + 1 );
+		} else
+			firstNameEn = nameEn;
+		
+		Query query = new GaeQueryBuilder( pm.newQuery( AuthorEntity.class ) )
+				.addFilter( "firstNameEn", firstNameEn )
+				.addFilter( "lastNameEn", lastNameEn )
+				.build();
+		
+		@SuppressWarnings("unchecked")
+		List<Author> authorList = (List<Author>) query.execute( firstNameEn, lastNameEn );
+		
+		if( authorList.size() > 1 )
+			logger.log( Level.SEVERE, authorList.size() + " Authors found with name " + nameEn + " ." );
+		
+		return authorList.size() == 0 ? null : pm.detachCopy( authorList.get( 0 ) );
+	}
+	
+	@Override
 	public DataListCursorTuple<Author> getAuthorList( String cursorStr, int resultCount ) {
 
 		Query query =
@@ -448,6 +472,7 @@ public class DataAccessorGaeImpl
 	public List<Category> getCategoryList() {
 		Query query = 
 				new GaeQueryBuilder( pm.newQuery( CategoryEntity.class ))
+						.addOrdering( "serial_number", true )
 						.addOrdering( "name", true )
 						.build();
 		

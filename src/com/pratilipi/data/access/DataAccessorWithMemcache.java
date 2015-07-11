@@ -247,6 +247,17 @@ public class DataAccessorWithMemcache
 	}
 	
 	@Override
+	public Author getAuthorByName( String nameEn ){
+		Author author = memcache.get( PREFIX_AUTHOR + "Name-" + nameEn );
+		if( author == null ) {
+			author = dataAccessor.getAuthorByName( nameEn );
+			if( author != null )
+				memcache.put( PREFIX_AUTHOR + "Name-" + nameEn, author );
+		}
+		return author;
+	}
+	
+	@Override
 	public DataListCursorTuple<Author> getAuthorList( String cursor, int resultCount ) {
 		return dataAccessor.getAuthorList( cursor, resultCount );
 	}
