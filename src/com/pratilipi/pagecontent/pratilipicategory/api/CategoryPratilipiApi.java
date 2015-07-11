@@ -5,11 +5,11 @@ import java.util.List;
 import com.claymus.api.GenericApi;
 import com.claymus.api.annotation.Bind;
 import com.claymus.api.annotation.Get;
+import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.data.access.DataListCursorTuple;
-import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.shared.PratilipiData;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
+import com.pratilipi.pagecontent.pratilipicategory.PratilipiCategoryContentHelper;
 import com.pratilipi.pagecontent.pratilipicategory.api.shared.GetCategoryPratilipiRequest;
 import com.pratilipi.pagecontent.pratilipicategory.api.shared.GetCategoryPratilipiResponse;
 
@@ -18,20 +18,24 @@ import com.pratilipi.pagecontent.pratilipicategory.api.shared.GetCategoryPratili
 public class CategoryPratilipiApi extends GenericApi {
 
 	@Get
-	public GetCategoryPratilipiResponse getCategoryPratilipiList( GetCategoryPratilipiRequest request ){
+	public GetCategoryPratilipiResponse getCategoryPratilipiList( GetCategoryPratilipiRequest request ) 
+			throws InvalidArgumentException{
 		
-		String query = request.getLanguageId() + " AND " + request.getCategoryId();
-		SearchAccessor searchAccessor = DataAccessorFactory.getSearchAccessor();
 		DataListCursorTuple<Long> pratilipiIdListCursorTuple = 
-							searchAccessor.searchQuery( query, 
+							PratilipiCategoryContentHelper.getCategoryPratilipiList( 
+									request.getLanguageId(), 
+									request.getCategoryId(), 
+									request.getResultCount(), 
 									request.getCursor(), 
-									request.getResultCount() == null ? 20 : request.getResultCount() );
-		List<PratilipiData> pratilipiDataList = PratilipiContentHelper.createPratilipiDataList( 
-															pratilipiIdListCursorTuple.getDataList(),
-															false,
-															true,
-															true,
-															this.getThreadLocalRequest() );
+									this.getThreadLocalRequest() );
+		
+		List<PratilipiData> pratilipiDataList = 
+							PratilipiContentHelper.createPratilipiDataList( 
+									pratilipiIdListCursorTuple.getDataList(),
+									false,
+									true,
+									true,
+									this.getThreadLocalRequest() );
 		
 		return new GetCategoryPratilipiResponse( 
 				pratilipiDataList,

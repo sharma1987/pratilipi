@@ -3,33 +3,30 @@ package com.pratilipi.pagecontent.pratilipicategory;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
+import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.AccessToken;
 import com.claymus.pagecontent.PageContentHelper;
 import com.claymus.pagecontent.user.UserContentHelper;
-import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.commons.server.PratilipiHelper;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.shared.CategoryData;
 import com.pratilipi.data.transfer.shared.PratilipiCategoryData;
-import com.pratilipi.data.transfer.shared.PratilipiData;
 import com.pratilipi.data.type.Author;
 import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.category.CategoryContentHelper;
 import com.pratilipi.pagecontent.genres.GenresContentProcessor;
-import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipicategory.shared.PratilipiCategoryContentData;
 
 public class PratilipiCategoryContentHelper extends PageContentHelper<
@@ -38,7 +35,6 @@ public class PratilipiCategoryContentHelper extends PageContentHelper<
 		PratilipiCategoryContentProcessor>{
 
 	public static final String ACCESS_ID_PRATILIPI_CATEGORY_ADD = "pratilipi_category_add";
-	
 	
 	@Override
 	public String getModuleName() {
@@ -132,36 +128,40 @@ public class PratilipiCategoryContentHelper extends PageContentHelper<
 		return categoryList;
 	}
 	
-	public static DataListCursorTuple<PratilipiData> getCategoryPratilipiList( 
-					Long categoryId, Integer resultCount, String cursor, HttpServletRequest request ){
+	public static DataListCursorTuple<Long> getCategoryPratilipiList( 
+					Long languageId, 
+					Long categoryId, 
+					Integer resultCount, 
+					String cursor, 
+					HttpServletRequest request ) 
+							throws InvalidArgumentException{
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		DataListCursorTuple<PratilipiCategory> categoryPratilipiTupleList =
-					dataAccessor.getCategoryPratilipiList( categoryId, resultCount, cursor );
-		List<PratilipiCategory> categoryPratilipiList;
-		if( categoryPratilipiTupleList == null )
-			categoryPratilipiList = new ArrayList<PratilipiCategory>( 0 );
-		else
-			categoryPratilipiList = categoryPratilipiTupleList.getDataList();
-		Logger.getLogger( PratilipiCategoryContentHelper.class.getName() )
-				.log( Level.INFO, "Response List : " + categoryPratilipiList.size() );
+		Category category = dataAccessor.getCategory( categoryId );
 		
-		List<PratilipiData> pratilipiDataList = new ArrayList<PratilipiData>( categoryPratilipiList.size() );
-		for( PratilipiCategory pratilipiCategory : categoryPratilipiTupleList.getDataList() ){
-			Pratilipi pratilipi = dataAccessor.getPratilipi( pratilipiCategory.getPratilipiId() );
-			if( pratilipi.getState() == PratilipiState.PUBLISHED || pratilipi.getState() == PratilipiState.PUBLISHED_PAID ){
-				Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
-				List<Category> categoryList = getPratilipiCategoryList( pratilipi.getId(), request );
-				PratilipiData pratilipiData = PratilipiContentHelper.createPratilipiData( 
-						pratilipi, null, author, categoryList, request );
-
-				pratilipiDataList.add( pratilipiData );
-			}
+		DataListCursorTuple<Long> pratilipiIdListCursorTuple = null;
+		String query = "";
+		
+		if( category.getType() == CategoryType.AUTHOR ){
+			Author author = dataAccessor.getAuthorByName( category.getName() );
+			if( author == null )
+				throw new InvalidArgumentException( "Author with name " + category.getName() + " does not exists" );
+			query = author.getId() + " AND " + languageId;
+		} else if( category.getType() == CategoryType.PRATILIPI_TYPE ){
+			query = category.getName().toUpperCase() + " AND " + languageId ;
+		} else if( category.getType() == CategoryType.GENRE ){
+			query = languageId + " AND " + categoryId;
+		} else if( category.getType() == CategoryType.GENERAL ){
+			
 		}
 		
-		return new DataListCursorTuple<PratilipiData>( 
-				pratilipiDataList, 
-				categoryPratilipiTupleList == null ? null : categoryPratilipiTupleList.getCursor() );
+		SearchAccessor searchAccessor = DataAccessorFactory.getSearchAccessor();
+		pratilipiIdListCursorTuple = 
+							searchAccessor.searchQuery( query, 
+									cursor, 
+									resultCount == null ? 20 : resultCount );
+		
+		return pratilipiIdListCursorTuple;
 	}
 	
 	public static PratilipiCategoryData addPratilipiCategory( PratilipiCategoryData pratilipiCategoryData, HttpServletRequest request ) 
