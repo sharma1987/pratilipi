@@ -12,11 +12,13 @@ import com.claymus.api.annotation.Get;
 import com.claymus.api.shared.GenericRequest;
 import com.claymus.api.shared.GenericResponse;
 import com.claymus.commons.shared.ClaymusPageType;
+import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.data.transfer.AppProperty;
 import com.claymus.data.transfer.Page;
 import com.claymus.data.transfer.PageContent;
+import com.claymus.data.transfer.User;
 import com.claymus.data.transfer.UserRole;
 import com.claymus.taskqueue.Task;
 import com.pratilipi.commons.shared.AuthorFilter;
@@ -38,7 +40,8 @@ import com.pratilipi.taskqueue.TaskQueueFactory;
 public class InitApi extends GenericApi {
 
 	@Get
-	public GenericResponse getInit( GenericRequest request ) throws InvalidArgumentException, UnexpectedServerException {
+	public GenericResponse getInit( GenericRequest request ) 
+			throws InvalidArgumentException, UnexpectedServerException, InsufficientAccessException {
 
 		updateHomePageContent( request );
 
@@ -238,11 +241,15 @@ public class InitApi extends GenericApi {
 	}
 	
 	@SuppressWarnings("unused")
-	private void createUserRole( Long userId ){
+	private void createUserRole( String email ) 
+			throws InvalidArgumentException{
 		com.claymus.data.access.DataAccessor dataAccessor = 
 				com.claymus.data.access.DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		User user = dataAccessor.getUserByEmail( email );
+		if( user == null )
+			throw new InvalidArgumentException( "Email is not registered" );
 		UserRole userRole = dataAccessor.newUserRole();
-		userRole.setUserId( userId );
+		userRole.setUserId( user.getId() );
 		userRole.setRoleId( "administrator" );
 		
 		userRole = dataAccessor.createOrUpdateUserRole( userRole );
