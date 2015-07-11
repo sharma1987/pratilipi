@@ -311,6 +311,9 @@ public class PratilipiMain extends ClaymusMain {
 		
 		else if( requestUri.equals( "/JoinTheGang" ) )
 			pageContentList.add( generateHtmlContentFromFile( "WEB-INF/classes/com/pratilipi/servlet/content/CareerPageContent.ftl" ) );
+		
+		else if( requestUri.equals( "/privacy" ) )
+			pageContentList.add( generateHtmlContentFromFile( "WEB-INF/classes/com/pratilipi/servlet/content/PrivacyPolicy.ftl" ) );
 			
 		return pageContentList;
 	}
