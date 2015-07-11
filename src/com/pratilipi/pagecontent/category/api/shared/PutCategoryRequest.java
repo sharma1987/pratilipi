@@ -9,8 +9,14 @@ public class PutCategoryRequest extends GenericRequest {
 	private Long id;
 	private Boolean hasId;
 	
+	private int serialNumber;
+	private boolean hasSerialNumber;
+	
 	private String name;
 	private Boolean hasName;
+	
+	private String plural;
+	private boolean hasPlural;
 	
 	private Long languageId;
 	private Boolean hasLanguageId;
@@ -27,12 +33,28 @@ public class PutCategoryRequest extends GenericRequest {
 		return hasId;
 	}
 	
+	public int getSerialNumber(){
+		return serialNumber;
+	}
+	
+	public boolean hasSerialNumber(){
+		return hasSerialNumber;
+	}
+	
 	public String getName(){
 		return name;
 	}
 	
 	public Boolean hasName(){
 		return hasName;
+	}
+	
+	public String getPlural(){
+		return plural;
+	}
+	
+	public boolean hasPlural(){
+		return hasPlural;
 	}
 	
 	public Long getLanguageId(){

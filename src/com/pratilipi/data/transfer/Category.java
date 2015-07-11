@@ -8,6 +8,10 @@ import com.pratilipi.commons.shared.CategoryType;
 public interface Category  extends Serializable {
 	
 	Long getId();
+
+	int getSerialNumber();
+	
+	void setSerialNumber( int serialNumber );
 	
 	String getName();
 	

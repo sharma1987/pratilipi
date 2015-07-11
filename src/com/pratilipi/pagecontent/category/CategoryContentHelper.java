@@ -56,6 +56,7 @@ public class CategoryContentHelper extends PageContentHelper<
 	public static CategoryData createCategoryData( Category category ){
 		CategoryData categoryData = new CategoryData();
 		categoryData.setId( category.getId() );
+		categoryData.setSerialNumber( category.getSerialNumber() );
 		categoryData.setName( category.getName() );
 		categoryData.setPlural( category.getPlural() );
 		categoryData.setLanguageId( category.getLanguageId() );
@@ -104,6 +105,8 @@ public class CategoryContentHelper extends PageContentHelper<
 			category.setCreationDate( new Date() );
 		}
 		
+		if( categoryData.hasSerialNumber() )
+			category.setSerialNumber( categoryData.getSerialNumber() );
 		if( categoryData.hasName() )
 			category.setName( categoryData.getName() );
 		if( categoryData.hasPlural() )

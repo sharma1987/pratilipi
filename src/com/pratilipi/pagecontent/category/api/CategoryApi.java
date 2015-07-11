@@ -43,8 +43,12 @@ public class CategoryApi extends GenericApi {
 		
 		if( request.hasId() )
 			categoryData.setId( request.getId() );
+		if( request.hasSerialNumber() )
+			categoryData.setSerialNumber( request.getSerialNumber() );
 		if( request.hasName() )
 			categoryData.setName( request.getName() );
+		if( request.hasPlural() )
+			categoryData.setPlural( request.getPlural() );
 		if( request.hasLanguageId() )
 			categoryData.setLanguageId( request.getLanguageId() );
 		if( request.hasType() )

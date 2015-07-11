@@ -9,6 +9,9 @@ import com.pratilipi.commons.shared.CategoryType;
 public class CategoryData implements Serializable {
 
 	private Long id;
+
+	private int serialNumber;
+	private boolean hasSerialNumber;
 	
 	private String name;
 	private boolean hasName;
@@ -35,6 +38,19 @@ public class CategoryData implements Serializable {
 		this.id = id;
 	}
 
+	public int getSerialNumber(){
+		return serialNumber;
+	}
+	
+	public void setSerialNumber( int serialNumber ){
+		this.serialNumber = serialNumber;
+		this.hasSerialNumber = true;
+	}
+	
+	public boolean hasSerialNumber(){
+		return hasSerialNumber;
+	}
+	
 	public String getName() {
 		return name;
 	}
