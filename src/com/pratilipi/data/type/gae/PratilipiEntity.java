@@ -218,7 +218,7 @@ public class PratilipiEntity implements Pratilipi {
 
 	@Override
 	public void setPublicationYear( Long publicationYear ) {
-		this.publicationYear = (int) (long) publicationYear;
+		this.publicationYear = ( publicationYear == null ? null : (int) (long) publicationYear );
 	}
 
 	
