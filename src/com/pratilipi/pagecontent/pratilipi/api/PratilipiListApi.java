@@ -13,6 +13,7 @@ import com.claymus.data.access.DataAccessorFactory;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.Page;
 import com.pratilipi.api.MobileInitApi;
+import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.shared.PratilipiData;
@@ -40,7 +41,23 @@ public class PratilipiListApi extends GenericApi {
 		DataListCursorTuple<PratilipiData> pratilipiListCursorTuple;
 		
 		if( request.getCategory() != null ){
-			pratilipiListCursorTuple = getCategoryPratilipiList( 
+			Category category = com.pratilipi.data.access.DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() )
+					.getCategory( request.getCategory() );
+			if( category != null && category.getType() != CategoryType.GENERAL ){
+				DataListCursorTuple<Long> pratilipiIdList = 
+						PratilipiCategoryContentHelper.getCategoryPratilipiList( 
+								request.getLanguageId(),
+								category.getId(), 
+								request.getResultCount(),
+								request.getCursor(), 
+								this.getThreadLocalRequest() );
+				List<PratilipiData> pratilipiDataList = 
+						PratilipiContentHelper.createPratilipiDataList( pratilipiIdList.getDataList(),
+								false, true, true, this.getThreadLocalRequest() );
+				
+				return new GetPratilipiListResponse( pratilipiDataList, pratilipiIdList.getCursor() );
+			} else
+				pratilipiListCursorTuple = getCategoryPratilipiList( 
 											request.getLanguageId(),
 											request.getCategory(), 
 											request.getResultCount()  == null ? 20 : request.getResultCount(), 
@@ -61,12 +78,13 @@ public class PratilipiListApi extends GenericApi {
 				pratilipiListCursorTuple.getCursor() );
 	}
 	
-	private DataListCursorTuple<PratilipiData> getCategoryPratilipiList( Long languageId, String category, Integer resultCount, String cursor ){
+	private DataListCursorTuple<PratilipiData> getCategoryPratilipiList( Long languageId, Long categoryId, Integer resultCount, String cursor ){
 		
 		int listSize = 0;
 		List<String> topReadsPratilipiDataList = new ArrayList<>();
 		List<String> featuredPratilipiDataList = new ArrayList<>();
 		List<String> newReleasesPratilipiDataList = new ArrayList<>();
+		
 		if( languageId == 5130467284090880L ){
 			//LANGUAGE : HINDI
 			topReadsPratilipiDataList.add( "/sharatchandra-chattopadhyay/devdas" );
@@ -152,11 +170,11 @@ public class PratilipiListApi extends GenericApi {
 			newReleasesPratilipiDataList.add( "/nanhalaal-dalpatraam-kavi/pankhadio" );
 		}
 		List<String> responseDataList = new ArrayList<>();
-		if( category.toLowerCase().equals( MobileInitApi.TOP_READS_CATEGORY_ID.toLowerCase() )){
+		if( categoryId.equals( MobileInitApi.TOP_READS_CATEGORY_ID )){
 			responseDataList = topReadsPratilipiDataList;
-		} else if( category.toLowerCase().equals( MobileInitApi.FEATURED_CATEGORY_ID.toLowerCase() )){
+		} else if( categoryId.equals( MobileInitApi.FEATURED_CATEGORY_ID )){
 			responseDataList = featuredPratilipiDataList;
-		} else if( category.toLowerCase().equals( MobileInitApi.NEW_RELEASES_CATEGORY_ID.toLowerCase() )){
+		} else if( categoryId.equals( MobileInitApi.NEW_RELEASES_CATEGORY_ID )){
 			responseDataList = newReleasesPratilipiDataList;
 		}
 		
