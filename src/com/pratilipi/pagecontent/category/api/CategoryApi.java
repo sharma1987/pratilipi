@@ -1,5 +1,6 @@
 package com.pratilipi.pagecontent.category.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.claymus.api.GenericApi;
@@ -23,16 +24,24 @@ public class CategoryApi extends GenericApi {
 	public GetCategoryListResponse getCategoryList( GetCategoryListRequest request ){
 		
 		CategoryFilter categoryFilter = new CategoryFilter();
-		if( request.hasLanguageId() )
-			categoryFilter.setLanguageId( request.getLanguageId() );
 		if( request.hasType() )
 			categoryFilter.setType( request.getType() );
-		
 		categoryFilter.setHidden( false );
 		
 		List<CategoryData> categoryDataList = CategoryContentHelper.getCategoryDataList( categoryFilter, this.getThreadLocalRequest() );
+		List<CategoryData> finalCategoryDataList = new ArrayList<>( categoryDataList.size() );
+		for( CategoryData categoryData : categoryDataList ){
+			if( categoryData.getLanguageId() == null ){
+				finalCategoryDataList.add( categoryData );
+			} else {
+				if( request.getLanguageId().equals( categoryData.getLanguageId() )){
+					finalCategoryDataList.add( categoryData );
+				}
+			}
+				
+		}
 		
-		return new GetCategoryListResponse( categoryDataList );
+		return new GetCategoryListResponse( finalCategoryDataList );
 	}
 	
 	@Put
