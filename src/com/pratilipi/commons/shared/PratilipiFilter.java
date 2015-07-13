@@ -22,6 +22,8 @@ public class PratilipiFilter implements IsSerializable {
 
 	private Boolean orderByReadCount;
 	
+	private Boolean orderByListingDate;
+	
 	
 	public PratilipiType getType() {
 		return type;
@@ -77,6 +79,14 @@ public class PratilipiFilter implements IsSerializable {
 
 	public void setOrderByReadCount( Boolean orderByReadCount ) {
 		this.orderByReadCount = orderByReadCount;
+	}
+	
+	public Boolean getOrderByListingDate(){
+		return orderByListingDate;
+	}
+	
+	public void setOrderByListingDate( Boolean orderByListingDate ){
+		this.orderByListingDate = orderByListingDate;
 	}
 	
 }
