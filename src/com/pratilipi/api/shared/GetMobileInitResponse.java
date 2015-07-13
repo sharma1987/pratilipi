@@ -19,7 +19,7 @@ public class GetMobileInitResponse extends GenericResponse {
 		response = new JsonArray();
 	}
 
-	public void attachToResponse( String name, String id, List<PratilipiData> content ){
+	public void attachToResponse( String name, Long id, List<PratilipiData> content ){
 		Gson gson = new GsonBuilder().create();
 		JsonElement element = gson.toJsonTree( content );
 		JsonObject jsonObject = new JsonObject();

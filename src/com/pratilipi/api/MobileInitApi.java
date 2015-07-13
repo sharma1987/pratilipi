@@ -15,12 +15,18 @@ import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 @Bind( uri= "/mobileinit" )
 public class MobileInitApi extends GenericApi {
 	
-	public static String TOP_READS_CATEGORY_ID = "topReadsPratilipiDataList";
+	public static Long TOP_READS_CATEGORY_ID = 5943744289308672L;
 	public static String TOP_READS_CATEGORY_NAME = "Top Reads";
-	public static String FEATURED_CATEGORY_ID = "featuredPratilipiDataList";
+	public static Long FEATURED_CATEGORY_ID = 6444076840779776L;
 	public static String FEATURED_CATEGORY_NAME = "Featured";
-	public static String NEW_RELEASES_CATEGORY_ID = "newReleasesPratilipiDataList";
+	public static Long NEW_RELEASES_CATEGORY_ID = 4984594474467328L;
 	public static String NEW_RELEASES_CATEGORY_NAME = "New Releases";
+	public static Long ROMANCE_CATEGORY_ID = 5992734565335040L;
+	public static String ROMANCE_CATEGORY_NAME = "Romance";
+	public static Long CLASSIC_CATEGORY_ID = 5763472432300032L;
+	public static String CLASSIC_CATEGORY_NAME = "Classic";
+	public static Long FICTION_CATEGORY_ID = 5667960169431040L;
+	public static String FICTION_CATEGORY_NAME = "Fiction";
 
 	@Get
 	public GetMobileInitResponse getMobileInit( GetMobileInitRequest request ){
@@ -28,6 +34,9 @@ public class MobileInitApi extends GenericApi {
 		List<Long> topReadsPratilipiIdList = new ArrayList<Long>();
 		List<Long> featuredPratilipiIdList = new ArrayList<Long>();
 		List<Long> newReleasesPratilipiIdList = new ArrayList<Long>();
+		List<Long> romancePratilipiIdList = new ArrayList<Long>();
+		List<Long> classicPratilipiIdList = new ArrayList<Long>();
+		List<Long> fictionPratilipiIdList = new ArrayList<Long>();
 		
 		if( request.getLanguageId() == 5130467284090880L ){
 			topReadsPratilipiIdList.add( 4530418997002240L );
@@ -48,6 +57,24 @@ public class MobileInitApi extends GenericApi {
 			newReleasesPratilipiIdList.add( 5752256343310336L );
 			newReleasesPratilipiIdList.add( 5756836925931520L );
 			
+			romancePratilipiIdList.add( 5637094319849472L );
+			romancePratilipiIdList.add( 5659569942429696L );
+			romancePratilipiIdList.add( 5686626164408320L );
+			
+			classicPratilipiIdList.add( 5700019675987968L );
+			classicPratilipiIdList.add( 5704980631650304L );
+			classicPratilipiIdList.add( 6450508839518208L );
+			classicPratilipiIdList.add( 6518793719250944L );
+			classicPratilipiIdList.add( 6582036038942720L );
+			classicPratilipiIdList.add( 6435940042014720L );
+			
+			fictionPratilipiIdList.add( 5727614605983744L );
+			fictionPratilipiIdList.add( 5979786463674368L );
+			fictionPratilipiIdList.add( 6450508839518208L );
+			fictionPratilipiIdList.add( 6518793719250944L );
+			fictionPratilipiIdList.add( 6582036038942720L );
+			fictionPratilipiIdList.add( 6435940042014720L );
+			
 		} else if( request.getLanguageId() == 5965057007550464L ){
 			topReadsPratilipiIdList.add( 4818859890573312L );
 			topReadsPratilipiIdList.add( 4834680419385344L );
@@ -67,6 +94,20 @@ public class MobileInitApi extends GenericApi {
 			newReleasesPratilipiIdList.add( 5706316634914816L );
 			newReleasesPratilipiIdList.add( 5733614071316480L );
 			
+			classicPratilipiIdList.add( 5726348362383360L );
+			classicPratilipiIdList.add( 5744421383438336L );
+			classicPratilipiIdList.add( 6330477187170304L );
+			classicPratilipiIdList.add( 5711865531334656L );
+			classicPratilipiIdList.add( 5739895830085632L );
+			classicPratilipiIdList.add( 6260573373202432L );
+			
+			fictionPratilipiIdList.add( 6330477187170304L );
+			fictionPratilipiIdList.add( 6260573373202432L );
+			fictionPratilipiIdList.add( 5191192820056064L );
+			fictionPratilipiIdList.add( 5151430885244928L );
+			fictionPratilipiIdList.add( 5706721502691328L );
+			fictionPratilipiIdList.add( 6332351135088640L );
+			
 		} else if( request.getLanguageId() == 6319546696728576L ){
 			topReadsPratilipiIdList.add( 4664696015683584L );
 			topReadsPratilipiIdList.add( 4801061093113856L );
@@ -85,7 +126,8 @@ public class MobileInitApi extends GenericApi {
 			newReleasesPratilipiIdList.add( 5169145746292736L );
 			newReleasesPratilipiIdList.add( 5203681645428736L );
 			newReleasesPratilipiIdList.add( 5246387360890880L );
-			
+
+			romancePratilipiIdList.add( 6270529652654080L );
 		}
 		
 		GetMobileInitResponse response = new GetMobileInitResponse();
@@ -118,6 +160,38 @@ public class MobileInitApi extends GenericApi {
 							this.getThreadLocalRequest() );
 		response.attachToResponse( NEW_RELEASES_CATEGORY_NAME, NEW_RELEASES_CATEGORY_ID, newReleasesPratilipiDataList );
 		
+		if( romancePratilipiIdList.size() > 0 ){
+			List<PratilipiData> romancePratilipiDataList = 
+					PratilipiContentHelper.createPratilipiDataList( 
+							romancePratilipiIdList,
+								true,
+								true,
+								true,
+								this.getThreadLocalRequest() );
+			response.attachToResponse( ROMANCE_CATEGORY_NAME, ROMANCE_CATEGORY_ID, romancePratilipiDataList );
+		}
+		
+		if( classicPratilipiIdList.size() > 0 ){
+			List<PratilipiData> classicPratilipiDataList = 
+					PratilipiContentHelper.createPratilipiDataList( 
+							classicPratilipiIdList,
+								true,
+								true,
+								true,
+								this.getThreadLocalRequest() );
+			response.attachToResponse( CLASSIC_CATEGORY_NAME, CLASSIC_CATEGORY_ID, classicPratilipiDataList );
+		}
+		
+		if( fictionPratilipiIdList.size() > 0 ){
+			List<PratilipiData> fictionPratilipiDataList = 
+					PratilipiContentHelper.createPratilipiDataList( 
+							fictionPratilipiIdList,
+								true,
+								true,
+								true,
+								this.getThreadLocalRequest() );
+			response.attachToResponse( FICTION_CATEGORY_NAME, FICTION_CATEGORY_ID, fictionPratilipiDataList );
+		}
 		return response;
 	}
 }
