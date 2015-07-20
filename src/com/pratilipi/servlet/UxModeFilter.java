@@ -1,6 +1,8 @@
 package com.pratilipi.servlet;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -158,6 +160,9 @@ public class UxModeFilter implements Filter {
 		
 		request.setAttribute( ClaymusHelper.REQUEST_ATTRIB_MODE_BASIC, basicMode );
 		request.setAttribute( ClaymusHelper.REQUEST_ATTRIB_MODE_EMBED, embedMode );
+		
+		Logger.getLogger( UxModeFilter.class.getName() ).log( Level.INFO, "REQUEST : " + req );
+		Logger.getLogger( UxModeFilter.class.getName() ).log( Level.INFO, "RESPONSE : " + resp );
 		
 		chain.doFilter( req, resp );
 	}
