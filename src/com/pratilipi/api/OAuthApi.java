@@ -37,8 +37,8 @@ public class OAuthApi extends GenericApi {
 		if( request.getLoginType() == null && request.getUserSecret() == null )
 			throw new InvalidArgumentException( "User Secret Cannot be null for non social login" );
 		
-		if( request.getLoginType() != null && request.getToken() == null )
-			throw new InvalidArgumentException( "Access Token cannot be null for login type " + request.getLoginType() );
+		if( request.getLoginType() != null && ( request.getToken() == null || request.getSocialId() == null ))
+			throw new InvalidArgumentException( "Access Token or Social Id is missing" );
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
 		AccessToken accessToken = dataAccessor.newAccessToken();
@@ -48,15 +48,11 @@ public class OAuthApi extends GenericApi {
 			userData.setPassword( request.getUserSecret() );
 		
 		if( request.getLoginType() != null && request.getLoginType().toLowerCase().equals( "facebook" ) ){
-			if( request.getSocialId() == null || request.getToken() == null )
-				throw new InvalidArgumentException( "Social id or access token is missing" );
-			
 			accessToken = UserContentHelper.facebookLogin( request.getSocialId(), request.getToken(), this.getThreadLocalRequest() );
 		} else if( request.getLoginType() != null && request.getLoginType().toLowerCase().equals( "google" ) ) {
-			accessToken = UserContentHelper.googleLogin( request.getToken(), this.getThreadLocalRequest() );
+			accessToken = UserContentHelper.googleLogin( request.getToken(), request.getSocialId(), this.getThreadLocalRequest() );
 		} else {
 			accessToken = UserContentHelper.userLogin( userData, this.getThreadLocalRequest() );
-			logger.log( Level.INFO, "Pratilipi User Id " + accessToken.getUserId() );
 		}
 		
 		if( accessToken == null )
