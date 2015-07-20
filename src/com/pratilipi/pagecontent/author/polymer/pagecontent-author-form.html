@@ -129,7 +129,7 @@
 			    	this.isValid = false;
 			    	this.$.Error.text = 'Please Select Language';
 					this.$.Error.show();
-			    } else if( !email.value.match( '^[A-Za-z0-9]+([._+-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\\.[A-Za-z]{2,4}$' ) ){
+			    } else if( !email.value.trim().match( '^[A-Za-z0-9]+([._+-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\\.[A-Za-z]{2,4}$' ) ){
 			    	console.log( "INVALID EMAIL ADDRESS" );
 			    	this.isValid = false;
 			    	this.$.Error.text = 'Please Enter Valid Email';
