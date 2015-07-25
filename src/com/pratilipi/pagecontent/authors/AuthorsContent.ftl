@@ -92,6 +92,4 @@
 	
 </script>
 
-<script type="text/javascript" language="javascript" src="/pagecontent.authors/pagecontent.authors.nocache.js" defer></script>
-
 <!-- PageContent :: Authors :: End -->
