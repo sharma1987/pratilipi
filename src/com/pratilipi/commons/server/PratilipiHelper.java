@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.data.access.Memcache;
-import com.claymus.data.transfer.Page;
 import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Language;
+import com.pratilipi.data.transfer.Page;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.type.Author;
