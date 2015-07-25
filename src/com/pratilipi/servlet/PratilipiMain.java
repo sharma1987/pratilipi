@@ -15,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.claymus.commons.server.FreeMarkerUtil;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
+import com.claymus.data.transfer.Page;
 import com.claymus.data.transfer.PageContent;
 import com.claymus.data.transfer.User;
 import com.claymus.data.transfer.WebsiteWidget;
@@ -30,7 +31,6 @@ import com.pratilipi.commons.server.PratilipiHelper;
 import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
-import com.pratilipi.data.transfer.Page;
 import com.pratilipi.data.type.Author;
 import com.pratilipi.pagecontent.author.AuthorContentHelper;
 import com.pratilipi.pagecontent.authordashboard.AuthorDashboardContentHelper;
