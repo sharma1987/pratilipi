@@ -41,6 +41,12 @@ public class UserPratilipiEntity implements UserPratilipi {
 	@Persistent( column = "RATING" )
 	private Integer rating;
 	
+	@Persistent( column = "RATING_DATE" )
+	private Date ratingDate;
+
+	@Persistent( column = "REVIEW_TITLE" )
+	private String reviewTitle;
+
 	@Persistent( column = "REVIEW" )
 	private Text review;
 	
