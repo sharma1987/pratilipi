@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.claymus.api.GenericApi;
 import com.claymus.api.annotation.Bind;
@@ -15,6 +17,7 @@ import com.claymus.commons.shared.ClaymusPageType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
+import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.AppProperty;
 import com.claymus.data.transfer.Page;
 import com.claymus.data.transfer.PageContent;
@@ -30,6 +33,7 @@ import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Language;
+import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipis.PratilipisContent;
@@ -276,5 +280,21 @@ public class InitApi extends GenericApi {
 		category.setCreationDate( new Date() );
 		category.setHidden( isHidden );
 		dataAccessor.createOrUpdateCategory( category );
+	}
+
+	@SuppressWarnings( "unused" )
+	private void updateSearchIndex( Long categoryId ) throws InvalidArgumentException, UnexpectedServerException{
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		
+		Logger logger = Logger.getLogger( InitApi.class.getName() );
+		
+		DataListCursorTuple<PratilipiCategory> pratilipiCategoryCursorTupleList = 
+				dataAccessor.getCategoryPratilipiList( categoryId, 1000, null );
+		
+		logger.log( Level.INFO, "Number of results : " + pratilipiCategoryCursorTupleList.getDataList().size() );
+		
+		for( PratilipiCategory pratilipiCategory : pratilipiCategoryCursorTupleList.getDataList() ){
+			PratilipiContentHelper.updatePratilipiSearchIndex( pratilipiCategory.getPratilipiId(), null, this.getThreadLocalRequest() );
+		}
 	}
 }
