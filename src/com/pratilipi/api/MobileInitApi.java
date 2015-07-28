@@ -80,12 +80,11 @@ public class MobileInitApi extends GenericApi {
 			topReadsPratilipiIdList.add( 4834680419385344L );
 			topReadsPratilipiIdList.add( 4849784863064064L );
 			topReadsPratilipiIdList.add( 4869201873338368L );
-			topReadsPratilipiIdList.add( 4901223018790912L );
 			
 			featuredPratilipiIdList.add( 5054455087104000L );
 			featuredPratilipiIdList.add( 4815090553454592L );
 			featuredPratilipiIdList.add( 5110699831328768L );
-			featuredPratilipiIdList.add( 5142641637326848L );
+			featuredPratilipiIdList.add( 5677651805077504L );
 			featuredPratilipiIdList.add( 5144374119759872L );
 			
 			newReleasesPratilipiIdList.add( 5677651805077504L );
