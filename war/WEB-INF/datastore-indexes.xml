@@ -73,6 +73,11 @@
     <property name="READ_COUNT" direction="desc"/>
   </datastore-index>
   
+  <!-- Required To Get Lateest Pricing -->
+  <datastore-index kind="PRICE" ancestor="false" source="manual">
+    <property name="PRATILIPI_ID" direction="asc"/>
+    <property name="CREATION_DATE" direction="desc"/>
+  </datastore-index>
     
   <!-- Required by Publisher PageContent Module -->
   <datastore-index kind="PRATILIPI" ancestor="false" source="manual">
