@@ -50,6 +50,7 @@ import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiCategory;
+import com.pratilipi.data.transfer.Price;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.UserPratilipi;
 import com.pratilipi.data.transfer.shared.AuthorData;
@@ -395,6 +396,16 @@ public class PratilipiContentHelper extends PageContentHelper<
 		pratilipiData.setAuthor( AuthorContentHelper.createAuthorData( author, null, request ) );
 		
 		pratilipiData.setPublicationYear( pratilipi.getPublicationYear() );
+		
+		Price price = dataAccessor.getPriceByPratilipiId( pratilipi.getId() );
+		if( price == null ){
+			pratilipiData.setPrice( 0L );
+			pratilipiData.setDiscountedPrice( 0L );
+		} else{
+			pratilipiData.setPrice( price.getMrpInInr() );
+			Long discountedPrice = price.getMrpInInr() - price.getDiscountByAuthorInInr() - price.getPratilipiDiscountInInr();
+			pratilipiData.setDiscountedPrice( discountedPrice );
+		}
 		pratilipiData.setListingDate( pratilipi.getListingDate() );
 		pratilipiData.setLastUpdated( pratilipi.getLastUpdated() );
 		

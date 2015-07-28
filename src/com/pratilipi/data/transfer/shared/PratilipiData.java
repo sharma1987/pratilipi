@@ -43,6 +43,14 @@ public class PratilipiData implements Serializable {
 	private Long publicationYear;
 	private boolean hasPublicationYear;
 	
+	
+	private Long price;
+	private boolean hasPrice;
+	
+	private Long discountedPrice;
+	private boolean hasDiscountedPrice;
+	
+	
 	private Date listingDate;
 	private Date lastUpdated;
 
@@ -229,6 +237,32 @@ public class PratilipiData implements Serializable {
 
 	public boolean hasPublicationYear() {
 		return hasPublicationYear;
+	}
+	
+	public Long getPrice(){
+		return price;
+	}
+	
+	public void setPrice( Long price ){
+		this.price = price;
+		this.hasPrice = true;
+	}
+	
+	public boolean hasPrice(){
+		return hasPrice;
+	}
+	
+	public Long getDiscountedPrice(){
+		return discountedPrice;
+	}
+	
+	public void setDiscountedPrice( Long discountedPrice ){
+		this.discountedPrice = discountedPrice;
+		this.hasDiscountedPrice = true;
+	}
+	
+	public boolean hasDiscountedPrice(){
+		return hasDiscountedPrice;
 	}
 	
 	public Date getListingDate() {
