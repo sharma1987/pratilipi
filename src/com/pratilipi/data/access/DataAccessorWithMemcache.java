@@ -11,6 +11,7 @@ import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
+import com.pratilipi.data.access.gae.PriceEntity;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
@@ -20,6 +21,7 @@ import com.pratilipi.data.transfer.PratilipiAuthor;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
+import com.pratilipi.data.transfer.Price;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.Tag;
 import com.pratilipi.data.transfer.UserPratilipi;
@@ -32,6 +34,7 @@ public class DataAccessorWithMemcache
 		implements DataAccessor {
 	
 	private static final String PREFIX_PRATILIPI = "Pratilipi-";
+	private static final String PREFIX_PRICE = "Price-";
 	private static final String PREFIX_LANGUAGE = "Language-";
 	private static final String PREFIX_LANGUAGE_LIST = "LanguageList-";
 	private static final String PREFIX_AUTHOR = "Author-";
@@ -133,6 +136,45 @@ public class DataAccessorWithMemcache
 		pratilipi = dataAccessor.createOrUpdatePratilipi( pratilipi );
 		memcache.put( PREFIX_PRATILIPI + pratilipi.getId(), pratilipi );
 		return pratilipi;
+	}
+	
+	
+	@Override
+	public Price newPrice(){
+		return new PriceEntity();
+	}
+	
+	@Override
+	public Price getPrice( Long id ){
+		Price price = memcache.get( PREFIX_PRICE + id );
+		if( price == null ){
+			price = dataAccessor.getPrice( id );
+			if( price != null )
+				memcache.put( PREFIX_PRICE + id, price );
+		}
+		
+		return price;
+	}
+	
+	@Override
+	public Price getPriceByPratilipiId( Long pratilipiId ){
+		Price price = memcache.get( PREFIX_PRICE + "Pratilipi-" + pratilipiId );
+		if( price == null ){
+			price = dataAccessor.getPriceByPratilipiId( pratilipiId );
+			if( price != null )
+				memcache.put( PREFIX_PRICE + "Pratilipi-" + pratilipiId, price );
+		}
+		
+		return price;
+	}
+	
+	@Override
+	public Price createOrUpdatePrice( Price price ){
+		if( price.getId() != null ){
+			memcache.remove( PREFIX_PRICE + price.getId() );
+		}
+		memcache.remove( PREFIX_PRICE + "Pratilipi-" + price.getPratilipiId() );
+		return dataAccessor.createOrUpdatePrice( price );
 	}
 	
 	
