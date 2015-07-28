@@ -13,6 +13,7 @@ import com.claymus.data.access.DataAccessorFactory;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.Page;
 import com.pratilipi.api.MobileInitApi;
+import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.data.transfer.Category;
@@ -36,7 +37,10 @@ public class PratilipiListApi extends GenericApi {
 		pratilipiFilter.setType( request.getType() );
 		pratilipiFilter.setLanguageId( request.getLanguageId() );
 		pratilipiFilter.setAuthorId( request.getAuthorId() );
-		pratilipiFilter.setState( request.getState() );
+		if( request.getState() == null )
+			pratilipiFilter.setState( PratilipiState.PUBLISHED );
+		else
+			pratilipiFilter.setState( request.getState() );
 		
 		DataListCursorTuple<PratilipiData> pratilipiListCursorTuple;
 		
@@ -53,7 +57,7 @@ public class PratilipiListApi extends GenericApi {
 								this.getThreadLocalRequest() );
 				List<PratilipiData> pratilipiDataList = 
 						PratilipiContentHelper.createPratilipiDataList( pratilipiIdList.getDataList(),
-								false, true, true, this.getThreadLocalRequest() );
+								true, true, true, this.getThreadLocalRequest() );
 				
 				return new GetPratilipiListResponse( pratilipiDataList, pratilipiIdList.getCursor() );
 			} else
@@ -94,6 +98,11 @@ public class PratilipiListApi extends GenericApi {
 			topReadsPratilipiDataList.add( "/vijay-kumar-sappatti/kavitaye-aur-nazme" );
 			topReadsPratilipiDataList.add( "/mahendra-bhatnagar/hans-hans-gane-gae-ham" );
 			topReadsPratilipiDataList.add( "/goswami-tulsidas/dohavali" );
+			topReadsPratilipiDataList.add( "/vimal-gandhi/maa-1" );
+			topReadsPratilipiDataList.add( "/unknown/baital-pachisi" );
+			topReadsPratilipiDataList.add( "/vivek-mishra/haniya" );
+			topReadsPratilipiDataList.add( "/mahavir-uttranchali/man-mein-naache-mor-hai" );
+			topReadsPratilipiDataList.add( "/rashmi-prabha/amrita-imroz" );
 			
 			featuredPratilipiDataList.add( "/munshi-premchand/nirmala" );
 			featuredPratilipiDataList.add( "/goswami-tulsidas/dohavali" );
@@ -106,6 +115,11 @@ public class PratilipiListApi extends GenericApi {
 			featuredPratilipiDataList.add( "/tripurari-kumar-sharma/tripurari-kumar-sharma-ki-najmein" );
 			featuredPratilipiDataList.add( "/ayodhya-singh-upadhyay-hariaudh/itivratt" );
 			featuredPratilipiDataList.add( "/mahendra-bhatnagar/hans-hans-gane-gae-ham" );
+			featuredPratilipiDataList.add( "/sharatchandra-chattopadhyay/srikanta" );
+			featuredPratilipiDataList.add( "/unknown/baital-pachisi" );
+			featuredPratilipiDataList.add( "/mahendra-bhatnagar/dadi-ki-kahaniya" );
+			featuredPratilipiDataList.add( "/rashmi-prabha/amrita-imroz" );
+			featuredPratilipiDataList.add( "/munshi-premchand/sohag-ka-shav" );
 			
 			newReleasesPratilipiDataList.add( "/ayodhya-singh-upadhyay-hariaudh/itivratt" );
 			newReleasesPratilipiDataList.add( "/sharatchandra-chattopadhyay/devdas" );
@@ -119,6 +133,11 @@ public class PratilipiListApi extends GenericApi {
 			newReleasesPratilipiDataList.add( "/suresh-chaudhary/shree-shiv-mahimn-strot" );
 			newReleasesPratilipiDataList.add( "/jayshankar-prasad/kankaal" );
 			newReleasesPratilipiDataList.add( "/tripurari-kumar-sharma/tripurari-kumar-sharma-ki-najmein" );
+			newReleasesPratilipiDataList.add( "/munshi-premchand/mansarovar-part-6" );
+			newReleasesPratilipiDataList.add( "/munshi-premchand/mansarovar-part-2" );
+			newReleasesPratilipiDataList.add( "/mahendra-bhatnagar/mrityu-bodh-jivan-bodh" );
+			newReleasesPratilipiDataList.add( "/munshi-premchand/mansarovar-part-8" );
+			newReleasesPratilipiDataList.add( "/vijay-kumar-sappatti/ek-thi-maya" );
 			
 		} else if( languageId == 6319546696728576L ){
 			//LANGUAGE : TAMIL
@@ -128,6 +147,11 @@ public class PratilipiListApi extends GenericApi {
 			topReadsPratilipiDataList.add( "/kalki-r-krishnamoorthy/ponniyin-selvan-condensed" );
 			topReadsPratilipiDataList.add( "/p-raghavan/booku" );
 			topReadsPratilipiDataList.add( "/chithran-ragunath/tharunam" );
+			topReadsPratilipiDataList.add( "/shammi-muthuvel/kanavugal-virpanaikku-alla" );
+			topReadsPratilipiDataList.add( "/aravindh-sachidanandam/thatpam-thavir" );
+			topReadsPratilipiDataList.add( "/geetha-sambasivam/kadhai-kadhaiyam-karanamam-ramayanam" );
+			topReadsPratilipiDataList.add( "/jothiji-tiruppur/konjam-soru-konjam-varalaru" );
+			topReadsPratilipiDataList.add( "/nirmala-raghavan/pengalo-pengal" );
 			
 			featuredPratilipiDataList.add( "/subashini-tremmel/en-sarithiram-u-ve-sa-vudan-oru-ula-pagudhi-i" );
 			featuredPratilipiDataList.add( "/jothiji-tiruppur/oru-thozhirchaalayin-kurippugal" );
@@ -135,6 +159,11 @@ public class PratilipiListApi extends GenericApi {
 			featuredPratilipiDataList.add( "/tanjore-v-gopalan/iniyavai-naarpadhu" );
 			featuredPratilipiDataList.add( "/s-kothandaraman/oru-vaasagam" );
 			featuredPratilipiDataList.add( "/tamil-keechargal-twitamils-group/twitter-kaiyedu" );
+			featuredPratilipiDataList.add( "/yercaud-ilango/dhaaniyangal" );
+			featuredPratilipiDataList.add( "/yercaud-ilango/indhiya-desiya-chinnangal" );
+			featuredPratilipiDataList.add( "/tanjore-v-gopalan/urainadaiyil-kambaramayanam" );
+			featuredPratilipiDataList.add( "/bengar/varalaaru-puviyiyal-kudiyiyal" );
+			featuredPratilipiDataList.add( "/aravindh-sachidanandam/thatpam-thavir" );
 			
 			newReleasesPratilipiDataList.add( "/s-kothandaraman/oru-vaasagam" );
 			newReleasesPratilipiDataList.add( "/p-raghavan/booku" );
@@ -143,6 +172,12 @@ public class PratilipiListApi extends GenericApi {
 			newReleasesPratilipiDataList.add( "/subramanian-sivam/saadhika-pirandhavar-neengal" );
 			newReleasesPratilipiDataList.add( "/chithran-ragunath/tharunam" );
 			newReleasesPratilipiDataList.add( "/kalki-r-krishnamoorthy/ponniyin-selvan-condense" );
+			newReleasesPratilipiDataList.add( "/t-s-varadhan/moondram-puram" );
+			newReleasesPratilipiDataList.add( "/vaa-mu-komu/pudhu-kavidhai-thogudhi" );
+			newReleasesPratilipiDataList.add( "/n-chokkan/a-r-rahman" );
+			newReleasesPratilipiDataList.add( "/ra-krishnaiyaa/arasum-puratchiyum" );
+			newReleasesPratilipiDataList.add( "/aravindh-sachidanandam/bothitharmar-muthal-jamesbond-varai" );
+			
 		} else if( languageId == 5965057007550464L ){
 			//LANGUAGE : GUJARATI
 			topReadsPratilipiDataList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
@@ -151,6 +186,10 @@ public class PratilipiListApi extends GenericApi {
 			topReadsPratilipiDataList.add( "/nimisha-dalal/kone-kahu-1" );
 			topReadsPratilipiDataList.add( "/lalit-parikh/bhed-abhed" );
 			topReadsPratilipiDataList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
+			topReadsPratilipiDataList.add( "/lalit-parikh/rummy-master" );
+			topReadsPratilipiDataList.add( "/gunavant-upadhyay/gazal-graph" );
+			topReadsPratilipiDataList.add( "/hema-patel/virangna-saroj-shrof" );
+			topReadsPratilipiDataList.add( "/pratima-maniyar/laal-swetar" );
 			
 			featuredPratilipiDataList.add( "/dalpatraam/mithybhiman" );
 			featuredPratilipiDataList.add( "/suresh-jani/antarni-vani" );
@@ -159,6 +198,10 @@ public class PratilipiListApi extends GenericApi {
 			featuredPratilipiDataList.add( "/lalit-parikh/varta-re-varta-3" );
 			featuredPratilipiDataList.add( "/zaverchand-meghani/tulsi-kyaro" );
 			featuredPratilipiDataList.add( "/lalit-parikh/bhed-abhed" );
+			featuredPratilipiDataList.add( "/zaverchand-meghani/tulsi-kyaro" );
+			featuredPratilipiDataList.add( "/mohandas-karamchand-gandhi-gandhiji/satya-na-prayogo-athva-atmakatha-bhag-1" );
+			featuredPratilipiDataList.add( "/sneha-patel/paglu-varta-sangrah" );
+			featuredPratilipiDataList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
 			
 			newReleasesPratilipiDataList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
 			newReleasesPratilipiDataList.add( "/lalit-parikh/bhed-abhed" );
@@ -168,6 +211,11 @@ public class PratilipiListApi extends GenericApi {
 			newReleasesPratilipiDataList.add( "/zaverchand-meghani/tulsi-kyaro" );
 			newReleasesPratilipiDataList.add( "/nimisha-dalal/kone-kahu-1" );
 			newReleasesPratilipiDataList.add( "/nanhalaal-dalpatraam-kavi/pankhadio" );
+			newReleasesPratilipiDataList.add( "/lata-bhatt/prem-ras-piyalo-pidho" );
+			newReleasesPratilipiDataList.add( "/ankit-gadhiya-nirbhay/anek-harifo-ni-hod-par" );
+			newReleasesPratilipiDataList.add( "/lalit-parikh/bhavebhav" );
+			newReleasesPratilipiDataList.add( "/anaami/panchtantra-ni-vartao" );
+			newReleasesPratilipiDataList.add( "/mukul-jani/seven-days-six-night" );
 		}
 		List<String> responseDataList = new ArrayList<>();
 		if( categoryId.equals( MobileInitApi.TOP_READS_CATEGORY_ID )){

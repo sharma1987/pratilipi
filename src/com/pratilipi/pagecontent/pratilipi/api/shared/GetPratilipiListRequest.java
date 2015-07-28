@@ -1,6 +1,5 @@
 package com.pratilipi.pagecontent.pratilipi.api.shared;
 
-import com.claymus.api.annotation.Validate;
 import com.claymus.api.shared.GenericRequest;
 import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.common.type.PratilipiType;
@@ -14,7 +13,6 @@ public class GetPratilipiListRequest extends GenericRequest {
 	
 	private Long authorId;
 
-	@Validate( required = true )
 	private PratilipiState state;
 
 	private Long categoryId;
