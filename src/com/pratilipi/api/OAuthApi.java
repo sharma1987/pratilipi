@@ -63,7 +63,7 @@ public class OAuthApi extends GenericApi {
 		
 		return new PostOAuthResponse( accessToken.getId(), 
 										userData.getName(),
-										userData.getProfilePicUrl(),
+										"",
 										accessToken.getExpiry().getTime() );
 	}
 	

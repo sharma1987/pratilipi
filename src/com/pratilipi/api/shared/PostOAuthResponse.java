@@ -11,6 +11,7 @@ public class PostOAuthResponse extends GenericResponse {
 	@SuppressWarnings("unused")
 	private String userName;
 	
+	@Deprecated
 	@SuppressWarnings("unused")
 	private String profileImageUrl;
 	
