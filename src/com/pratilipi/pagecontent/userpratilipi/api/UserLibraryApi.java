@@ -27,29 +27,38 @@ public class UserLibraryApi extends GenericApi {
 
 	@Get
 	public GetUserLibResponse getLibList( GetUserLibRequest request ) 
-			throws InvalidArgumentException{
+			throws InvalidArgumentException, InsufficientAccessException{
+		
+		if( request.getAccessToken() == null )
+			throw new InvalidArgumentException( "Access Token Is missing" );
 		
 		AccessToken accessToken = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() )
 										.getAccessToken( request.getAccessToken() );
-		if( accessToken == null || accessToken.getUserId() == 0L )
-			throw new InvalidArgumentException( "Invalid Access Token!" );
+		
+		if( accessToken == null )
+			throw new InvalidArgumentException( "Access Token is invalid or expired" );
 		
 		UserPratilipiFilter userPratilipiFilter = new UserPratilipiFilter();
 		userPratilipiFilter.setUserId( accessToken.getUserId() );
-		userPratilipiFilter.setOrderByReviewDate( false );
+		userPratilipiFilter.setOrderByAddedToLibDate( false );
 		
 		List<Long> pratilipiIdList = 
 								UserPratilipiContentHelper.getUserLibrary( userPratilipiFilter, this.getThreadLocalRequest() );
 		
 		List<PratilipiData> pratilipiDataList = 
-								PratilipiContentHelper.createPratilipiDataList( pratilipiIdList, false, true, true, this.getThreadLocalRequest() );
+								PratilipiContentHelper.createPratilipiDataList( pratilipiIdList, true, true, true, this.getThreadLocalRequest() );
 		
-		return new GetUserLibResponse( pratilipiDataList );
+		return new GetUserLibResponse( pratilipiDataList, pratilipiDataList.size() );
 	}
 	
 	@Put
 	public PutAddToLibResposne addToLib( PutAddToLibRequest request ) 
 			throws InvalidArgumentException, InsufficientAccessException{
+		
+		if( request.getAccessToken() == null )
+			throw new InvalidArgumentException( "accessToken is missing" );
+		if( request.getPratilipiId() == null )
+			throw new InvalidArgumentException( "pratilipiId is missing" );
 		
 		AccessToken accessToken = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() )
 										.getAccessToken( request.getAccessToken() );
