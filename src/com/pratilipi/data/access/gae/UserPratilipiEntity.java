@@ -65,6 +65,12 @@ public class UserPratilipiEntity implements UserPratilipi {
 	@Persistent( column = "ADDED_TO_LIB" )
 	private Boolean addedToLib;
 	
+	@Persistent( column = "ADDED_TO_LIB_DATE" )
+	private Date addedToLibDate;
+	
+	@Persistent( column = "REMOVED_FROM_LIB_DATE" )
+	private Date removedFromLibDate;
+	
 	public void setId( String id ) {
 		this.id = id;
 	}
@@ -202,6 +208,26 @@ public class UserPratilipiEntity implements UserPratilipi {
 	@Override
 	public void setAddedToLib(Boolean addedToLib) {
 		this.addedToLib = addedToLib;
+	}
+	
+	@Override
+	public Date getAddedToLibDate(){
+		return addedToLibDate;
+	}
+	
+	@Override
+	public void setAddedToLibDate( Date addedToLibDate ){
+		this.addedToLibDate = addedToLibDate;
+	}
+	
+	@Override
+	public Date getRemovedFromLibDate(){
+		return removedFromLibDate;
+	}
+	
+	@Override
+	public void setRemovedFromLibDate( Date removedFromLibDate ){
+		this.removedFromLibDate = removedFromLibDate;
 	}
 
 }

@@ -62,4 +62,12 @@ public interface UserPratilipi extends Serializable {
 	
 	void setAddedToLib( Boolean addedToLib );
 	
+	Date getAddedToLibDate();
+	
+	void setAddedToLibDate( Date addedToLibDate );
+	
+	Date getRemovedFromLibDate();
+	
+	void setRemovedFromLibDate( Date removedFromLib );
+	
 }

@@ -760,6 +760,8 @@ public class DataAccessorGaeImpl
 			gaeQueryBuilder.addFilter( "userId", userPratilipiFilter.getUserId() );
 		if( userPratilipiFilter.getOrderByReviewDate() != null )
 			gaeQueryBuilder.addOrdering( "reviewDate", userPratilipiFilter.getOrderByReviewDate() );
+		if( userPratilipiFilter.getOrderByAddedToLibDate() != null )
+			gaeQueryBuilder.addOrdering( "addedToLibDate", userPratilipiFilter.getOrderByAddedToLibDate() );
 		
 		Query query = gaeQueryBuilder.build();
 		
