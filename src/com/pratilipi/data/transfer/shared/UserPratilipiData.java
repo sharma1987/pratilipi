@@ -32,6 +32,8 @@ public class UserPratilipiData implements IsSerializable {
 	
 	private Boolean addedToLib;
 	private boolean hasAddedToLib;
+	private Date addedToLibDate;
+	private Date removedFromLibDate;
 	
 	public Long getUserId() {
 		return userId;
@@ -139,6 +141,22 @@ public class UserPratilipiData implements IsSerializable {
 	
 	public Boolean hasAddedToLib(){
 		return hasAddedToLib;
+	}
+	
+	public Date getAddedToLibDate(){
+		return addedToLibDate;
+	}
+	
+	public void setAddedToLibDate( Date addedToLibDate ){
+		this.addedToLibDate = addedToLibDate;
+	}
+	
+	public Date getRemovedFromLib(){
+		return removedFromLibDate;
+	}
+	
+	public void setRemovedFromLibDate( Date removedFromLib ){
+		this.removedFromLibDate = removedFromLib;
 	}
 	
 }
