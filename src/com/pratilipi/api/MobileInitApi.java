@@ -6,6 +6,8 @@ import java.util.List;
 import com.claymus.api.GenericApi;
 import com.claymus.api.annotation.Bind;
 import com.claymus.api.annotation.Get;
+import com.claymus.data.access.DataAccessorFactory;
+import com.claymus.data.transfer.Page;
 import com.pratilipi.api.shared.GetMobileInitRequest;
 import com.pratilipi.api.shared.GetMobileInitResponse;
 import com.pratilipi.data.transfer.shared.PratilipiData;
@@ -31,109 +33,110 @@ public class MobileInitApi extends GenericApi {
 	@Get
 	public GetMobileInitResponse getMobileInit( GetMobileInitRequest request ){
 		
-		List<Long> topReadsPratilipiIdList = new ArrayList<Long>();
-		List<Long> featuredPratilipiIdList = new ArrayList<Long>();
-		List<Long> newReleasesPratilipiIdList = new ArrayList<Long>();
-		List<Long> romancePratilipiIdList = new ArrayList<Long>();
-		List<Long> classicPratilipiIdList = new ArrayList<Long>();
-		List<Long> fictionPratilipiIdList = new ArrayList<Long>();
+		List<String> topReadsPratilipiPageUrlList = new ArrayList<String>();
+		List<String> featuredPratilipiPageUrlList = new ArrayList<String>();
+		List<String> newReleasesPratilipiPageUrlList = new ArrayList<String>();
+		List<String> romancePratilipiPageUrlList = new ArrayList<String>();
+		List<String> classicPratilipiPageUrlList = new ArrayList<String>();
+		List<String> fictionPratilipiPageUrlList = new ArrayList<String>();
 		
 		if( request.getLanguageId() == 5130467284090880L ){
-			topReadsPratilipiIdList.add( 4530418997002240L );
-			topReadsPratilipiIdList.add( 4843865324388352L );
-			topReadsPratilipiIdList.add( 4629135213199360L );
-			topReadsPratilipiIdList.add( 4538710716579840L );
-			topReadsPratilipiIdList.add( 4571168321306624L );
+			topReadsPratilipiPageUrlList.add( "/sharatchandra-chattopadhyay/devdas" );
+			topReadsPratilipiPageUrlList.add( "/goswami-tulsidas/ramcharitmanas-sundarkand" );
+			topReadsPratilipiPageUrlList.add( "/munshi-premchand/nirmala" );
+			topReadsPratilipiPageUrlList.add( "/unknown/baital-pachisi" );
+			topReadsPratilipiPageUrlList.add( "/vijay-kumar-sappatti/kavitaye-aur-nazme" );
 			
-			featuredPratilipiIdList.add( 4653241656672256L );
-			featuredPratilipiIdList.add( 4571168321306624L );
-			featuredPratilipiIdList.add( 4747639635574784L );
-			featuredPratilipiIdList.add( 4843865324388352L );
-			featuredPratilipiIdList.add( 4910999823974400L );
+			featuredPratilipiPageUrlList.add( "/subashini-tremmel/en-sarithiram-u-ve-sa-vudan-oru-ula-pagudhi-i" );
+			featuredPratilipiPageUrlList.add( "/jothiji-tiruppur/oru-thozhirchaalayin-kurippugal" );
+			featuredPratilipiPageUrlList.add( "/subramanian-sivam/saadhika-pirandhavar-neengal" );
+			featuredPratilipiPageUrlList.add( "/tanjore-v-gopalan/iniyavai-naarpadhu" );
+			featuredPratilipiPageUrlList.add( "/s-kothandaraman/oru-vaasagam" );
 			
-			newReleasesPratilipiIdList.add( 5636953047302144L );
-			newReleasesPratilipiIdList.add( 5653702044024832L );
-			newReleasesPratilipiIdList.add( 5688643247144960L );
-			newReleasesPratilipiIdList.add( 5752256343310336L );
-			newReleasesPratilipiIdList.add( 5756836925931520L );
+			newReleasesPratilipiPageUrlList.add( "/ayodhya-singh-upadhyay-hariaudh/itivratt" );
+			newReleasesPratilipiPageUrlList.add( "/sharatchandra-chattopadhyay/devdas" );
+			newReleasesPratilipiPageUrlList.add( "/vijay-kumar-sappatti/kavitaye-aur-nazme" );
+			newReleasesPratilipiPageUrlList.add( "/anwar-suhail/gyarah-sitambar-ke-baad" );
+			newReleasesPratilipiPageUrlList.add( "/ayodhya-singh-upadhyay-hariaudh/adhkhila-phool" );
 			
-			romancePratilipiIdList.add( 5637094319849472L );
-			romancePratilipiIdList.add( 5659569942429696L );
-			romancePratilipiIdList.add( 5686626164408320L );
+			romancePratilipiPageUrlList.add( "/preeti-tailor/page-18" );
+			romancePratilipiPageUrlList.add( "/ranjeet-pratap-singh-rohit-1/jeevan-kya" );
+			romancePratilipiPageUrlList.add( "/preeti-tailor/page-16" );
 			
-			classicPratilipiIdList.add( 5700019675987968L );
-			classicPratilipiIdList.add( 5704980631650304L );
-			classicPratilipiIdList.add( 6450508839518208L );
-			classicPratilipiIdList.add( 6518793719250944L );
-			classicPratilipiIdList.add( 6582036038942720L );
-			classicPratilipiIdList.add( 6435940042014720L );
+			classicPratilipiPageUrlList.add( "/mohandas-karamchand-gandhi-gandhiji/satyke-prayog-athva-atmkatha-bhag-4" );
+			classicPratilipiPageUrlList.add( "/mohandas-karamchand-gandhi-gandhiji/saty-ke-prayog-athva-atmkatha-bhag-3" );
+			classicPratilipiPageUrlList.add( "/munshi-premchand/juloos" );
+			classicPratilipiPageUrlList.add( "/munshi-premchand/baudam" );
+			classicPratilipiPageUrlList.add( "/munshi-premchand/grih-neeti" );
+			classicPratilipiPageUrlList.add( "/munshi-premchand/brahma-ka-svaang" );
 			
-			fictionPratilipiIdList.add( 5727614605983744L );
-			fictionPratilipiIdList.add( 5979786463674368L );
-			fictionPratilipiIdList.add( 6450508839518208L );
-			fictionPratilipiIdList.add( 6518793719250944L );
-			fictionPratilipiIdList.add( 6582036038942720L );
-			fictionPratilipiIdList.add( 6435940042014720L );
+			fictionPratilipiPageUrlList.add( "/ummedsingh-baid-sadhak/ganpati-shatak-1" );
+			fictionPratilipiPageUrlList.add( "/munshi-premchand/visham-samasya" );
+			fictionPratilipiPageUrlList.add( "/munshi-premchand/juloos" );
+			fictionPratilipiPageUrlList.add( "/munshi-premchand/baudam" );
+			fictionPratilipiPageUrlList.add( "/munshi-premchand/grih-neeti" );
+			fictionPratilipiPageUrlList.add( "/munshi-premchand/brahma-ka-svaang" );
 			
 		} else if( request.getLanguageId() == 5965057007550464L ){
-			topReadsPratilipiIdList.add( 4818859890573312L );
-			topReadsPratilipiIdList.add( 4834680419385344L );
-			topReadsPratilipiIdList.add( 4849784863064064L );
-			topReadsPratilipiIdList.add( 4869201873338368L );
+			topReadsPratilipiPageUrlList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
+			topReadsPratilipiPageUrlList.add( "/p-p-kuntanpuri-yogi/akbar-ane-birbalni-ramuji-vartao" );
+			topReadsPratilipiPageUrlList.add( "/dalpatraam/mithybhiman" );
+			topReadsPratilipiPageUrlList.add( "/nimisha-dalal/kone-kahu-1" );
 			
-			featuredPratilipiIdList.add( 5054455087104000L );
-			featuredPratilipiIdList.add( 4815090553454592L );
-			featuredPratilipiIdList.add( 5110699831328768L );
-			featuredPratilipiIdList.add( 5677651805077504L );
-			featuredPratilipiIdList.add( 5144374119759872L );
+			featuredPratilipiPageUrlList.add( "/dalpatraam/mithybhiman" );
+			featuredPratilipiPageUrlList.add( "/suresh-jani/antarni-vani" );
+			featuredPratilipiPageUrlList.add( "/suresh-jani/200-avlokano" );
+			featuredPratilipiPageUrlList.add( "/nanhalaal-dalpatraam-kavi/pankhadio" );
+			featuredPratilipiPageUrlList.add( "/lalit-parikh/varta-re-varta-3" );
 			
-			newReleasesPratilipiIdList.add( 5677651805077504L );
-			newReleasesPratilipiIdList.add( 5685330787172352L );
-			newReleasesPratilipiIdList.add( 5704013609697280L );
-			newReleasesPratilipiIdList.add( 5706316634914816L );
-			newReleasesPratilipiIdList.add( 5733614071316480L );
+			newReleasesPratilipiPageUrlList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
+			newReleasesPratilipiPageUrlList.add( "/lalit-parikh/bhed-abhed" );
+			newReleasesPratilipiPageUrlList.add( "/suresh-jani/200-avlokano" );
+			newReleasesPratilipiPageUrlList.add( "/suresh-jani/antarni-vani" );
+			newReleasesPratilipiPageUrlList.add( "/lalit-parikh/varta-re-varta-3" );
 			
-			classicPratilipiIdList.add( 5726348362383360L );
-			classicPratilipiIdList.add( 5744421383438336L );
-			classicPratilipiIdList.add( 6330477187170304L );
-			classicPratilipiIdList.add( 5711865531334656L );
-			classicPratilipiIdList.add( 5739895830085632L );
-			classicPratilipiIdList.add( 6260573373202432L );
+			classicPratilipiPageUrlList.add( "/kishorlaal-ghanshyamlaal-mashruvaala/yesu-khrist" );
+			classicPratilipiPageUrlList.add( "/agnat/bakru-ke-kutru" );
+			classicPratilipiPageUrlList.add( "/agnat/bapa-kagado" );
+			classicPratilipiPageUrlList.add( "/agnat/pemlo-pemli" );
+			classicPratilipiPageUrlList.add( "/agnat/lobhiyo-bhai-latki-gaya" );
+			classicPratilipiPageUrlList.add( "/zaverchand-meghani/aai-kaambai" );
 			
-			fictionPratilipiIdList.add( 6330477187170304L );
-			fictionPratilipiIdList.add( 6260573373202432L );
-			fictionPratilipiIdList.add( 5191192820056064L );
-			fictionPratilipiIdList.add( 5151430885244928L );
-			fictionPratilipiIdList.add( 5706721502691328L );
-			fictionPratilipiIdList.add( 6332351135088640L );
+			fictionPratilipiPageUrlList.add( "/agnat/bapa-kagado" );
+			fictionPratilipiPageUrlList.add( "/zaverchand-meghani/aai-kaambai" );
+			fictionPratilipiPageUrlList.add( "/ravindra-parekh/lat-hukam-prakran-3" );
+			fictionPratilipiPageUrlList.add( "/ravindra-parekh/lathukam-prakran-2" );
+			fictionPratilipiPageUrlList.add( "/agnat/popat-bhukhyo-nathi-popat-tarasyo-nathi" );
+			fictionPratilipiPageUrlList.add( "/zaverchand-meghani/bholo-katyay" );
 			
 		} else if( request.getLanguageId() == 6319546696728576L ){
-			topReadsPratilipiIdList.add( 4664696015683584L );
-			topReadsPratilipiIdList.add( 4801061093113856L );
-			topReadsPratilipiIdList.add( 4685596450619392L );
-			topReadsPratilipiIdList.add( 4803319927144448L );
-			topReadsPratilipiIdList.add( 4837289477799936L );
+			topReadsPratilipiPageUrlList.add( "/p-raghavan/rendu" );
+			topReadsPratilipiPageUrlList.add( "/subashini-tremmel/payanangal-thodargindrana-then-korea-2003-1" );
+			topReadsPratilipiPageUrlList.add( "/dubukku/namadevarum-kaipidi-sundalum" );
+			topReadsPratilipiPageUrlList.add( "/kalki-r-krishnamoorthy/ponniyin-selvan-condensed" );
+			topReadsPratilipiPageUrlList.add( "/p-raghavan/booku" );
 			
-			featuredPratilipiIdList.add( 4803319927144448L );
-			featuredPratilipiIdList.add( 4831463656652800L );
-			featuredPratilipiIdList.add( 4912458217029632L );
-			featuredPratilipiIdList.add( 4957982857101312L );
-			featuredPratilipiIdList.add( 5107756889538560L );
+			featuredPratilipiPageUrlList.add( "/subashini-tremmel/en-sarithiram-u-ve-sa-vudan-oru-ula-pagudhi-i" );
+			featuredPratilipiPageUrlList.add( "/jothiji-tiruppur/oru-thozhirchaalayin-kurippugal" );
+			featuredPratilipiPageUrlList.add( "/subramanian-sivam/saadhika-pirandhavar-neengal" );
+			featuredPratilipiPageUrlList.add( "/tanjore-v-gopalan/iniyavai-naarpadhu" );
+			featuredPratilipiPageUrlList.add( "/s-kothandaraman/oru-vaasagam" );
 			
-			newReleasesPratilipiIdList.add( 5149579519459328L );
-			newReleasesPratilipiIdList.add( 5151970692169728L );
-			newReleasesPratilipiIdList.add( 5169145746292736L );
-			newReleasesPratilipiIdList.add( 5203681645428736L );
-			newReleasesPratilipiIdList.add( 5246387360890880L );
+			newReleasesPratilipiPageUrlList.add( "/s-kothandaraman/oru-vaasagam" );
+			newReleasesPratilipiPageUrlList.add( "/p-raghavan/booku" );
+			newReleasesPratilipiPageUrlList.add( "/p-raghavan/rendu" );
+			newReleasesPratilipiPageUrlList.add( "/tamil-keechargal-twitamils-group/twitter-kaiyedu" );
+			newReleasesPratilipiPageUrlList.add( "/subramanian-sivam/saadhika-pirandhavar-neengal" );
 
-			romancePratilipiIdList.add( 6270529652654080L );
+			romancePratilipiPageUrlList.add( "/manobharathi-ezhuthupizhai/ezhuthupizhai-1" );
 		}
 		
 		GetMobileInitResponse response = new GetMobileInitResponse();
 		
+		
 		List<PratilipiData> topReadsPratilipiDataList = 
 					PratilipiContentHelper.createPratilipiDataList( 
-								topReadsPratilipiIdList,
+								getPratilipiIdList( topReadsPratilipiPageUrlList ),
 								true,
 								true,
 								true,
@@ -143,7 +146,7 @@ public class MobileInitApi extends GenericApi {
 		
 		List<PratilipiData> featuredPratilipiDataList = 
 				PratilipiContentHelper.createPratilipiDataList( 
-						featuredPratilipiIdList,
+							getPratilipiIdList( featuredPratilipiPageUrlList ),
 							true,
 							true,
 							true,
@@ -152,17 +155,17 @@ public class MobileInitApi extends GenericApi {
 		
 		List<PratilipiData> newReleasesPratilipiDataList = 
 				PratilipiContentHelper.createPratilipiDataList( 
-						newReleasesPratilipiIdList,
+							getPratilipiIdList( newReleasesPratilipiPageUrlList ),
 							true,
 							true,
 							true,
 							this.getThreadLocalRequest() );
 		response.attachToResponse( NEW_RELEASES_CATEGORY_NAME, NEW_RELEASES_CATEGORY_ID, newReleasesPratilipiDataList );
 		
-		if( romancePratilipiIdList.size() > 0 ){
+		if( romancePratilipiPageUrlList.size() > 0 ){
 			List<PratilipiData> romancePratilipiDataList = 
 					PratilipiContentHelper.createPratilipiDataList( 
-							romancePratilipiIdList,
+								getPratilipiIdList( romancePratilipiPageUrlList ),
 								true,
 								true,
 								true,
@@ -170,10 +173,10 @@ public class MobileInitApi extends GenericApi {
 			response.attachToResponse( ROMANCE_CATEGORY_NAME, ROMANCE_CATEGORY_ID, romancePratilipiDataList );
 		}
 		
-		if( classicPratilipiIdList.size() > 0 ){
+		if( classicPratilipiPageUrlList.size() > 0 ){
 			List<PratilipiData> classicPratilipiDataList = 
 					PratilipiContentHelper.createPratilipiDataList( 
-							classicPratilipiIdList,
+								getPratilipiIdList( classicPratilipiPageUrlList ),
 								true,
 								true,
 								true,
@@ -181,10 +184,10 @@ public class MobileInitApi extends GenericApi {
 			response.attachToResponse( CLASSIC_CATEGORY_NAME, CLASSIC_CATEGORY_ID, classicPratilipiDataList );
 		}
 		
-		if( fictionPratilipiIdList.size() > 0 ){
+		if( fictionPratilipiPageUrlList.size() > 0 ){
 			List<PratilipiData> fictionPratilipiDataList = 
 					PratilipiContentHelper.createPratilipiDataList( 
-							fictionPratilipiIdList,
+								getPratilipiIdList( fictionPratilipiPageUrlList ),
 								true,
 								true,
 								true,
@@ -192,5 +195,18 @@ public class MobileInitApi extends GenericApi {
 			response.attachToResponse( FICTION_CATEGORY_NAME, FICTION_CATEGORY_ID, fictionPratilipiDataList );
 		}
 		return response;
+	}
+	
+	private List<Long> getPratilipiIdList( List<String> pageUrlList ){
+		
+		List<Long> pratilipiIdList = new ArrayList<Long>( pageUrlList.size() );
+		for( String pageUrl : pageUrlList ){
+			Page page = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() )
+					.getPage( pageUrl );
+			if( page != null )
+				pratilipiIdList.add( page.getPrimaryContentId() );
+		}
+		
+		return pratilipiIdList;
 	}
 }
