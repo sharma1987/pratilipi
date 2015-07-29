@@ -11,7 +11,11 @@ public class GetUserLibResponse extends GenericResponse {
 	@SuppressWarnings( "unused" )
 	private List<PratilipiData> pratilipiDataList;
 	
-	public GetUserLibResponse( List<PratilipiData> pratilipiDataList ){
+	@SuppressWarnings("unused")
+	private Integer numberOfContentInLib;
+	
+	public GetUserLibResponse( List<PratilipiData> pratilipiDataList, Integer numberOfContentInLib ){
 		this.pratilipiDataList = pratilipiDataList;
+		this.numberOfContentInLib = numberOfContentInLib;
 	}
 }
