@@ -62,7 +62,7 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 		return ClaymusHelper.get( request ).isUserLoggedIn();
 	}
 
-	public static Boolean hasRequestAccessToAddToLibrary( HttpServletRequest request ){
+	public static Boolean hasRequestAccessToLibrary( HttpServletRequest request ){
 		return ClaymusHelper.get( request ).isUserLoggedIn();
 	}
 	
@@ -185,10 +185,17 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 		}
 		
 		if( userPratilipiData.hasAddedToLib() ){
-			if( !hasRequestAccessToAddToLibrary( request ) )
+			if( !hasRequestAccessToLibrary( request ) )
 				throw new InsufficientAccessException();
 			
+			if( !userPratilipiData.isAddedToLib() && ( userPratilipi.isAddedtoLib() == null || !userPratilipi.isAddedtoLib() ))
+				throw new InvalidArgumentException( "You cannot remove a content which is not added to your library" );
+			
 			userPratilipi.setAddedToLib( userPratilipiData.isAddedToLib() );
+			if( userPratilipiData.isAddedToLib() )
+				userPratilipi.setAddedToLibDate( new Date() );
+			else
+				userPratilipi.setRemovedFromLibDate( new Date() );
 			
 		}
 		
@@ -212,7 +219,11 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 		return userPratilipiDataList;
 	}
 	
-	public static List<Long> getUserLibrary( UserPratilipiFilter userPratilipiFilter, HttpServletRequest request ){
+	public static List<Long> getUserLibrary( UserPratilipiFilter userPratilipiFilter, HttpServletRequest request ) 
+			throws InsufficientAccessException{
+		
+		if( !hasRequestAccessToLibrary( request ))
+			throw new InsufficientAccessException();
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		List<UserPratilipi> userPratilipiList = dataAccessor.getUserPratilipiList( userPratilipiFilter );
