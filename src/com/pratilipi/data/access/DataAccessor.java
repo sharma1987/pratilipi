@@ -16,7 +16,7 @@ import com.pratilipi.data.transfer.PratilipiAuthor;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
-import com.pratilipi.data.transfer.Price;
+import com.pratilipi.data.transfer.PratilipiMeta;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.Tag;
 import com.pratilipi.data.transfer.UserPratilipi;
@@ -38,13 +38,13 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	Pratilipi createOrUpdatePratilipi( Pratilipi pratilipi );
 	
 	
-	Price newPrice();
+	PratilipiMeta newPrice();
 	
-	Price getPrice( Long id );
+	PratilipiMeta getPrice( Long id );
 	
-	Price getPriceByPratilipiId( Long pratilipiId );
+	PratilipiMeta getPriceByPratilipiId( Long pratilipiId );
 	
-	Price createOrUpdatePrice( Price price );
+	PratilipiMeta createOrUpdatePrice( PratilipiMeta price );
 	
 
 	Language newLanguage();

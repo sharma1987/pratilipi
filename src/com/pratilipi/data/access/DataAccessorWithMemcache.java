@@ -11,7 +11,7 @@ import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
-import com.pratilipi.data.access.gae.PriceEntity;
+import com.pratilipi.data.access.gae.PratilipiMetaEntity;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
@@ -21,7 +21,7 @@ import com.pratilipi.data.transfer.PratilipiAuthor;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
-import com.pratilipi.data.transfer.Price;
+import com.pratilipi.data.transfer.PratilipiMeta;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.Tag;
 import com.pratilipi.data.transfer.UserPratilipi;
@@ -140,13 +140,13 @@ public class DataAccessorWithMemcache
 	
 	
 	@Override
-	public Price newPrice(){
-		return new PriceEntity();
+	public PratilipiMeta newPrice(){
+		return new PratilipiMetaEntity();
 	}
 	
 	@Override
-	public Price getPrice( Long id ){
-		Price price = memcache.get( PREFIX_PRICE + id );
+	public PratilipiMeta getPrice( Long id ){
+		PratilipiMeta price = memcache.get( PREFIX_PRICE + id );
 		if( price == null ){
 			price = dataAccessor.getPrice( id );
 			if( price != null )
@@ -157,8 +157,8 @@ public class DataAccessorWithMemcache
 	}
 	
 	@Override
-	public Price getPriceByPratilipiId( Long pratilipiId ){
-		Price price = memcache.get( PREFIX_PRICE + "Pratilipi-" + pratilipiId );
+	public PratilipiMeta getPriceByPratilipiId( Long pratilipiId ){
+		PratilipiMeta price = memcache.get( PREFIX_PRICE + "Pratilipi-" + pratilipiId );
 		if( price == null ){
 			price = dataAccessor.getPriceByPratilipiId( pratilipiId );
 			if( price != null )
@@ -169,7 +169,7 @@ public class DataAccessorWithMemcache
 	}
 	
 	@Override
-	public Price createOrUpdatePrice( Price price ){
+	public PratilipiMeta createOrUpdatePrice( PratilipiMeta price ){
 		if( price.getId() != null ){
 			memcache.remove( PREFIX_PRICE + price.getId() );
 		}

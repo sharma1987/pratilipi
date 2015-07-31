@@ -28,7 +28,7 @@ import com.pratilipi.data.access.gae.PratilipiAuthorEntity;
 import com.pratilipi.data.access.gae.PratilipiCategoryEntity;
 import com.pratilipi.data.access.gae.PratilipiGenreEntity;
 import com.pratilipi.data.access.gae.PratilipiTagEntity;
-import com.pratilipi.data.access.gae.PriceEntity;
+import com.pratilipi.data.access.gae.PratilipiMetaEntity;
 import com.pratilipi.data.access.gae.PublisherEntity;
 import com.pratilipi.data.access.gae.TagEntity;
 import com.pratilipi.data.access.gae.UserPratilipiEntity;
@@ -41,7 +41,7 @@ import com.pratilipi.data.transfer.PratilipiAuthor;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
 import com.pratilipi.data.transfer.PratilipiTag;
-import com.pratilipi.data.transfer.Price;
+import com.pratilipi.data.transfer.PratilipiMeta;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.Tag;
 import com.pratilipi.data.transfer.UserPratilipi;
@@ -151,14 +151,14 @@ public class DataAccessorGaeImpl
 	
 	
 	@Override
-	public Price newPrice(){
-		return new PriceEntity();
+	public PratilipiMeta newPrice(){
+		return new PratilipiMetaEntity();
 	}
 	
 	@Override
-	public Price getPrice( Long id ){
+	public PratilipiMeta getPrice( Long id ){
 		try{
-			return getEntity( PriceEntity.class, id );
+			return getEntity( PratilipiMetaEntity.class, id );
 		} catch( JDOObjectNotFoundException e ){
 			logger.log( Level.SEVERE, "Price Record of id " + id + " is not present" );
 			return null;
@@ -166,23 +166,23 @@ public class DataAccessorGaeImpl
 	}
 	
 	@Override
-	public Price getPriceByPratilipiId( Long pratilipiId ){
+	public PratilipiMeta getPriceByPratilipiId( Long pratilipiId ){
 		if( pratilipiId == null )
 			return null;
 		
-		Query query = new GaeQueryBuilder( pm.newQuery( PriceEntity.class ) )
+		Query query = new GaeQueryBuilder( pm.newQuery( PratilipiMetaEntity.class ) )
 						.addFilter( "pratilipiId", pratilipiId )
 						.addOrdering( "creationDate", false )
 						.build();
 		
 		@SuppressWarnings( "unchecked" )
-		List<Price> priceList = ( List<Price> ) query.execute( pratilipiId );
+		List<PratilipiMeta> priceList = ( List<PratilipiMeta> ) query.execute( pratilipiId );
 		
 		return priceList.size() == 0 ? null : pm.detachCopy( priceList.get( 0 ) );
 	}
 	
 	@Override
-	public Price createOrUpdatePrice( Price price ){
+	public PratilipiMeta createOrUpdatePrice( PratilipiMeta price ){
 		return createOrUpdateEntity( price );
 	}
 	
@@ -760,8 +760,8 @@ public class DataAccessorGaeImpl
 			gaeQueryBuilder.addFilter( "userId", userPratilipiFilter.getUserId() );
 		if( userPratilipiFilter.getOrderByReviewDate() != null )
 			gaeQueryBuilder.addOrdering( "reviewDate", userPratilipiFilter.getOrderByReviewDate() );
-		if( userPratilipiFilter.getOrderByAddedToLibDate() != null )
-			gaeQueryBuilder.addOrdering( "addedToLibDate", userPratilipiFilter.getOrderByAddedToLibDate() );
+		if( userPratilipiFilter.getOrderByLastOpenedDate() != null )
+			gaeQueryBuilder.addOrdering( "lastOpenedDate", userPratilipiFilter.getOrderByLastOpenedDate() );
 		
 		Query query = gaeQueryBuilder.build();
 		
