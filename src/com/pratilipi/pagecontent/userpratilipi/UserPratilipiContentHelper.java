@@ -192,10 +192,6 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 				throw new InvalidArgumentException( "You cannot remove a content which is not added to your library" );
 			
 			userPratilipi.setAddedToLib( userPratilipiData.isAddedToLib() );
-			if( userPratilipiData.isAddedToLib() )
-				userPratilipi.setAddedToLibDate( new Date() );
-			else
-				userPratilipi.setRemovedFromLibDate( new Date() );
 			
 		}
 		
