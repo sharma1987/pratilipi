@@ -50,7 +50,7 @@ import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiCategory;
-import com.pratilipi.data.transfer.Price;
+import com.pratilipi.data.transfer.PratilipiMeta;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.UserPratilipi;
 import com.pratilipi.data.transfer.shared.AuthorData;
@@ -397,15 +397,17 @@ public class PratilipiContentHelper extends PageContentHelper<
 		
 		pratilipiData.setPublicationYear( pratilipi.getPublicationYear() );
 		
-		Price price = dataAccessor.getPriceByPratilipiId( pratilipi.getId() );
-		if( price == null ){
-			pratilipiData.setPrice( 0L );
-			pratilipiData.setDiscountedPrice( 0L );
+		PratilipiMeta pratilipiMeta = dataAccessor.getPriceByPratilipiId( pratilipi.getId() );
+		if( pratilipiMeta == null ){
+			// ASSUMING PRATILIPI_META TABLE CONTAIN ENTRIES FOR PAID CONTENT ONLY
+			pratilipiData.setPrice( 0 );
+			pratilipiData.setDiscountedPrice( 0 );
 		} else{
-			pratilipiData.setPrice( price.getMrpInInr() );
-			Long discountedPrice = price.getMrpInInr() - price.getDiscountByAuthorInInr() - price.getPratilipiDiscountInInr();
+			pratilipiData.setPrice( pratilipiMeta.getMrp() );
+			float discountedPrice = pratilipiMeta.getMrp() - pratilipiMeta.getAuthorDiscount() - pratilipiMeta.getPratilipiDiscount();
 			pratilipiData.setDiscountedPrice( discountedPrice );
 		}
+
 		pratilipiData.setListingDate( pratilipi.getListingDate() );
 		pratilipiData.setLastUpdated( pratilipi.getLastUpdated() );
 		
