@@ -40,7 +40,7 @@ public class UserLibraryApi extends GenericApi {
 		
 		UserPratilipiFilter userPratilipiFilter = new UserPratilipiFilter();
 		userPratilipiFilter.setUserId( accessToken.getUserId() );
-		userPratilipiFilter.setOrderByAddedToLibDate( false );
+		userPratilipiFilter.setOrderByLastOpenedDate( false );
 		
 		List<Long> pratilipiIdList = 
 								UserPratilipiContentHelper.getUserLibrary( userPratilipiFilter, this.getThreadLocalRequest() );

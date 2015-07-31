@@ -8,7 +8,7 @@ public class UserPratilipiFilter {
 	
 	private Boolean orderByReviewDate;
 	
-	private Boolean orderByAddedToLibDate; 
+	private Boolean orderByLastOpenedDate; 
 
 	public Long getPratilipiId() {
 		return pratilipiId;
@@ -34,12 +34,12 @@ public class UserPratilipiFilter {
 		this.orderByReviewDate = orderByReviewDate;
 	}
 	
-	public Boolean getOrderByAddedToLibDate(){
-		return orderByAddedToLibDate;
+	public Boolean getOrderByLastOpenedDate(){
+		return orderByLastOpenedDate;
 	}
 	
-	public void setOrderByAddedToLibDate( Boolean orderByAddedToLibDate ){
-		this.orderByAddedToLibDate = orderByAddedToLibDate;
+	public void setOrderByLastOpenedDate( Boolean orderByLastOpenedDate ){
+		this.orderByLastOpenedDate = orderByLastOpenedDate;
 	}
 	
 }
