@@ -47,11 +47,12 @@ public class MobileInitApi extends GenericApi {
 			topReadsPratilipiPageUrlList.add( "/unknown/baital-pachisi" );
 			topReadsPratilipiPageUrlList.add( "/vijay-kumar-sappatti/kavitaye-aur-nazme" );
 			
-			featuredPratilipiPageUrlList.add( "/subashini-tremmel/en-sarithiram-u-ve-sa-vudan-oru-ula-pagudhi-i" );
-			featuredPratilipiPageUrlList.add( "/jothiji-tiruppur/oru-thozhirchaalayin-kurippugal" );
-			featuredPratilipiPageUrlList.add( "/subramanian-sivam/saadhika-pirandhavar-neengal" );
-			featuredPratilipiPageUrlList.add( "/tanjore-v-gopalan/iniyavai-naarpadhu" );
-			featuredPratilipiPageUrlList.add( "/s-kothandaraman/oru-vaasagam" );
+			featuredPratilipiPageUrlList.add( "/munshi-premchand/nirmala" );
+			featuredPratilipiPageUrlList.add( "/goswami-tulsidas/dohavali" );
+			featuredPratilipiPageUrlList.add( "/goswami-tulsidas/kavitavali" );
+			featuredPratilipiPageUrlList.add( "/unknown/alif-laila" );
+			featuredPratilipiPageUrlList.add( "/unknown/baital-pachisi" );
+			featuredPratilipiPageUrlList.add( "/ayodhya-singh-upadhyay-hariaudh/adhkhila-phool" );
 			
 			newReleasesPratilipiPageUrlList.add( "/ayodhya-singh-upadhyay-hariaudh/itivratt" );
 			newReleasesPratilipiPageUrlList.add( "/sharatchandra-chattopadhyay/devdas" );
