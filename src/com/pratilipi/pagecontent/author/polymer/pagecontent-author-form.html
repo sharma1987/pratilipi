@@ -83,8 +83,6 @@
 					this.$.Error.text = 'Could Not Save Author. Please Try Again.';
 					this.$.Error.show();
 				} else {
-					this.$.Success.text = 'New Author Created';
-					this.$.Success.show();
 					window.location = response.response.authorData.pageUrl;
 				}
 			},
@@ -109,6 +107,7 @@
 				this.validate();
 				if( this.isValid ){
 					this.authorData.languageId = parseInt( this.authorData.languageId );
+					this.authorData.email = jQuery.trim( this.authorData.email );
 					var ajaxPut = this.$.AjaxPut;
 					ajaxPut.body = JSON.stringify( this.authorData );
 					ajaxPut.go();
@@ -124,12 +123,12 @@
 			    	this.isValid = false;
 			    	this.$.Error.text = 'Please Enter First Name';
 					this.$.Error.show();
-			    } else if( !this.authorData.languageId.trim() ){
+			    } else if( !jQuery.trim( this.authorData.languageId ) ){
 			    	console.log( "SELECT LANGUAGE" );
 			    	this.isValid = false;
 			    	this.$.Error.text = 'Please Select Language';
 					this.$.Error.show();
-			    } else if( !email.value.trim().match( '^[A-Za-z0-9]+([._+-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\\.[A-Za-z]{2,4}$' ) ){
+			    } else if( !jQuery.trim( email.value ).match( '^[A-Za-z0-9]+([._+-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\\.[A-Za-z]{2,4}$' ) ){
 			    	console.log( "INVALID EMAIL ADDRESS" );
 			    	this.isValid = false;
 			    	this.$.Error.text = 'Please Enter Valid Email';

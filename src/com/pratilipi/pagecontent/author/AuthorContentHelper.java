@@ -308,8 +308,11 @@ public class AuthorContentHelper extends PageContentHelper<
 			if( ! authorData.hasLanguageId() )
 				throw new InvalidArgumentException( "'languageId' is missing !" );
 
-			if( authorData.hasEmail() && dataAccessor.getAuthorByEmailId( authorData.getEmail().toLowerCase() ) != null )
-				throw new InvalidArgumentException( "Email is already linked with an exiting Author !" );
+			if( authorData.hasEmail() ){
+				Author existingAuthor = dataAccessor.getAuthorByEmailId( authorData.getEmail().toLowerCase() );
+				if( existingAuthor != null )
+					return createAuthorData( existingAuthor, dataAccessor.getLanguage( existingAuthor.getLanguageId() ), request );
+			}
 			
 			author = dataAccessor.newAuthor();
 			auditLog.setEventId( ACCESS_TO_ADD_AUTHOR_DATA.getId() );
