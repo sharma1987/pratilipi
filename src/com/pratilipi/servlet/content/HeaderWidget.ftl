@@ -66,6 +66,7 @@ function validateForm() {
                   <li><a href="/books">All</a></li>
                   <li><a href="/books/gujarati">Gujarati</a></li>
                   <li><a href="/books/hindi">Hindi</a></li>
+                  <li><a href="/books/malayalam">Malayalam</a></li>
                   <li><a href="/books/marathi">Marathi</a></li>
                   <li><a href="/books/tamil">Tamil</a></li>
                 </ul>
@@ -76,6 +77,7 @@ function validateForm() {
                   <li><a href="/poems">All</a></li>
                   <li><a href="/poems/gujarati">Gujarati</a></li>
                   <li><a href="/poems/hindi">Hindi</a></li>
+                  <li><a href="/poems/malayalam">Malayalam</a></li>
                   <li><a href="/poems/marathi">Marathi</a></li>
                   <li><a href="/poems/tamil">Tamil</a></li>
                 </ul>
@@ -86,6 +88,7 @@ function validateForm() {
                   <li><a href="/stories">All</a></li>
                   <li><a href="/stories/gujarati">Gujarati</a></li>
                   <li><a href="/stories/hindi">Hindi</a></li>
+                  <li><a href="/stories/malayalam">Malayalam</a></li>
                   <li><a href="/stories/marathi">Marathi</a></li>
                   <li><a href="/stories/tamil">Tamil</a></li>
                 </ul>
@@ -96,6 +99,7 @@ function validateForm() {
                   <li><a href="/articles">All</a></li>
                   <li><a href="/articles/gujarati">Gujarati</a></li>
                   <li><a href="/articles/hindi">Hindi</a></li>
+                  <li><a href="/articles/malayalam">Malayalam</a></li>
                   <li><a href="/articles/marathi">Marathi</a></li>
                   <li><a href="/articles/tamil">Tamil</a></li>
                 </ul>
@@ -119,6 +123,7 @@ function validateForm() {
                   <li onclick="subMenu( event, this );" style="position:relative">
 		                <a>Events<span id="Header-Navigation-Submenu-Caret" class="caret-right"></span></a>
 		                <ul class="dropdown-subMenu">
+		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/pratilipi-katha-sammaan-pratispardha">Pratilipi Katha Sammaan Pratispardha</a></li>
 		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/my-daddy-strongest">My Daddy Strongest</a></li>
 			                <li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/vahali-ma-lekhan-spardha">Vahali Ma - lekhan spardha</a></li>
 			                <li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/kavya-spardha-2015">Kavya Spardha 2015</a></li>

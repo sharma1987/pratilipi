@@ -87,62 +87,75 @@ public class PratilipiMain extends ClaymusMain {
 		if( requestUri.equals( "/books" ) )
 			page.setTitle( "Books" );
 		
+		else if( requestUri.equals( "/books/gujarati" ) )
+			page.setTitle( "Gujarati Books" );
+
 		else if( requestUri.equals( "/books/hindi" ) )
 			page.setTitle( "Hindi Books" );
 		
-		else if( requestUri.equals( "/books/gujarati" ) )
-			page.setTitle( "Gujarati Books" );
-		
-		else if( requestUri.equals( "/books/tamil" ) )
-			page.setTitle( "Tamil Books" );
+		else if( requestUri.equals( "/books/malayalam" ) )
+			page.setTitle( "Malayalam Books" );
 		
 		else if( requestUri.equals( "/books/marathi" ) )
 			page.setTitle( "Marathi Books" );
 		
+		else if( requestUri.equals( "/books/tamil" ) )
+			page.setTitle( "Tamil Books" );
+
 		else if( requestUri.equals( "/poems" ) )
 			page.setTitle( "Poems" );
-		
-		else if( requestUri.equals( "/poems/hindi" ) )
-			page.setTitle( "Hindi Poems" );
 		
 		else if( requestUri.equals( "/poems/gujarati" ) )
 			page.setTitle( "Gujarati Poems" );
 		
-		else if( requestUri.equals( "/poems/tamil" ) )
-			page.setTitle( "Tamil Poems" );
+		else if( requestUri.equals( "/poems/hindi" ) )
+			page.setTitle( "Hindi Poems" );
+		
+		else if( requestUri.equals( "/poems/malayalam" ) )
+			page.setTitle( "Malayalam Poems" );
 		
 		else if( requestUri.equals( "/poems/marathi" ) )
 			page.setTitle( "Marathi Poems" );
 		
+		else if( requestUri.equals( "/poems/tamil" ) )
+			page.setTitle( "Tamil Poems" );
+		
 		else if( requestUri.equals( "/stories" ) )
 			page.setTitle( "Stories" );
-		
-		else if( requestUri.equals( "/stories/hindi" ) )
-			page.setTitle( "Hindi Stories" );
 		
 		else if( requestUri.equals( "/stories/gujarati" ) )
 			page.setTitle( "Gujarati Stories" );
 		
-		else if( requestUri.equals( "/stories/tamil" ) )
-			page.setTitle( "Tamil Stories" );
+		else if( requestUri.equals( "/stories/hindi" ) )
+			page.setTitle( "Hindi Stories" );
+
+		else if( requestUri.equals( "/stories/malayalam" ) )
+			page.setTitle( "Malayalam Stories" );
 		
 		else if( requestUri.equals( "/stories/marathi" ) )
 			page.setTitle( "Marathi Stories" );
 		
+		else if( requestUri.equals( "/stories/tamil" ) )
+			page.setTitle( "Tamil Stories" );
+		
 		else if( requestUri.equals( "/articles" ) )
 			page.setTitle( "Articles" );
-		
-		else if( requestUri.equals( "/articles/hindi" ) )
-			page.setTitle( "Hindi Articles" );
 		
 		else if( requestUri.equals( "/articles/gujarati" ) )
 			page.setTitle( "Gujarati Articles" );
 		
-		else if( requestUri.equals( "/articles/tamil" ) )
-			page.setTitle( "Tamil Articles" );
+		else if( requestUri.equals( "/articles/hindi" ) )
+			page.setTitle( "Hindi Articles" );
+		
+		else if( requestUri.equals( "/articles/malayalam" ) )
+			page.setTitle( "Malayalam articles" );
 		
 		else if( requestUri.equals( "/articles/marathi" ) )
 			page.setTitle( "Marathi Articles" );
+		
+		else if( requestUri.equals( "/articles/tamil" ) )
+			page.setTitle( "Tamil Articles" );
+		
 
 		
 		else if( requestUri.startsWith( "/magazines" ) )
@@ -221,62 +234,74 @@ public class PratilipiMain extends ClaymusMain {
 		else if( requestUri.equals( "/books" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, PratilipiState.PUBLISHED ) );
 		
-		else if( requestUri.equals( "/books/hindi" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 5130467284090880L, PratilipiState.PUBLISHED ) );
-		
 		else if( requestUri.equals( "/books/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 5965057007550464L, PratilipiState.PUBLISHED ) );
 		
-		else if( requestUri.equals( "/books/tamil" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		else if( requestUri.equals( "/books/hindi" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 5130467284090880L, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/books/malayalam" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 5752669171875840L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/books/marathi" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 5173513199550464L, PratilipiState.PUBLISHED ) );
 		
+		else if( requestUri.equals( "/books/tamil" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		
 		else if( requestUri.equals( "/poems" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, PratilipiState.PUBLISHED ) );
-		
-		else if( requestUri.equals( "/poems/hindi" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 5130467284090880L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/poems/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 5965057007550464L, PratilipiState.PUBLISHED ) );
 		
-		else if( requestUri.equals( "/poems/tamil" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		else if( requestUri.equals( "/poems/hindi" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 5130467284090880L, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/poems/malayalam" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 5752669171875840L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/poems/marathi" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 5173513199550464L, PratilipiState.PUBLISHED ) );
 		
+		else if( requestUri.equals( "/poems/tamil" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		
 		else if( requestUri.equals( "/stories" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, PratilipiState.PUBLISHED ) );
-		
-		else if( requestUri.equals( "/stories/hindi" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 5130467284090880L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/stories/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 5965057007550464L, PratilipiState.PUBLISHED ) );
 		
-		else if( requestUri.equals( "/stories/tamil" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		else if( requestUri.equals( "/stories/hindi" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 5130467284090880L, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/stories/malayalam" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 5752669171875840L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/stories/marathi" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 5173513199550464L, PratilipiState.PUBLISHED ) );
 		
+		else if( requestUri.equals( "/stories/tamil" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		
 		else if( requestUri.equals( "/articles" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, PratilipiState.PUBLISHED ) );
-		
-		else if( requestUri.equals( "/articles/hindi" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 5130467284090880L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/articles/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 5965057007550464L, PratilipiState.PUBLISHED ) );
 		
-		else if( requestUri.equals( "/articles/tamil" ) )
-			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 6319546696728576L, PratilipiState.PUBLISHED ) );
+		else if( requestUri.equals( "/articles/hindi" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 5130467284090880L, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/articles/malayalam" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 5752669171875840L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/articles/marathi" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 5173513199550464L, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/articles/tamil" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 6319546696728576L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.startsWith( "/magazines" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.MAGAZINE, PratilipiState.PUBLISHED ) );
