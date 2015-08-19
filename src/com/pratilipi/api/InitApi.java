@@ -72,14 +72,14 @@ public class InitApi extends GenericApi {
 //		bookIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Book
-		bookIdList.add( 6286498366226432L );
-		bookIdList.add( 5163984965599232L );
+		bookIdList.add( 5761003044208640L );
+		bookIdList.add( 5089701274845184L );
 		//Gujarati Book
-		bookIdList.add( 5745060998021120L );
-		bookIdList.add( 5160364626935808L );
+		bookIdList.add( 5673309542809600L );
+		bookIdList.add( 4816280603328512L );
 		//Tamil Book
-		bookIdList.add( 6420625908301824L );
-		bookIdList.add( 5687573741568000L );
+		bookIdList.add( 5087738558676992L );
+		bookIdList.add( 6243710173970432L );
 
 		
 		List<Long> storyIdList = new ArrayList<>( 6 );
@@ -93,14 +93,14 @@ public class InitApi extends GenericApi {
 //		storyIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Story
-		storyIdList.add( 4856680475000832L );
-		storyIdList.add( 5469610694410240L );
+		storyIdList.add( 5753841555341312L );
+		storyIdList.add( 5172317713858560L );
 		//Gujarati Story
-		storyIdList.add( 6276871046037504L );
-		storyIdList.add( 5634672872652800L );
+		storyIdList.add( 5419260885073920L );
+		storyIdList.add( 6210565265424384L );
 		//Tamil Story
-		storyIdList.add( 5148083453165568L );
-		storyIdList.add( 5369816122654720L );
+		storyIdList.add( 4904619138351104L );
+		storyIdList.add( 5659520256704512L );
 
 		
 		List<Long> poemIdList = new ArrayList<>( 6 );
@@ -114,14 +114,14 @@ public class InitApi extends GenericApi {
 //		poemIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Poem
-		poemIdList.add( 6223508015153152L );
-		poemIdList.add( 5642720550846464L );
+		poemIdList.add( 5760012525764608L );
+		poemIdList.add( 5698913638023168L );
 		//Gujarati Poem
-		poemIdList.add( 6291265897365504L );
-		poemIdList.add( 5657271639998464L );
+		poemIdList.add( 6211651388833792L );
+		poemIdList.add( 5433431634739200L );
 		//Tamil Poem
-		poemIdList.add( 5354251932925952L );
-		poemIdList.add( 5239923066011648L );
+		poemIdList.add( 4911342708326400L );
+		poemIdList.add( 6531324110176256L );
 
 		
 		PratilipisContent pratilipisContent = (PratilipisContent) dataAccessor.getPageContent( 5197655504322560L );
