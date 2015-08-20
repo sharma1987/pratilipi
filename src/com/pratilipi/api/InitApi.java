@@ -115,7 +115,7 @@ public class InitApi extends GenericApi {
 		
 		//Hindi Poem
 		poemIdList.add( 5093914268663808L );
-		poemIdList.add( 5093914268663808L );
+		poemIdList.add( 5976919816273920L );
 		//Gujarati Poem
 		poemIdList.add( 5975435041046528L );
 		poemIdList.add( 5094831512616960L );
