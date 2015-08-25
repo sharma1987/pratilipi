@@ -87,6 +87,9 @@ public class PratilipiMain extends ClaymusMain {
 		if( requestUri.equals( "/books" ) )
 			page.setTitle( "Books" );
 		
+		else if( requestUri.equals( "/books/bengali" ) )
+			page.setTitle( "Bengali Books" );
+		
 		else if( requestUri.equals( "/books/gujarati" ) )
 			page.setTitle( "Gujarati Books" );
 
@@ -104,6 +107,9 @@ public class PratilipiMain extends ClaymusMain {
 
 		else if( requestUri.equals( "/poems" ) )
 			page.setTitle( "Poems" );
+	
+		else if( requestUri.equals( "/poems/bengali" ) )
+			page.setTitle( "Bengali Poems" );
 		
 		else if( requestUri.equals( "/poems/gujarati" ) )
 			page.setTitle( "Gujarati Poems" );
@@ -123,6 +129,9 @@ public class PratilipiMain extends ClaymusMain {
 		else if( requestUri.equals( "/stories" ) )
 			page.setTitle( "Stories" );
 		
+		else if( requestUri.equals( "/stories/bengali" ) )
+			page.setTitle( "Bengali Stories" );
+		
 		else if( requestUri.equals( "/stories/gujarati" ) )
 			page.setTitle( "Gujarati Stories" );
 		
@@ -140,6 +149,9 @@ public class PratilipiMain extends ClaymusMain {
 		
 		else if( requestUri.equals( "/articles" ) )
 			page.setTitle( "Articles" );
+		
+		else if( requestUri.equals( "/articles/bengali" ) )
+			page.setTitle( "Bengali Articles" );
 		
 		else if( requestUri.equals( "/articles/gujarati" ) )
 			page.setTitle( "Gujarati Articles" );
@@ -234,6 +246,9 @@ public class PratilipiMain extends ClaymusMain {
 		else if( requestUri.equals( "/books" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, PratilipiState.PUBLISHED ) );
 		
+		else if( requestUri.equals( "/books/bengali" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 6235363433512960L, PratilipiState.PUBLISHED ) );
+		
 		else if( requestUri.equals( "/books/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.BOOK, 5965057007550464L, PratilipiState.PUBLISHED ) );
 		
@@ -251,6 +266,9 @@ public class PratilipiMain extends ClaymusMain {
 		
 		else if( requestUri.equals( "/poems" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/poems/bengali" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 6235363433512960L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/poems/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.POEM, 5965057007550464L, PratilipiState.PUBLISHED ) );
@@ -270,6 +288,9 @@ public class PratilipiMain extends ClaymusMain {
 		else if( requestUri.equals( "/stories" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, PratilipiState.PUBLISHED ) );
 		
+		else if( requestUri.equals( "/stories/bengali" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 6235363433512960L, PratilipiState.PUBLISHED ) );
+		
 		else if( requestUri.equals( "/stories/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.STORY, 5965057007550464L, PratilipiState.PUBLISHED ) );
 		
@@ -287,6 +308,9 @@ public class PratilipiMain extends ClaymusMain {
 		
 		else if( requestUri.equals( "/articles" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, PratilipiState.PUBLISHED ) );
+		
+		else if( requestUri.equals( "/articles/bengali" ) )
+			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 6235363433512960L, PratilipiState.PUBLISHED ) );
 		
 		else if( requestUri.equals( "/articles/gujarati" ) )
 			pageContentList.add( PratilipisContentHelper.newPratilipisContent( PratilipiType.ARTICLE, 5965057007550464L, PratilipiState.PUBLISHED ) );

@@ -64,6 +64,7 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/books">All</a></li>
+                  <li><a href="/books/bengali">Bengali</a></li>
                   <li><a href="/books/gujarati">Gujarati</a></li>
                   <li><a href="/books/hindi">Hindi</a></li>
                   <li><a href="/books/malayalam">Malayalam</a></li>
@@ -75,6 +76,7 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Poems<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/poems">All</a></li>
+                  <li><a href="/poems/bengali">Bengali</a></li>
                   <li><a href="/poems/gujarati">Gujarati</a></li>
                   <li><a href="/poems/hindi">Hindi</a></li>
                   <li><a href="/poems/malayalam">Malayalam</a></li>
@@ -86,6 +88,7 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stories<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/stories">All</a></li>
+                  <li><a href="/stories/bengali">Bengali</a></li>
                   <li><a href="/stories/gujarati">Gujarati</a></li>
                   <li><a href="/stories/hindi">Hindi</a></li>
                   <li><a href="/stories/malayalam">Malayalam</a></li>
@@ -97,6 +100,7 @@ function validateForm() {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Articles<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/articles">All</a></li>
+                  <li><a href="/articles/bengali">Bengali</a></li>
                   <li><a href="/articles/gujarati">Gujarati</a></li>
                   <li><a href="/articles/hindi">Hindi</a></li>
                   <li><a href="/articles/malayalam">Malayalam</a></li>
