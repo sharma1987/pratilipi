@@ -113,8 +113,8 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 		}
 		String ogDescription = pratilipi.getType() == PratilipiType.BOOK ? summarySubstr : pratilipi.getTitle();
 		
-		final String fbOgTags = "<meta property='fb:app_id' content='" + ogFbAppId + "' />"
-				+ "<meta property='og:locale' content='" + ogLocale + "' />"
+		final String fbOgTags = /*"<meta property='fb:app_id' content='" + ogFbAppId + "' />"
+				+*/ "<meta property='og:locale' content='" + ogLocale + "' />"
 				+ "<meta property='og:type' content='" + ogType + "' />"
 				+ "<meta property='books:author' content='" + ogAuthor + "' />"
 				+ "<meta property='books:isbn' content='" + ogBooksIsbn + "' />"
@@ -123,7 +123,7 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 				+ "<meta property='og:image' content='" + ogImage + "' />"
 //				+ "<meta property='og:image:width' content='1900' />"
 //				+ "<meta property='og:image:height' content='1000' />"
-				+ "<meta property='og:publisher' content='" + ogPublisher + "' />"
+//				+ "<meta property='og:publisher' content='" + ogPublisher + "' />"
 				+ "<meta property='og:description' content='" + ogDescription + "' />";
 		
 		
