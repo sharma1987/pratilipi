@@ -72,13 +72,13 @@ public class InitApi extends GenericApi {
 //		bookIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Book
-		bookIdList.add( 5673309542809600L );
-		bookIdList.add( 5397577474244608L );
+		bookIdList.add( 6018985665495040L );
+		bookIdList.add( 4889317092622336L );
 		//Gujarati Book
-		bookIdList.add( 6122619199815680L );
-		bookIdList.add( 5745628160196608L );
+		bookIdList.add( 6286498366226432L );
+		bookIdList.add( 4857033970941952L );
 		//Tamil Book
-		bookIdList.add( 6701122471329792L );
+		bookIdList.add( 5149579519459328L );
 		bookIdList.add( 4891774384340992L );
 
 		
@@ -93,13 +93,13 @@ public class InitApi extends GenericApi {
 //		storyIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Story
-		storyIdList.add( 5745628160196608L );
-		storyIdList.add( 5745628160196608L );
+		storyIdList.add( 5762004543340544L );
+		storyIdList.add( 5867563842011136L );
 		//Gujarati Story
-		storyIdList.add( 6417268435058688L );
-		storyIdList.add( 5472416532791296L );
+		storyIdList.add( 5153060179410944L );
+		storyIdList.add( 5765968387112960L );
 		//Tamil Story
-		storyIdList.add( 4663110996590592L );
+		storyIdList.add( 6025744937385984L );
 		storyIdList.add( 6209095799406592L );
 
 		
@@ -114,14 +114,14 @@ public class InitApi extends GenericApi {
 //		poemIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Poem
-		poemIdList.add( 6016222994890752L );
-		poemIdList.add( 5766184234385408L );
+		poemIdList.add( 5361332354285568L );
+		poemIdList.add( 5139405152976896L );
 		//Gujarati Poem
-		poemIdList.add( 6247147011833856L );
-		poemIdList.add( 4681811368083456L );
+		poemIdList.add( 4713070039400448L );
+		poemIdList.add( 6291265897365504L );
 		//Tamil Poem
-		poemIdList.add( 6330152053112832L );
-		poemIdList.add( 5689141891170304L );
+		poemIdList.add( 6461512889663488L );
+		poemIdList.add( 5631290560741376L );
 
 		
 		PratilipisContent pratilipisContent = (PratilipisContent) dataAccessor.getPageContent( 5197655504322560L );
