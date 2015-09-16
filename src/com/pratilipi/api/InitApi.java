@@ -78,8 +78,8 @@ public class InitApi extends GenericApi {
 		bookIdList.add( 4830920553005056L );
 		bookIdList.add( 4964375890755584L );
 		//Tamil Book
-		bookIdList.add( 5677742343323648L );
-		bookIdList.add( 5146633197060096L );
+		bookIdList.add( 4687133486874624L );
+		bookIdList.add( 6532436372488192L );
 
 		
 		List<Long> storyIdList = new ArrayList<>( 6 );
@@ -99,8 +99,8 @@ public class InitApi extends GenericApi {
 		storyIdList.add( 6417268435058688L );
 		storyIdList.add( 5631513630605312L );
 		//Tamil Story
-		storyIdList.add( 4813744441917440L );
-		storyIdList.add( 5077382352338944L );
+		storyIdList.add( 4832227095478272L );
+		storyIdList.add( 4875038557732864L );
 
 		
 		List<Long> poemIdList = new ArrayList<>( 6 );
@@ -120,8 +120,8 @@ public class InitApi extends GenericApi {
 		poemIdList.add( 5708207905308672L );
 		poemIdList.add( 4878102077374464L );
 		//Tamil Poem
-		poemIdList.add( 5146765116309504L );
-		poemIdList.add( 6362996137787392L );
+		poemIdList.add( 5760833330085888L );
+		poemIdList.add( 4784918936682496L );
 
 		
 		PratilipisContent pratilipisContent = (PratilipisContent) dataAccessor.getPageContent( 5197655504322560L );
