@@ -51,6 +51,9 @@ public class PratilipiFilter implements Filter {
 
 		redirections.put( "/about", "/about/pratilipi" );
 		redirections.put( "/career", "/JoinTheGang" );
+		
+		redirections.put( "/event/gnayam&pada&varai", "/event/gnayam-pada-varai" );
+		redirections.put( "/event/gnayam&pada&varai>", "/event/gnayam-pada-varai" );
 
 		nonExistents.add( "/pagecontent.userforms/undefined.cache.js" );
 		nonExistents.add( "/pagecontent.pratilipi/undefined.cache.js" );

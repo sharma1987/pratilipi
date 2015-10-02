@@ -451,7 +451,7 @@
 		
 		<p style="text-align:justify">&#2986;&#3006;&#2994;&#3006;&#2972;&#3007; - <a href="mailto:balaji@agamonline.com">balaji@agamonline.com</a> ; 09940288001</p>
 	
-		<p style="text-align:justify"><strong><a href=" https://docs.google.com/forms/d/1Amsn-bYXeg6Z_h_z_R6_TeVRD0G_eU9Sp29D7YQ3jfQ/viewform?usp=send_form" target="_blank"> இங்கே</a></strong> பதிவு செய்யுங்கள்</p> 
+		<p style="text-align:justify"><strong><a href=" https://docs.google.com/forms/d/1Amsn-bYXeg6Z_h_z_R6_TeVRD0G_eU9Sp29D7YQ3jfQ/viewform?usp=send_form" target="_blank" style="text-decoration: underline;"> இங்கே</a></strong> பதிவு செய்யுங்கள்</p> 
 		
 	</#if>
 </div>
