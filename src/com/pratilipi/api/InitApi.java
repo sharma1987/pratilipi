@@ -78,7 +78,7 @@ public class InitApi extends GenericApi {
 		bookIdList.add( 5158881751728128L );
 		bookIdList.add( 6547964503785472L );
 		//Tamil Book
-		bookIdList.add( 5928333632077824L );
+		bookIdList.add( 5478306187051008L );
 		bookIdList.add( 4891774384340992L );
 
 		
@@ -99,7 +99,7 @@ public class InitApi extends GenericApi {
 		storyIdList.add( 5703925764194304L );
 		storyIdList.add( 5735814474498048L );
 		//Tamil Story
-		storyIdList.add( 5174475972673536L );
+		storyIdList.add( 6129708777340928L );
 		storyIdList.add( 5077382352338944L );
 
 		
@@ -120,7 +120,7 @@ public class InitApi extends GenericApi {
 		poemIdList.add( 5781603896786944L );
 		poemIdList.add( 5765132604932096L );
 		//Tamil Poem
-		poemIdList.add( 5108535192977408L );
+		poemIdList.add( 5679250883477504L );
 		poemIdList.add( 5642759935361024L );
 
 		
