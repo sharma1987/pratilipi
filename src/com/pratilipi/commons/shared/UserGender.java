@@ -6,6 +6,6 @@ public enum UserGender implements IsSerializable {
 
 	MALE,
 	FEMALE,
-	TRANSGENDER
+	OTHER
 	
 }
