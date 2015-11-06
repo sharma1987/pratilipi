@@ -2,8 +2,6 @@ package com.pratilipi.servlet.content.client;
 
 import com.claymus.service.client.ClaymusService;
 import com.claymus.service.client.ClaymusServiceAsync;
-import com.claymus.service.shared.FacebookLoginUserRequest;
-import com.claymus.service.shared.FacebookLoginUserResponse;
 import com.claymus.service.shared.LoginUserRequest;
 import com.claymus.service.shared.LoginUserResponse;
 import com.claymus.service.shared.RegisterUserRequest;
@@ -14,7 +12,6 @@ import com.claymus.service.shared.SendQueryRequest;
 import com.claymus.service.shared.SendQueryResponse;
 import com.claymus.service.shared.UpdateUserPasswordRequest;
 import com.claymus.service.shared.UpdateUserPasswordResponse;
-import com.claymus.service.shared.data.FacebookLoginData;
 import com.claymus.service.shared.data.UserData;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -26,6 +23,10 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -504,53 +505,51 @@ public class UserForms implements EntryPoint {
 	
 	
 	public void facebookLoginRPC( String accessToken,String email, String firstName, String lastName ) {
-		FacebookLoginData facebookLoginData = new FacebookLoginData();
-		facebookLoginData.setAccessToken( accessToken );
-		facebookLoginData.setEmail( email );
-		facebookLoginData.setFirstName( firstName );
-		facebookLoginData.setLastName( lastName );
-		facebookLoginData.setCampaign( "PreLaunch" );
-		facebookLoginData.setReferer( Window.Location.getParameter( "ref" ));
 		
 		loginForm.setEnabled( false );
 		loginForm.hideServerError();
-		claymusService.facebookLogin( new FacebookLoginUserRequest( facebookLoginData ), new AsyncCallback<FacebookLoginUserResponse>(){
 
-					@Override
-					public void onFailure(
-							Throwable caught) {
-						loginForm.setServerError( caught.getMessage() );
-						loginForm.showServerError();
-						loginForm.setEnabled( true );
+		RequestBuilder rb = new RequestBuilder( RequestBuilder.POST, "/api/user/login/facebook" );
+		try {
+			rb.setHeader( "Content-Type", "application/x-www-form-urlencoded" );
+			rb.sendRequest( "fbUserAccessToken=" + accessToken, new RequestCallback() {
+				
+				public void onResponseReceived(final Request request, final Response response) {
+					hideLoginModal();
+					String currentUrl = Window.Location.getHref();
+					String action = "";
+					if( currentUrl.indexOf( "#" ) != -1 ){
+						action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
+						currentUrl = currentUrl.substring( 0, currentUrl.indexOf( "#" ) );
 					}
-
-					@Override
-					public void onSuccess(
-							FacebookLoginUserResponse result) {
-						hideLoginModal();
-						String currentUrl = Window.Location.getHref();
-						String action = "";
-						if( currentUrl.indexOf( "#" ) != -1 ){
-							action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
-							currentUrl = currentUrl.substring( 0, currentUrl.indexOf( "#" ) );
-						}
-						String newUrl = null;
-						if( currentUrl.indexOf( "?" ) == -1 )
-							newUrl = currentUrl + "?action=login" ;
-						else
-							newUrl = currentUrl + "&action=login" ;
-						
-						if( !action.isEmpty() )
-							newUrl = newUrl + "#" + action;
-						Window.Location.assign( newUrl );
-					}});
+					String newUrl = null;
+					if( currentUrl.indexOf( "?" ) == -1 )
+						newUrl = currentUrl + "?action=login" ;
+					else
+						newUrl = currentUrl + "&action=login" ;
+					
+					if( !action.isEmpty() )
+						newUrl = newUrl + "#" + action;
+					Window.Location.assign( newUrl );
+				}
+				
+				public void onError(final Request request, final Throwable exception) {
+					loginForm.setServerError( exception.getMessage() );
+					loginForm.showServerError();
+					loginForm.setEnabled( true );
+				}
+				
+			});
+		} catch (final Exception e) {
+			Window.Location.reload();
+		}
 		
 	}
 	
 	//JQuery function to show and hide bootstrap modal view
 	public static native void showModal() /*-{
-    		$wnd.jQuery("#myModal").modal("show");
-    		
+			$wnd.jQuery("#myModal").modal("show");
+			
 	}-*/;
 	
 	public static native void hideLoginModal() /*-{
