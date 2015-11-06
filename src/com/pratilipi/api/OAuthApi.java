@@ -10,7 +10,6 @@ import com.claymus.api.annotation.Bind;
 import com.claymus.api.annotation.Post;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
-import com.claymus.data.transfer.AccessToken;
 import com.claymus.data.transfer.shared.UserData;
 import com.claymus.pagecontent.user.UserContentHelper;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
@@ -18,6 +17,7 @@ import com.pratilipi.api.shared.PostOAuthRequest;
 import com.pratilipi.api.shared.PostOAuthResponse;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.type.AccessToken;
 
 
 @SuppressWarnings("serial")

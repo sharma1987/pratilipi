@@ -12,7 +12,6 @@ import com.claymus.commons.server.FreeMarkerUtil;
 import com.claymus.commons.shared.ClaymusAccessTokenType;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.data.access.DataListCursorTuple;
-import com.claymus.data.transfer.AccessToken;
 import com.claymus.pagecontent.PageContentProcessor;
 import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.commons.server.PratilipiHelper;
@@ -21,6 +20,7 @@ import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Publisher;
+import com.pratilipi.data.type.AccessToken;
 import com.pratilipi.service.shared.data.PratilipiData;
 import com.pratilipi.service.shared.data.PublisherData;
 

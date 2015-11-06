@@ -9,7 +9,6 @@ import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
-import com.claymus.data.transfer.AccessToken;
 import com.claymus.data.transfer.User;
 import com.pratilipi.api.shared.PutPurchaseRequest;
 import com.pratilipi.api.shared.PutPurchaseResponse;
@@ -18,8 +17,8 @@ import com.pratilipi.commons.shared.SellerType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.UserPratilipi;
+import com.pratilipi.data.type.AccessToken;
 import com.pratilipi.data.type.Pratilipi;
-
 @SuppressWarnings("serial")
 @Bind( uri = "/purchase" )
 public class PurchaseApi extends GenericApi {

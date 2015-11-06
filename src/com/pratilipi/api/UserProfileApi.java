@@ -7,13 +7,13 @@ import com.claymus.api.annotation.Put;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.data.access.DataAccessorFactory;
-import com.claymus.data.transfer.AccessToken;
 import com.claymus.data.transfer.shared.UserData;
 import com.claymus.pagecontent.user.UserContentHelper;
 import com.pratilipi.api.shared.PostUserProfileRequest;
 import com.pratilipi.api.shared.PostUserProfileResponse;
 import com.pratilipi.api.shared.PutUserUpdateRequest;
 import com.pratilipi.api.shared.PutUserUpdateResponse;
+import com.pratilipi.data.type.AccessToken;
 
 @SuppressWarnings( "serial" )
 @Bind( uri = "/userprofile" )

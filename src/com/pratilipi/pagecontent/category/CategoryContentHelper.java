@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
-import com.claymus.data.transfer.AccessToken;
 import com.claymus.data.transfer.UserRole;
 import com.claymus.pagecontent.PageContentHelper;
 import com.pratilipi.commons.shared.CategoryFilter;
@@ -18,6 +17,7 @@ import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.shared.CategoryData;
+import com.pratilipi.data.type.AccessToken;
 import com.pratilipi.pagecontent.category.shared.CategoryContentData;
 
 public class CategoryContentHelper extends PageContentHelper<
