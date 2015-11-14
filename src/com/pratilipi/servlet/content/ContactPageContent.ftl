@@ -10,9 +10,6 @@
 	<div class="row margin0 static-page-fonts">
 		<div class="container">
 			<div class="col-md-6">
-				<h3>Call Us</h3>
-				+91-9537093144
-				
 				<h3>Mail Us</h3>
 				<a href="mailto:contact@pratilipi.com" target="_top">contact@pratilipi.com</a>
 				
