@@ -138,6 +138,14 @@ public class DataAccessorWithMemcache
 		return pratilipi;
 	}
 	
+	@Override
+	public Boolean deletePratilipi(Long id) {
+		Pratilipi pratilipi = memcache.get( PREFIX_PRATILIPI + id );
+		if( pratilipi != null )
+			memcache.remove( PREFIX_PRATILIPI + id );
+		return dataAccessor.deletePratilipi( id );
+	}
+	
 	
 	@Override
 	public PratilipiMeta newPrice(){
@@ -357,6 +365,19 @@ public class DataAccessorWithMemcache
 		author = dataAccessor.createOrUpdateAuthor( author );
 		memcache.put( PREFIX_AUTHOR + author.getId(), author );
 		return author;
+	}
+
+	@Override
+	public Boolean deleteAuthor( Long id ){
+		if( id == null )
+			return null;
+		
+		Author author = memcache.get( PREFIX_AUTHOR + id );
+		if( author != null ){
+			memcache.remove( PREFIX_AUTHOR + author.getEmail() );
+			memcache.remove( PREFIX_AUTHOR + id );
+		}
+		return dataAccessor.deleteAuthor( id );
 	}
 
 	
@@ -778,5 +799,13 @@ public class DataAccessorWithMemcache
 		return userPratilipi;
 	}
 
+	@Override
+	public Boolean deleteUserPratilipi(String id) {
+		UserPratilipi userPratilipi = memcache.get(
+				PREFIX_USER_PRATILIPI + id );
+		if( userPratilipi != null )
+			memcache.remove( PREFIX_USER_PRATILIPI + id );
+		return dataAccessor.deleteUserPratilipi( id )	;
+	}
 
 }

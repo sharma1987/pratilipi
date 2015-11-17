@@ -14,11 +14,13 @@ import com.claymus.api.annotation.Get;
 import com.claymus.api.shared.GenericRequest;
 import com.claymus.api.shared.GenericResponse;
 import com.claymus.commons.shared.ClaymusPageType;
+import com.claymus.commons.shared.CommentFilter;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.AppProperty;
+import com.claymus.data.transfer.Comment;
 import com.claymus.data.transfer.Page;
 import com.claymus.data.transfer.PageContent;
 import com.claymus.data.transfer.User;
@@ -28,12 +30,15 @@ import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryType;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiCategory;
+import com.pratilipi.data.transfer.UserPratilipi;
+import com.pratilipi.data.type.Author;
 import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 import com.pratilipi.pagecontent.pratilipis.PratilipisContent;
@@ -42,6 +47,9 @@ import com.pratilipi.taskqueue.TaskQueueFactory;
 @SuppressWarnings("serial")
 @Bind( uri= "/init" )
 public class InitApi extends GenericApi {
+	
+	private static final Logger logger = 
+			Logger.getLogger( InitApi.class.getName() );
 
 	@Get
 	public GenericResponse getInit( GenericRequest request ) 
@@ -296,5 +304,209 @@ public class InitApi extends GenericApi {
 		for( PratilipiCategory pratilipiCategory : pratilipiCategoryCursorTupleList.getDataList() ){
 			PratilipiContentHelper.updatePratilipiSearchIndex( pratilipiCategory.getPratilipiId(), null, this.getThreadLocalRequest() );
 		}
+	}
+
+	@SuppressWarnings( "unused" )
+	private Boolean deleteUser( String email ){
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		User user = dataAccessor.getUserByEmail( email );
+		if( user == null ){
+			logger.log( Level.INFO, "User " + email + " is not present in database");
+			return false;
+		}
+		//DELETE ALL COMMENT ENTRIES
+		CommentFilter commentFilter = new CommentFilter();
+		commentFilter.setUserId( user.getId() );
+		DataListCursorTuple<Comment> commentCursorList = dataAccessor.getCommentList(commentFilter, null, 200 );
+		for( Comment comment : commentCursorList.getDataList() ){
+			Boolean isDeleted = dataAccessor.deleteComment( comment.getId() );
+			if( isDeleted ){
+				logger.log(Level.INFO, "Comment Deleted " + comment.getId() );
+			} else{
+				logger.log(Level.INFO, "Unable to delete comment : " + comment.getId() );
+				return false;
+			}
+		}
+
+		UserPratilipiFilter userPratilipiFilter = new UserPratilipiFilter();
+		userPratilipiFilter.setUserId( user.getId() );
+		List<UserPratilipi> userPratilipiList = dataAccessor.getUserPratilipiList( userPratilipiFilter );
+		logger.log(Level.INFO, "UserPratilipi List Size : " + userPratilipiList.size() );
+		int countUserPratilipiDeleted=0;
+		//DELETE USER_PRATILIPI ENTRIES	
+		for( UserPratilipi userPratilipi : userPratilipiList ){
+			if( deleteUserPratilipi( userPratilipi ) )
+				countUserPratilipiDeleted++;
+			else{
+				logger.log(Level.SEVERE, "Unable to delete UserPratilipi : " + userPratilipi.getId() );
+				return false;
+			}
+		}
+		logger.log(Level.INFO, "NUMBER OF USER_PRATILIPI DELETED : " + countUserPratilipiDeleted );
+		
+		//DELETE AUTHOR PROFILE
+		Author author = dataAccessor.getAuthorByEmailId( user.getEmail() );
+		if( author != null ){
+			if( !deleteAuthor( author.getEmail()) )
+				return false;
+		}
+
+		//DELETE PAGE ENTRY
+		Page page = dataAccessor.getPage( "USER", user.getId() );
+		if( page != null ){
+			if( !deletePage( page ))
+				return false;
+		}
+		
+		//DELETE USER_ROLES
+		List<UserRole> userRoleList = dataAccessor.getUserRoleList( user.getId());
+		for( UserRole userRole : userRoleList ){
+			Boolean isDeleted = dataAccessor.deleteUserRole( userRole.getId() );
+			if( isDeleted ){
+				logger.log(Level.INFO, "UserRole deleted : " + userRole.getId() );
+			} else{
+				logger.log(Level.INFO, "Unable to delete UserRole : " + userRole.getId() );
+				return false;
+			}
+		}
+		//DELETE USER
+		Boolean isUserDeleted = dataAccessor.deleteUser( user.getId() );
+		if( isUserDeleted ){
+			logger.log( Level.INFO, "User Deleted : " + user.getEmail() );
+			return true;
+		} else{
+			logger.log( Level.SEVERE, "Unable to delete User : " + user.getEmail() );
+			return false;
+		}
+		
+	}
+	
+	private Boolean deleteAuthor(String email){
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		Author author = dataAccessor.getAuthorByEmailId( email );
+		PratilipiFilter pratilipiFilter = new PratilipiFilter();
+		pratilipiFilter.setAuthorId( author.getId() );
+		DataListCursorTuple<Pratilipi> pratilipiCursorList = dataAccessor.getPratilipiList( pratilipiFilter, null, 200 );
+		int contentsCount = pratilipiCursorList.getDataList().size();
+		logger.log(Level.INFO, "Number of content peices : " + contentsCount );
+		int deletedPratilipiCount = 0;
+		//DELETE PRATILIPI ENTRIES
+		for( Pratilipi pratilipi : pratilipiCursorList.getDataList() ){
+			if( deletePratilipi( pratilipi.getId() ) )
+				deletedPratilipiCount++;
+			else{
+				logger.log(Level.SEVERE, "Unable to delete Pratilipi : " + pratilipi.getTitleEn() );
+				return false;
+			}
+		}
+		logger.log(Level.INFO, "Number of content peices deleted : " + deletedPratilipiCount );
+		//DELETE PAGE ENTRIES
+		Page page = dataAccessor.getPage( "AUTHOR", author.getId() );
+		if( !deletePage( page ))
+			return false;
+		
+		//DELETE AUTHOR
+		if( dataAccessor.deleteAuthor( author.getId() )){
+			logger.log(Level.INFO, "Author Deleted : " + author.getEmail() );
+			return true;
+		} else{
+			logger.log(Level.INFO, "Unable to delete Author : " + author.getEmail() );
+			return false;
+		}
+		
+	}
+	
+	private Boolean deletePratilipi(Long pratilipiId){
+		Boolean isDeleted = false;
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		List<UserPratilipi> userPratilipiList = dataAccessor.getUserPratilipiList( pratilipiId );
+		logger.log(Level.INFO, "UserPratilipi List Size : " + userPratilipiList.size() );
+		int countUserPratilipiDeleted=0;
+		//TODO : DELETE USER_PRATILIPI ENTRIES	
+		for( UserPratilipi userPratilipi : userPratilipiList ){
+			isDeleted = deleteUserPratilipi( userPratilipi );
+			if( isDeleted )
+				countUserPratilipiDeleted++;
+			else{
+				logger.log(Level.SEVERE, "Unable to delete UserPratilipi : " + userPratilipi.getId() );
+				return false;
+			}
+		}
+		logger.log(Level.INFO, "NUMBER OF USER_PRATILIPI DELETED : " + countUserPratilipiDeleted );
+		
+		
+		//DELETE PAGE ENTRY
+		Page page = dataAccessor.getPage( "PRATILIPI", pratilipiId );
+		if( !deletePage( page ))
+			return false;
+		
+		isDeleted = dataAccessor.deletePratilipi( pratilipiId );
+		if( isDeleted )
+			logger.log(Level.INFO, "Pratilipi Deleted : " + pratilipiId );
+		else{
+			logger.log(Level.INFO, "Unable to deleted pratilipi : " + pratilipiId );
+			return false;
+		}
+		return true;
+	}
+	
+	private Boolean deleteUserPratilipi( UserPratilipi userPratilipi ){
+		Boolean isDeleted = false;
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		//DELETE COMMENT ENTRIES
+		CommentFilter commentFilter = new CommentFilter();
+		commentFilter.setParentId( userPratilipi.getId() );
+		DataListCursorTuple<Comment> commentTupleList = dataAccessor.getCommentList(commentFilter, null, 200);
+		logger.log(Level.INFO, "Comment List Size : " + commentTupleList.getDataList().size() );
+		int countCommentDeleted = 0;
+		for( Comment comment : commentTupleList.getDataList() ){
+			isDeleted = dataAccessor.deleteComment( comment.getId() );
+			if( isDeleted ){
+				logger.log(Level.INFO, "Comment Deleted : " + comment.getId() );
+				countCommentDeleted++;
+			}
+			else{
+				logger.log(Level.SEVERE, "Unable to delete comment " + comment.getId() + " of parent " + comment.getParentId() );
+				return false;
+			}
+		}
+		logger.log(Level.INFO, "NUMBER OF COMMENT DELETED : " + countCommentDeleted );
+		isDeleted = dataAccessor.deleteUserPratilipi( userPratilipi.getId() );
+		logger.log(Level.INFO, "UserPratilipi " + userPratilipi.getId() + " isDeleted : " + isDeleted );
+		if( isDeleted ){
+			logger.log(Level.INFO, "UserPratilipi Deleted : " + userPratilipi.getId() );
+			return true;
+		} else{
+			logger.log(Level.SEVERE, "Unable to delete UserPratilipi " + userPratilipi.getId() );
+			return false;
+		}
+	}
+	
+	private Boolean deletePage( Page page ){
+		Boolean isDeleted = false;
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
+		//TODO : DELETE PAGE_CONTENT ENTRIES
+		List<PageContent> pageContentList = dataAccessor.getPageContentList( page.getId() );
+		logger.log(Level.INFO, "PageContent List Size : " + pageContentList.size() );
+		int countPageContentDeletd = 0;
+		for( PageContent pageContent : pageContentList ){
+			isDeleted = dataAccessor.deletePageContent( pageContent.getId() );
+			if( isDeleted ){
+				logger.log(Level.INFO, "PageContent Deleted : " + pageContent.getId() );
+				countPageContentDeletd++;
+			} else{
+				logger.log(Level.SEVERE, "Unable to delete PageContent " + pageContent.getId() + " of page " + pageContent.getPageId() );
+				return false;
+			}
+		}
+		logger.log(Level.INFO, "Number of PageContent Deleted : " + countPageContentDeletd );
+		isDeleted = dataAccessor.deletePage( page.getId() );
+		if( isDeleted ){
+			logger.log(Level.INFO, "Page Deleted : " + page.getId() );
+		} else{
+			logger.log(Level.SEVERE, "Unable to delete Page " + page.getId() + " of pratilipi " + page.getPrimaryContentId() );
+			return false;
+		}
+		return true;
 	}
 }

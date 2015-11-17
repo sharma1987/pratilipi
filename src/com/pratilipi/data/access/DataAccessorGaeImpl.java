@@ -13,6 +13,7 @@ import javax.jdo.Query;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.GaeQueryBuilder;
 import com.claymus.data.access.GaeQueryBuilder.Operator;
+import com.claymus.data.access.gae.CommentEntity;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.pratilipi.commons.shared.AuthorFilter;
@@ -148,7 +149,18 @@ public class DataAccessorGaeImpl
 	public Pratilipi createOrUpdatePratilipi( Pratilipi pratilipi ) {
 		return createOrUpdateEntity( pratilipi );
 	}
-	
+
+	@Override
+	public Boolean deletePratilipi( Long id ){
+		try {
+//			deleteEntity( PratilipiEntity.class, id );
+			return false;
+		} catch( JDOObjectNotFoundException e ) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	
 	@Override
 	public PratilipiMeta newPrice(){
@@ -378,6 +390,16 @@ public class DataAccessorGaeImpl
 		return createOrUpdateEntity( author );
 	}
 
+	@Override
+	public Boolean deleteAuthor( Long id ){
+		try {
+//			deleteEntity( AuthorEntity.class, id );
+			return false;
+		} catch( JDOObjectNotFoundException e ) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	@Override
 	public Publisher newPublisher() {
@@ -790,4 +812,14 @@ public class DataAccessorGaeImpl
 		return createOrUpdateEntity( userPratilipi );
 	}
 
+	@Override
+	public Boolean deleteUserPratilipi( String id ){
+		try {
+//			deleteEntity( UserPratilipiEntity.class, id );
+			return false;
+		} catch( JDOObjectNotFoundException e ) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

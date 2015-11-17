@@ -37,6 +37,8 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	
 	Pratilipi createOrUpdatePratilipi( Pratilipi pratilipi );
 	
+	Boolean deletePratilipi( Long id );
+	
 	
 	PratilipiMeta newPrice();
 	
@@ -78,6 +80,8 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	List<Author> getAuthorList( List<Long> idList );
 	
 	Author createOrUpdateAuthor( Author author );
+	
+	Boolean deleteAuthor( Long id );
 
 	
 	Publisher newPublisher();
@@ -179,5 +183,7 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	List<Long> getPurchaseList( Long userId );
 
 	UserPratilipi createOrUpdateUserPratilipi( UserPratilipi userPratilipi );
+	
+	Boolean deleteUserPratilipi( String id );
 	
 }
