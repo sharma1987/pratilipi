@@ -24,7 +24,7 @@
 						<li class="menuItem" onclick="addPageBefore();">Add Page Before This Page</li>
 						<li class="menuItem" onclick="addPageAfter();">Add Page  After This Page</li>
 						<li class="menuItem" onclick="deletePage();">Delete Page</li>
-						<div id="PratilipiContent-writer-Languages"  onclick="subMenu( event, this );" style="position: relative;">
+						<#-- div id="PratilipiContent-writer-Languages"  onclick="subMenu( event, this );" style="position: relative;">
 							<li id="PratilipiContent-writer-Languages-Text" class="menuItem">Typing Language</li>
 							<ul id="PratilipiContent-writer-Languages-SubMenu" style="position: absolute; width: 60%; top: 0px; right: 100%;">
 								<li class="subMenuItem" onclick="enableTransliteration( this );">Bengali</li>
@@ -34,7 +34,7 @@
 								<li class="subMenuItem" onclick="enableTransliteration( this );">Tamil</li>
 							</ul> 
 						</div>
-						<li class="menuItem">Upload Word Document</li>
+						<li class="menuItem">Upload Word Document</li -->
 					</ul>
 				</div>
 			</td>

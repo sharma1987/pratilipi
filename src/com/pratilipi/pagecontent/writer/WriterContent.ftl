@@ -27,7 +27,7 @@
 	<paper-fab mini icon="chevron-left" title="Previous Page" class="bg-green" style="margin-right:10px;" disabled="{{ disabled || pageNo == 1 }}" on-tap="{{displayPrevious}}"></paper-fab>
 	<paper-fab mini icon="chevron-right" title="Next Page" class="bg-green" style="margin-right:10px;" disabled="{{ disabled || pageNo == pageCount }}" on-tap="{{displayNext}}"></paper-fab>
 	<paper-fab mini icon="reorder" title="Options" class="bg-green" style="margin-right:10px;" disabled="{{ disabled }}" on-tap="{{displayOptions}}"></paper-fab>
-	<paper-fab mini icon="translate" title="Enable Transliteration" class="bg-green" style="margin-right:10px;" disabled="{{ disabled }}" on-tap="{{displayTransliterationOptions}}"></paper-fab>
+	<#-- paper-fab mini icon="translate" title="Enable Transliteration" class="bg-green" style="margin-right:10px;" disabled="{{ disabled }}" on-tap="{{displayTransliterationOptions}}"></paper-fab -->
 	<paper-fab mini icon="launch" title="View on Reader" class="bg-green" style="margin-right:10px;" disabled="{{ disabled }}" on-tap="{{goToReader}}"></paper-fab>
 	<paper-fab icon="{{ isEditorDirty ? 'save' : 'done' }}" title="{{ isEditorDirty ? 'Save' : 'Saved' }}" class="{{ isEditorDirty ? 'bg-red' : 'bg-green' }}" style="margin-right:25px;" disabled="{{ disabled }}" on-tap="{{savePage}}"></paper-fab>
 </div>
