@@ -76,8 +76,7 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 									pratilipiData.getAuthor().getPageUrl() : pratilipiData.getAuthor().getPageUrlAlias() );
 		}
 		String ogBooksIsbn = pratilipi.getId() + "";
-		String ogUrl = "http://" + DOMAIN + 
-							( pratilipiData.getPageUrlAlias() == null ? pratilipiData.getPageUrl() : pratilipiData.getPageUrlAlias() );
+		String ogUrl = "http://" + DOMAIN + pratilipiData.getPageUrl();
 		String ogTitle = pratilipi.getTitle() + ( pratilipi.getTitleEn() == null ? "" : " / " + pratilipi.getTitleEn() );
 		String ogImage = "http://" + DOMAIN + "/api/pratilipi/cover?pratilipiId=" + pratilipi.getId();
 		if( ! ogImage.startsWith( "http:" ) )
