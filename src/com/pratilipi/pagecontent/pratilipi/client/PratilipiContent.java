@@ -88,8 +88,7 @@ public class PratilipiContent implements EntryPoint, ClickHandler {
 			reviewEditAnchorPanel.add( editReviewAnchor );
 		}
 		
-		if( reviewEditPanel != null && submitButtonPanel != null ){
-			reviewEditPanel.add( summaryInput );
+		if( submitButtonPanel != null ){
 			submitButtonPanel.add( updateReviewButton );
 			submitButtonPanel.add( cancelReviewEditButton );
 		}
@@ -171,6 +170,7 @@ public class PratilipiContent implements EntryPoint, ClickHandler {
 					continue;
 				}
 				if( reviewPara.getInnerHTML() != null && !reviewPara.getInnerHTML().trim().isEmpty() ){
+					reviewEditPanel.add( summaryInput );
 					reviewPara.getStyle().setDisplay( Display.NONE );
 					reviewEditAnchorPanel.getElement().getStyle().setDisplay( Display.NONE );
 					summaryInput.setHtml( reviewPara.getInnerHTML() );
@@ -199,6 +199,7 @@ public class PratilipiContent implements EntryPoint, ClickHandler {
 				
 				@Override
 				public void onSuccess( AddUserPratilipiResponse result ) {
+					reviewEditPanel.remove( summaryInput );
 					reviewEditPanel.getElement().getStyle().setDisplay( Display.NONE );
 					submitButtonPanel.getElement().getStyle().setDisplay( Display.NONE );
 					reviewPara.setInnerHTML( summaryInput.getHtml() );
