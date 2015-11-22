@@ -1,4 +1,4 @@
-package com.pratilipi.data.transfer;
+package com.pratilipi.data.type;
 
 import java.io.Serializable;
 import java.util.Date;

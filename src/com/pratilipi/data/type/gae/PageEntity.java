@@ -1,4 +1,4 @@
-package com.pratilipi.data.access.gae;
+package com.pratilipi.data.type.gae;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.pratilipi.data.transfer.Page;
+import com.pratilipi.data.type.Page;
 
 @PersistenceCapable( table = "PAGE" )
 public class PageEntity implements Page {

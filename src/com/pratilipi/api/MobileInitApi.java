@@ -7,10 +7,10 @@ import com.claymus.api.GenericApi;
 import com.claymus.api.annotation.Bind;
 import com.claymus.api.annotation.Get;
 import com.claymus.data.access.DataAccessorFactory;
-import com.claymus.data.transfer.Page;
 import com.pratilipi.api.shared.GetMobileInitRequest;
 import com.pratilipi.api.shared.GetMobileInitResponse;
 import com.pratilipi.data.transfer.shared.PratilipiData;
+import com.pratilipi.data.type.Page;
 import com.pratilipi.pagecontent.pratilipi.PratilipiContentHelper;
 
 @SuppressWarnings( "serial" )
