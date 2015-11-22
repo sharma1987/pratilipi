@@ -19,7 +19,6 @@ public class DataAccessorFactory
 
 	private static final SearchAccessor searchAccessor = new SearchAccessorGaeImpl( GOOGLE_APP_ENGINE_SEARCH_INDEX );
 	private static final BlobAccessor blobAccessorAsia = new BlobAccessorGcsImpl( GOOGLE_CLOUD_STORAGE_BUCKET_ASIA );
-	private static final BlobAccessor blobAccessorPublic = new BlobAccessorGcsImpl( GOOGLE_CLOUD_STORAGE_BUCKET_PUBLIC );
 
 	
 	public static DataAccessor getDataAccessor( HttpServletRequest request ) {
@@ -39,10 +38,6 @@ public class DataAccessorFactory
 	
 	public static BlobAccessor getBlobAccessorAsia() {
 		return new BlobAccessorWithMemcache( blobAccessorAsia, cacheL2 );
-	}
-
-	public static BlobAccessor getBlobAccessorPublic() {
-		return new BlobAccessorWithMemcache( blobAccessorPublic, cacheL2 );
 	}
 
 }
