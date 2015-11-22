@@ -184,6 +184,6 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 
 	UserPratilipi createOrUpdateUserPratilipi( UserPratilipi userPratilipi );
 	
-	Boolean deleteUserPratilipi( String id );
+	Boolean deleteUserPratilipi( UserPratilipi userPratilipi );
 	
 }

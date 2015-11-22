@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.Memcache;
 import com.pratilipi.commons.shared.AuthorFilter;
@@ -800,12 +802,16 @@ public class DataAccessorWithMemcache
 	}
 
 	@Override
-	public Boolean deleteUserPratilipi(String id) {
-		UserPratilipi userPratilipi = memcache.get(
-				PREFIX_USER_PRATILIPI + id );
-		if( userPratilipi != null )
-			memcache.remove( PREFIX_USER_PRATILIPI + id );
-		return dataAccessor.deleteUserPratilipi( id )	;
+	public Boolean deleteUserPratilipi(UserPratilipi userPratilipi) {
+		UserPratilipi userPratilipiCached = memcache.get(
+				PREFIX_USER_PRATILIPI + userPratilipi.getId() );
+		if( userPratilipiCached != null )
+			memcache.remove( PREFIX_USER_PRATILIPI + userPratilipi.getId() );
+		List<UserPratilipi> userPratilipiList = memcache.get(
+				PREFIX_USER_PRATILIPI_LIST + userPratilipi.getPratilipiId() );
+		if( userPratilipiList != null )
+			memcache.remove( PREFIX_USER_PRATILIPI_LIST + userPratilipi.getPratilipiId() );
+		return dataAccessor.deleteUserPratilipi( userPratilipi )	;
 	}
 
 }

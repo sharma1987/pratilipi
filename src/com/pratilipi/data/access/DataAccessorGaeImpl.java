@@ -813,9 +813,9 @@ public class DataAccessorGaeImpl
 	}
 
 	@Override
-	public Boolean deleteUserPratilipi( String id ){
+	public Boolean deleteUserPratilipi( UserPratilipi userPratilipi ){
 		try {
-//			deleteEntity( UserPratilipiEntity.class, id );
+//			deleteEntity( UserPratilipiEntity.class, userPratilipi.getId() );
 			return false;
 		} catch( JDOObjectNotFoundException e ) {
 			e.printStackTrace();

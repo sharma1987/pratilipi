@@ -403,6 +403,9 @@ public class InitApi extends GenericApi {
 		Page page = dataAccessor.getPage( "AUTHOR", author.getId() );
 		if( !deletePage( page ))
 			return false;
+		Page authorDashboardPage = dataAccessor.getPage( "AUTHOR_DASHBOARD", author.getId());
+		if( !deletePage( authorDashboardPage ))
+			return false;
 		
 		//DELETE AUTHOR
 		if( dataAccessor.deleteAuthor( author.getId() )){
@@ -421,7 +424,7 @@ public class InitApi extends GenericApi {
 		List<UserPratilipi> userPratilipiList = dataAccessor.getUserPratilipiList( pratilipiId );
 		logger.log(Level.INFO, "UserPratilipi List Size : " + userPratilipiList.size() );
 		int countUserPratilipiDeleted=0;
-		//TODO : DELETE USER_PRATILIPI ENTRIES	
+		//DELETE USER_PRATILIPI ENTRIES	
 		for( UserPratilipi userPratilipi : userPratilipiList ){
 			isDeleted = deleteUserPratilipi( userPratilipi );
 			if( isDeleted )
@@ -470,7 +473,7 @@ public class InitApi extends GenericApi {
 			}
 		}
 		logger.log(Level.INFO, "NUMBER OF COMMENT DELETED : " + countCommentDeleted );
-		isDeleted = dataAccessor.deleteUserPratilipi( userPratilipi.getId() );
+		isDeleted = dataAccessor.deleteUserPratilipi( userPratilipi );
 		logger.log(Level.INFO, "UserPratilipi " + userPratilipi.getId() + " isDeleted : " + isDeleted );
 		if( isDeleted ){
 			logger.log(Level.INFO, "UserPratilipi Deleted : " + userPratilipi.getId() );
@@ -482,6 +485,9 @@ public class InitApi extends GenericApi {
 	}
 	
 	private Boolean deletePage( Page page ){
+		if( page == null )
+			return false;
+		
 		Boolean isDeleted = false;
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
 		//TODO : DELETE PAGE_CONTENT ENTRIES
