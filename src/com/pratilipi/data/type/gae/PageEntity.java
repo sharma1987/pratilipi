@@ -7,7 +7,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.pratilipi.commons.shared.PageType;
+import com.pratilipi.common.type.PageType;
 import com.pratilipi.data.type.Page;
 
 @PersistenceCapable( table = "PAGE" )
