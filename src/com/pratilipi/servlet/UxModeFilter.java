@@ -13,7 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.ClaymusHelper;
-import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.type.Page;
@@ -147,8 +147,8 @@ public class UxModeFilter implements Filter {
 			DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 			Page page = dataAccessor.getPage( request.getRequestURI() );
 			basicMode = page == null
-					|| !( page.getType().equals( PratilipiPageType.READ.toString() )
-							|| page.getType().equals( PratilipiPageType.WRITE.toString() ) );
+					|| !( page.getType().equals( PageType.READ.toString() )
+							|| page.getType().equals( PageType.WRITE.toString() ) );
 		
 		}
 		

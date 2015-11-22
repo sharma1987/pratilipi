@@ -41,7 +41,7 @@ import com.pratilipi.commons.server.PratilipiHelper;
 import com.pratilipi.commons.server.SystemProperty;
 import com.pratilipi.commons.shared.PratilipiAccessTokenType;
 import com.pratilipi.commons.shared.PratilipiFilter;
-import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.access.SearchAccessor;
@@ -373,7 +373,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 						HttpServletRequest request ) {
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page pratilipiPage = dataAccessor.getPage( PratilipiPageType.PRATILIPI.toString(), pratilipi.getId() );
+		Page pratilipiPage = dataAccessor.getPage( PageType.PRATILIPI.toString(), pratilipi.getId() );
 		
 		
 		PratilipiData pratilipiData = new PratilipiData();
@@ -384,8 +384,8 @@ public class PratilipiContentHelper extends PageContentHelper<
 		pratilipiData.setPageUrlAlias( pratilipiPage.getUriAlias() );
 		pratilipiData.setCoverImageUrl( createCoverImageUrl( pratilipi ) );
 		
-		pratilipiData.setReaderPageUrl( PratilipiPageType.READ.getUrlPrefix() + pratilipi.getId() );
-		pratilipiData.setWriterPageUrl( PratilipiPageType.WRITE.getUrlPrefix() + pratilipi.getId() );
+		pratilipiData.setReaderPageUrl( PageType.READ.getUrlPrefix() + pratilipi.getId() );
+		pratilipiData.setWriterPageUrl( PageType.WRITE.getUrlPrefix() + pratilipi.getId() );
 		
 		pratilipiData.setTitle( pratilipi.getTitle() );
 		pratilipiData.setTitleEn( pratilipi.getTitleEn() );
@@ -804,23 +804,23 @@ public class PratilipiContentHelper extends PageContentHelper<
 	public static boolean createOrUpdatePratilipiPageUrl( Long pratilipiId, HttpServletRequest request ) {
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		Pratilipi pratilipi = dataAccessor.getPratilipi( pratilipiId );
-		Page page = dataAccessor.getPage( PratilipiPageType.PRATILIPI.toString(), pratilipiId );
+		Page page = dataAccessor.getPage( PageType.PRATILIPI.toString(), pratilipiId );
 
 		String uriPrifix = null;
 		if( pratilipi.getAuthorId() != null ) {
-			Page authorPage = dataAccessor.getPage( PratilipiPageType.AUTHOR.toString(), pratilipi.getAuthorId() );
+			Page authorPage = dataAccessor.getPage( PageType.AUTHOR.toString(), pratilipi.getAuthorId() );
 			if( authorPage.getUriAlias() != null )
 				uriPrifix = authorPage.getUriAlias() + "/";
 		} else if( pratilipi.getPublisherId() != null ) {
-			Page publisherPage = dataAccessor.getPage( PratilipiPageType.PUBLISHER.toString(), pratilipi.getPublisherId() );
+			Page publisherPage = dataAccessor.getPage( PageType.PUBLISHER.toString(), pratilipi.getPublisherId() );
 			if( publisherPage.getUriAlias() != null )
 				uriPrifix = publisherPage.getUriAlias() + "/";
 		}
 
 		if( page == null ) {
 			page = dataAccessor.newPage();
-			page.setType( PratilipiPageType.PRATILIPI.toString() );
-			page.setUri( PratilipiPageType.PRATILIPI.getUrlPrefix() + pratilipiId );
+			page.setType( PageType.PRATILIPI.toString() );
+			page.setUri( PageType.PRATILIPI.getUrlPrefix() + pratilipiId );
 			page.setPrimaryContentId( pratilipiId );
 			page.setCreationDate( new Date() );
 			if( uriPrifix == null )
@@ -884,7 +884,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 	
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page pratilipiPage = dataAccessor.getPage( PratilipiPageType.PRATILIPI.toString(), pratilipiId );
+		Page pratilipiPage = dataAccessor.getPage( PageType.PRATILIPI.toString(), pratilipiId );
 		
 		String fbLikeShareUrl = "http://" + ClaymusHelper.getSystemProperty( "domain" ) + pratilipiPage.getUri();
 		long fbLikeShareCount = FacebookApi.getUrlShareCount( fbLikeShareUrl, request );

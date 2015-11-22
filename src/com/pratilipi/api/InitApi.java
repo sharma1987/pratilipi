@@ -13,7 +13,6 @@ import com.claymus.api.annotation.Bind;
 import com.claymus.api.annotation.Get;
 import com.claymus.api.shared.GenericRequest;
 import com.claymus.api.shared.GenericResponse;
-import com.claymus.commons.shared.ClaymusPageType;
 import com.claymus.commons.shared.CommentFilter;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
 import com.claymus.commons.shared.exception.InvalidArgumentException;
@@ -27,8 +26,8 @@ import com.claymus.data.transfer.UserRole;
 import com.claymus.taskqueue.Task;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.commons.shared.PratilipiFilter;
-import com.pratilipi.commons.shared.PratilipiPageType;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
@@ -219,7 +218,7 @@ public class InitApi extends GenericApi {
 		Page page = dataAccessor.getPage( pageUriAlias );
 		if( page == null ) {
 			page = dataAccessor.newPage();
-			page.setType( ClaymusPageType.GENERIC.toString() );
+			page.setType( PageType.GENERIC.toString() );
 			page.setUriAlias( pageUriAlias );
 			page.setCreationDate( new Date() );
 			page = dataAccessor.createOrUpdatePage( page );
@@ -245,8 +244,8 @@ public class InitApi extends GenericApi {
 		event = dataAccessor.createOrUpdateEvent( event );
 		
 		Page page = dataAccessor.newPage();
-		page.setType( PratilipiPageType.EVENT.toString() );
-		page.setUri( PratilipiPageType.EVENT.getUrlPrefix() + event.getId() );
+		page.setType( PageType.EVENT.toString() );
+		page.setUri( PageType.EVENT.getUrlPrefix() + event.getId() );
 		page.setPrimaryContentId( event.getId() );
 		page.setCreationDate( new Date() );
 		page = dataAccessor.createOrUpdatePage( page );

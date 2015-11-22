@@ -27,7 +27,7 @@ import com.claymus.websitewidget.html.HtmlWidgetHelper;
 import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.commons.server.PratilipiHelper;
-import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.type.Author;
@@ -222,19 +222,19 @@ public class PratilipiMain extends ClaymusMain {
 		
 		if( page != null ) {
 			
-			if( page.getType().equals( PratilipiPageType.PRATILIPI.toString() ) ) {
+			if( page.getType().equals( PageType.PRATILIPI.toString() ) ) {
 				pageContentList.add( PratilipiContentHelper.newPratilipiContent( page.getPrimaryContentId() ) );
 
-			} else if( page.getType().equals( PratilipiPageType.AUTHOR.toString() ) ) {
+			} else if( page.getType().equals( PageType.AUTHOR.toString() ) ) {
 				pageContentList.add( AuthorContentHelper.newAuthorContent( page.getPrimaryContentId() ) );
 		
-			} else if( page.getType().equals( PratilipiPageType.AUTHOR_DASHBOARD.toString() ) ) {
+			} else if( page.getType().equals( PageType.AUTHOR_DASHBOARD.toString() ) ) {
 				pageContentList.add( AuthorDashboardContentHelper.newAuthorDashboardContent( page.getPrimaryContentId() ) );
 		
-			} else if( page.getType().equals( PratilipiPageType.PUBLISHER.toString() ) ) {
+			} else if( page.getType().equals( PageType.PUBLISHER.toString() ) ) {
 				pageContentList.add( PublisherContentHelper.newPublisherContent( page.getPrimaryContentId() ) );
 		
-			} else if( page.getType().equals( PratilipiPageType.EVENT.toString() ) ) {
+			} else if( page.getType().equals( PageType.EVENT.toString() ) ) {
 				pageContentList.add( EventContentHelper.newEventContent( page.getPrimaryContentId() ) );
 		
 			}

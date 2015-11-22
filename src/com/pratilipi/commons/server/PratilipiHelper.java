@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.data.access.Memcache;
-import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.transfer.Category;
@@ -232,7 +232,7 @@ public class PratilipiHelper extends ClaymusHelper {
 			Author author, List<Category> categoryList, boolean includeMetaData ) {
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page pratilipiPage = dataAccessor.getPage( PratilipiPageType.PRATILIPI.toString(), pratilipi.getId() );
+		Page pratilipiPage = dataAccessor.getPage( PageType.PRATILIPI.toString(), pratilipi.getId() );
 		if( categoryList == null )
 			categoryList = new ArrayList<Category>( 0 );
 		
@@ -260,8 +260,8 @@ public class PratilipiHelper extends ClaymusHelper {
 		pratilipiData.setImageContentUploadUrl( "/api/pratilipi/content/image?pratilipiId=" + pratilipi.getId() );
 		pratilipiData.setWordContentUplaodUrl( URL_RESOURCE + "pratilipi-content/word/" + pratilipi.getId() );
 		pratilipiData.setPdfContentUplaodUrl( URL_RESOURCE + "pratilipi-content/pdf/" + pratilipi.getId());
-		pratilipiData.setReaderPageUrl( PratilipiPageType.READ.getUrlPrefix() + pratilipi.getId() );
-		pratilipiData.setWriterPageUrl( PratilipiPageType.WRITE.getUrlPrefix() + pratilipi.getId() );
+		pratilipiData.setReaderPageUrl( PageType.READ.getUrlPrefix() + pratilipi.getId() );
+		pratilipiData.setWriterPageUrl( PageType.WRITE.getUrlPrefix() + pratilipi.getId() );
 		if( includeMetaData )
 			pratilipiData.setPublicDomain( pratilipi.isPublicDomain() );
 		
@@ -320,7 +320,7 @@ public class PratilipiHelper extends ClaymusHelper {
 			return null;
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page authorPage = dataAccessor.getPage( PratilipiPageType.AUTHOR.toString(), author.getId() );
+		Page authorPage = dataAccessor.getPage( PageType.AUTHOR.toString(), author.getId() );
 		
 		AuthorData authorData = new AuthorData();
 		
@@ -389,7 +389,7 @@ public class PratilipiHelper extends ClaymusHelper {
 			return null;
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page publisherPage = dataAccessor.getPage( PratilipiPageType.PUBLISHER.toString(), publisher.getId() );
+		Page publisherPage = dataAccessor.getPage( PageType.PUBLISHER.toString(), publisher.getId() );
 		
 		PublisherData publisherData = new PublisherData();
 		

@@ -24,7 +24,6 @@ import com.claymus.data.access.BlobAccessor;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.AuditLog;
 import com.claymus.data.transfer.BlobEntry;
-import com.claymus.data.transfer.Page;
 import com.claymus.data.transfer.User;
 import com.claymus.pagecontent.PageContentHelper;
 import com.google.gson.Gson;
@@ -34,7 +33,7 @@ import com.pratilipi.commons.server.PratilipiHelper;
 import com.pratilipi.commons.server.SystemProperty;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
-import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.access.SearchAccessor;
@@ -43,6 +42,7 @@ import com.pratilipi.data.transfer.shared.AuthorData;
 import com.pratilipi.data.transfer.shared.LanguageData;
 import com.pratilipi.data.type.AccessToken;
 import com.pratilipi.data.type.Author;
+import com.pratilipi.data.type.Page;
 import com.pratilipi.data.type.Pratilipi;
 import com.pratilipi.pagecontent.author.gae.AuthorContentEntity;
 import com.pratilipi.pagecontent.author.shared.AuthorContentData;
@@ -144,7 +144,7 @@ public class AuthorContentHelper extends PageContentHelper<
 			author = dataAccessor.createOrUpdateAuthor( author );
 			
 			Page page = dataAccessor.newPage();
-			page.setType( PratilipiPageType.AUTHOR.toString() );
+			page.setType( PageType.AUTHOR.toString() );
 			page.setUri( "/author/" + author.getId().toString() );
 			page.setPrimaryContentId( author.getId() );
 			page.setCreationDate( new Date() );
@@ -183,7 +183,7 @@ public class AuthorContentHelper extends PageContentHelper<
 			return null;
 		
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page authorPage = dataAccessor.getPage( PratilipiPageType.AUTHOR.toString(), author.getId() );
+		Page authorPage = dataAccessor.getPage( PageType.AUTHOR.toString(), author.getId() );
 		
 		AuthorData authorData = new AuthorData();
 		
@@ -409,12 +409,12 @@ public class AuthorContentHelper extends PageContentHelper<
 	public static boolean createOrUpdateAuthorPageUrl( Long authorId, HttpServletRequest request ) {
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
 		Author author = dataAccessor.getAuthor( authorId );
-		Page page = dataAccessor.getPage( PratilipiPageType.AUTHOR.toString(), authorId );
+		Page page = dataAccessor.getPage( PageType.AUTHOR.toString(), authorId );
 		
 		if( page == null ) {
 			page = dataAccessor.newPage();
-			page.setType( PratilipiPageType.AUTHOR.toString() );
-			page.setUri( PratilipiPageType.AUTHOR.getUrlPrefix() + authorId );
+			page.setType( PageType.AUTHOR.toString() );
+			page.setUri( PageType.AUTHOR.getUrlPrefix() + authorId );
 			page.setPrimaryContentId( authorId );
 			page.setCreationDate( new Date() );
 		}
@@ -433,12 +433,12 @@ public class AuthorContentHelper extends PageContentHelper<
 	
 	public static boolean createOrUpdateAuthorDashboardPageUrl( Long authorId, HttpServletRequest request ) {
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-		Page page = dataAccessor.getPage( PratilipiPageType.AUTHOR.toString(), authorId );
+		Page page = dataAccessor.getPage( PageType.AUTHOR.toString(), authorId );
 		
-		Page dashboardPage = dataAccessor.getPage( PratilipiPageType.AUTHOR_DASHBOARD.toString(), authorId );
+		Page dashboardPage = dataAccessor.getPage( PageType.AUTHOR_DASHBOARD.toString(), authorId );
 		if( dashboardPage == null ) {
 			dashboardPage = dataAccessor.newPage();
-			dashboardPage.setType( PratilipiPageType.AUTHOR_DASHBOARD.toString() );
+			dashboardPage.setType( PageType.AUTHOR_DASHBOARD.toString() );
 			dashboardPage.setUri( page.getUri() + "/dashboard" );
 			dashboardPage.setPrimaryContentId( authorId );
 			dashboardPage.setCreationDate( new Date() );

@@ -1,9 +1,11 @@
 package com.pratilipi.commons.shared;
 
-import com.claymus.commons.shared.PageType;
 
-public enum PratilipiPageType implements PageType {
+public enum PageType {
 	
+	GENERIC( "/page/" ),
+	BLOG( "/blog/" ),
+
 	PRATILIPI( "/pratilipi/" ),
 	READ( "/read?id=" ),
 	WRITE( "/write?id=" ),
@@ -19,11 +21,10 @@ public enum PratilipiPageType implements PageType {
 	private String urlPrefix;
 	
 	
-	private PratilipiPageType( String urlPrefix ) {
+	private PageType( String urlPrefix ) {
 		this.urlPrefix = urlPrefix;
 	}
 	
-	@Override
 	public String getUrlPrefix() {
 		return urlPrefix;
 	}

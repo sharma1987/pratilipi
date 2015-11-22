@@ -17,7 +17,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.pratilipi.commons.server.ConvertWordToHtml;
 import com.pratilipi.commons.server.GlobalSearch;
 import com.pratilipi.commons.server.PratilipiHelper;
-import com.pratilipi.commons.shared.PratilipiPageType;
+import com.pratilipi.commons.shared.PageType;
 import com.pratilipi.commons.shared.UserReviewState;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
@@ -164,8 +164,8 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 			author = dataAccessor.createOrUpdateAuthor( author );
 			
 			Page page = dataAccessor.newPage();
-			page.setType( PratilipiPageType.AUTHOR.toString() );
-			page.setUri( PratilipiPageType.AUTHOR.getUrlPrefix() + author.getId() );
+			page.setType( PageType.AUTHOR.toString() );
+			page.setUri( PageType.AUTHOR.getUrlPrefix() + author.getId() );
 			page.setPrimaryContentId( author.getId() );
 			page.setCreationDate( new Date() );
 			page = dataAccessor.createOrUpdatePage( page );
