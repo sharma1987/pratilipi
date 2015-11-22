@@ -48,7 +48,7 @@ public class PageEntity implements Page {
 
 	@Override
 	public String getType() {
-		return type.toString();
+		return type == null ? null : type.toString();
 	}
 
 	@Override
