@@ -70,10 +70,12 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 		String ogFbAppId = FacebookApi.getAppId( request );
 		String ogType = "books.book";
 		String ogAuthor = null;
-		if( author != null ){
+		if( author != null ) {
 			ogAuthor = "http://" + DOMAIN + 
 							( pratilipiData.getAuthor().getPageUrlAlias() == null ? 
 									pratilipiData.getAuthor().getPageUrl() : pratilipiData.getAuthor().getPageUrlAlias() );
+		} else {
+			ogAuthor = "http://" + DOMAIN + "/team-pratilipi";
 		}
 		String ogBooksIsbn = pratilipi.getId() + "";
 		String ogUrl = "http://" + DOMAIN + pratilipiData.getPageUrl();
