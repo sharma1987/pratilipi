@@ -44,7 +44,6 @@ import com.pratilipi.service.shared.data.PratilipiData;
 
 public class PratilipiContentProcessor extends PageContentProcessor<PratilipiContent> {
 
-	
 	private static final String DOMAIN = ClaymusHelper.getSystemProperty( "domain" );
 	private static final Logger logger = Logger.getLogger( PratilipiContentProcessor.class.getName() );
 	private static final String COOKIE_LANGUAGE = "user_language";

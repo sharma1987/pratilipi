@@ -71,7 +71,10 @@ public class AuthorEntity implements Author {
 	@Persistent( column = "TOTAL_READ_COUNT" )
 	private Long totalReadCount;
 
+	@Persistent( column = "TOTAL_FB_LIKE_SHARE_COUNT" )
+	private Long totalFbLikeShareCount;
 
+	
 	@Persistent( column = "LAST_PROCESS_DATE" )
 	private Date lastProcessDate;
 
