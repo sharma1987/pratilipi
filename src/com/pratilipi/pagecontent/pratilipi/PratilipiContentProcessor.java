@@ -113,8 +113,8 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 		}
 		String ogDescription = pratilipi.getType() == PratilipiType.BOOK ? summarySubstr : pratilipi.getTitle();
 		
-		final String fbOgTags = /*"<meta property='fb:app_id' content='" + ogFbAppId + "' />"
-				+*/ "<meta property='og:locale' content='" + ogLocale + "' />"
+		final String fbOgTags = "<meta property='fb:app_id' content='" + ogFbAppId + "' />"
+				+ "<meta property='og:locale' content='" + ogLocale + "' />"
 				+ "<meta property='og:type' content='" + ogType + "' />"
 				+ "<meta property='books:author' content='" + ogAuthor + "' />"
 				+ "<meta property='books:isbn' content='" + ogBooksIsbn + "' />"
