@@ -55,8 +55,12 @@ public class AuthorEntity implements Author {
 	private Text summary;
 	
 
+	@Deprecated
 	@Persistent( column = "CUSTOM_COVER" )
 	private Boolean customCover;
+
+	@Persistent( column = "CUSTOM_IMAGE" )
+	private Boolean customImage;
 
 	@Persistent( column = "REGISTRATION_DATE" )
 	private Date registrationDate;
@@ -219,12 +223,14 @@ public class AuthorEntity implements Author {
 	
 	@Override
 	public Boolean hasCustomCover() {
-		return customCover == null ? false : customCover;
+		if( customImage == null )
+			customImage = customCover;
+		return customImage == null ? false : customImage;
 	}
 
 	@Override
-	public void setCustomCover( Boolean customCover ) {
-		this.customCover = customCover;
+	public void setCustomCover( Boolean customImage ) {
+		this.customImage = customImage;
 	}
 	
 	@Override
