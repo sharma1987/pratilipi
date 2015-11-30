@@ -300,6 +300,8 @@ public class PratilipiHelper extends ClaymusHelper {
 		pratilipiData.setGenreIdList( categoryIdList );
 		pratilipiData.setGenreNameList( categoryNameList );
 		
+		pratilipiData.setFbLikeShareCount( pratilipi.getFbLikeShareCount() );
+		
 		return pratilipiData;
 	}
 

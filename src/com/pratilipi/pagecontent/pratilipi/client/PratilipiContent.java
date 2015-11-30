@@ -88,10 +88,10 @@ public class PratilipiContent implements EntryPoint, ClickHandler {
 			reviewEditAnchorPanel.add( editReviewAnchor );
 		}
 		
-		if( submitButtonPanel != null ){
-			submitButtonPanel.add( updateReviewButton );
-			submitButtonPanel.add( cancelReviewEditButton );
-		}
+//		if( submitButtonPanel != null ){
+//			submitButtonPanel.add( updateReviewButton );
+//			submitButtonPanel.add( cancelReviewEditButton );
+//		}
 		
 		if( rootRatingPanel != null ){
 			@SuppressWarnings( "unused" )

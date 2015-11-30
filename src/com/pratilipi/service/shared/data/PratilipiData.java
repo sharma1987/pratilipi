@@ -95,6 +95,8 @@ public class PratilipiData implements IsSerializable {
 	private List<Long> genreIdList;
 	private List<String> genreNameList;
 	
+	private Long fbLikeShareCount;
+	
 	
 	public PratilipiData() {}
 	
@@ -492,4 +494,11 @@ public class PratilipiData implements IsSerializable {
 		this.genreNameList = genreNameList;
 	}
 	
+	public Long getFbLikeShareCount(){
+		return fbLikeShareCount;
+	}
+	
+	public void setFbLikeShareCount( Long fbLikeShareCount ){
+		this.fbLikeShareCount = fbLikeShareCount;
+	}
 }

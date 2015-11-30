@@ -6,7 +6,7 @@
 <#import "../../../../com/claymus/pagecontent/comments/PageContent-Comment.ftl" as comments>
 
 <#assign shareUrl="http://${ domain }${ pratilipiData.getPageUrl() }">
-	
+<#assign likes = pratilipiData.getFbLikeShareCount()>
 
 <div class="container" itemscope itemtype="http://schema.org/Product">
 
@@ -28,7 +28,7 @@
 			</#if>
 			<div style="margin-top:10px; margin-bottom:10px;">
 				<#if pratilipiData.getState() == 'PUBLISHED'>
-					<@social.vToolbar shareUrl=shareUrl/>
+					<@social.pratilipi shareUrl=shareUrl likes=likes/>
 				</#if>
 				<#if pratilipiData.getStarCount() gt 0 && pratilipiData.getRatingCount() gt 0>
 					<label itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" style="font-size: 14px;">
