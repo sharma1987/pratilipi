@@ -11,7 +11,8 @@
 			<li><a href="/JoinTheGang">Join The Gang</a></li>
 		</ul>
 		<ul class="col-md-2">
-			<li><a href="/privacy">Privacy Policy</a></li>
+			<li><a href="/privacy-policy">Privacy Policy</a></li>
+			<li><a href="/terms-of-service">Terms Of Use</a></li>
 		</ul>
 		<ul class="col-md-2">
 		</ul>

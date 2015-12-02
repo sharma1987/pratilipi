@@ -54,11 +54,13 @@ public class PratilipiFilter implements Filter {
 		
 		redirections.put( "/event/gnayam&pada&varai", "/event/gnayam-pada-varai" );
 		redirections.put( "/event/gnayam&pada&varai>", "/event/gnayam-pada-varai" );
+		redirections.put( "/event/gpv", "/event/gnayam-pada-varai" );
 
 		nonExistents.add( "/pagecontent.userforms/undefined.cache.js" );
 		nonExistents.add( "/pagecontent.pratilipi/undefined.cache.js" );
 		nonExistents.add( "/pagecontent.reader/undefined.cache.js" );
 		nonExistents.add( "/pagecontent.author/undefined.cache.js" );
+	
 	}
 	
 

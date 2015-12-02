@@ -203,6 +203,11 @@ public class PratilipiMain extends ClaymusMain {
 		else if( requestUri.equals( "/about/the-founding-readers" ) )
 			page.setTitle( "About The Founding Readers" );
 		
+		else if( requestUri.equals( "/privacy-policy" ) )
+			page.setTitle( "Privacy Policy" );
+		
+		else if( requestUri.equals( "/terms-of-service" ) )
+			page.setTitle( "Terms Of Use" );
 		
 		else
 			page = super.getPage( request );
@@ -361,8 +366,11 @@ public class PratilipiMain extends ClaymusMain {
 		else if( requestUri.equals( "/JoinTheGang" ) )
 			pageContentList.add( generateHtmlContentFromFile( "WEB-INF/classes/com/pratilipi/servlet/content/CareerPageContent.ftl" ) );
 		
-		else if( requestUri.equals( "/privacy" ) )
+		else if( requestUri.equals( "/privacy-policy" ) )
 			pageContentList.add( generateHtmlContentFromFile( "WEB-INF/classes/com/pratilipi/servlet/content/PrivacyPolicy.ftl" ) );
+		
+		else if( requestUri.equals( "/terms-of-service" ) )
+			pageContentList.add( generateHtmlContentFromFile( "WEB-INF/classes/com/pratilipi/servlet/content/TermsOfService.ftl" ) );
 			
 		return pageContentList;
 	}
