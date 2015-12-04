@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.claymus.api.annotation.Validate;
 import com.claymus.api.shared.GenericRequest;
-import com.pratilipi.commons.shared.UserGender;
+import com.pratilipi.common.type.Gender;
 
 @SuppressWarnings( "serial" )
 public class PutUserUpdateRequest extends GenericRequest {
@@ -25,7 +25,7 @@ public class PutUserUpdateRequest extends GenericRequest {
 	private Date dateOfBirth;
 	private boolean hasDateOfBirth;
 	
-	private UserGender sex;
+	private Gender sex;
 	private boolean hasSex;
 	
 	
@@ -65,7 +65,7 @@ public class PutUserUpdateRequest extends GenericRequest {
 		return hasDateOfBirth;
 	}
 	
-	public UserGender getSex() {
+	public Gender getSex() {
 		return sex;
 	}
 	
