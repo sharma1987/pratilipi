@@ -46,7 +46,7 @@
 				<br/><br/>
 				We believe in the age old adage: "You become what you read", and that's why we want us to be able to.
 				<br/><br/>
-				Read whatever we want, whenever we want and wherever we want. Read from any device: computer, tablet or smartphone. Read in any language: Hindi, English, Tamil or Gujarati. Read carelessly. That's what paradise is: no file downloads, no format issues, no compatibility problems and oh loads and loads of books and poems and stories.
+				Read whatever we want, whenever we want and wherever we want. Read from any device: computer, tablet or smartphone. Read in any language: Bengali, Gujarati, Hindi, Malayalam, Marathi or Tamil. Read carelessly. That's what paradise is: no file downloads, no format issues, no compatibility problems and oh loads and loads of books and poems and stories.
 				<br/><br/>
 				Discover India's most celebrated authors, and the hidden gems. Read poems, Stories, Haiku, Books and much more. Follow your favorite authors, meet your new favorites, discover the joy of stumbling upon the best literature ever written.
 				<br/><br/>
