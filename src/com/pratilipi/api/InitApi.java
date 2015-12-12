@@ -234,10 +234,11 @@ public class InitApi extends GenericApi {
 	}
 
 	@SuppressWarnings("unused")
-	private void createEvent( String nameEn ) {
+	private void createEvent( String nameEn, Long languageId ) {
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
 		Event event = dataAccessor.newEvent();
 		event.setNameEn( nameEn );
+		event.setLanguageId( languageId );
 		event.setStartDate( new Date() );
 		event.setEndDate( new Date() );
 		event.setCreationDate( new Date() );
