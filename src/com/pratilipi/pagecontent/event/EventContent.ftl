@@ -3,8 +3,8 @@
 
 <!-- PageContent :: Event :: Start -->
 
-<div style="margin-bottom:20px;">
-	<img src="${ eventData.getEventBannerUrl() }" style="width:100%">
+<div style="margin-bottom:20px; margin-top: 10px;text-align: center;">
+	<img src="${ eventData.getEventBannerUrl() }" style="width:66%">
 </div>
 
 <div style="max-width:800px; margin-left:auto; margin-right:auto;">
