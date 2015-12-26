@@ -203,37 +203,27 @@
 		</script>
 		
 		<!-- pop-up for marketing -->
-		<div  id ="backdrop">
-			<div id="popup" onclick="event.stopPropagation();">
-				<div id="popup_heading" style="text-align: left;">
-					<span>Sign up for Pratilipi</span><span id="popupCloseButton" onclick="closePopup()">x</span>
-				</div>
-				<div id="popup_body">
-					<h2 style="margin-bottom: 40px;">Enjoy Reading?</h2>
-					<p>Sign up to <strong>rate and review</strong> your favorite stories, books, poems and more!</p>
-					<div id="popup_action" onclick="signUpButtonClick()">Sign up</div>
-					<p>Already a member?</p>
-					<a href="#" onclick="loginLinkClick()" style="color: #0000FF; text-decoration: underline;">Sign In</a>
-				</div>
-			</div> 
+		<div class="modal fade"  id ="prompt-modal" onclick="event.stopPropagation();">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div id="modal-header" style="text-align: left; text-align: left;background-color: #f0f0f0;color: #4d4d4d;padding: 5px 20px;">
+						<span>Sign up for Pratilipi</span><span id="popupCloseButton" onclick="closePopup()">x</span>
+					</div>
+					<div id="modal-body" style="text-align: center; padding-left: 20%; padding-right: 20%; padding-bottom: 50px;">
+						<h2 style="margin-bottom: 40px;">Enjoy Reading?</h2>
+						<p>Sign up to <strong>rate and review</strong> your favorite stories, books, poems and more!</p>
+						<div id="popup_action" onclick="signUpButtonClick()">Sign up</div>
+						<p>Already a member?</p>
+						<a href="#" onclick="loginLinkClick()" style="color: #0000FF; text-decoration: underline;">Sign In</a>
+					</div>
+				</div> 
+			</div>
 		</div>
 		<script>
 			var clickEventSend = Boolean( 0 );
 			var userId = ${ userId?c };
-			function showPopup () {
-				jQuery( "#backdrop" ).addClass( "backDrop" );
-				var popup = jQuery( "#popup" );
-				popup.show();
-				setCookie( "rate_review_notification", Boolean(1), 365, "/" );
-				ga( 'send', 'event',
-					'Encourage Users to Rate/Review',	// Event Category
-					'Users Prompted',				// Event Action
-					'Number of Users Prompted', // Event Label
-					1 );									// Event Value
-			}
 			function closePopup() {
-				jQuery( "#popup" ).hide()
-				jQuery( "#backdrop" ).removeClass( "backDrop" );
+				$('#prompt-modal').modal('hide');
 			}
 			function signUpButtonClick(){
 				closePopup();
@@ -263,7 +253,7 @@
 				var visitNumber = getVisitCount();
 				var hasReceivedNotification = getCookie( "rate_review_notification" );
 				if( parseInt( userId ) == 0 && !hasReceivedNotification &&  parseInt( visitNumber ) >= 2 )
-					showPopup();
+					$('#prompt-modal').modal('show');					
 			}
 			
 			if( window.attachEvent) {//for IE8 and below
