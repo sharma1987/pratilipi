@@ -252,8 +252,15 @@
 			function showNotification(){
 				var visitNumber = getVisitCount();
 				var hasReceivedNotification = getCookie( "rate_review_notification" );
-				if( parseInt( userId ) == 0 && !hasReceivedNotification &&  parseInt( visitNumber ) >= 2 )
-					$('#prompt-modal').modal('show');					
+				if( parseInt( userId ) == 0 && !hasReceivedNotification &&  parseInt( visitNumber ) >= 2 ){
+					$('#prompt-modal').modal('show');
+					setCookie( "rate_review_notification", Boolean(1), 365, "/" );
+	 				ga( 'send', 'event',
+	 					'Encourage Users to Rate/Review',	// Event Category
+	 					'Users Prompted',				// Event Action
+	 					'Number of Users Prompted', // Event Label
+	 					1 );									// Event Value
+				}
 			}
 			
 			if( window.attachEvent) {//for IE8 and below
