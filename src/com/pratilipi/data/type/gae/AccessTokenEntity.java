@@ -6,6 +6,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.claymus.commons.shared.ClaymusAccessTokenType;
 import com.pratilipi.data.type.AccessToken;
 
 @PersistenceCapable( table = "ACCESS_TOKEN" )
@@ -103,7 +104,7 @@ public class AccessTokenEntity implements AccessToken {
 
 	@Override
 	public String getType() {
-		return type;
+		return type == null ? ClaymusAccessTokenType.USER.toString() : type;
 	}
 
 	@Override
