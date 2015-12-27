@@ -12,10 +12,11 @@
 
 		<link rel="shortcut icon" type="image/png" href="/theme.pratilipi/favicon.png">
 
+		<script src="//j.lib.cdssolutions.in/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+		<script src="//b.lib.cdssolutions.in/bootstrap-3.3.4/js/bootstrap.min.js" defer></script>
+		<link rel="stylesheet" href="//b.lib.cdssolutions.in/bootstrap-3.3.4/css/bootstrap.min.css">
+		
 		<#if basicMode>
-			<script src="//j.lib.cdssolutions.in/jquery-1.11.1/jquery-1.11.1.min.js"></script>
-			<script src="//b.lib.cdssolutions.in/bootstrap-3.3.4/js/bootstrap.min.js" defer></script>
-			<link rel="stylesheet" href="//b.lib.cdssolutions.in/bootstrap-3.3.4/css/bootstrap.min.css">
 			<script src="//j.lib.cdssolutions.in/jquery-file-upload-9.7.0/js/vendor/jquery.ui.widget.js" defer></script>
 			<script src="//j.lib.cdssolutions.in/jquery-file-upload-9.7.0/js/jquery.iframe-transport.js" defer></script>
 			<script src="//j.lib.cdssolutions.in/jquery-file-upload-9.7.0/js/jquery.fileupload.js" defer></script>
@@ -223,7 +224,7 @@
 			var clickEventSend = Boolean( 0 );
 			var userId = ${ userId?c };
 			function closePopup() {
-				$('#prompt-modal').modal('hide');
+				jQuery('#prompt-modal').modal('hide');
 			}
 			function signUpButtonClick(){
 				closePopup();
@@ -253,7 +254,7 @@
 				var visitNumber = getVisitCount();
 				var hasReceivedNotification = getCookie( "rate_review_notification" );
 				if( parseInt( userId ) == 0 && !hasReceivedNotification &&  parseInt( visitNumber ) >= 2 ){
-					$('#prompt-modal').modal('show');
+					jQuery('#prompt-modal').modal('show');
 					setCookie( "rate_review_notification", Boolean(1), 365, "/" );
 	 				ga( 'send', 'event',
 	 					'Encourage Users to Rate/Review',	// Event Category
