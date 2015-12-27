@@ -9,6 +9,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Text;
 import com.pratilipi.common.type.AuthorState;
+import com.pratilipi.common.type.Gender;
 import com.pratilipi.common.type.Language;
 import com.pratilipi.data.type.Author;
 
@@ -41,6 +42,14 @@ public class AuthorEntity implements Author {
 
 	@Persistent( column = "PEN_NAME_EN" )
 	private String penNameEn;
+	
+	
+	@Persistent( column = "GENDER" )
+	private Gender gender;
+	
+	@Persistent( column = "DATE_OF_BIRTH" )
+	private Date dateOfBirth;
+	
 	
 	@Persistent( column = "EMAIL" )
 	private String email;
