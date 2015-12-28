@@ -2,11 +2,13 @@ package com.pratilipi.common.type;
 
 public enum Language {
 
+	BENGALI	( "bn", "বাংলা",     "Bengali" ),
 	ENGLISH	( "en", "English", "English" ),
-	HINDI	( "hi", "हिंदी",      "Hindi" ),
 	GUJARATI( "gu", "ગુજરાતી",   "Gujarati" ),
-	TAMIL	( "ta", "தமிழ்",   "Tamil" ),
+	HINDI	( "hi", "हिंदी",      "Hindi" ),
+	MALAYALAM( "ml", "മലയാളം",	"Malayalam"),
 	MARATHI	( "mr", "मराठी",     "Marathi" ),
+	TAMIL	( "ta", "தமிழ்",   "Tamil" ),
 	;
 	
 	
