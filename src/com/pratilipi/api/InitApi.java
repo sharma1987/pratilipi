@@ -1,5 +1,9 @@
 package com.pratilipi.api;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -514,5 +518,32 @@ public class InitApi extends GenericApi {
 			return false;
 		}
 		return true;
+	}
+
+	private void eventEntries(String filename){
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor(this.getThreadLocalRequest());
+		BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(filename));
+            try {
+                String x;
+                while ( (x = br.readLine()) != null ) {
+                    // printing out each line in the file
+                    Page page = dataAccessor.getPage(x);
+                    if( page == null ){
+                    	logger.log(Level.SEVERE, "URI ALIAS : " + x);
+                    } else{
+	                    Long pratilipiId = page.getPrimaryContentId();
+	                    String message = "pratilipiIdList.add( " + pratilipiId + "L );";
+	                    logger.log(Level.SEVERE, message);
+                    }
+                } 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
 	}
 }
