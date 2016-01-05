@@ -76,9 +76,6 @@ public class PratilipiEntity implements Pratilipi {
 	@Persistent( column = "INDEX" )
 	private Text index;
 
-	@Persistent( column = "KEYWORDS" )
-	private Text keywords;
-
 	@Persistent( column = "WORD_COUNT" )
 	private Long wordCount;
 
