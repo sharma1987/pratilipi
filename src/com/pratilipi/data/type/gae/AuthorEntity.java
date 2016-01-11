@@ -48,7 +48,7 @@ public class AuthorEntity implements Author {
 	private Gender gender;
 	
 	@Persistent( column = "DATE_OF_BIRTH" )
-	private Date dateOfBirth;
+	private String dateOfBirth;
 	
 	
 	@Persistent( column = "EMAIL" )
