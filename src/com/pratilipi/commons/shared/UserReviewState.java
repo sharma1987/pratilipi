@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public enum UserReviewState implements IsSerializable {
 	
 	NOT_SUBMITTED,
-	PENDING_APPROVAL,
+	SUBMITTED,
 	APPROVED,
 	AUTO_APPROVED
 		

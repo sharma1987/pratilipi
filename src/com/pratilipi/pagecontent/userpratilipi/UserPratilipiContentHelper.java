@@ -126,7 +126,7 @@ public class UserPratilipiContentHelper extends PageContentHelper<
 	
 			if( userPratilipi.getReviewDate() == null ){
 				userPratilipi.setReviewDate( new Date() );
-				userPratilipi.setReviewState( UserReviewState.PENDING_APPROVAL );
+				userPratilipi.setReviewState( UserReviewState.SUBMITTED );
 				
 				notificationType  = NotificationType.REVIEW_ADD.toString();
 			} else

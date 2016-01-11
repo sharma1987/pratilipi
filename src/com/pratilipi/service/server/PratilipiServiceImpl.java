@@ -463,7 +463,7 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 				userPratilipi.setUserId( pratilipiHelper.getCurrentUserId() );
 				userPratilipi.setPratilipiId( pratilipi.getId() );
 				userPratilipi.setReviewDate( new Date() );
-				userPratilipi.setReviewState( UserReviewState.PENDING_APPROVAL );
+				userPratilipi.setReviewState( UserReviewState.SUBMITTED );
 				
 				notificationType  = NotificationType.REVIEW_ADD.toString();
 			}
