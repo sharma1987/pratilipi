@@ -181,6 +181,7 @@ public class PratilipiEntity implements Pratilipi {
 
 	@Override
 	public void setLanguageId( Long languageId ) {
+		this.language = null;
 		this.languageId = languageId;
 	}
 

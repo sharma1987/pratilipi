@@ -220,6 +220,7 @@ public class AuthorEntity implements Author {
 
 	@Override
 	public void setLanguageId( Long languageId ) {
+		this.language = null;
 		this.languageId = languageId;
 	}
 
