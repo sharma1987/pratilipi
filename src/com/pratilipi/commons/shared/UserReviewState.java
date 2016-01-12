@@ -7,6 +7,7 @@ public enum UserReviewState implements IsSerializable {
 	NOT_SUBMITTED,
 	SUBMITTED,
 	APPROVED,
-	AUTO_APPROVED
+	AUTO_APPROVED,
+	PUBLISHED
 		
 }
