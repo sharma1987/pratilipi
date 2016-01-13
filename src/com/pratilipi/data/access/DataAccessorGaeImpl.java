@@ -13,9 +13,10 @@ import javax.jdo.Query;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.GaeQueryBuilder;
 import com.claymus.data.access.GaeQueryBuilder.Operator;
-import com.claymus.data.access.gae.CommentEntity;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
+import com.pratilipi.common.type.AuthorState;
+import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
@@ -68,7 +69,8 @@ public class DataAccessorGaeImpl
 	@Override
 	public Pratilipi getPratilipi( Long id ) {
 		try {
-			return getEntity( PratilipiEntity.class, id );
+			Pratilipi pratilipi = getEntity( PratilipiEntity.class, id );
+			return pratilipi.getState() == PratilipiState.DELETED ? null : pratilipi;
 		} catch( JDOObjectNotFoundException e ) {
 			return null;
 		}
@@ -242,17 +244,23 @@ public class DataAccessorGaeImpl
 
 	@Override
 	public Author getAuthor( Long id ) {
-		return id == null ? null : getEntity( AuthorEntity.class, id );
+		if( id == null )
+			return null;
+		Author author = getEntity( AuthorEntity.class, id );
+		return author.getState() == AuthorState.DELETED ? null : author;
 	}
 	
 	@Override
 	public Author getAuthorByEmailId( String email ) {
 		Query query = new GaeQueryBuilder( pm.newQuery( AuthorEntity.class ) )
 				.addFilter( "email", email )
+				.addFilter( "state", AuthorState.DELETED, Operator.NOT_EQUALS )
+				.addOrdering( "state", true )
+				.addOrdering( "registrationDate", true )
 				.build();
-
+		
 		@SuppressWarnings("unchecked")
-		List<Author> authorList = (List<Author>) query.execute( email );
+		List<Author> authorList = (List<Author>) query.execute( email, AuthorState.DELETED );
 
 		if( authorList.size() > 1 )
 			logger.log( Level.SEVERE, authorList.size() + " Authors found with Email Id " + email   + " ." );
@@ -264,10 +272,13 @@ public class DataAccessorGaeImpl
 	public Author getAuthorByUserId( Long userId ) {
 		Query query = new GaeQueryBuilder( pm.newQuery( AuthorEntity.class ) )
 				.addFilter( "userId", userId )
+				.addFilter( "state", AuthorState.DELETED, Operator.NOT_EQUALS )
+				.addOrdering( "state", true )
+				.addOrdering( "registrationDate", true )
 				.build();
 		
 		@SuppressWarnings("unchecked")
-		List<Author> authorList = (List<Author>) query.execute( userId );
+		List<Author> authorList = (List<Author>) query.execute( userId, AuthorState.DELETED );
 		
 		if( authorList.size() > 1 )
 			logger.log( Level.SEVERE, authorList.size() + " Authors found with User Id " + userId + " ." );

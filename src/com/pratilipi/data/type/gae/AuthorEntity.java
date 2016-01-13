@@ -236,6 +236,18 @@ public class AuthorEntity implements Author {
 
 	
 	@Override
+	public AuthorState getState() {
+		if( state == null )
+			state = AuthorState.ACTIVE;
+		return state;
+	}
+	
+	@Override
+	public void setState( AuthorState state ) {
+		this.state = state;
+	}
+	
+	@Override
 	public Boolean hasCustomCover() {
 		if( customImage == null )
 			customImage = customCover;

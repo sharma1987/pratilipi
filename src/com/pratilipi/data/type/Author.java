@@ -3,6 +3,7 @@ package com.pratilipi.data.type;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.pratilipi.common.type.AuthorState;
 import com.pratilipi.common.type.Language;
 
 public interface Author extends Serializable {
@@ -54,6 +55,10 @@ public interface Author extends Serializable {
 	void setSummary( String summary );
 	
 
+	AuthorState getState();
+	
+	void setState( AuthorState state );
+	
 	Boolean hasCustomCover();
 
 	void setCustomCover( Boolean customCover );
