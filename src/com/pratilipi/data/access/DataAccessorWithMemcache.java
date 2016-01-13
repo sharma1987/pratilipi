@@ -195,6 +195,8 @@ public class DataAccessorWithMemcache
 
 	@Override
 	public Language getLanguage( Long id ) {
+		if( id == null )
+			return null;
 		Language language = memcache.get( PREFIX_LANGUAGE + id );
 		if( language == null ) {
 			language = dataAccessor.getLanguage( id );

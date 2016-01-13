@@ -206,7 +206,7 @@ public class DataAccessorGaeImpl
 
 	@Override
 	public Language getLanguage( Long id ) {
-		return getEntity( LanguageEntity.class, id );
+		return id == null ? null : getEntity( LanguageEntity.class, id );
 	}
 
 	@Override
