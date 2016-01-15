@@ -136,7 +136,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 			return true;
 		
 		return pratilipiFilter.getState() != null
-				&& pratilipiFilter.getState() != PratilipiState.PUBLISHED_DISCONTINUED
+				&& pratilipiFilter.getState() != PratilipiState.DISCONTINUED
 				&& pratilipiFilter.getState() != PratilipiState.DELETED;
 	}
 	
@@ -305,7 +305,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 		if( pratilipi.getState() == PratilipiState.DRAFTED
 				|| pratilipi.getState() == PratilipiState.SUBMITTED
 				|| pratilipi.getState() == PratilipiState.PUBLISHED_PAID
-				|| pratilipi.getState() == PratilipiState.PUBLISHED_DISCONTINUED ) {
+				|| pratilipi.getState() == PratilipiState.DISCONTINUED ) {
 			
 			if( accessToken.getType().equals( ClaymusAccessTokenType.USER.toString() ) ) {
 				if( UserAccessHelper.hasUserAccess( accessToken.getUserId(), ACCESS_TO_READ_PRATILIPI_CONTENT, request ) )
