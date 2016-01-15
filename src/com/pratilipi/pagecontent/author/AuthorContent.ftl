@@ -154,7 +154,7 @@
 
 <#if showEditOption>
 	<div id="PageContent-Author-EncodedData" style="display:none;">${ authorDataEncodedStr }</div>
-	<script type="text/javascript" language="javascript" src="/pagecontent.author.witheditoptions/pagecontent.author.witheditoptions.nocache.js" defer></script>
+	<script type="text/javascript" language="javascript" src="/pagecontent.author.witheditoptions/pagecontent.author.witheditoptions.nocache.js?14012016" defer></script>
 <#else>
 	<script type="text/javascript" language="javascript" src="/pagecontent.author/pagecontent.author.nocache.js" defer></script>
 </#if>

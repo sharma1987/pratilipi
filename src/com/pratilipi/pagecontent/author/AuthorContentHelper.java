@@ -248,13 +248,14 @@ public class AuthorContentHelper extends PageContentHelper<
 		if( includeLanguageData ) {
 			List<Long> languageIdList = new LinkedList<>();
 			for( Author author : authorList )
-				if( ! languageIdList.contains( author.getLanguageId() ) )
+				if( author.getLanguageId() != null && ! languageIdList.contains( author.getLanguageId() ) )
 					languageIdList.add( author.getLanguageId() );
 			List<Language> languageList = dataAccessor.getLanguageList( languageIdList );
 		
 			languageIdToDataMap = new HashMap<>( languageList.size() );
 			for( Language language : languageList )
 				languageIdToDataMap.put( language.getId(), LanguageContentHelper.createLanguageData( language ) );
+			
 		}
 		
 		
