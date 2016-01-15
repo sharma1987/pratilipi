@@ -1,6 +1,8 @@
 package com.pratilipi.common.type;
 
-public enum UserState {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum UserState implements IsSerializable {
 	
 	GUEST,
 	REFERRAL,
