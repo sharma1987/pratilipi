@@ -1058,6 +1058,7 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 5763963933425664L );
 			pratilipiIdList.add( 5760255581487104L );
 			pratilipiIdList.add( 5172994301231104L );
+			pratilipiIdList.add( 5635917089865728L );
 		} else if( event.getId() == 6331022492827648L ){
 			pratilipiIdList.add( 5640385091076096L );
 			pratilipiIdList.add( 5726315676172288L );

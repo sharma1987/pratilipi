@@ -44,6 +44,8 @@ public class UserForms implements EntryPoint {
 	private String email = null;
 	private String password = null;
 	
+	private static boolean called = true;
+	
 	public void onModuleLoad() {
 /*****************************************************User Login form********************************************************************/
 		RootPanel loginDiv = RootPanel.get( "login" );
@@ -67,10 +69,13 @@ public class UserForms implements EntryPoint {
 			}};
 
 		ClickHandler fbLoginClickHandler = new ClickHandler() {
-
+			
 			@Override
 			public void onClick(ClickEvent event) {
-				facebookLogin();
+				if(called){
+					called = false;
+					facebookLogin();
+				}
 			}};
 			
 		loginForm.addLoginButtonClickHandler( loginButtonClickHandler );

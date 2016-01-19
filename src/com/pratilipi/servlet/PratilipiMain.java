@@ -450,8 +450,12 @@ public class PratilipiMain extends ClaymusMain {
 		}
 		
 		String authorPageUrl = null;
-		if( author != null )
+		if( author != null ){
 			authorPageUrl = pratilipiHelper.createAuthorData( author, null ).getPageUrl();
+			//HACK TO TAKE USER DATA FROM AUTHOR TABLE.
+			user.setFirstName( author.getFirstName() );
+			user.setLastName( author.getLastName() );
+		}
 		
 		Map<String, Object> dataModal = new HashMap<>();
 		dataModal.put( "user", user);
