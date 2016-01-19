@@ -57,12 +57,13 @@ public class MobileInitApi extends GenericApi {
 			newReleasesPratilipiPageUrlList.add( "/ayodhya-singh-upadhyay-hariaudh/itivratt" );
 			newReleasesPratilipiPageUrlList.add( "/sharatchandra-chattopadhyay/devdas" );
 			newReleasesPratilipiPageUrlList.add( "/vijay-kumar-sappatti/kavitaye-aur-nazme" );
-			newReleasesPratilipiPageUrlList.add( "/anwar-suhail/gyarah-sitambar-ke-baad" );
 			newReleasesPratilipiPageUrlList.add( "/ayodhya-singh-upadhyay-hariaudh/adhkhila-phool" );
+			newReleasesPratilipiPageUrlList.add( "/devkinandan-khatri/chandrakanta" );
+			newReleasesPratilipiPageUrlList.add( "/manmohan-bhatia/katha-sagar" );
 			
-			romancePratilipiPageUrlList.add( "/preeti-tailor/page-18" );
-			romancePratilipiPageUrlList.add( "/ranjeet-pratap-singh-rohit-1/jeevan-kya" );
-			romancePratilipiPageUrlList.add( "/preeti-tailor/page-16" );
+			romancePratilipiPageUrlList.add( "/nitin-srivastava/prem" );
+			romancePratilipiPageUrlList.add( "/vijay-kumar-sappatti/ek-thi-maya" );
+			romancePratilipiPageUrlList.add( "/munshi-premchand/prema" );
 			
 			classicPratilipiPageUrlList.add( "/mohandas-karamchand-gandhi-gandhiji/satyke-prayog-athva-atmkatha-bhag-4" );
 			classicPratilipiPageUrlList.add( "/mohandas-karamchand-gandhi-gandhiji/saty-ke-prayog-athva-atmkatha-bhag-3" );
@@ -80,21 +81,21 @@ public class MobileInitApi extends GenericApi {
 			
 		} else if( request.getLanguageId() == 5965057007550464L ){
 			topReadsPratilipiPageUrlList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
-			topReadsPratilipiPageUrlList.add( "/p-p-kuntanpuri-yogi/akbar-ane-birbalni-ramuji-vartao" );
+			topReadsPratilipiPageUrlList.add( "/chandrvadan-mistry/ullas" );
 			topReadsPratilipiPageUrlList.add( "/dalpatraam/mithybhiman" );
-			topReadsPratilipiPageUrlList.add( "/nimisha-dalal/kone-kahu-1" );
+			topReadsPratilipiPageUrlList.add( "/rashmi-jagirdar/oh-no-1" );
 			
 			featuredPratilipiPageUrlList.add( "/dalpatraam/mithybhiman" );
 			featuredPratilipiPageUrlList.add( "/suresh-jani/antarni-vani" );
-			featuredPratilipiPageUrlList.add( "/suresh-jani/200-avlokano" );
+			featuredPratilipiPageUrlList.add( "/rashmi-jagirdar/oh-no-1" );
 			featuredPratilipiPageUrlList.add( "/nanhalaal-dalpatraam-kavi/pankhadio" );
-			featuredPratilipiPageUrlList.add( "/lalit-parikh/varta-re-varta-3" );
+			featuredPratilipiPageUrlList.add( "/ravi-yadav/arrange-merraige" );
 			
 			newReleasesPratilipiPageUrlList.add( "/zaverchand-meghani/meghani-ni-navlikao-khand-2" );
 			newReleasesPratilipiPageUrlList.add( "/lalit-parikh/bhed-abhed" );
 			newReleasesPratilipiPageUrlList.add( "/suresh-jani/200-avlokano" );
 			newReleasesPratilipiPageUrlList.add( "/suresh-jani/antarni-vani" );
-			newReleasesPratilipiPageUrlList.add( "/lalit-parikh/varta-re-varta-3" );
+			newReleasesPratilipiPageUrlList.add( "/ravi-yadav/arrange-merraige" );
 			
 			classicPratilipiPageUrlList.add( "/kishorlaal-ghanshyamlaal-mashruvaala/yesu-khrist" );
 			classicPratilipiPageUrlList.add( "/agnat/bakru-ke-kutru" );
