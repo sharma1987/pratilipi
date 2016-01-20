@@ -127,6 +127,8 @@ function validateForm() {
                   <li onclick="subMenu( event, this );" style="position:relative">
 		                <a>Events<span id="Header-Navigation-Submenu-Caret" class="caret-right"></span></a>
 		                <ul class="dropdown-subMenu">
+		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/tasvir-bole-che">Tasvir Bole Che</a></li>
+		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/katha-masti">Katha Masti</a></li>
 		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/pratilipi-katha-spardha">Pratilipi Katha Spardha</a></li>
 		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/kavita-utsav-2015">Kavita Utsav - 2015</a></li>
 		                	<li class="subMenuItem" onclick="subMenuItemClick( event );" data-toggle="dropdown"><a href="/event/direct-encounter">Direct Encounter</a></li>
