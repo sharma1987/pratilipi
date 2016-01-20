@@ -5,10 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.access.Memcache;
+import com.pratilipi.common.type.AuthorState;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryFilter;
 import com.pratilipi.commons.shared.PratilipiFilter;
@@ -291,11 +290,11 @@ public class DataAccessorWithMemcache
 	
 	@Override
 	public Author getAuthorByUserId( Long userId ) {
-		Author author = memcache.get( PREFIX_AUTHOR + "User-" + userId );
+		Author author = memcache.get( PREFIX_AUTHOR + "USER::" + userId );
 		if( author == null ) {
 			author = dataAccessor.getAuthorByUserId( userId );
 			if( author != null )
-				memcache.put( PREFIX_AUTHOR + "User-" + userId, author );
+				memcache.put( PREFIX_AUTHOR + "USER::" + userId, author );
 		}
 		return author;
 	}
@@ -368,6 +367,18 @@ public class DataAccessorWithMemcache
 	public Author createOrUpdateAuthor( Author author ) {
 		author = dataAccessor.createOrUpdateAuthor( author );
 		memcache.put( PREFIX_AUTHOR + author.getId(), author );
+		if( author.getEmail() != null ) {
+			if( author.getState() == AuthorState.DELETED )
+				memcache.remove( PREFIX_AUTHOR + author.getEmail() );
+			else
+				memcache.put( PREFIX_AUTHOR + author.getEmail(), author );
+		}
+		if( author.getUserId() != null ) {
+			if( author.getState() == AuthorState.DELETED )
+				memcache.remove( PREFIX_AUTHOR + "USER::" + author.getUserId() );
+			else
+				memcache.put( PREFIX_AUTHOR + "USER::" + author.getUserId(), author );
+		}
 		return author;
 	}
 
