@@ -520,6 +520,7 @@ public class InitApi extends GenericApi {
 		return true;
 	}
 
+	@SuppressWarnings( "unused" )
 	private void eventEntries(String filename){
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor(this.getThreadLocalRequest());
 		BufferedReader br;
