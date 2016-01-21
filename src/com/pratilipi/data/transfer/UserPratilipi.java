@@ -38,6 +38,10 @@ public interface UserPratilipi extends Serializable {
 	
 	void setRating( Integer rating );
 	
+	Date getRatingDate();
+	
+	void setRatingDate( Date ratingDate );
+	
 	String getReview();
 	
 	void setReview( String review );

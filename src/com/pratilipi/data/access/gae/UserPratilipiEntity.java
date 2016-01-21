@@ -145,6 +145,16 @@ public class UserPratilipiEntity implements UserPratilipi {
 	}
 	
 	@Override
+	public Date getRatingDate() {
+		return ratingDate;
+	}
+	
+	@Override
+	public void setRatingDate( Date ratingDate ) {
+		this.ratingDate = ratingDate;
+	}
+	
+	@Override
 	public String getReview() {
 		return review == null ? null : review.getValue();
 	}

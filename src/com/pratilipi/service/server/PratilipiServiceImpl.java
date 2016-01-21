@@ -444,7 +444,7 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 				if( earlierRating == 0 )
 					pratilipi.setRatingCount( pratilipi.getRatingCount() + 1 );
 			}
-			
+			userPratilipi.setRatingDate( new Date() );
 			
 			userPratilipi = dataAccessor.createOrUpdateUserPratilipi( userPratilipi );
 			dataAccessor.createOrUpdatePratilipi( pratilipi );
