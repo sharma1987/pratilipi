@@ -991,7 +991,107 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 5507207877623808L );
 			
 		} else if( event.getId() == 5390552958763008L ){
-			
+			pratilipiIdList.add( 5717666658516992L );
+			pratilipiIdList.add( 5084539422507008L );
+			pratilipiIdList.add( 5799833006768128L );
+			pratilipiIdList.add( 5276489295593472L );
+			pratilipiIdList.add( 4871156857307136L );
+			pratilipiIdList.add( 4884399382331392L );
+			pratilipiIdList.add( 5665527433265152L );
+			pratilipiIdList.add( 5078776918573056L );
+			pratilipiIdList.add( 6219929328025600L );
+			pratilipiIdList.add( 5734668622102528L );
+			pratilipiIdList.add( 6267176988180480L );
+			pratilipiIdList.add( 6288514922577920L );
+			pratilipiIdList.add( 6296837428346880L );
+			pratilipiIdList.add( 5158478693793792L );
+			pratilipiIdList.add( 5073777308205056L );
+			pratilipiIdList.add( 5692972274286592L );
+			pratilipiIdList.add( 5657333977841664L );
+			pratilipiIdList.add( 5964957252321280L );
+			pratilipiIdList.add( 5988853376614400L );
+			pratilipiIdList.add( 4822298651525120L );
+			pratilipiIdList.add( 4822298651525120L );
+			pratilipiIdList.add( 4665712465412096L );
+			pratilipiIdList.add( 6325356279627776L );
+			pratilipiIdList.add( 6543126690791424L );
+			pratilipiIdList.add( 4959377700159488L );
+			pratilipiIdList.add( 5369399907188736L );
+			pratilipiIdList.add( 5200863511445504L );
+			pratilipiIdList.add( 5184714971283456L );
+			pratilipiIdList.add( 5199456372785152L );
+			pratilipiIdList.add( 6261651714080768L );
+			pratilipiIdList.add( 5087924930478080L );
+			pratilipiIdList.add( 5727701379842048L );
+			pratilipiIdList.add( 5662074279559168L );
+			pratilipiIdList.add( 5124665959776256L );
+			pratilipiIdList.add( 5942910178557952L );
+			pratilipiIdList.add( 5942910178557952L );
+			pratilipiIdList.add( 5168237329252352L );
+			pratilipiIdList.add( 5083210935435264L );
+			pratilipiIdList.add( 5712612622860288L );
+			pratilipiIdList.add( 5764720575381504L );
+			pratilipiIdList.add( 5727093641969664L );
+			pratilipiIdList.add( 5710686128701440L );
+			pratilipiIdList.add( 5108207645097984L );
+			pratilipiIdList.add( 5630253470842880L );
+			pratilipiIdList.add( 5720232498823168L );
+			pratilipiIdList.add( 5717639949189120L );
+			pratilipiIdList.add( 4849670276775936L );
+			pratilipiIdList.add( 6332661012365312L );
+			pratilipiIdList.add( 6277789315497984L );
+			pratilipiIdList.add( 5160281237880832L );
+			pratilipiIdList.add( 5075379398115328L );
+			pratilipiIdList.add( 5110502566920192L );
+			pratilipiIdList.add( 5138025522659328L );
+			pratilipiIdList.add( 5684938336632832L );
+			pratilipiIdList.add( 6316798020419584L );
+			pratilipiIdList.add( 5688153522307072L );
+			pratilipiIdList.add( 5755304128020480L );
+			pratilipiIdList.add( 6316228467490816L );
+			pratilipiIdList.add( 6216514896134144L );
+			pratilipiIdList.add( 5754811414740992L );
+			pratilipiIdList.add( 5153256818868224L );
+			pratilipiIdList.add( 6283871391842304L );
+			pratilipiIdList.add( 6083196426911744L );
+			pratilipiIdList.add( 5941312853377024L );
+			pratilipiIdList.add( 5185159567507456L );
+			pratilipiIdList.add( 5654678010331136L );
+			pratilipiIdList.add( 4787524381704192L );
+			pratilipiIdList.add( 5736454187646976L );
+			pratilipiIdList.add( 5667899932934144L );
+			pratilipiIdList.add( 6267793450205184L );
+			pratilipiIdList.add( 5151814649380864L );
+			pratilipiIdList.add( 5712796836691968L );
+			pratilipiIdList.add( 6283103129567232L );
+			pratilipiIdList.add( 5737419749982208L );
+			pratilipiIdList.add( 5693127429980160L );
+			pratilipiIdList.add( 5672359585382400L );
+			pratilipiIdList.add( 5770096398041088L );
+			pratilipiIdList.add( 5739111698661376L );
+			pratilipiIdList.add( 5203293053648896L );
+			pratilipiIdList.add( 6494732005933056L );
+			pratilipiIdList.add( 5766243007070208L );
+			pratilipiIdList.add( 5692907380015104L );
+			pratilipiIdList.add( 5688229489541120L );
+			pratilipiIdList.add( 5735130532413440L );
+			pratilipiIdList.add( 5667770144391168L );
+			pratilipiIdList.add( 5821838674362368L );
+			pratilipiIdList.add( 5086434778152960L );
+			pratilipiIdList.add( 5762106685128704L );
+			pratilipiIdList.add( 5146837923135488L );
+			pratilipiIdList.add( 4798967583866880L );
+			pratilipiIdList.add( 4788969705308160L );
+			pratilipiIdList.add( 4788969705308160L );
+			pratilipiIdList.add( 5181695072403456L );
+			pratilipiIdList.add( 4658230095511552L );
+			pratilipiIdList.add( 5926202688667648L );
+			pratilipiIdList.add( 5933905578295296L );
+			pratilipiIdList.add( 5191332576362496L );
+			pratilipiIdList.add( 5718375932100608L );
+			pratilipiIdList.add( 5106024660860928L );
+			pratilipiIdList.add( 5755304128020480L );
+
 		} else if( event.getId() == 4734313010561024L ){
 			pratilipiIdList.add( 5642160883892224L );
 			pratilipiIdList.add( 5714591212371968L );
@@ -1059,6 +1159,7 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 5760255581487104L );
 			pratilipiIdList.add( 5172994301231104L );
 			pratilipiIdList.add( 5635917089865728L );
+			pratilipiIdList.add( 5759822500724736L );
 		} else if( event.getId() == 6331022492827648L ){
 			pratilipiIdList.add( 5640385091076096L );
 			pratilipiIdList.add( 5726315676172288L );
@@ -1313,9 +1414,13 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 5692411244183552L );
 		}
 		
+		boolean includeAuthor = false;
+		if( event.getId() == 5390552958763008L )
+			includeAuthor = true;
+		
 		List<PratilipiData> pratilipiDataList =
 				pratilipiHelper.createPratilipiDataListFromIdList(
-						pratilipiIdList, false, false, false );
+						pratilipiIdList, false, includeAuthor, false );
 		
 		
 		// Creating data model required for template processing
