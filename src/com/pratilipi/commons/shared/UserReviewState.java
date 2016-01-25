@@ -11,5 +11,5 @@ public enum UserReviewState implements IsSerializable {
 	PUBLISHED,	// Review approved by Moderator/System
 	BLOCKED,	// Review blocked by Moderator/System
 	DELETED,	// Review deleted by User OR by System when User is DELETED
-
+	NOT_SUBMITTED
 }
