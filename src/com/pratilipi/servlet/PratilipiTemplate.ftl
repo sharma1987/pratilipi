@@ -73,13 +73,14 @@
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 			
 			<#if userId == 0>
-				ga('create', 'UA-53742841-2', 'auto' );
+				ga('create', 'UA-53742841-2', 'pratilipi.com');
 				ga('require', 'displayfeatures');
 				ga('send', 'pageview');
 			<#else>
-				ga('create', 'UA-53742841-2', { 'userId': ${ userId?c } });
+				ga('create', 'UA-53742841-2', 'pratilipi.com');
 				ga('require', 'displayfeatures');
-				ga('set', 'dimension1', ${ userId?c });
+				ga('set', 'userId', '${ userId?c }');
+				ga('set', 'dimension1', '${ userId?c }');
 				ga('send', 'pageview');
 			</#if>
 		</script>	
