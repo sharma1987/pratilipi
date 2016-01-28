@@ -226,6 +226,7 @@ public class AuthorContentEditOptions implements EntryPoint, ClickHandler {
 						
 						@Override
 						public void onFailure( Throwable caught ) {
+							Window.alert( caught.getMessage() );
 							authorDataInputView.setEnabled( true );
 						}
 						

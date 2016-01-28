@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.claymus.commons.shared.NotificationType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
@@ -147,14 +149,14 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 		PratilipiHelper pratilipiHelper = PratilipiHelper.get( this.getThreadLocalRequest() );
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
 		Author author = null;
+		Author existingAuthor = dataAccessor.getAuthorByEmailId( authorData.getEmail() );
+		boolean isAuthorExist = existingAuthor != null ? true : false;
 		
 		if( authorData.getId() == null ) { // Add Author usecase
 		
 			if( ! AuthorContentHelper.hasRequestAccessToAddAuthorData( this.getThreadLocalRequest() ) )
 				throw new InsufficientAccessException();
 			
-			boolean isAuthorExist = dataAccessor.getAuthorByEmailId( authorData.getEmail() ) != null ?
-						true : false;
 			if( isAuthorExist )
 				throw new InvalidArgumentException( "This author is already registered !" );
 			
@@ -176,6 +178,11 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 		
 			if( ! AuthorContentHelper.hasRequestAccessToUpdateAuthorData( this.getThreadLocalRequest(), author ) )
 				throw new InsufficientAccessException();
+
+			if( authorData.hasEmail() && !author.getEmail().equals( authorData.getEmail() ) && isAuthorExist ){
+				Logger.getLogger( PratilipiServiceImpl.class.getName() ).log(Level.SEVERE, "Unable to udpate email.Another author exists with this email" );
+				throw new InvalidArgumentException( "Unable to update email. Another author exists with this email" );
+			}
 
 		}
 		
