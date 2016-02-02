@@ -149,8 +149,11 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 		PratilipiHelper pratilipiHelper = PratilipiHelper.get( this.getThreadLocalRequest() );
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( this.getThreadLocalRequest() );
 		Author author = null;
-		Author existingAuthor = dataAccessor.getAuthorByEmailId( authorData.getEmail() );
-		boolean isAuthorExist = existingAuthor != null ? true : false;
+		boolean isAuthorExist = false;
+		if( authorData.hasEmail() ){
+			Author existingAuthor = dataAccessor.getAuthorByEmailId( authorData.getEmail() );
+			isAuthorExist = existingAuthor != null;
+		}
 		
 		if( authorData.getId() == null ) { // Add Author usecase
 		
