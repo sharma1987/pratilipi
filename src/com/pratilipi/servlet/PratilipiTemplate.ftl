@@ -75,14 +75,16 @@
 			<#if userId == 0>
 				ga('create', 'UA-53742841-2', 'pratilipi.com');
 				ga('require', 'displayfeatures');
-				ga('send', 'pageview');
 			<#else>
 				ga('create', 'UA-53742841-2', 'pratilipi.com');
 				ga('require', 'displayfeatures');
 				ga('set', 'userId', '${ userId?c }');
-				ga('set', 'dimension1', '${ userId?c }');
-				ga('send', 'pageview');
 			</#if>
+			ga('set', 'dimension1', '${ userId?c }');
+			ga('set', 'dimension2', '${ "MASTER" }');
+			ga('set', 'dimension3', '${ "Standard" }');
+			ga('set', 'dimension4', '${ "Mark-4" }');
+			ga('send', 'pageview');
 		</script>	
 		
 		<!-- Facebook Conversion-Tracking Pixel Code -->
