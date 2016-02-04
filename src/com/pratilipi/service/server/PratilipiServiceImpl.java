@@ -440,24 +440,19 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 				userPratilipi.setPratilipiId( pratilipi.getId() );
 				userPratilipi.setRating( userPratilipiData.getRating() );
 				
-				pratilipi.setRatingCount( ( pratilipi.getRatingCount() == null ? 0 : pratilipi.getRatingCount() ) + 1 );
-				pratilipi.setStarCount( ( pratilipi.getStarCount() == null ? 0 : pratilipi.getStarCount() ) + userPratilipiData.getRating() );
 			} else {
-				int earlierRating = userPratilipi.getRating() == null ? 0 : userPratilipi.getRating();
 				userPratilipi.setRating( userPratilipiData.getRating() );
-				
-				pratilipi.setStarCount( ( pratilipi.getStarCount() == null ? 0 : pratilipi.getStarCount() ) - earlierRating + userPratilipiData.getRating() );
-				
-				if( userPratilipiData.getRating() == 0 )
-					pratilipi.setRatingCount( pratilipi.getRatingCount() - 1 );
-				
-				if( earlierRating == 0 )
-					pratilipi.setRatingCount( pratilipi.getRatingCount() + 1 );
 			}
 			userPratilipi.setRatingDate( new Date() );
 			
 			userPratilipi = dataAccessor.createOrUpdateUserPratilipi( userPratilipi );
-			dataAccessor.createOrUpdatePratilipi( pratilipi );
+			
+			Task task = TaskQueueFactory.newTask()
+					.setUrl( "/pratilipi/process" )
+					.addParam( "pratilipiId", userPratilipi.getPratilipiId().toString() )
+					.addParam( "updateUserPratilipiStats", "true" );
+			TaskQueueFactory.getPratilipiTaskQueue().add( task );
+			
 		}
 		
 		
