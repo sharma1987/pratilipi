@@ -89,8 +89,8 @@ public class InitApi extends GenericApi {
 		bookIdList.add( 5713122392276992L );
 		bookIdList.add( 5438754210709504L );
 		//Tamil Book
-		bookIdList.add( 5752539773403136L );
-		bookIdList.add( 5715876565221376L );
+		bookIdList.add( 5633413302190080L );
+		bookIdList.add( 6346276517969920L );
 
 		
 		List<Long> storyIdList = new ArrayList<>( 6 );
@@ -110,8 +110,8 @@ public class InitApi extends GenericApi {
 		storyIdList.add( 5656501863579648L );
 		storyIdList.add( 6208109873725440L );
 		//Tamil Story
-		storyIdList.add( 5172009166176256L );
-		storyIdList.add( 4777177878888448L );
+		storyIdList.add( 5655605784084480L );
+		storyIdList.add( 5163744984301568L );
 
 		
 		List<Long> poemIdList = new ArrayList<>( 6 );
@@ -131,8 +131,8 @@ public class InitApi extends GenericApi {
 		poemIdList.add( 4830349955694592L );
 		poemIdList.add( 5697528011948032L );
 		//Tamil Poem
-		poemIdList.add( 5655609833684992L );
-		poemIdList.add( 5082598573342720L );
+		poemIdList.add( 5719160596201472L );
+		poemIdList.add( 5094265650675712L );
 
 		
 		PratilipisContent pratilipisContent = (PratilipisContent) dataAccessor.getPageContent( 5197655504322560L );
@@ -521,9 +521,10 @@ public class InitApi extends GenericApi {
 	}
 
 	@SuppressWarnings( "unused" )
-	private void eventEntries(String filename){
+	private void eventEntries(){
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor(this.getThreadLocalRequest());
 		BufferedReader br;
+		String filename = "Event.txt";
         try {
             br = new BufferedReader(new FileReader(filename));
             try {
