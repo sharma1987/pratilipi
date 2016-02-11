@@ -143,6 +143,8 @@ public class AuthorContentEditOptions implements EntryPoint, ClickHandler {
 					( (SerializationStreamFactory) pratilipiService )
 							.createStreamReader( authorDataEncodedStr );
 			authorData = (AuthorData) streamReader.readObject();
+			if ( authorData.getLanguageId() == null )
+				authorData.setLanguageId( 5130467284090880L );
 			setAuthorData( authorData );
 		} catch( SerializationException e ) {
 			Window.Location.reload();
