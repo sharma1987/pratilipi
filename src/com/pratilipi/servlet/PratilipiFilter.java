@@ -56,8 +56,8 @@ public class PratilipiFilter implements Filter {
 		redirections.put( "/event/gnayam&pada&varai", "/event/gnayam-pada-varai" );
 		redirections.put( "/event/gnayam&pada&varai>", "/event/gnayam-pada-varai" );
 		redirections.put( "/event/gnayam-pada-varai", "http://tamil.pratilipi.com/event/gnayam-pada-varai" );
-		redirections.put( "/event/kk", "/kondaadapadaadha-kaadhalgal" );
-		redirections.put( "/event/kondaadapadaadha-kaadhalgal", "http://tamil.pratilipi.com/event/kk" );
+		redirections.put( "/event/kk", "/event/kondaadapadaadha-kaadhalgal" );
+		redirections.put( "/event/kondaadapadaadha-kaadhalgal", "http://tamil.pratilipi.com/event/kondaadapadaadha-kaadhalgal" );
 		redirections.put( "/event/story-writing-contest", "http://tamil.pratilipi.com/event/story-writing-contest" );
 
 		redirections.put( "/books/tamil",    "http://tamil.pratilipi.com/search?q=books" );
