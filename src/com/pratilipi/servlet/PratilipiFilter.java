@@ -52,12 +52,18 @@ public class PratilipiFilter implements Filter {
 		redirections.put( "/about", "/about/pratilipi" );
 		redirections.put( "/career", "/JoinTheGang" );
 		
+		redirections.put( "/event/gpv", "/event/gnayam-pada-varai" );
 		redirections.put( "/event/gnayam&pada&varai", "/event/gnayam-pada-varai" );
 		redirections.put( "/event/gnayam&pada&varai>", "/event/gnayam-pada-varai" );
-		redirections.put( "/event/gpv", "/event/gnayam-pada-varai" );
-		redirections.put( "/event/story-writing-contest", "http://tamil.pratilipi.com/event/story-writing-contest" );
-		redirections.put( "/event/kk", "http://tamil.pratilipi.com/event/kk" );
 		redirections.put( "/event/gnayam-pada-varai", "http://tamil.pratilipi.com/event/gnayam-pada-varai" );
+		redirections.put( "/event/kk", "/kondaadapadaadha-kaadhalgal" );
+		redirections.put( "/event/kondaadapadaadha-kaadhalgal", "http://tamil.pratilipi.com/event/kk" );
+		redirections.put( "/event/story-writing-contest", "http://tamil.pratilipi.com/event/story-writing-contest" );
+
+		redirections.put( "/books/tamil",    "http://tamil.pratilipi.com/search?q=books" );
+		redirections.put( "/poems/tamil",    "http://tamil.pratilipi.com/poems" );
+		redirections.put( "/stories/tamil",  "http://tamil.pratilipi.com/stories" );
+		redirections.put( "/articles/tamil", "http://tamil.pratilipi.com/articles" );
 
 		nonExistents.add( "/pagecontent.userforms/undefined.cache.js" );
 		nonExistents.add( "/pagecontent.pratilipi/undefined.cache.js" );
