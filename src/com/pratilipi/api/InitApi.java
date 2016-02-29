@@ -83,11 +83,11 @@ public class InitApi extends GenericApi {
 //		bookIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Book
-		bookIdList.add( 5766327729913856L );
-		bookIdList.add( 5706164826275840L );
+		bookIdList.add( 5106567942766592L );
+		bookIdList.add( 4767758436794368L );
 		//Gujarati Book
-		bookIdList.add( 5140247855759360L );
-		bookIdList.add( 5411649284472832L );
+		bookIdList.add( 6235501572915200L );
+		bookIdList.add( 5925606231375872L );
 		//Tamil Book
 		bookIdList.add( 5768371205308416L );
 		bookIdList.add( 6346276517969920L );
@@ -104,11 +104,11 @@ public class InitApi extends GenericApi {
 //		storyIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Story
-		storyIdList.add( 5732477299589120L );
-		storyIdList.add( 5701482984767488L );
+		storyIdList.add( 5728885882748928L );
+		storyIdList.add( 5653579788451840L );
 		//Gujarati Story
-		storyIdList.add( 4859177237217280L );
-		storyIdList.add( 5112291984932864L );
+		storyIdList.add( 6331532230787072L );
+		storyIdList.add( 5684936145108992L );
 		//Tamil Story
 		storyIdList.add( 6590903252680704L );
 		storyIdList.add( 5163744984301568L );
@@ -125,11 +125,11 @@ public class InitApi extends GenericApi {
 //		poemIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Poem
-		poemIdList.add( 5669626977452032L );
-		poemIdList.add( 5705040979296256L );
+		poemIdList.add( 5642720550846464L );
+		poemIdList.add( 5133015994859520L );
 		//Gujarati Poem
-		poemIdList.add( 5097733253758976L );
-		poemIdList.add( 5697528011948032L );
+		poemIdList.add( 5642204856975360L );
+		poemIdList.add( 5742782224269312L );
 		//Tamil Poem
 		poemIdList.add( 5151555315564544L );
 		poemIdList.add( 5094265650675712L );
