@@ -269,7 +269,11 @@
 			
 			if( window.attachEvent) {//for IE8 and below
 				window.attachEvent( 'onload', function( event ){
-					showNotification();
+					var url = window.location.href;
+					var read = 'read';
+					if(url.indexOf(read) == -1){
+						showNotification();
+					}
 				});
 				
 				window.attachEvent( 'onclick', function( event ){
@@ -284,7 +288,11 @@
 			}
 			else {
 				window.addEventListener( 'load', function( event ){
-					showNotification();
+					var url = window.location.href;
+					var read = 'read';
+					if(url.indexOf(read) == -1){
+						showNotification();
+					}
 				});
 				
 				window.addEventListener( 'click',function( event ){
