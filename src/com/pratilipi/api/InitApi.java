@@ -531,7 +531,7 @@ public class InitApi extends GenericApi {
                 String x;
                 while ( (x = br.readLine()) != null ) {
                     // printing out each line in the file
-                    Page page = dataAccessor.getPage(x);
+                    Page page = dataAccessor.getPage(x.trim());
                     if( page == null ){
                     	logger.log(Level.SEVERE, "URI ALIAS : " + x);
                     } else{
