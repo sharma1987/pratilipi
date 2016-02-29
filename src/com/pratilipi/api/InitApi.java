@@ -110,7 +110,7 @@ public class InitApi extends GenericApi {
 		storyIdList.add( 6331532230787072L );
 		storyIdList.add( 5684936145108992L );
 		//Tamil Story
-		storyIdList.add( 6590903252680704L );
+		storyIdList.add( 5640989890838528L );
 		storyIdList.add( 5163744984301568L );
 
 		
@@ -131,7 +131,7 @@ public class InitApi extends GenericApi {
 		poemIdList.add( 5642204856975360L );
 		poemIdList.add( 5742782224269312L );
 		//Tamil Poem
-		poemIdList.add( 5151555315564544L );
+		poemIdList.add( 5731336004304896L );
 		poemIdList.add( 5094265650675712L );
 
 		
