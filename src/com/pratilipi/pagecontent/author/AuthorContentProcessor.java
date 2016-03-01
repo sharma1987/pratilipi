@@ -39,6 +39,10 @@ public class AuthorContentProcessor extends PageContentProcessor<AuthorContent> 
 		Author author = DataAccessorFactory
 								.getDataAccessor( request )
 								.getAuthor( authorContent.getId() );
+		
+		if( author == null )
+			return null;
+		
 		Language language = author.getLanguageId() == null ? 
 								null :
 								DataAccessorFactory
@@ -109,6 +113,8 @@ public class AuthorContentProcessor extends PageContentProcessor<AuthorContent> 
 	@Override
 	public String generateTitle( AuthorContent authorContent, HttpServletRequest request ) {
 		AuthorData authorData = PratilipiHelper.get( request ).createAuthorData( authorContent.getId() );
+		if( authorData == null )
+			return null;
 		if( authorData.getFullName() != null )
 			return authorData.getFullName() + " (" + authorData.getFullNameEn() + ")";
 		else
@@ -125,6 +131,8 @@ public class AuthorContentProcessor extends PageContentProcessor<AuthorContent> 
 
 		Long authorId = authorContent.getId();
 		Author author = dataAccessor.getAuthor( authorId );
+		if( author == null )
+			return null;
 
 		boolean showEditOption = AuthorContentHelper
 				.hasRequestAccessToUpdateAuthorData( request, author );
