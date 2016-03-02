@@ -1650,6 +1650,47 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 5670413419937792L );
 			pratilipiIdList.add( 5736762074726400L );
 
+		} else if( event.getId() == 5699803461713920L ){
+			pratilipiIdList.add( 5692169308340224L );
+			pratilipiIdList.add( 5729818723221504L );
+			pratilipiIdList.add( 5634215704002560L );
+			pratilipiIdList.add( 5686821537185792L );
+			pratilipiIdList.add( 5137923643015168L );
+			pratilipiIdList.add( 6241332148305920L );
+			pratilipiIdList.add( 4857320813101056L );
+			pratilipiIdList.add( 4833957264752640L );
+			pratilipiIdList.add( 6304933584306176L );
+			pratilipiIdList.add( 6262379048337408L );
+			pratilipiIdList.add( 5720230477168640L );
+			pratilipiIdList.add( 5756300417826816L );
+			pratilipiIdList.add( 5703086444118016L );
+			pratilipiIdList.add( 5176893223469056L );
+			pratilipiIdList.add( 5709949130768384L );
+			pratilipiIdList.add( 5690380857114624L );
+			pratilipiIdList.add( 5183626658447360L );
+			pratilipiIdList.add( 4873512437153792L );
+			pratilipiIdList.add( 5655489616543744L );
+			pratilipiIdList.add( 4849210035798016L );
+			pratilipiIdList.add( 5188760218107904L );
+			pratilipiIdList.add( 5158166763405312L );
+			pratilipiIdList.add( 5685675049353216L );
+			pratilipiIdList.add( 5753930266968064L );
+			pratilipiIdList.add( 5991859644006400L );
+			pratilipiIdList.add( 6309859022602240L );
+			pratilipiIdList.add( 6311063895146496L );
+			pratilipiIdList.add( 5947261106257920L );
+			pratilipiIdList.add( 4867731008520192L );
+			pratilipiIdList.add( 5815786251747328L );
+			pratilipiIdList.add( 6206582910091264L );
+			pratilipiIdList.add( 5935037897768960L );
+			pratilipiIdList.add( 6524985344524288L );
+			pratilipiIdList.add( 5649637052514304L );
+			pratilipiIdList.add( 5759189588639744L );
+			pratilipiIdList.add( 5639583339380736L );
+			pratilipiIdList.add( 4799208026537984L );
+			pratilipiIdList.add( 5925107933380608L );
+			pratilipiIdList.add( 5118392816107520L );
+			pratilipiIdList.add( 5761502428528640L );
 		}
 		
 		boolean includeAuthor = false;
