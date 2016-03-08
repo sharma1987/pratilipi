@@ -1913,7 +1913,26 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 6241453011369984L );
 			pratilipiIdList.add( 5633903312240640L );
 
-
+		} else if( event.getId() == 5165530132512768L ){
+			pratilipiIdList.add( 5630130317688832L );
+			pratilipiIdList.add( 5647976175239168L );
+			pratilipiIdList.add( 5741876239925248L );
+			pratilipiIdList.add( 5648444058238976L );
+			pratilipiIdList.add( 5724636778070016L );
+			pratilipiIdList.add( 5640052229013504L );
+			pratilipiIdList.add( 5119427836116992L );
+			pratilipiIdList.add( 5716928653950976L );
+			pratilipiIdList.add( 5675234722054144L );
+			pratilipiIdList.add( 5390836483227648L );
+			pratilipiIdList.add( 5202644438089728L );
+			pratilipiIdList.add( 5719615961300992L );
+			pratilipiIdList.add( 5089090066186240L );
+			pratilipiIdList.add( 5673145757335552L );
+			pratilipiIdList.add( 5751815968653312L );
+			pratilipiIdList.add( 5175719824982016L );
+			pratilipiIdList.add( 5687300090494976L );
+			pratilipiIdList.add( 6318471841316864L );
+			pratilipiIdList.add( 5744558715437056L );
 		}
 		
 		boolean includeAuthor = false;
