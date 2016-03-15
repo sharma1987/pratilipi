@@ -83,7 +83,7 @@ public class UxModeFilter implements Filter {
 			String userAgentSubStr = userAgent.substring( userAgent.indexOf( "Chrome" ) + 7 );
 			int version = Integer.parseInt( userAgentSubStr.substring( 0, userAgentSubStr.indexOf( "." ) ) );
 
-			basicMode = version <= 35;
+			basicMode = version <= 35 || version >= 49;
 		
 			
 		} else if( userAgent.contains( "UCBrowser" ) ) { // UCBrowser
