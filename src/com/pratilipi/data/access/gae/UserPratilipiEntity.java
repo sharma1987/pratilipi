@@ -65,6 +65,10 @@ public class UserPratilipiEntity implements UserPratilipi {
 	@Persistent( column = "ADDED_TO_LIB" )
 	private Boolean addedToLib;
 	
+	@Persistent( column = "ADDED_TO_LIB_DATE" )
+	private Date addedToLibDate;
+	
+	
 	public void setId( String id ) {
 		this.id = id;
 	}
