@@ -10,13 +10,14 @@ import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
+import com.pratilipi.data.transfer.Follower;
 import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiAuthor;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiGenre;
-import com.pratilipi.data.transfer.PratilipiTag;
 import com.pratilipi.data.transfer.PratilipiMeta;
+import com.pratilipi.data.transfer.PratilipiTag;
 import com.pratilipi.data.transfer.Publisher;
 import com.pratilipi.data.transfer.Tag;
 import com.pratilipi.data.transfer.UserPratilipi;
@@ -185,5 +186,17 @@ public interface DataAccessor extends com.claymus.data.access.DataAccessor {
 	UserPratilipi createOrUpdateUserPratilipi( UserPratilipi userPratilipi );
 	
 	Boolean deleteUserPratilipi( UserPratilipi userPratilipi );
+	
+	Follower newFollower();
+	
+	Follower addFollower( Follower follower );
+	
+	Follower getFollowerById( Long authorId, Long userId );
+	
+	void deleteFollower( Long authorId, Long userId );
+	
+	List<Follower> getFollowersByAuthorId( Long authorId );
+	
+	List<Follower> getFollowersByUserId( Long userId );
 	
 }

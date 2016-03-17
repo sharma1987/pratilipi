@@ -28,6 +28,7 @@ import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.data.transfer.AuditLog;
 import com.claymus.data.transfer.BlobEntry;
 import com.claymus.pagecontent.PageContentHelper;
+import com.claymus.taskqueue.Task;
 import com.google.api.services.analytics.Analytics;
 import com.google.api.services.analytics.Analytics.Data.Ga.Get;
 import com.google.api.services.analytics.AnalyticsScopes;
@@ -46,6 +47,7 @@ import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.access.SearchAccessor;
 import com.pratilipi.data.transfer.Category;
+import com.pratilipi.data.transfer.Follower;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiCategory;
 import com.pratilipi.data.transfer.PratilipiMeta;
@@ -63,6 +65,7 @@ import com.pratilipi.pagecontent.language.LanguageContentHelper;
 import com.pratilipi.pagecontent.pratilipi.gae.PratilipiContentEntity;
 import com.pratilipi.pagecontent.pratilipi.shared.PratilipiContentData;
 import com.pratilipi.pagecontent.pratilipicategory.PratilipiCategoryContentHelper;
+import com.pratilipi.taskqueue.TaskQueueFactory;
 
 public class PratilipiContentHelper extends PageContentHelper<
 		PratilipiContent,
@@ -607,6 +610,24 @@ public class PratilipiContentHelper extends PageContentHelper<
 		auditLog.setEventDataNew( gson.toJson( pratilipi ) );
 		auditLog = dataAccessor.createAuditLog( auditLog );
 		
+		/**
+		 * Below code can be used to send email notification to all followers 
+		 * of the user. 
+		 * To make notification work you have to uncomment follow notification lines 
+		 * present in the QueueNotificationServlet.java
+		 */
+//		if( pratilipiData.hasState() && pratilipi.getState().equals(PratilipiState.PUBLISHED) ){
+//			//SEND PUBLISH NOTIFICATION
+//			List<Follower> followersList = dataAccessor.getFollowersByAuthorId( pratilipi.getAuthorId() );
+//			for( Follower follower : followersList ){
+//				Task followerTask = TaskQueueFactory.newTask()
+//						.addParam( "recipientId", follower.getUserId().toString() )
+//						.addParam( "authorId", pratilipi.getAuthorId().toString() )
+//						.addParam( "pratilipiId", pratilipi.getId().toString())
+//						.addParam( "notificationType", "PUBLISH" );
+//				TaskQueueFactory.getNotificationTaskQueue().add( followerTask );
+//			}
+//		}
 		
 		return pratilipiHelper.createPratilipiData(
 				pratilipi.getId(),
@@ -694,6 +715,25 @@ public class PratilipiContentHelper extends PageContentHelper<
 		auditLog.setEventDataNew( gson.toJson( pratilipi ) );
 		auditLog = dataAccessor.createAuditLog( auditLog );
 		
+		/**
+		 * Below code can be used to send email notification to all followers 
+		 * of the user. 
+		 * To make notification work you have to uncomment follow notification lines 
+		 * present in the QueueNotificationServlet.java
+		 */
+//		if( pratilipiData.hasState() && pratilipi.getState().equals(PratilipiState.PUBLISHED) ){
+//			//SEND PUBLISH NOTIFICATION
+//			List<Follower> followersList = dataAccessor.getFollowersByAuthorId( pratilipi.getAuthorId() );
+//			for( Follower follower : followersList ){
+//				Task followerTask = TaskQueueFactory.newTask()
+//						.addParam( "recipientId", follower.getUserId().toString() )
+//						.addParam( "authorId", pratilipi.getAuthorId().toString() )
+//						.addParam( "pratilipiId", pratilipi.getId().toString())
+//						.addParam( "notificationType", "PUBLISH" );
+//				TaskQueueFactory.getNotificationTaskQueue().add( followerTask );
+//			}
+//		}
+//		
 		return createPratilipiData(
 				pratilipi,
 				dataAccessor.getLanguage( pratilipi.getLanguageId() ),

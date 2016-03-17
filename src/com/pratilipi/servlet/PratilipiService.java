@@ -9,6 +9,7 @@ import com.pratilipi.api.PurchaseApi;
 import com.pratilipi.api.RegisterApi;
 import com.pratilipi.api.UserProfileApi;
 import com.pratilipi.pagecontent.author.api.AuthorApi;
+import com.pratilipi.pagecontent.author.api.AuthorFollowersApi;
 import com.pratilipi.pagecontent.author.api.AuthorImageApi;
 import com.pratilipi.pagecontent.author.api.AuthorListApi;
 import com.pratilipi.pagecontent.author.api.AuthorProcessApi;
@@ -49,6 +50,7 @@ public class PratilipiService extends ClaymusService {
 		ApiRegistry.register( LanguageListApi.class );
 
 		ApiRegistry.register( AuthorApi.class );
+		ApiRegistry.register( AuthorFollowersApi.class );
 		ApiRegistry.register( AuthorListApi.class );
 		ApiRegistry.register( AuthorImageApi.class );
 		ApiRegistry.register( AuthorProcessApi.class );

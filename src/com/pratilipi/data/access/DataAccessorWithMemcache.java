@@ -16,6 +16,7 @@ import com.pratilipi.data.access.gae.PratilipiMetaEntity;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
+import com.pratilipi.data.transfer.Follower;
 import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiAuthor;
@@ -826,5 +827,39 @@ public class DataAccessorWithMemcache
 			memcache.remove( PREFIX_USER_PRATILIPI_LIST + userPratilipi.getPratilipiId() );
 		return dataAccessor.deleteUserPratilipi( userPratilipi )	;
 	}
-
+	
+	
+	@Override
+	public Follower newFollower() {
+		// TODO : Implement Memcache
+		return dataAccessor.newFollower();
+	}
+	
+	@Override
+	public Follower addFollower(Follower follower) {
+		// TODO : Implement Memcache
+		return dataAccessor.addFollower(follower);
+	}
+	
+	@Override
+	public Follower getFollowerById( Long authorId, Long userId ){
+		return dataAccessor.getFollowerById( authorId, userId );
+	}
+	
+	@Override
+	public void deleteFollower(Long authorId, Long userId){
+		dataAccessor.deleteFollower(authorId, userId);
+	}
+	
+	@Override
+	public List<Follower> getFollowersByAuthorId(Long authorId) {
+		// TODO : Implement Memcache
+		return dataAccessor.getFollowersByAuthorId(authorId);
+	}
+	
+	@Override
+	public List<Follower> getFollowersByUserId(Long userId) {
+		// TODO : Implement Memcache
+		return dataAccessor.getFollowersByUserId(userId);
+	}
 }

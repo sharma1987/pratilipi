@@ -24,6 +24,7 @@ import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.gae.CategoryEntity;
 import com.pratilipi.data.access.gae.EventEntity;
 import com.pratilipi.data.access.gae.EventPratilipiEntity;
+import com.pratilipi.data.access.gae.FollowerEntity;
 import com.pratilipi.data.access.gae.GenreEntity;
 import com.pratilipi.data.access.gae.LanguageEntity;
 import com.pratilipi.data.access.gae.PratilipiAuthorEntity;
@@ -37,6 +38,7 @@ import com.pratilipi.data.access.gae.UserPratilipiEntity;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.EventPratilipi;
+import com.pratilipi.data.transfer.Follower;
 import com.pratilipi.data.transfer.Genre;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.PratilipiAuthor;
@@ -832,5 +834,67 @@ public class DataAccessorGaeImpl
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	
+	
+	@Override
+	public Follower newFollower() {
+		return new FollowerEntity();
+	}
+	
+
+	@Override
+	public Follower addFollower(Follower follower) {
+		follower.setId( follower.getAuthorId() + "-" + follower.getUserId() );
+		return createOrUpdateEntity( follower );
+	}
+	
+	@Override
+	public Follower getFollowerById( Long authorId, Long userId ){
+		try{
+			return getEntity( FollowerEntity.class, authorId + "-" + userId );
+		} catch ( JDOObjectNotFoundException e ){
+			return null;
+		}
+	}
+	
+	@Override
+	public void deleteFollower( Long authorId, Long userId ){
+		try {
+			deleteEntity( FollowerEntity.class, authorId + "-" + userId );
+		} catch( JDOObjectNotFoundException e ) {
+			// Do nothing
+		}
+	}
+
+	@Override
+	public List<Follower> getFollowersByAuthorId(Long authorId) {
+		if( authorId == null )
+			return null;
+		
+		Query query = 
+				new GaeQueryBuilder( pm.newQuery( FollowerEntity.class ))
+					.addFilter( "authorId", authorId )
+					.build();
+		
+		@SuppressWarnings( "unchecked" )
+		List<Follower> followerEntityList = ( List<Follower> ) query.execute( authorId );
+		return (List<Follower>) pm.detachCopyAll( followerEntityList );
+	}
+
+	@Override
+	public List<Follower> getFollowersByUserId(Long userId) {
+		if( userId == null )
+			return null;
+		
+		Query query = 
+				new GaeQueryBuilder( pm.newQuery( FollowerEntity.class ))
+					.addFilter( "authorId", userId )
+					.build();
+		
+		@SuppressWarnings( "unchecked" )
+		List<Follower> followerEntityList = ( List<Follower> ) query.execute( userId );
+		return (List<Follower>) pm.detachCopyAll( followerEntityList );
 	}
 }
