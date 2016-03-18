@@ -6,9 +6,11 @@ public enum Language {
 	ENGLISH	( "en", "English", "English" ),
 	GUJARATI( "gu", "ગુજરાતી",   "Gujarati" ),
 	HINDI	( "hi", "हिंदी",      "Hindi" ),
+	KANNADA	 ( "kn", "ಕನ್ನಡ",	"Kannada" ),
 	MALAYALAM( "ml", "മലയാളം",	"Malayalam"),
 	MARATHI	( "mr", "मराठी",     "Marathi" ),
 	TAMIL	( "ta", "தமிழ்",   "Tamil" ),
+	TELUGU	( "te", "తెలుగు",   "Telugu" ),
 	;
 	
 	
