@@ -28,6 +28,14 @@ import com.claymus.data.transfer.PageContent;
 import com.claymus.data.transfer.User;
 import com.claymus.data.transfer.UserRole;
 import com.claymus.taskqueue.Task;
+import com.google.appengine.api.search.Document;
+import com.google.appengine.api.search.GetRequest;
+import com.google.appengine.api.search.GetResponse;
+import com.google.appengine.api.search.Index;
+import com.google.appengine.api.search.IndexSpec;
+import com.google.appengine.api.search.Results;
+import com.google.appengine.api.search.ScoredDocument;
+import com.google.appengine.api.search.SearchServiceFactory;
 import com.pratilipi.common.type.PageType;
 import com.pratilipi.commons.shared.AuthorFilter;
 import com.pratilipi.commons.shared.CategoryType;
@@ -35,6 +43,8 @@ import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.commons.shared.UserPratilipiFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.access.SearchAccessor;
+import com.pratilipi.data.access.SearchAccessorGaeImpl;
 import com.pratilipi.data.transfer.Category;
 import com.pratilipi.data.transfer.Event;
 import com.pratilipi.data.transfer.Language;
@@ -83,13 +93,13 @@ public class InitApi extends GenericApi {
 //		bookIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Book
-		bookIdList.add( 4747639635574784L );
-		bookIdList.add( 5757907245203456L );
+		bookIdList.add( 4876393569583104L );
+		bookIdList.add( 4767758436794368L );
 		//Gujarati Book
-		bookIdList.add( 6594598373687296L );
-		bookIdList.add( 5798863940091904L );
+		bookIdList.add( 5935050646355968L );
+		bookIdList.add( 4595597331922944L );
 		//Tamil Book
-		bookIdList.add( 5752539773403136L );
+		bookIdList.add( 4860346651115520L );
 		bookIdList.add( 6346276517969920L );
 
 		
@@ -104,13 +114,13 @@ public class InitApi extends GenericApi {
 //		storyIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Story
-		storyIdList.add( 4829651994148864L );
-		storyIdList.add( 5692031573688320L );
+		storyIdList.add( 6610443116216320L );
+		storyIdList.add( 5723556373594112L );
 		//Gujarati Story
-		storyIdList.add( 4848081543626752L );
-		storyIdList.add( 6388171034066944L );
+		storyIdList.add( 5756637186883584L );
+		storyIdList.add( 6013187816161280L );
 		//Tamil Story
-		storyIdList.add( 6046785843757056L );
+		storyIdList.add( 5648727880499200L );
 		storyIdList.add( 5163744984301568L );
 
 		
@@ -125,11 +135,11 @@ public class InitApi extends GenericApi {
 //		poemIdList.addAll( searchAccessor.searchPratilipi( pratilipiFilter, null, 2 ).getDataList() );
 		
 		//Hindi Poem
-		poemIdList.add( 5186657707884544L );
-		poemIdList.add( 6236747964874752L );
+		poemIdList.add( 5071538357272576L );
+		poemIdList.add( 5975435041046528L );
 		//Gujarati Poem
-		poemIdList.add( 4899682991996928L );
-		poemIdList.add( 6249095450591232L );
+		poemIdList.add( 5763184816291840L );
+		poemIdList.add( 5134515469025280L );
 		//Tamil Poem
 		poemIdList.add( 5976011181129728L );
 		poemIdList.add( 5094265650675712L );
@@ -547,5 +557,30 @@ public class InitApi extends GenericApi {
             System.out.println(e);
             e.printStackTrace();
         }
+	}
+
+	@SuppressWarnings( "unused" )
+	private void deleteSearchDocuments(){
+		IndexSpec indexSpec = IndexSpec.newBuilder().setName( "GLOBAL_INDEX" ).build(); 
+		Index index = SearchServiceFactory.getSearchService().getIndex(indexSpec);
+		
+		String search = "5741139659325440";
+		
+		try {
+		        List<String> docIds = new ArrayList<String>();
+		        // Return a set of doc_ids.
+		        GetRequest request = GetRequest.newBuilder().setReturningIdsOnly( true ).build();
+		        Results<ScoredDocument> response = index.search( search );
+		        
+		        for (Document doc : response) {
+		        	logger.log( Level.SEVERE, "Document Id to be deleted : " + doc.getId() );
+		            docIds.add(doc.getId());
+		        }
+		        logger.log( Level.SEVERE, "Number of records found : " + docIds.size() );
+		        index.delete(docIds);
+		} catch (RuntimeException e) {
+		    logger.log( Level.SEVERE, "Failed to delete documents" + e);
+		}
+		
 	}
 }
