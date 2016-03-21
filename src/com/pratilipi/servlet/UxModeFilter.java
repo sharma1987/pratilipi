@@ -82,8 +82,9 @@ public class UxModeFilter implements Filter {
 			 */
 			String userAgentSubStr = userAgent.substring( userAgent.indexOf( "Chrome" ) + 7 );
 			int version = Integer.parseInt( userAgentSubStr.substring( 0, userAgentSubStr.indexOf( "." ) ) );
+			String uri = request.getRequestURI();
 
-			basicMode = version <= 35 || version >= 49;
+			basicMode = ( version <= 35 || version >= 49 ) && uri.contains( "read" );
 		
 			
 		} else if( userAgent.contains( "UCBrowser" ) ) { // UCBrowser
