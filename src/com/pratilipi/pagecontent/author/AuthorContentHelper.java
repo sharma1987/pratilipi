@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.claymus.commons.server.Access;
 import com.claymus.commons.server.ClaymusHelper;
-import com.claymus.commons.server.ImageUtil;
 import com.claymus.commons.server.UserAccessHelper;
 import com.claymus.commons.shared.ClaymusAccessTokenType;
 import com.claymus.commons.shared.exception.InsufficientAccessException;
@@ -26,6 +25,7 @@ import com.claymus.data.transfer.AuditLog;
 import com.claymus.data.transfer.BlobEntry;
 import com.claymus.data.transfer.User;
 import com.claymus.pagecontent.PageContentHelper;
+import com.claymus.service.shared.data.UserData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pratilipi.common.type.PageType;
@@ -37,8 +37,10 @@ import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
 import com.pratilipi.data.access.SearchAccessor;
+import com.pratilipi.data.transfer.Follower;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.transfer.shared.AuthorData;
+import com.pratilipi.data.transfer.shared.FollowerData;
 import com.pratilipi.data.transfer.shared.LanguageData;
 import com.pratilipi.data.type.AccessToken;
 import com.pratilipi.data.type.Author;
@@ -504,4 +506,49 @@ public class AuthorContentHelper extends PageContentHelper<
 		searchAccessor.indexAuthorData( createAuthorData( author, language, request ) );
 	}
 	
+	public static boolean hasFollowAccess(UserData userData, HttpServletRequest request ){
+		AccessToken accessToken = (AccessToken) request.getAttribute( ClaymusHelper.REQUEST_ATTRIB_ACCESS_TOKEN ); 
+
+		List<String> authorizedUser = new ArrayList<>();
+		authorizedUser.add( "ranjeet@pratilipi.com" );
+		authorizedUser.add( "prashant@pratilipi.com" );
+		authorizedUser.add( "shally@pratilipi.com" );
+		authorizedUser.add( "sankar@pratilipi.com" );
+		authorizedUser.add( "raghu@pratilipi.com" );
+		authorizedUser.add( "krithiha@pratilipi.com" );
+		authorizedUser.add( "dileepan@pratilipi.com" );
+		authorizedUser.add( "jitesh@pratilipi.com" );
+		authorizedUser.add( "rahul@pratilipi.com" );
+		
+		if( accessToken.getType().equals( ClaymusAccessTokenType.USER.toString() ) ) {
+			if(userData == null)
+				return false;
+			
+			for( String email : authorizedUser){
+				if(email.equals(userData.getEmail()))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public static int saveFollower(FollowerData followerData, Boolean isFollowing, HttpServletRequest request){
+		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
+		
+		if( isFollowing ){
+			Follower follower = dataAccessor.newFollower();
+			follower.setAuthorId( followerData.getAuthorId() );
+			follower.setUserId( followerData.getUserId() );
+			follower.setCreationDate( new Date() );
+			
+			follower = dataAccessor.addFollower( follower );
+		} else{
+			dataAccessor.deleteFollower(followerData.getAuthorId(), followerData.getUserId());
+		}
+		
+		//TODO : CREATION TASK FOR EMAIL NOTIFICATION.
+		
+		List<Follower> followerList = dataAccessor.getFollowersByAuthorId( followerData.getAuthorId() );
+		return followerList == null ? 0 : followerList.size();
+	}
 }

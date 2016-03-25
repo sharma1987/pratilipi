@@ -1,6 +1,7 @@
 <#setting time_zone="${ timeZone }">
 <#import "../../../../com/claymus/commons/client/ui/Social.ftl" as social>
 <#import "../../../../com/pratilipi/commons/client/PratilipiView.ftl" as pratilipiView>
+<#import "../../../../com/pratilipi/commons/client/follower.ftl" as follower>
 
 <!-- PageContent :: Author :: Start -->
 
@@ -22,14 +23,19 @@
 			
 		<#-- Author data and edit options -->
 		<div class="col-lg-7 col-md-6 col-sm-9 col-xs-12" style="margin-bottom:15px;">
-			<h1 id="PageContent-Author-Name" style="text-align:center;" itemprop="name">${ authorData.getFullName() ! authorData.getFullNameEn() }</h1>
-			<h3 id="PageContent-Author-NameEn" style="text-align:center; margin-top:10px;" itemprop="alternateName">${ authorData.getFullNameEn() }</h3>
-			
-			<div id="PageContent-Author-Summary" style="margin-top:20px; margin-bottom:10px;" itemprop="description">
-				${ authorData.getSummary()! }
+			<div>
+				<h1 id="PageContent-Author-Name" style="text-align:center;" itemprop="name">${ authorData.getFullName() ! authorData.getFullNameEn() }</h1>
+				<h3 id="PageContent-Author-NameEn" style="text-align:center; margin-top:10px;" itemprop="alternateName">${ authorData.getFullNameEn() }</h3>
+				
+				<div id="PageContent-Author-Summary" style="margin-top:20px; margin-bottom:10px;" itemprop="description">
+					${ authorData.getSummary()! }
+				</div>
+				<#if showEditOption>
+					<div id="PageContent-Author-Summary-EditOptions" style="text-align:right;"></div>
+				</#if>
 			</div>
-			<#if showEditOption>
-				<div id="PageContent-Author-Summary-EditOptions" style="text-align:right;"></div>
+			<#if hasFollowAccess>
+				<@follower.follower authorId=authorData.getId() userId=userId following=following followerCount=followerCount followingCount=followingCount/>
 			</#if>
 		</div>
 		

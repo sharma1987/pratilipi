@@ -17,12 +17,14 @@ import com.claymus.commons.shared.Resource;
 import com.claymus.commons.shared.exception.UnexpectedServerException;
 import com.claymus.data.access.DataListCursorTuple;
 import com.claymus.pagecontent.PageContentProcessor;
+import com.claymus.service.shared.data.UserData;
 import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.commons.server.PratilipiHelper;
 import com.pratilipi.commons.shared.PratilipiFilter;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.transfer.Follower;
 import com.pratilipi.data.transfer.Language;
 import com.pratilipi.data.type.Author;
 import com.pratilipi.data.type.Pratilipi;
@@ -203,9 +205,19 @@ public class AuthorContentProcessor extends PageContentProcessor<AuthorContent> 
 				pratilipiHelper.createPratilipiDataList(
 						magazineListCursorTuple.getDataList(), false, false, false );
 		
+		UserData userData = pratilipiHelper.createUserData( pratilipiHelper.getCurrentUser() );
+		List<Follower> followerList = dataAccessor.getFollowersByAuthorId( author.getId() );
+		int following = 0;
+		for(Follower follower : followerList ){
+			if(follower.getUserId().equals( userData.getId() ))
+				following = 1;
+		}
+		List<Follower> followingList = dataAccessor.getFollowersByUserId( author.getUserId() );
+		
 		// Creating data model required for template processing
 		Map<String, Object> dataModel = new HashMap<>();
 		dataModel.put( "timeZone", pratilipiHelper.getCurrentUserTimeZone() );
+		dataModel.put( "userId", userData.getId() );
 		dataModel.put( "authorData", authorData );
 		dataModel.put( "authorDataEncodedStr", SerializationUtil.encode( authorData ) );
 		dataModel.put( "draftedPratilipiDataList", draftedPratilipiDataList );
@@ -217,6 +229,10 @@ public class AuthorContentProcessor extends PageContentProcessor<AuthorContent> 
 		dataModel.put( "magazineDataList", magazineDataList );
 		dataModel.put( "domain", ClaymusHelper.getSystemProperty( "domain" ) );
 		dataModel.put( "showEditOption", showEditOption );
+		dataModel.put( "hasFollowAccess", AuthorContentHelper.hasFollowAccess( userData, request ));
+		dataModel.put( "followerCount", followerList == null ? 0 : followerList.size() );
+		dataModel.put( "followingCount", followingList == null ? 0 : followingList.size() );
+		dataModel.put( "following", following );
 		
 		
 		// Processing template
