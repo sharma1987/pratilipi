@@ -85,6 +85,8 @@ public class PratilipiData implements Serializable {
 	private Long starCount;
 	
 	private Double relevance;
+	
+	private Long fbLikeShareCount;
 
 	
 	public PratilipiData() {}
@@ -416,5 +418,13 @@ public class PratilipiData implements Serializable {
 	
 	public void setRelevance( Double relevance ) {
 		this.relevance = relevance;
+	}
+	
+	public Long getFbLikeShareCount(){
+		return fbLikeShareCount;
+	}
+	
+	public void setFbLikeShareCount( Long fbLikeShareCount ){
+		this.fbLikeShareCount = fbLikeShareCount;
 	}
 }

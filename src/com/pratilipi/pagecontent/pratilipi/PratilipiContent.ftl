@@ -47,8 +47,8 @@
 		<#-- Title, Author Name, Genre List, Summary and Buttons -->
 		<div class="col-lg-10 col-md-10 col-sm-9 col-xs-8" style="padding-bottom:15px;">
 			<h1 id="PageContent-Pratilipi-Title" itemprop="name">${ pratilipiData.getTitle() }</h1>
-			<#if pratilipiData.getAuthorData()??>
-				<h4><a href="${ pratilipiData.getAuthorData().getPageUrlAlias() ! pratilipiData.getAuthorData().getPageUrl() }" id="PageContent-Pratilipi-AuthorName">${ pratilipiData.getAuthorData().getFullName() ! pratilipiData.getAuthorData().getFullNameEn() }</a></h4>
+			<#if pratilipiData.getAuthor()??>
+				<h4><a href="${ pratilipiData.getAuthor().getPageUrlAlias() ! pratilipiData.getAuthor().getPageUrl() }" id="PageContent-Pratilipi-AuthorName">${ pratilipiData.getAuthor().getFullName() ! pratilipiData.getAuthor().getFullNameEn() }</a></h4>
 			</#if>
 			
 			<h5 id="PageContent-Pratilipi-GenreList">
@@ -212,7 +212,11 @@
 			ga( 'send', 'event',
 				'Pratilipi:' + '${ pratilipiData.getId()?c }',	// Event Category
 				'ABTesting : Old Read For Free Click',				// Event Action
-				'${ pratilipiData.getLanguageData().getNameEn() } ${ pratilipiData.getType() }', // Event Label
+				<#if pratilipiData.getLanguage()??>
+					'${ pratilipiData.getLanguage().getNameEn() } ${ pratilipiData.getType() }', // Event Label
+				<#else>
+					'${ pratilipiData.getType() }', // Event Label
+				</#if>
 				1 );									// Event Value
 		}
 		
@@ -232,14 +236,20 @@
 		ga( 'send', 'event',
 			'Pratilipi:' + '${ pratilipiData.getId()?c }',	// Event Category
 			'ReadTimeSec: Old Summary Page',						// Event Action
-			'${ pratilipiData.getLanguageData().getNameEn() } ${ pratilipiData.getType() }', // Event Label
+			<#if pratilipiData.getLanguage()??>
+				'${ pratilipiData.getLanguage().getNameEn() } ${ pratilipiData.getType() }', // Event Label
+			<#else>
+				'${ pratilipiData.getType() }', // Event Label
+			</#if>
 			readTimeSec );									// Event Value
 	}
 	
 	if( window.attachEvent) {//for IE8 and below
 		window.attachEvent( 'onload', function( event ){
 			pageStartTime = jQuery.now();
-			setCookie( '${ languageCookieName }', '${ pratilipiData.getLanguageData().getNameEn() }', 365, '/' );
+			<#if pratilipiData.getLanguage()??>
+				setCookie( '${ languageCookieName }', '${ pratilipiData.getLanguage().getNameEn() }', 365, '/' );
+			</#if>
 		});
 		
 		window.attachEvent( 'onunload', function( event ) {
@@ -249,7 +259,9 @@
 	else {
 		window.addEventListener( 'load', function( event ){
 			pageStartTime = jQuery.now();
-			setCookie( '${ languageCookieName }', '${ pratilipiData.getLanguageData().getNameEn() }', 365, '/' );
+			<#if pratilipiData.getLanguage()??>
+				setCookie( '${ languageCookieName }', '${ pratilipiData.getLanguage().getNameEn() }', 365, '/' );
+			</#if>
 		});
 		
 		window.addEventListener( 'unload', function( event ){

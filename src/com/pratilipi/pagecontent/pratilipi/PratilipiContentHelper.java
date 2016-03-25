@@ -439,6 +439,8 @@ public class PratilipiContentHelper extends PageContentHelper<
 		
 		pratilipiData.setGenreIdList( genreIdList );
 		pratilipiData.setGenreNameList( genreNameList );
+		
+		pratilipiData.setFbLikeShareCount( pratilipi.getFbLikeShareCount() );
 
 		return pratilipiData;
 		

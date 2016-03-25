@@ -266,9 +266,15 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 			logger.log( Level.INFO, "REVIEW LIKES STRING FOR " + review.getId() + " : " + reviewLikesString );
 		}
 		
-		PratilipiData pratilipiData = pratilipiHelper.createPratilipiData(
+		PratilipiData pratilipiData_Old = pratilipiHelper.createPratilipiData(
 				pratilipiId,
 				PratilipiContentHelper.hasRequestAccessToReadPratilipiMetaData( request ) );
+		
+		Language language = dataAccessor.getLanguage( pratilipi.getLanguageId() );
+		Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
+		
+		
+		com.pratilipi.data.transfer.shared.PratilipiData pratilipiData = PratilipiContentHelper.createPratilipiData(pratilipi, language, author, null, request);
 		
 		
 		// Creating data model required for template processing
@@ -276,7 +282,7 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 		dataModel.put( "timeZone", pratilipiHelper.getCurrentUserTimeZone() );
 		dataModel.put( "userData", pratilipiHelper.createUserData( pratilipiHelper.getCurrentUser() ) );
 		dataModel.put( "pratilipiData", pratilipiData );
-		dataModel.put( "pratilipiDataEncodedStr", SerializationUtil.encode( pratilipiData ) );
+		dataModel.put( "pratilipiDataEncodedStr", SerializationUtil.encode( pratilipiData_Old ) );
 		dataModel.put( "reviewList", reviewList );
 		dataModel.put( "userIdNameMap", userIdNameMap );
 		dataModel.put( "reveiwCommentListMap", reveiwCommentListMap );
@@ -287,7 +293,7 @@ public class PratilipiContentProcessor extends PageContentProcessor<PratilipiCon
 		dataModel.put( "domain", ClaymusHelper.getSystemProperty( "domain" ) );
 		dataModel.put( "languageCookieName", COOKIE_LANGUAGE );
 		dataModel.put( "showEditOptions", showEditOption );
-		dataModel.put( "showWriterOption", showEditOption && pratilipiData.getContentType() != PratilipiContentType.IMAGE );
+		dataModel.put( "showWriterOption", showEditOption && pratilipiData_Old.getContentType() != PratilipiContentType.IMAGE );
 		dataModel.put( "showReviewedMessage",
 				userPratilipi != null 
 				&& userPratilipi.getReview() != null
