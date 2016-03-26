@@ -205,8 +205,8 @@ public class PratilipiServiceImpl extends RemoteServiceServlet
 			author.setPenNameEn( authorData.getPenNameEn() );
 		if( authorData.hasSummary() )
 			author.setSummary( authorData.getSummary() );
-		if( authorData.hasEmail() )
-			author.setEmail( authorData.getEmail() == null ? null : authorData.getEmail().toLowerCase() );
+//		if( authorData.hasEmail() )
+//			author.setEmail( authorData.getEmail() == null ? null : authorData.getEmail().toLowerCase() );
 		
 		
 		author = dataAccessor.createOrUpdateAuthor( author );

@@ -60,7 +60,12 @@ public class PratilipiFilter implements Filter {
 		redirections.put( "/event/kondaadapadaadha-kaadhalgal", "http://tamil.pratilipi.com/event/kondaadapadaadha-kaadhalgal" );
 		redirections.put( "/event/story-writing-contest", "http://tamil.pratilipi.com/event/story-writing-contest" );
 
-		redirections.put( "/books/tamil",    "http://tamil.pratilipi.com/search?q=books" );
+		redirections.put( "/books/gujarati",    "http://gujarati.pratilipi.com/search?q=books" );
+		redirections.put( "/poems/gujarati",    "http://gujarati.pratilipi.com/poetry" );
+		redirections.put( "/stories/gujarati",  "http://gujarati.pratilipi.com/short-stories" );
+		redirections.put( "/articles/gujarati", "http://gujarati.pratilipi.com/non-fiction" );
+
+		redirections.put( "/books/tamil",    "http://tamil.pratilipi.com/books" );
 		redirections.put( "/poems/tamil",    "http://tamil.pratilipi.com/poems" );
 		redirections.put( "/stories/tamil",  "http://tamil.pratilipi.com/stories" );
 		redirections.put( "/articles/tamil", "http://tamil.pratilipi.com/articles" );
