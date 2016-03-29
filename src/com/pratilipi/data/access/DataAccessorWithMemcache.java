@@ -275,7 +275,7 @@ public class DataAccessorWithMemcache
 			if( author != null )
 				memcache.put( PREFIX_AUTHOR + id, author );
 		}
-		return author;
+		return author.getState() == AuthorState.DELETED ? null : author;
 	}
 
 	@Override
@@ -286,7 +286,7 @@ public class DataAccessorWithMemcache
 			if( author != null )
 				memcache.put( PREFIX_AUTHOR + email, author );
 		}
-		return author;
+		return author.getState() == AuthorState.DELETED ? null : author;
 	}
 	
 	@Override
@@ -297,7 +297,7 @@ public class DataAccessorWithMemcache
 			if( author != null )
 				memcache.put( PREFIX_AUTHOR + "USER::" + userId, author );
 		}
-		return author;
+		return author.getState() == AuthorState.DELETED ? null : author;
 	}
 	
 	@Override
