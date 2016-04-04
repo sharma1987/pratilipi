@@ -20,9 +20,7 @@
 				<br/><br/>
 				<b>For writers:</b> 
 				<br/><br/>
-				We provide a self publishing platform in various Indian languages, and provide you a bigger reach than almost any other player.
-				<br/><br/>
-				If you are a Hindi / Gujarati writer and if you want to become a part of Pratilipi family drop us a mail at shally@pratilipi.com and  If you are a Tamil writer drop us a mail at sankar@pratilipi.com
+				We are the largest and the fastest growing self-publishing platform for Indian language content and can help your content reach to a large number of highly engaged readers. You can directly sign-up and start publishing your content or you can write us at contact@pratilipi.com for more details.
 				<br/><br/>
 				<div style="width:100%; text-align: center;">
 					<iframe width="500" height="315" align="middle"
@@ -47,10 +45,6 @@
 				We believe in the age old adage: "You become what you read", and that's why we want us to be able to.
 				<br/><br/>
 				Read whatever we want, whenever we want and wherever we want. Read from any device: computer, tablet or smartphone. Read in any language: Bengali, Gujarati, Hindi, Malayalam, Marathi or Tamil. Read carelessly. That's what paradise is: no file downloads, no format issues, no compatibility problems and oh loads and loads of books and poems and stories.
-				<br/><br/>
-				Discover India's most celebrated authors, and the hidden gems. Read poems, Stories, Haiku, Books and much more. Follow your favorite authors, meet your new favorites, discover the joy of stumbling upon the best literature ever written.
-				<br/><br/>
-				Build Create bookshelves, manage and arrange your books as you wish. Keep it private or share it with others. You can even build your wishlist and we might just gift you some of those books you wish to read ;)
 			</p>
 		</div>
 	</div>

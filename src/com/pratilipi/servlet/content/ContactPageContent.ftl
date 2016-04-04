@@ -27,16 +27,16 @@
 				<h3>Address</h3>
 				<p>
 					Pratilipi<br/>
-					House #23<br/>
-					16th cross road, 7th main<br/>
-					Stage 2, BTM Layout<br/>
+					#1064, Jai Plaza Elite<br/>
+					1st Floor,<br/>
+					7th A Main, 3rd Block Koramangala<br/>
 					Bangalore<br/>
-					Karnataka - 560076<br/>
+					Karnataka - 560095<br/>
 				</p>
 			</div>
 			<div class="col-md-4" style="width: 200px; margin-top: 20px;">
-				<a href="https://www.google.co.in/maps/place/12%C2%B054%2736.9%22N+77%C2%B036%2719.9%22E/@12.9102416,77.6055429,16z/data=!4m2!3m1!1s0x0:0x0" target="_blank">
-					<img src="/theme.pratilipi/images/location.jpg"/></a>
+				<a href="https://www.google.co.in/maps/place/1064,+7th+A+Main+Rd,+Koramangala+1A+Block,+SBI+Colony,+Koramangala,+Bengaluru,+Karnataka+560034/@12.9257012,77.6295422,16.5z/data=!4m2!3m1!1s0x3bae146057f2e09d:0x2c934a2f5246bbe1?hl=en" target="_blank">
+					<img src="/theme.pratilipi/images/location.jpg" style="width: 500px;"/></a>
 			</div>
 		</div>
 	</div>

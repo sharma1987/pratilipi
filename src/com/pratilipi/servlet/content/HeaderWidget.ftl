@@ -116,7 +116,6 @@ function validateForm() {
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/about/pratilipi">Pratilipi</a></li>
                   <li><a href="/about/team">Team Pratilipi</a></li>
-                  <li><a href="/about/the-founding-readers">The Founding Readers</a></li>
                 </ul>
             </li>
             <li id="Header-Navigation-Menu" class="dropdown" onclick="menu( event, this );">

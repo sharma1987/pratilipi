@@ -16,33 +16,31 @@
 		<p>
 		<b>Who are the people behind Pratilipi ?</b>
 		<br/><br/>
-		We are five young Indians who are all united by our love for great content and awesome chai. If you love either of these things come and say <a href="/contact">'Hi'</a>
-		<br/><br/>
-		You can also check our <a href="/about/pratilipi">Team Pratilipi</a> Section for more details on our present team.
+		We are just a few people who want to make India well read againm in Indian languages :)   If you want to know more about us, please visit <a href="/about/pratilipi">our team page</a>
 		</p>
 		<br/><br/>
 		<p>
 		<b>What languages do you support ?</b>
 		<br/><br/>
-		At present we support Hindi, Gujarati and Tamil. We will soon be expanding to other Indian languages as well.
+		At present we support six Indian languages: Hindi, Gujarati, Tamil, Marathi, Bengali and Malayalam. Many more languages coming soon :)
 		</p>
 		<br/><br/>
 		<p>
 		<b>What devices do you support?</b>
 		<br/><br/>
-		Our goal is to make reading a device independent process, at present Pratilipi platform is a fully responsive website that works on all devices. We would soon be launching our e-reader as well which will make the reading experience even better.
+		Our goal is to make reading a device independent process, at present Pratilipi  is a responsive web-based platform that works across devices. We would soon be launching dedicated apps for most used platforms (such as Android, iOS and perhaps even Desktop someday)
 		</p>
 		<br/><br/>
 		<p>
 		<b>How do I start using Pratilipi?</b>
 		<br/><br/>
-		Simple, sign-up as our reader and start exploring :) If you have any doubts, problem or feedback <a href="/contact">drop us a mail</a>.
+		Simple, sign-up on the platform and start exploring :) If you have any doubts, problem or feedback drop us a mail at contact@pratilipi.com
 		</p>
 		<br/><br/>
 		<p>
 		<b>Which book should I read?</b>
 		<br/><br/>
-		While we will soon provide you with a Book Genie who could help with that, you can also mail us your preferences; your past reads, your favourite authors, your tee-shirt colour, or the type of chai you like and we will respond with a totally personalized recommendation of books you should read.
+		On Pratilipi you as a reader have the complete freedom to read whatever you want. It could be a romance story, a thriller novel or just a small poem. We will come with our recommendation engine soon that will try to help you find your next best read
 		</p>
 		<br/><br/>
 		<p>
@@ -54,7 +52,7 @@
 		<p>
 		<b>Have any other question?</b>
 		<br/>
-		 <a href="/contact">Drop us a mail</a>, and we will get back to you with-in 12 hours.
+		Drop us a mail at <a href="/contact">contact@pratilipi.com</a> and we will get back to you as soon as we can :)
 		</p>
 	</div>
 </div>

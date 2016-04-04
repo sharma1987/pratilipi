@@ -11,7 +11,7 @@
 				<b>We&#39;re hiring:</b> Someone smarter than us; who has a history of building things (preferably software / web / mobile products), an ambition to build awesome products that hundreds of millions of people will use and most importantly has a habit of getting things done
 			</p></br>
 			<p>
-				<b>Current Profiles:</b> Graphic Designer, Android Developer, Full Stack Engineer, Front end developer, Experiment Engineer, Marketing Head.
+				<b>Current Profiles:</b> Graphic Designer, Android Developer, Full Stack Engineer, Front end developer, Experiment Engineer.
 			</P></br>
 			<p>
 				<b>What we offer:</b> Above market salary + way above market ESOPS + an opportunity to work on making India well read again.
