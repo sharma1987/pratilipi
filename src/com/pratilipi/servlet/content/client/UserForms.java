@@ -381,36 +381,42 @@ public class UserForms implements EntryPoint {
 				   && registrationForm.validateEmail()
 				   && registrationForm.validatePassword()
 				   && registrationForm.validateConfPassword()){
-					registrationForm.setEnable( false );	
+					registrationForm.setEnable( false );
 					UserData userData = registrationForm.getUser();
-					claymusService.registerUser( new RegisterUserRequest( userData ), new AsyncCallback<RegisterUserResponse>() {
-						
-						@Override
-						public void onSuccess( RegisterUserResponse response ) {
-							registrationForm.hideForm();
-							registrationForm.setServerSuccess( response.getMessage() );
-							registrationForm.showServerSuccess();
-							Timer time = new Timer() {
-
-								@Override
-								public void run() {
-									hideSignupModal();
-									String url = Window.Location.getHref();
-									if( url.indexOf( "?" ) == -1 )
-										Window.Location.assign( url + "?action=login" );
-									else
-										Window.Location.assign( url + "&action=login" );
-								}};
-							time.schedule( 2000 );
-						}
-						
-						@Override
-						public void onFailure( Throwable caught ) {
-							registrationForm.setServerError( caught.getMessage() );
-							registrationForm.showServerError();
-							registrationForm.setEnable( true );
-						}		
-					});
+					
+					RequestBuilder rb = new RequestBuilder( RequestBuilder.POST, "/api/user/register" );
+					try {
+						rb.setHeader( "Content-Type", "application/x-www-form-urlencoded" );
+						rb.sendRequest( "name=" + userData.getName() + "&email=" + userData.getEmail() + "&password=" + userData.getPassword(), new RequestCallback() {
+							
+							public void onResponseReceived(final Request request, final Response response) {
+								registrationForm.hideForm();
+								registrationForm.setServerSuccess( response.getMessage() );
+								registrationForm.showServerSuccess();
+								Timer time = new Timer() {
+									@Override
+									public void run() {
+										hideSignupModal();
+										String url = Window.Location.getHref();
+										if( url.indexOf( "?" ) == -1 )
+											Window.Location.assign( url + "?action=login" );
+										else
+											Window.Location.assign( url + "&action=login" );
+									}};
+								time.schedule( 2000 );
+							}
+							
+							public void onError(final Request request, final Throwable exception) {
+								registrationForm.setServerError( caught.getMessage() );
+								registrationForm.showServerError();
+								registrationForm.setEnable( true );
+							}
+							
+						});
+					} catch (final Exception e) {
+						Window.Location.reload();
+					}
+					
 				}
 	}
 	
