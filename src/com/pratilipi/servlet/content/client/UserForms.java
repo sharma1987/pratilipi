@@ -390,24 +390,30 @@ public class UserForms implements EntryPoint {
 						rb.sendRequest( "name=" + userData.getName() + "&email=" + userData.getEmail() + "&password=" + userData.getPassword(), new RequestCallback() {
 							
 							public void onResponseReceived(final Request request, final Response response) {
-								registrationForm.hideForm();
-								registrationForm.setServerSuccess( response.getMessage() );
-								registrationForm.showServerSuccess();
-								Timer time = new Timer() {
-									@Override
-									public void run() {
-										hideSignupModal();
-										String url = Window.Location.getHref();
-										if( url.indexOf( "?" ) == -1 )
-											Window.Location.assign( url + "?action=login" );
-										else
-											Window.Location.assign( url + "&action=login" );
-									}};
-								time.schedule( 2000 );
+								if( response.getStatusCode() == 200 ) {
+									registrationForm.hideForm();
+									registrationForm.setServerSuccess( response.getText() );
+									registrationForm.showServerSuccess();
+									Timer time = new Timer() {
+										@Override
+										public void run() {
+											hideSignupModal();
+											String url = Window.Location.getHref();
+											if( url.indexOf( "?" ) == -1 )
+												Window.Location.assign( url + "?action=login" );
+											else
+												Window.Location.assign( url + "&action=login" );
+										}};
+									time.schedule( 2000 );
+								} else {
+									registrationForm.setServerError( response.getText() );
+									registrationForm.showServerError();
+									registrationForm.setEnable( true );
+								}
 							}
 							
 							public void onError(final Request request, final Throwable exception) {
-								registrationForm.setServerError( caught.getMessage() );
+								registrationForm.setServerError( exception.getMessage() );
 								registrationForm.showServerError();
 								registrationForm.setEnable( true );
 							}
@@ -452,36 +458,46 @@ public class UserForms implements EntryPoint {
 		if( loginForm.validateEmail() && loginForm.validatePassword() ){
 			loginForm.setEnabled( false );
 			loginForm.hideServerError();
-			claymusService.loginUser( new LoginUserRequest( loginForm.getEmail(), loginForm.getPassword() ), new AsyncCallback<LoginUserResponse>() {
-				
-				@Override
-				public void onSuccess( LoginUserResponse response ) {
-					hideLoginModal();
-					String currentUrl = Window.Location.getHref();
-					String action = "";
-					if( currentUrl.indexOf( "#" ) != -1 ){
-						action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
-						currentUrl = currentUrl.substring( 0, currentUrl.indexOf( "#" ) );
+			RequestBuilder rb = new RequestBuilder( RequestBuilder.POST, "/api/user/login" );
+			try {
+				rb.setHeader( "Content-Type", "application/x-www-form-urlencoded" );
+				rb.sendRequest( "&email=" + loginForm.getEmail() + "&password=" + loginForm.getPassword(), new RequestCallback() {
+					
+					public void onResponseReceived(final Request request, final Response response) {
+						if( response.getStatusCode() == 200 ){
+							hideLoginModal();
+							String currentUrl = Window.Location.getHref();
+							String action = "";
+							if( currentUrl.indexOf( "#" ) != -1 ){
+								action = currentUrl.substring( currentUrl.indexOf( "#" ) + 1 );
+								currentUrl = currentUrl.substring( 0, currentUrl.indexOf( "#" ) );
+							}
+							String newUrl = null;
+							if( currentUrl.indexOf( "?" ) == -1 )
+								newUrl = currentUrl + "?action=login" ;
+							else
+								newUrl = currentUrl + "&action=login" ;
+							
+							if( !action.isEmpty() )
+								newUrl = newUrl + "#" + action;
+							Window.Location.assign( newUrl );
+						} else{
+							loginForm.setServerError( response.getText() );
+							loginForm.showServerError();
+							loginForm.setEnabled( true );
+						}
 					}
-					String newUrl = null;
-					if( currentUrl.indexOf( "?" ) == -1 )
-						newUrl = currentUrl + "?action=login" ;
-					else
-						newUrl = currentUrl + "&action=login" ;
 					
-					if( !action.isEmpty() )
-						newUrl = newUrl + "#" + action;
-					Window.Location.assign( newUrl );
+					public void onError(final Request request, final Throwable exception) {
+						loginForm.setServerError( exception.getMessage() );
+						loginForm.showServerError();
+						loginForm.setEnabled( true );
+					}
 					
-				}
-				
-				@Override
-				public void onFailure( Throwable caught ) {
-					loginForm.setServerError( caught.getMessage() );
-					loginForm.showServerError();
-					loginForm.setEnabled( true );
-				}
-			});
+				});
+			} catch (final Exception e) {
+				Window.Location.reload();
+			}
 		}
 	}
 	
