@@ -60,6 +60,20 @@ public class PratilipiFilter implements Filter {
 		redirections.put( "/event/kondaadapadaadha-kaadhalgal", "http://tamil.pratilipi.com/event/kondaadapadaadha-kaadhalgal" );
 		redirections.put( "/event/story-writing-contest", "http://tamil.pratilipi.com/event/story-writing-contest" );
 
+		redirections.put( "/event/katha-kadi", "http://gujarati.pratilipi.com/event/katha-kadi" );
+		redirections.put( "/event/my-daddy-strongest", "http://gujarati.pratilipi.com/event/my-daddy-strongest" );
+		redirections.put( "/event/varta-re-varta", "http://gujarati.pratilipi.com/event/varta-re-varta" );
+		redirections.put( "/event/tasvir-bole-che", "http://gujarati.pratilipi.com/event/tasvir-bole-che" );
+		redirections.put( "/event/samarthini", "http://gujarati.pratilipi.com/event/samarthini" );
+		redirections.put( "/event/kavya-spardha-2015", "http://gujarati.pratilipi.com/event/kavya-spardha-2015" );
+		redirections.put( "/event/april-tasavir-bole-chhe", "http://gujarati.pratilipi.com/event/april-tasavir-bole-chhe" );
+		redirections.put( "/event/mansi-lekhspardha", "http://gujarati.pratilipi.com/event/mansi-lekhspardha" );
+		redirections.put( "/event/direct-encounter", "http://gujarati.pratilipi.com/event/direct-encounter" );
+		redirections.put( "/event/vahali-ma-lekhan-spardha", "http://gujarati.pratilipi.com/event/vahali-ma-lekhan-spardha" );
+		redirections.put( "/event/march-tasvir-bole-chhe", "http://gujarati.pratilipi.com/event/march-tasvir-bole-chhe" );
+		redirections.put( "/event/upado-tamari-kalam-varta-spardha", "http://gujarati.pratilipi.com/event/upado-tamari-kalam-varta-spardha" );
+		redirections.put( "/event/varta-mahotsav-2015", "http://gujarati.pratilipi.com/event/varta-mahotsav-2015" );
+
 		redirections.put( "/books/gujarati",    "http://gujarati.pratilipi.com/search?q=books" );
 		redirections.put( "/poems/gujarati",    "http://gujarati.pratilipi.com/poetry" );
 		redirections.put( "/stories/gujarati",  "http://gujarati.pratilipi.com/short-stories" );
