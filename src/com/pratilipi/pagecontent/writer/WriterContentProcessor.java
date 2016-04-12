@@ -3,7 +3,9 @@ package com.pratilipi.pagecontent.writer;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -127,7 +129,34 @@ public class WriterContentProcessor extends PageContentProcessor<WriterContent> 
 		Pratilipi pratilipi = dataAccessor.getPratilipi( pratilipiId );
 		
 		// AccessToUpdatePratilipiContent ?
-		if( !PratilipiContentHelper.hasRequestAccessToUpdatePratilipiContent( request, pratilipi ) )
+		Long currentUserId = pratilipiHelper.getCurrentUserId();
+		List<Long> idList = new ArrayList<>();
+		idList.add( 6243664397336576L );	// moumita@
+		idList.add( 5644707593977856L );	// nimisha@
+		idList.add( 4790800105865216L );	// veena@
+		idList.add( 4900189601005568L );	// vrushali@
+		idList.add( 5743817900687360L );	// jitesh@
+		idList.add( 5664902681198592L );	// shally@
+		idList.add( 5666355716030464L );	// vaisakh@		
+		idList.add( 4900071594262528L );	// dileepan@
+		idList.add( 5674672871964672L );	// krithiha@
+		idList.add( 5156503382130688L );	// babu@
+		idList.add( 5991416564023296L );	// sankar@
+		idList.add( 6196244602945536L );	// raghu@
+		idList.add( 5694768648552448L );	// abhishek@
+		idList.add( 5705241014042624L );	// prashant@
+		idList.add( 5073076857339904L );	// rahul@
+		idList.add( 6264191547604992L );	// ranjeete@
+		
+		boolean isAdmin = false;
+		for( Long id : idList ){
+			if( id.equals( currentUserId )){
+				isAdmin = true;
+				logger.log( Level.SEVERE, "USER IS ADMIN" );
+			}
+		}
+		
+		if( !isAdmin && !PratilipiContentHelper.hasRequestAccessToUpdatePratilipiContent( request, pratilipi ) )
 			throw new InsufficientAccessException();
 		
 		// Creating PratilipiData
