@@ -165,6 +165,8 @@ public class PratilipiEntity implements Pratilipi {
 				language = Language.TAMIL;
 			else if( languageId == 5173513199550464L )
 				return Language.MARATHI;
+			else if( languageId == 6235363433512960L )
+				return Language.BENGALI;
 		}
 		return language;
 	}

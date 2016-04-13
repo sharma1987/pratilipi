@@ -18,8 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.claymus.commons.server.ClaymusHelper;
 import com.claymus.pagecontent.blogpost.BlogPostContent;
+import com.pratilipi.common.type.Language;
+import com.pratilipi.common.type.PageType;
 import com.pratilipi.data.access.DataAccessor;
 import com.pratilipi.data.access.DataAccessorFactory;
+import com.pratilipi.data.type.Page;
+import com.pratilipi.data.type.Pratilipi;
 
 public class PratilipiFilter implements Filter {
 	
@@ -29,7 +33,7 @@ public class PratilipiFilter implements Filter {
 	private final Pattern oldPratilipiCoverUrlRegEx = Pattern.compile( "/resource\\.(book|poem|story|article|pratilipi)-cover/.*" );
 	private final Pattern oldPratilipiReaderUrlRegEx = Pattern.compile( "/read/(book|poem|story|article|pratilipi)/.*" );
 	private final Pattern validHostRegEx = Pattern.compile(
-			"(www|hindi|gujarati|tamil|m|hi|gu|ta)(\\.gamma)?\\.pratilipi\\.com"
+			"(www|hindi|gujarati|tamil|marathi|malayalam|bengali|telugu|kannada|m|hi|gu|ta|mr|bn|te|kn)(\\.gamma)?\\.pratilipi\\.com"
 			+ "|"
 			+ "((mark-4p14\\d\\.www|www)\\.prod-pratilipi|.+\\.(dev|devo)-pratilipi)\\.appspot\\.com"
 			+ "|"
@@ -110,7 +114,7 @@ public class PratilipiFilter implements Filter {
 		String userAgent = request.getHeader( "user-agent" );
 
 		DataAccessor dataAccessor = DataAccessorFactory.getDataAccessor( request );
-
+		Page page = dataAccessor.getPage(requestUri);
 		
 		if( userAgent != null && userAgent.startsWith( "libwww-perl" ) ) {
 			response.setStatus( HttpServletResponse.SC_NO_CONTENT );
@@ -134,6 +138,19 @@ public class PratilipiFilter implements Filter {
 				response.setHeader( "Location", ( request.isSecure() ? "https:" : "http:" ) + "//www.pratilipi.com" + requestUri + "?" + request.getQueryString() );
 
 			
+		} else if( page != null && page.getType().equals( PageType.PRATILIPI.toString() ) ){ // Redirecting to new Pratilipi website
+			Long pratilipiId = page.getPrimaryContentId();
+			Pratilipi pratilipi = dataAccessor.getPratilipi( pratilipiId );
+			String uri = page.getUriAlias() == null ? page.getUri() : page.getUriAlias();
+			if( pratilipi.getLanguage() == Language.TAMIL ){
+				response.setStatus( HttpServletResponse.SC_MOVED_PERMANENTLY );
+				response.setHeader( "Location", "http://tamil.pratilipi.com" + uri);
+			} else if( pratilipi.getLanguage() == Language.GUJARATI ){
+				response.setStatus( HttpServletResponse.SC_MOVED_PERMANENTLY );
+				response.setHeader( "Location", "http://gujarati.pratilipi.com" + uri);
+			} else {
+				chain.doFilter( request, response );
+			}
 		} else if( oldPratilipiCoverUrlRegEx.matcher( requestUri ).matches() ) { // Redirecting to new Pratilipi cover url
 			response.setStatus( HttpServletResponse.SC_MOVED_PERMANENTLY );
 			response.setHeader( "Location", requestUri
