@@ -150,10 +150,8 @@ public class WriterContentProcessor extends PageContentProcessor<WriterContent> 
 		
 		boolean isAdmin = false;
 		for( Long id : idList ){
-			if( id.equals( currentUserId )){
+			if( id.equals( currentUserId ))
 				isAdmin = true;
-				logger.log( Level.SEVERE, "USER IS ADMIN" );
-			}
 		}
 		
 		if( !isAdmin && !PratilipiContentHelper.hasRequestAccessToUpdatePratilipiContent( request, pratilipi ) )
