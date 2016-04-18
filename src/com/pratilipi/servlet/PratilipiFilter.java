@@ -138,7 +138,10 @@ public class PratilipiFilter implements Filter {
 				response.setHeader( "Location", ( request.isSecure() ? "https:" : "http:" ) + "//www.pratilipi.com" + requestUri + "?" + request.getQueryString() );
 
 			
-		} else if( page != null && page.getType().equals( PageType.PRATILIPI.toString() ) ){ // Redirecting to new Pratilipi website
+		} else if( page != null && page.getType().equals( PageType.PRATILIPI.toString() )
+				&& ( ( userAgent = request.getHeader( "user-agent" ) ) == null 
+						|| userAgent.isEmpty() 
+						|| ! userAgent.startsWith( "facebookexternalhit/1.1" ) )){ // Redirecting to new Pratilipi website
 			Long pratilipiId = page.getPrimaryContentId();
 			Pratilipi pratilipi = dataAccessor.getPratilipi( pratilipiId );
 			String uri = page.getUriAlias() == null ? page.getUri() : page.getUriAlias();
