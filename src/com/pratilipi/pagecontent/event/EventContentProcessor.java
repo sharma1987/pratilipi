@@ -2124,7 +2124,8 @@ public class EventContentProcessor extends PageContentProcessor<EventContent> {
 			pratilipiIdList.add( 6302771751944192L );
 			pratilipiIdList.add( 4527588821172224L );
 			pratilipiIdList.add( 6394250059055104L );
-			
+			pratilipiIdList.add( 5258314424254464L );
+			pratilipiIdList.add( 5518171219951616L );
 		}
 		
 		boolean includeAuthor = false;
