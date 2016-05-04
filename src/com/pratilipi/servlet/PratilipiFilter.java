@@ -77,6 +77,13 @@ public class PratilipiFilter implements Filter {
 		redirections.put( "/event/march-tasvir-bole-chhe", "http://gujarati.pratilipi.com/event/march-tasvir-bole-chhe" );
 		redirections.put( "/event/upado-tamari-kalam-varta-spardha", "http://gujarati.pratilipi.com/event/upado-tamari-kalam-varta-spardha" );
 		redirections.put( "/event/varta-mahotsav-2015", "http://gujarati.pratilipi.com/event/varta-mahotsav-2015" );
+		
+		redirections.put( "/event/pratilipi-kavita-sammaan", "http://hindi.pratilipi.com/event/pratilipi-kavita-sammaan" );
+		redirections.put( "/event/ptr-lekhan", "http://hindi.pratilipi.com/event/ptr-lekhan" );
+		redirections.put( "/event/katha-masti", "http://hindi.pratilipi.com/event/katha-masti" );
+		redirections.put( "/event/sidha-sawal", "http://hindi.pratilipi.com/event/sidha-sawal" );
+		redirections.put( "/event/pratilipi-katha-sammaan-pratispardha", "http://hindi.pratilipi.com/event/pratilipi-katha-sammaan-pratispardha" );
+		redirections.put( "/event/pyari-ma", "http://hindi.pratilipi.com/event/pyari-ma" );
 
 		redirections.put( "/books/gujarati",    "http://gujarati.pratilipi.com/search?q=books" );
 		redirections.put( "/poems/gujarati",    "http://gujarati.pratilipi.com/poetry" );
@@ -87,6 +94,11 @@ public class PratilipiFilter implements Filter {
 		redirections.put( "/poems/tamil",    "http://tamil.pratilipi.com/poems" );
 		redirections.put( "/stories/tamil",  "http://tamil.pratilipi.com/stories" );
 		redirections.put( "/articles/tamil", "http://tamil.pratilipi.com/articles" );
+		
+		redirections.put( "/books/hindi",    "http://hindi.pratilipi.com/search?q=books" );
+		redirections.put( "/poems/hindi",    "http://hindi.pratilipi.com/search?q=poems" );
+		redirections.put( "/stories/hindi",  "http://hindi.pratilipi.com/search?q=stories" );
+		redirections.put( "/articles/hindi", "http://hindi.pratilipi.com/search?q=articles" );
 
 		nonExistents.add( "/pagecontent.userforms/undefined.cache.js" );
 		nonExistents.add( "/pagecontent.pratilipi/undefined.cache.js" );
@@ -151,6 +163,9 @@ public class PratilipiFilter implements Filter {
 			} else if( pratilipi.getLanguage() == Language.GUJARATI ){
 				response.setStatus( HttpServletResponse.SC_MOVED_PERMANENTLY );
 				response.setHeader( "Location", "http://gujarati.pratilipi.com" + uri);
+			} else if( pratilipi.getLanguage() == Language.HINDI ){
+				response.setStatus( HttpServletResponse.SC_MOVED_PERMANENTLY );
+				response.setHeader( "Location", "http://hindi.pratilipi.com" + uri);
 			} else {
 				chain.doFilter( request, response );
 			}
