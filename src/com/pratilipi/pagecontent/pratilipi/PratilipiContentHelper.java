@@ -556,6 +556,8 @@ public class PratilipiContentHelper extends PageContentHelper<
 		idList.add( 5705241014042624L );	// prashant@
 		idList.add( 5073076857339904L );	// rahul@
 		idList.add( 6264191547604992L );	// ranjeete@
+		idList.add( 5715256422694912L );	//aruna@
+		
 		boolean isAdmin = false;
 		for( Long id : idList ){
 			if( id.equals( currentUserId )){
@@ -692,6 +694,8 @@ public class PratilipiContentHelper extends PageContentHelper<
 		idList.add( 5705241014042624L );	// prashant@
 		idList.add( 5073076857339904L );	// rahul@
 		idList.add( 6264191547604992L );	// ranjeete@
+		idList.add( 5715256422694912L );	//aruna@
+		
 		boolean isAdmin = false;
 		for( Long id : idList ){
 			if( id.equals( currentUserId )){
@@ -1078,6 +1082,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 		idList.add( 5705241014042624L );	// prashant@
 		idList.add( 5073076857339904L );	// rahul@
 		idList.add( 6264191547604992L );	// ranjeete@
+		idList.add( 5715256422694912L );	//aruna@
 		
 		boolean isAdmin = false;
 		for( Long id : idList ){
@@ -1155,6 +1160,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 		idList.add( 5705241014042624L );	// prashant@
 		idList.add( 5073076857339904L );	// rahul@
 		idList.add( 6264191547604992L );	// ranjeete@
+		idList.add( 5715256422694912L );	//aruna@
 		
 		boolean isAdmin = false;
 		for( Long id : idList ){
@@ -1287,6 +1293,7 @@ public class PratilipiContentHelper extends PageContentHelper<
 		idList.add( 5705241014042624L );	// prashant@
 		idList.add( 5073076857339904L );	// rahul@
 		idList.add( 6264191547604992L );	// ranjeete@
+		idList.add( 5715256422694912L );	//aruna@
 		
 		boolean isAdmin = false;
 		for( Long id : idList ){
