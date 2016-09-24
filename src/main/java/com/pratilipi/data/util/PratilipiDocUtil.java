@@ -118,6 +118,7 @@ public class PratilipiDocUtil {
 		
 		List<Object[]> pageletList = new LinkedList<>();
 		
+		Node prevNode = null;
 		Object[] pagelet = null;
 		for( Node childNode : node.childNodes() ) {
 			
@@ -133,16 +134,24 @@ public class PratilipiDocUtil {
 				String text = _extractText( childNode );
 				if( text == null )
 					continue;
-				pagelet = null;
-				pageletList.add( new Object[] { PratilipiContentDoc.PageletType.HEAD_1, text } );
+				if( pagelet != null && ( pagelet[0] == PratilipiContentDoc.PageletType.HEAD_1 || pagelet[0] == PratilipiContentDoc.PageletType.HEAD_2 ) ) {
+					pagelet[1] = pagelet[1] + " - " + text;
+				} else {
+					pagelet = new Object[] { PratilipiContentDoc.PageletType.HEAD_1, text };
+					pageletList.add( pagelet );
+				}
 				
 			} else if( childNode.nodeName().equals( "h2" ) ) {
 				
 				String text = _extractText( childNode );
 				if( text == null )
 					continue;
-				pagelet = null;
-				pageletList.add( new Object[] { PratilipiContentDoc.PageletType.HEAD_2, text } );
+				if( pagelet != null && pagelet[0] == PratilipiContentDoc.PageletType.HEAD_2 ) {
+					pagelet[1] = pagelet[1] + " - " + text;
+				} else {
+					pagelet = new Object[] { PratilipiContentDoc.PageletType.HEAD_2, text };
+					pageletList.add( pagelet );
+				}
 				
 			} else if( childNode.nodeName().equals( "img" ) ) {
 				
@@ -202,21 +211,28 @@ public class PratilipiDocUtil {
 				
 			} else if( childNode.nodeName().equals( "br" ) ) {
 				
-				pagelet = null;
+				// Create new pagelet after 2 consecutive line breaks.
+				if( prevNode.nodeName().equals( "br" ) )
+					pagelet = null;
 				
 			} else {
 				
 				String text  = _extractText( childNode );
-				if( text == null || text.isEmpty() )
+				if( text == null )
 					continue;
-				if( pagelet == null ) {
+				if( pagelet == null || pagelet[0] != PratilipiContentDoc.PageletType.TEXT ) {
 					pagelet = new Object[] { PratilipiContentDoc.PageletType.TEXT, text };
 					pageletList.add( pagelet );
+				} else if( prevNode.nodeName().equals( "br" ) ) {
+					pagelet[1] = pagelet[1] + "\n" + text;
 				} else {
 					pagelet[1] = pagelet[1] + " " + text;
 				}
 				
 			}
+			
+			
+			prevNode = childNode;
 			
 		}
 		
