@@ -497,7 +497,7 @@ public class PratilipiDocUtil {
 						PratilipiContentDoc.Page page = chapter.getPage( 1 );
 						if( page == null )
 							page = chapter.addPage();
-						page.addPagelet( (PratilipiContentDoc.PageletType) pagelet[0], pagelet[1] );
+						page.addPagelet( (PratilipiContentDoc.PageletType) pagelet[0], pagelet[1], (PratilipiContentDoc.AlignmentType) pagelet[2] );
 					}
 				}
 				
