@@ -85,10 +85,7 @@ public class PratilipiDocUtil {
 		DocAccessor docAccessor = DataAccessorFactory.getDocAccessor();
 		PratilipiContentDoc pcDoc = docAccessor.getPratilipiContentDoc( pratilipiId );
 		
-		if( pcDoc == null )
-			return new JsonArray();
-
-		return pcDoc.getIndex();
+		return pcDoc == null ? null : pcDoc.getIndex();
 		
 	}
 	
