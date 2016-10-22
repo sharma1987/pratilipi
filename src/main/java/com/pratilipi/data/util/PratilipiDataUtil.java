@@ -281,9 +281,9 @@ public class PratilipiDataUtil {
 			pratilipiData.setWritePageUrl( writePage.getUriAlias() );
 		} else {
 			if( pratilipi.isOldContent() )
-				pratilipiData.setWritePageUrl( PageType.WRITE.getUrlPrefix() + pratilipi.getId() );
+				pratilipiData.setWritePageUrl( "/write?id=" + pratilipi.getId() );
 			else
-				pratilipiData.setWritePageUrl( "/pratilipi-write?id=" + pratilipi.getId() );
+				pratilipiData.setWritePageUrl( PageType.WRITE.getUrlPrefix() + pratilipi.getId() );
 		}
 
 		pratilipiData.setType( pratilipi.getType() );

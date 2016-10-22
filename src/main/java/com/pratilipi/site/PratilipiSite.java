@@ -264,7 +264,7 @@ public class PratilipiSite extends HttpServlet {
 				else
 					pageNo = 1;
 
-				String version = "2";
+				String version = "1";
 				if( request.getParameter( RequestParameter.API_VERSION.getName() ) != null )
 					version = request.getParameter( RequestParameter.API_VERSION.getName() );
 
@@ -1100,14 +1100,21 @@ public class PratilipiSite extends HttpServlet {
 		Author author = dataAccessor.getAuthor( pratilipi.getAuthorId() );
 		PratilipiData pratilipiData = PratilipiDataUtil.createPratilipiData( pratilipi, author, false );
 
-		PratilipiContentIndexApi.GetRequest indexReq = new PratilipiContentIndexApi.GetRequest();
-		indexReq.setPratilipiId( pratilipiId );
-		PratilipiContentIndexApi.Response indexRes = ApiRegistry
-													.getApi( PratilipiContentIndexApi.class )
-													.getIndex( indexReq );
+		String indexJson = null;
+		Integer pageCount = null;
 
-		String indexJson = indexRes.getIndex().toString();
-		Integer pageCount = indexRes.getIndex().size() > 0 ? indexRes.getIndex().size() : 1;
+		if( version.equals( "1" ) ) {
+			indexJson = pratilipi.getIndex();
+			pageCount = pratilipi.getPageCount() > 0 ? pratilipi.getPageCount() : 1;
+		} else {
+			PratilipiContentIndexApi.GetRequest indexReq = new PratilipiContentIndexApi.GetRequest();
+			indexReq.setPratilipiId( pratilipiId );
+			PratilipiContentIndexApi.Response indexRes = ApiRegistry
+														.getApi( PratilipiContentIndexApi.class )
+														.getIndex( indexReq );
+			indexJson = indexRes.getIndex().toString();
+			pageCount = indexRes.getIndex().size() > 0 ? indexRes.getIndex().size() : 1;
+		}
 
 		if( pageNo < 1 )
 			pageNo = 1;
@@ -1121,7 +1128,9 @@ public class PratilipiSite extends HttpServlet {
 				PratilipiContentV1Api.GetRequest req = new PratilipiContentV1Api.GetRequest();
 				req.setPratilipiId( pratilipiId );
 				req.setChapterNo( pageNo );
-				PratilipiContentV1Api.GetResponse res = (PratilipiContentV1Api.GetResponse) ApiRegistry.getApi( PratilipiContentV1Api.class ).get( req );
+				PratilipiContentV1Api.GetResponse res = (PratilipiContentV1Api.GetResponse) ApiRegistry
+																		.getApi( PratilipiContentV1Api.class )
+																		.get( req );
 				content = res.getContent();
 				if( res.getChapterTitle() != null )
 					content = "<h1>" + res.getChapterTitle() + "</h1>" + content;
@@ -1129,13 +1138,20 @@ public class PratilipiSite extends HttpServlet {
 				PratilipiContentV2Api.GetRequest req = new PratilipiContentV2Api.GetRequest();
 				req.setPratilipiId( pratilipiId );
 				req.setChapterNo( pageNo );
-				PratilipiContentV2Api.GetResponse res = (PratilipiContentV2Api.GetResponse) ApiRegistry.getApi( PratilipiContentV2Api.class ).get( req );
+				PratilipiContentV2Api.GetResponse res = (PratilipiContentV2Api.GetResponse) ApiRegistry
+																		.getApi( PratilipiContentV2Api.class )
+																		.get( req );
 				content = res.getContent();
 				if( res.getChapterTitle() != null )
 					content = "<h1>" + res.getChapterTitle() + "</h1>" + content;
 			}
 		} else if( pratilipi.getContentType() == PratilipiContentType.IMAGE ) {
-			content = "<img src=\"/api/pratilipi/content/image?pratilipiId=" + pratilipi.getId() + "&pageNo=" + pageNo + "\" />";
+			PratilipiContentV2Api.GetRequest req = new PratilipiContentV2Api.GetRequest();
+			req.setPratilipiId( pratilipiId );
+			PratilipiContentV2Api.GetResponse res = (PratilipiContentV2Api.GetResponse) ApiRegistry
+																		.getApi( PratilipiContentV2Api.class )
+																		.get( req );
+			content = new Gson().toJson( res.getContent() );
 		}
 		
 		Gson gson = new Gson();
