@@ -62,6 +62,7 @@ import com.pratilipi.data.type.Vote;
 import com.pratilipi.filter.AccessTokenFilter;
 import com.pratilipi.filter.UxModeFilter;
 
+
 public class PratilipiDocUtil {
 	
 	private static final Logger logger =
@@ -563,7 +564,7 @@ public class PratilipiDocUtil {
 								alignment = AlignmentType.valueOf( style.substring( style.indexOf( ":" ) + 1 ).trim().toUpperCase() );
 					if( alignment != null )
 						for( Object[] pagelet : pList )
-							if( pagelet[2] == null && ( pagelet[1] == PratilipiContentDoc.PageletType.TEXT || pagelet[1] == PratilipiContentDoc.PageletType.HTML ) )
+							if( pagelet[2] == null && ( pagelet[0] == PratilipiContentDoc.PageletType.TEXT || pagelet[0] == PratilipiContentDoc.PageletType.HTML ) )
 								pagelet[2] = alignment;
 					pageletList.addAll( pList );
 				}
