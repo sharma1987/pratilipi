@@ -62,8 +62,6 @@ import com.pratilipi.data.type.Vote;
 import com.pratilipi.filter.AccessTokenFilter;
 import com.pratilipi.filter.UxModeFilter;
 
-import mediautil.gen.Log;
-
 
 public class PratilipiDocUtil {
 	
@@ -204,7 +202,6 @@ public class PratilipiDocUtil {
 
 	}
 
-	
 	public static JsonArray deleteContentChapter( Long pratilipiId, Integer chapterNo ) 
 			throws InsufficientAccessException, UnexpectedServerException {
 
