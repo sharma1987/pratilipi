@@ -62,7 +62,6 @@ import com.pratilipi.data.type.Vote;
 import com.pratilipi.filter.AccessTokenFilter;
 import com.pratilipi.filter.UxModeFilter;
 
-
 public class PratilipiDocUtil {
 	
 	private static final Logger logger =
