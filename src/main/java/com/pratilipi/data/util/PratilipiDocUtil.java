@@ -513,7 +513,7 @@ public class PratilipiDocUtil {
 				else if( blobEntry == null && pratilipi.getId() == 5768181499035648L )
 					continue; // Skipping missing pages as per Dileepan's request
 				
-				else if( blobEntry == null && ( pratilipi.getId() == 5749258686824448L || pratilipi.getId() == 5486454792781824L ) )
+				else if( blobEntry == null && pratilipi.getId() == 5486454792781824L )
 					continue; // Known issues. Waiting on Shally
 				
 				JsonObject imgData = new JsonObject();
