@@ -646,14 +646,22 @@ public class PratilipiDocUtil {
 				
 			} else if( childNode.nodeName().equals( "br" ) ) {
 				
-				if( currPagelet != null && ( currPagelet[0] == PratilipiContentDoc.PageletType.TEXT ||  currPagelet[0] == PratilipiContentDoc.PageletType.HTML ) )
+				if( currPagelet != null && currPagelet[0] == PratilipiContentDoc.PageletType.HTML )
 					currPagelet[1] = currPagelet[1] + "<br/>";
 				
 			} else {
 				
-				String text  = _extractText( childNode );
+				String text = _extractText( childNode );
 				if( text == null )
 					continue;
+				if( childNode.nodeName().equals( "b" )
+						|| childNode.nodeName().equals( "strong" )
+						|| childNode.nodeName().equals( "h3" )
+						|| childNode.nodeName().equals( "h4" )
+						|| childNode.nodeName().equals( "h5" )
+						|| childNode.nodeName().equals( "h6" ) )
+					text = "<b>" + text + "</b>";
+				
 				if( currPagelet == null || currPagelet[0] != PratilipiContentDoc.PageletType.HTML ) {
 					currPagelet = new Object[] { PratilipiContentDoc.PageletType.HTML, text, null };
 					pageletList.add( currPagelet );
