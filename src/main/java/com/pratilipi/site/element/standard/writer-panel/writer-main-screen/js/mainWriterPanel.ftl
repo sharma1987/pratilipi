@@ -45,6 +45,7 @@ MainWriterPanel.prototype.init = function() {
     /* add button listeners */
     this.attachActionButtonListeners();
     this.initializeAutosave();
+    this.preventUserFromLeaving();
     
 };
 
@@ -122,6 +123,7 @@ MainWriterPanel.prototype.initializeGlobalVariables = function() {
 		this.currChapter = 0;	
 	}	
 	this.lastSavedContent = "";
+	this.writer_back_button_active = false;
 };
 
 MainWriterPanel.prototype.initializeData = function() {
@@ -134,7 +136,7 @@ MainWriterPanel.prototype.initializeData = function() {
 	}
 	else {
 		/* make a new chapter call asychrolously and populate the index */
-		this.addNewChapter();
+		this.ajaxAddNewChapter();
 	}
 };
 
@@ -159,7 +161,7 @@ MainWriterPanel.prototype.attachActionButtonListeners = function() {
 	}
 	
 	this.$publish_button.on('click', function() {
-		_this.saveChapter( true );
+		_this.saveChapter();
 	} );
 	
 	this.$preview_button.on('click', function() {
@@ -167,8 +169,22 @@ MainWriterPanel.prototype.attachActionButtonListeners = function() {
 
 	} );
 	
-	this.$back_button.on('click', function() {
-		_this.saveChapter( true );
+	this.$back_button.on('click', function(e) {
+		_this.writer_back_button_active = true;
+		if( _this.hasUnsavedChanges() ) {
+			  e.preventDefault();
+			  var a = _this.confirmLeavingWithoutSaving();
+			  a.then(function (b) {
+			    if( b == "save" ) {
+			    	_this.saveChapter();
+			    	_this.writer_back_button_active = false;
+			    }
+			    else {
+			    	_this.saveChapter( true );
+					window.location = "${ pratilipi.getPageUrl() }";
+			    }
+			  });
+		}
 	} );
 	
 };
@@ -210,6 +226,25 @@ MainWriterPanel.prototype.populateContent = function( parsed_data ) {
 };
 
 MainWriterPanel.prototype.addNewChapter = function( chapterNum ) {
+	var _this = this;
+	if( this.hasUnsavedChanges() ) {
+		  var a = this.confirmLeavingWithoutSaving();
+		  a.then(function (b) {
+		    if( b == "save" ) {
+		    	_this.saveChapter();
+		    }
+		    else {
+				_this.ajaxAddNewChapter( chapterNum );
+		    }
+		  });
+	}
+	else {
+		this.ajaxAddNewChapter( chapterNum );
+	}
+};
+
+
+MainWriterPanel.prototype.ajaxAddNewChapter = function( chapterNum ) {
 	var _this = this;
 	var $spinner = $("<div>").addClass("spinner");
 	this.$panel_container.append( $spinner );
@@ -261,10 +296,10 @@ MainWriterPanel.prototype.removeChapter = function( chapterNum ) {
 	        	_this.index = index;
 	        	if( _this.currChapter >= chapterNum ) {
 	        		if( _this.currChapter == 1 ) {
-	        			_this.setCurrentPage( 1 );	
+	        			_this.ajaxSetCurrentPage( 1 );	
 	        		}
 	        		else {
-	        			_this.setCurrentPage( _this.currChapter - 1 );
+	        			_this.ajaxSetCurrentPage( _this.currChapter - 1 );
 	        		}
 	        	}	        	
 	        	_this.table_of_contents_object.populateIndex( _this.index );
@@ -340,8 +375,48 @@ MainWriterPanel.prototype.saveChapter = function( autosaveFlag ) {
 };
 
 MainWriterPanel.prototype.setCurrentPage = function( chapterNum ) {
+	var _this = this;
+	if( this.hasUnsavedChanges() ) {
+		  var a = this.confirmLeavingWithoutSaving();
+		  a.then(function (b) {
+		    if( b == "save" ) {
+		    	_this.saveChapter();
+		    	_this.pagination_object.setCurrentPageNo();
+		    }
+		    else {
+		    	_this.ajaxSetCurrentPage( chapterNum );
+		    }
+		  });
+	}
+	else {
+		this.ajaxSetCurrentPage( chapterNum );
+	}
+};
+
+MainWriterPanel.prototype.ajaxSetCurrentPage = function( chapterNum ) {
 	this.currChapter = chapterNum;
 	this.getChapter( chapterNum );
+};
+
+MainWriterPanel.prototype.confirmLeavingWithoutSaving = function() {
+	  var dfd = jQuery.Deferred();
+	  var $confirm = $('#saveChangesModal');
+	  $confirm.modal('show');
+	  $confirm.find('[data-behaviour=save]').off('click').click(function () {
+	    $confirm.modal('hide');
+	    dfd.resolve("save");
+	    return 1;
+	  });
+	  $confirm.find('[data-behaviour=cancel]').off('click').click(function () {
+	    $confirm.modal('hide');
+	    dfd.resolve("cancel");
+	    return 1;
+	  });
+	  return dfd.promise();	
+};
+
+MainWriterPanel.prototype.hasUnsavedChanges = function() {
+	return ( this.lastSavedContent != this.content_object.getContent() );
 };
 
 MainWriterPanel.prototype.initializeAutosave = function() {
@@ -391,5 +466,15 @@ MainWriterPanel.prototype.preventBackspaceDefaultAction = function() {
 	    if (e.which === 8 && !$(e.target).is("input:not([readonly]):not([type=radio]):not([type=checkbox]), textarea, [contentEditable], [contentEditable=true]")) {
 	        e.preventDefault();
 	    }
+	});
+};
+
+MainWriterPanel.prototype.preventUserFromLeaving = function() {
+	var _this = this;
+	$(window).bind("beforeunload",function(event) {
+		if( _this.lastSavedContent != _this.content_object.getContent() && !_this.writer_back_button_active ) {
+		    return true;
+		}
+		_this.writer_back_button_active = false;
 	});
 };

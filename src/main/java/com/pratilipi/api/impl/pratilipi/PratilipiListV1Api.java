@@ -16,31 +16,33 @@ import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.common.util.PratilipiFilter;
 import com.pratilipi.data.DataAccessorFactory;
 import com.pratilipi.data.DataListCursorTuple;
+import com.pratilipi.data.DocAccessor;
 import com.pratilipi.data.client.PratilipiData;
 import com.pratilipi.data.type.Event;
+import com.pratilipi.data.type.PratilipiContentDoc;
 import com.pratilipi.data.util.EventDataUtil;
 import com.pratilipi.data.util.PratilipiDataUtil;
 import com.pratilipi.filter.UxModeFilter;
 
 @SuppressWarnings("serial")
 @Bind( uri = "/pratilipi/list" )
-public class PratilipiListApi extends GenericApi {
+public class PratilipiListV1Api extends GenericApi {
 
 	public static class GetRequest extends GenericRequest {
 
-		private String searchQuery;
-		private Long authorId;
-		private Long eventId;
-		private Language language;
-		private PratilipiType type;
-		private String listName;
-		private PratilipiState state;
+		protected String searchQuery;
+		protected Long authorId;
+		protected Long eventId;
+		protected Language language;
+		protected PratilipiType type;
+		protected String listName;
+		protected PratilipiState state;
 
-		private Boolean orderByLastUpdated;
+		protected Boolean orderByLastUpdated;
 
-		private String cursor;
-		private Integer offset;
-		private Integer resultCount;
+		protected String cursor;
+		protected Integer offset;
+		protected Integer resultCount;
 
 
 		public void setSearchQuery( String searchQuery ) {
@@ -96,7 +98,7 @@ public class PratilipiListApi extends GenericApi {
 
 		private String bannerUrl;
 		private String description;
-		private List<PratilipiApi.Response> pratilipiList;
+		private List<PratilipiV1Api.Response> pratilipiList;
 		private String cursor;
 		private Long numberFound;
 
@@ -106,21 +108,21 @@ public class PratilipiListApi extends GenericApi {
 		public Response( List<PratilipiData> pratilipiList, String cursor, Long numberFound ) {
 			this.pratilipiList = new ArrayList<>( pratilipiList.size() ); 
 			for( PratilipiData pratilipi : pratilipiList )
-				this.pratilipiList.add( new PratilipiApi.Response( pratilipi, PratilipiListApi.class ) );
+				this.pratilipiList.add( new PratilipiV1Api.Response( pratilipi, PratilipiListV1Api.class ) );
 			this.cursor = cursor;
 			this.numberFound = numberFound;
 		}
 
 
-		private void setBannerUrl( String bannerUrl ) {
+		public void setBannerUrl( String bannerUrl ) {
 			this.bannerUrl = bannerUrl;
 		}
 		
-		private void setDescription( String description ) {
+		public void setDescription( String description ) {
 			this.description = description;
 		}
 		
-		public List<PratilipiApi.Response> getPratilipiList() {
+		public List<PratilipiV1Api.Response> getPratilipiList() {
 			return pratilipiList;
 		}
 
@@ -158,6 +160,16 @@ public class PratilipiListApi extends GenericApi {
 
 		
 		// Preparing & returning response object.
+		
+		if( UxModeFilter.isAndroidApp() ) {
+			DocAccessor docAccessor = DataAccessorFactory.getDocAccessor();
+			for( PratilipiData pratilipiData : pratilipiListCursorTuple.getDataList() ) {
+				PratilipiContentDoc pcDoc = docAccessor.getPratilipiContentDoc( pratilipiData.getId() );
+				if( pcDoc == null )
+					continue;
+				pratilipiData.setIndex( pcDoc.getIndex() );
+			}
+		}
 		
 		Response response = new Response(
 				pratilipiListCursorTuple.getDataList(),

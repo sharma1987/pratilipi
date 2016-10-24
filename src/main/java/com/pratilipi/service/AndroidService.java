@@ -14,18 +14,21 @@ import com.pratilipi.api.impl.comment.CommentListApi;
 import com.pratilipi.api.impl.contact.ContactApi;
 import com.pratilipi.api.impl.event.EventApi;
 import com.pratilipi.api.impl.event.EventListApi;
-import com.pratilipi.api.impl.init.InitApi;
 import com.pratilipi.api.impl.init.InitBannerListApi;
+import com.pratilipi.api.impl.init.InitV1Api;
+import com.pratilipi.api.impl.init.InitV2Api;
 import com.pratilipi.api.impl.navigation.NavigationListApi;
 import com.pratilipi.api.impl.notification.NotificationApi;
 import com.pratilipi.api.impl.notification.NotificationListApi;
 import com.pratilipi.api.impl.page.PageApi;
-import com.pratilipi.api.impl.pratilipi.PratilipiApi;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentImageApi;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentIndexApi;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentV1Api;
 import com.pratilipi.api.impl.pratilipi.PratilipiCoverApi;
-import com.pratilipi.api.impl.pratilipi.PratilipiListApi;
+import com.pratilipi.api.impl.pratilipi.PratilipiListV1Api;
+import com.pratilipi.api.impl.pratilipi.PratilipiListV2Api;
+import com.pratilipi.api.impl.pratilipi.PratilipiV1Api;
+import com.pratilipi.api.impl.pratilipi.PratilipiV2Api;
 import com.pratilipi.api.impl.user.UserAccessTokenApi;
 import com.pratilipi.api.impl.user.UserAccessTokenFcmTokenApi;
 import com.pratilipi.api.impl.user.UserEmailApi;
@@ -51,7 +54,8 @@ public class AndroidService extends GenericService {
 		
 		ApiRegistry.register( GenericBatchApi.class );
 		
-		ApiRegistry.register( InitApi.class );
+		ApiRegistry.register( InitV1Api.class );
+		ApiRegistry.register( InitV2Api.class );
 		ApiRegistry.register( InitBannerListApi.class );
 		
 		ApiRegistry.register( UserAccessTokenApi.class );
@@ -65,8 +69,10 @@ public class AndroidService extends GenericService {
 
 		ApiRegistry.register( PageApi.class );
 		
-		ApiRegistry.register( PratilipiApi.class );
-		ApiRegistry.register( PratilipiListApi.class );
+		ApiRegistry.register( PratilipiV1Api.class );
+		ApiRegistry.register( PratilipiV2Api.class );
+		ApiRegistry.register( PratilipiListV1Api.class );
+		ApiRegistry.register( PratilipiListV2Api.class );
 		ApiRegistry.register( PratilipiContentV1Api.class );
 		ApiRegistry.register( PratilipiContentIndexApi.class );
 		ApiRegistry.register( PratilipiCoverApi.class );

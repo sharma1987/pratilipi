@@ -7,7 +7,8 @@ import com.pratilipi.api.annotation.Get;
 import com.pratilipi.api.annotation.Post;
 import com.pratilipi.api.annotation.Validate;
 import com.pratilipi.api.impl.author.AuthorApi;
-import com.pratilipi.api.impl.init.InitApi;
+import com.pratilipi.api.impl.init.InitV1Api;
+import com.pratilipi.api.impl.init.InitV2Api;
 import com.pratilipi.api.shared.GenericRequest;
 import com.pratilipi.api.shared.GenericResponse;
 import com.pratilipi.common.exception.InsufficientAccessException;
@@ -19,9 +20,11 @@ import com.pratilipi.common.type.PratilipiState;
 import com.pratilipi.common.type.PratilipiType;
 import com.pratilipi.data.DataAccessor;
 import com.pratilipi.data.DataAccessorFactory;
+import com.pratilipi.data.DocAccessor;
 import com.pratilipi.data.client.PratilipiData;
 import com.pratilipi.data.type.Author;
 import com.pratilipi.data.type.Pratilipi;
+import com.pratilipi.data.type.PratilipiContentDoc;
 import com.pratilipi.data.util.PratilipiDataUtil;
 import com.pratilipi.filter.AccessTokenFilter;
 import com.pratilipi.filter.UxModeFilter;
@@ -30,17 +33,18 @@ import com.pratilipi.taskqueue.TaskQueueFactory;
 
 @SuppressWarnings("serial")
 @Bind( uri = "/pratilipi" )
-public class PratilipiApi extends GenericApi {
+public class PratilipiV1Api extends GenericApi {
 	
 	public static class GetRequest extends GenericRequest {
 
 		@Validate( required = true, minLong = 1L, requiredErrMsg = ERR_PRATILIPI_ID_REQUIRED )
-		private Long pratilipiId;
+		protected Long pratilipiId;
 
 
 		public void setPratilipiId( Long pratilipiId ) {
 			this.pratilipiId = pratilipiId;
 		}
+		
 	}
 	
 	@SuppressWarnings("unused")
@@ -99,6 +103,7 @@ public class PratilipiApi extends GenericApi {
 		private String coverImageUrl;
 		private String readPageUrl;
 		private String writePageUrl;
+		private Boolean oldContent;
 
 		private PratilipiType type;
 		private PratilipiContentType contentType;
@@ -120,7 +125,7 @@ public class PratilipiApi extends GenericApi {
 		
 		
 		@SuppressWarnings("unused")
-		private Response() { }
+		protected Response() { }
 		
 		// TODO: change this to package level access ASAP
 		public Response( PratilipiData pratilipiData ) {
@@ -130,13 +135,14 @@ public class PratilipiApi extends GenericApi {
 			this.title = pratilipiData.getTitle();
 			this.titleEn = pratilipiData.getTitleEn();
 			this.language = pratilipiData.getLanguage();
-			this.author = new AuthorApi.Response( pratilipiData.getAuthor(), PratilipiApi.class );
+			this.author = new AuthorApi.Response( pratilipiData.getAuthor(), PratilipiV1Api.class );
 			this.summary = pratilipiData.getSummary();
 			
 			this.pageUrl = pratilipiData.getPageUrl();
 			this.coverImageUrl = pratilipiData.getCoverImageUrl();
 			this.readPageUrl = pratilipiData.getReadPageUrl();
 			this.writePageUrl = pratilipiData.getWritePageUrl();
+			this.oldContent = pratilipiData.isOldContent();
 			if( UxModeFilter.isAndroidApp() )
 				this.contentType = pratilipiData.getContentType();
 
@@ -159,14 +165,14 @@ public class PratilipiApi extends GenericApi {
 
 		public Response( PratilipiData pratilipi, Class<? extends GenericApi> clazz ) {
 			
-			if( clazz == InitApi.class || clazz == PratilipiListApi.class ) {
+			if( clazz == InitV1Api.class || clazz == InitV2Api.class || clazz == PratilipiListV1Api.class ) {
 				
 				this.pratilipiId = pratilipi.getId();
 				this.title = pratilipi.getTitle() == null ? pratilipi.getTitleEn() : pratilipi.getTitle();
 				if( UxModeFilter.isAndroidApp() )
 					this.language = pratilipi.getLanguage();
 				if( pratilipi.getAuthor() != null )
-					this.author = new AuthorApi.Response( pratilipi.getAuthor(), PratilipiListApi.class );
+					this.author = new AuthorApi.Response( pratilipi.getAuthor(), PratilipiListV1Api.class );
 				if( UxModeFilter.isAndroidApp() )
 					this.summary = pratilipi.getSummary();
 				this.pageUrl = pratilipi.getPageUrl();
@@ -193,7 +199,7 @@ public class PratilipiApi extends GenericApi {
 			if( UxModeFilter.isAndroidApp() )
 				this.language = pratilipi.getLanguage();
 			if( pratilipi.getAuthor() != null )
-				this.author = new AuthorApi.Response( pratilipi.getAuthor(), PratilipiListApi.class );
+				this.author = new AuthorApi.Response( pratilipi.getAuthor(), PratilipiListV1Api.class );
 			if( UxModeFilter.isAndroidApp() )
 				this.summary = pratilipi.getSummary();
 			this.pageUrl = pratilipi.getPageUrl();
@@ -320,6 +326,12 @@ public class PratilipiApi extends GenericApi {
 				: dataAccessor.getAuthor( pratilipi.getAuthorId() );
 		
 		PratilipiData pratilipiData = PratilipiDataUtil.createPratilipiData( pratilipi, author );
+		
+		if( UxModeFilter.isAndroidApp() ) {
+			DocAccessor docAccessor = DataAccessorFactory.getDocAccessor();
+			PratilipiContentDoc pcDoc = docAccessor.getPratilipiContentDoc( request.pratilipiId );
+			pratilipiData.setIndex( pcDoc == null ? null : pcDoc.getIndex() );
+		}
 
 		return new Response( pratilipiData );
 		

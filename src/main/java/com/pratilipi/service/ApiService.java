@@ -17,13 +17,13 @@ import com.pratilipi.api.impl.contact.ContactApi;
 import com.pratilipi.api.impl.event.EventApi;
 import com.pratilipi.api.impl.event.EventBannerApi;
 import com.pratilipi.api.impl.event.EventListApi;
-import com.pratilipi.api.impl.init.InitApi;
+import com.pratilipi.api.impl.init.InitV1Api;
 import com.pratilipi.api.impl.init.InitBannerApi;
 import com.pratilipi.api.impl.init.InitBannerListApi;
 import com.pratilipi.api.impl.mailinglist.MailingListSubscribeApi;
 import com.pratilipi.api.impl.notification.NotificationApi;
 import com.pratilipi.api.impl.notification.NotificationListApi;
-import com.pratilipi.api.impl.pratilipi.PratilipiApi;
+import com.pratilipi.api.impl.pratilipi.PratilipiV1Api;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentChapterAddApi;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentChapterDeleteApi;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentImageApi;
@@ -31,7 +31,7 @@ import com.pratilipi.api.impl.pratilipi.PratilipiContentIndexApi;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentV1Api;
 import com.pratilipi.api.impl.pratilipi.PratilipiContentV2Api;
 import com.pratilipi.api.impl.pratilipi.PratilipiCoverApi;
-import com.pratilipi.api.impl.pratilipi.PratilipiListApi;
+import com.pratilipi.api.impl.pratilipi.PratilipiListV1Api;
 import com.pratilipi.api.impl.user.UserApi;
 import com.pratilipi.api.impl.user.UserEmailApi;
 import com.pratilipi.api.impl.user.UserLoginApi;
@@ -55,7 +55,7 @@ public class ApiService extends GenericService {
 	
 	static {
 
-		ApiRegistry.register( InitApi.class );						// *.pratilipi.com
+		ApiRegistry.register( InitV1Api.class );						// *.pratilipi.com
 		ApiRegistry.register( GenericBatchApi.class );				// *.pratilipi.com
 		
 		ApiRegistry.register( InitBannerApi.class );				// *.pratilipi.com & AWS CloudFront
@@ -70,8 +70,8 @@ public class ApiService extends GenericService {
 		ApiRegistry.register( UserVerificationApi.class );			// *.pratilipi.com
 		ApiRegistry.register( UserPasswordUpdateApi.class );		// *.pratilipi.com
 
-		ApiRegistry.register( PratilipiApi.class );					// *.pratilipi.com
-		ApiRegistry.register( PratilipiListApi.class );				// *.pratilipi.com
+		ApiRegistry.register( PratilipiV1Api.class );					// *.pratilipi.com
+		ApiRegistry.register( PratilipiListV1Api.class );				// *.pratilipi.com
 		ApiRegistry.register( PratilipiCoverApi.class );			// *.pratilipi.com & AWS CloudFront
 		ApiRegistry.register( PratilipiContentV1Api.class );			// *.pratilipi.com
 		ApiRegistry.register( PratilipiContentV2Api.class );			// *.pratilipi.com

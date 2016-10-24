@@ -85,10 +85,7 @@ public class PratilipiDocUtil {
 		DocAccessor docAccessor = DataAccessorFactory.getDocAccessor();
 		PratilipiContentDoc pcDoc = docAccessor.getPratilipiContentDoc( pratilipiId );
 		
-		if( pcDoc == null )
-			return new JsonArray();
-
-		return pcDoc.getIndex();
+		return pcDoc == null ? null : pcDoc.getIndex();
 		
 	}
 	
@@ -283,7 +280,7 @@ public class PratilipiDocUtil {
 				if( node.nodeName().equals( "p" ) ) {
 
 					AlignmentType alignment = null;
-					if( node.attr( "style" ) != null && ! node.attr( "style" ).trim().isEmpty() )
+					if( node.hasAttr( "style" ) && ! node.attr( "style" ).trim().isEmpty() )
 						for( String style : node.attr( "style" ).split( ";" ) )
 							if( style.substring( 0, style.indexOf( ":" ) ).trim().equals( "text-align" ) )
 								alignment = AlignmentType.valueOf( style.substring( style.indexOf( ":" ) + 1 ).trim().toUpperCase() );
@@ -392,7 +389,8 @@ public class PratilipiDocUtil {
 			for( Node childNode : node.childNodes() ) {
 				if( childNode.getClass() == TextNode.class ) {
 					// Do Nothing
-				} else if( childNode.nodeName().equals( "i" )
+				} else if( childNode.nodeName().equals( "br" )
+						|| childNode.nodeName().equals( "i" )
 						|| childNode.nodeName().equals( "u" )
 						|| childNode.nodeName().equals( "a" ) ) {
 					Node badNode = _validateContent( childNode );
@@ -408,7 +406,8 @@ public class PratilipiDocUtil {
 			for( Node childNode : node.childNodes() ) {
 				if( childNode.getClass() == TextNode.class ) {
 					// Do Nothing
-				} else if( childNode.nodeName().equals( "b" )
+				} else if( childNode.nodeName().equals( "br" )
+						|| childNode.nodeName().equals( "b" )
 						|| childNode.nodeName().equals( "u" )
 						|| childNode.nodeName().equals( "a" ) ) {
 					Node badNode = _validateContent( childNode );
@@ -424,7 +423,8 @@ public class PratilipiDocUtil {
 			for( Node childNode : node.childNodes() ) {
 				if( childNode.getClass() == TextNode.class ) {
 					// Do Nothing
-				} else if( childNode.nodeName().equals( "b" )
+				} else if( childNode.nodeName().equals( "br" )
+						|| childNode.nodeName().equals( "b" )
 						|| childNode.nodeName().equals( "i" )
 						|| childNode.nodeName().equals( "a" ) ) {
 					Node badNode = _validateContent( childNode );
@@ -494,7 +494,7 @@ public class PratilipiDocUtil {
 						PratilipiContentDoc.Page page = chapter.getPage( 1 );
 						if( page == null )
 							page = chapter.addPage();
-						page.addPagelet( (PratilipiContentDoc.PageletType) pagelet[0], pagelet[1] );
+						page.addPagelet( (PratilipiContentDoc.PageletType) pagelet[0], pagelet[1], (PratilipiContentDoc.AlignmentType) pagelet[2] );
 					}
 				}
 				
@@ -508,12 +508,12 @@ public class PratilipiDocUtil {
 				
 				if( pratilipi.getId() == 5639838220943360L && i <= 5 )
 					continue; // Skipping first 5 pages as per Shally's request
-
-				else if( blobEntry == null
-						&& ( pratilipi.getId() == 5385510763626496L
-						|| pratilipi.getId() == 5768181499035648L
-						|| pratilipi.getId() == 5486454792781824L ) )
-					continue; // Known issues. Ignoring this just to keep task queue clear
+				else if( pratilipi.getId() == 5749258686824448L && i <= 4 )
+					continue; // Skipping first 4 pages as per Shally's request
+				else if( pratilipi.getId() == 5486454792781824L && i <= 1 )
+					continue; // Skipping first page as per Shally's request
+				else if( blobEntry == null && pratilipi.getId() == 5768181499035648L )
+					continue; // Skipping missing pages as per Dileepan's request
 				
 				JsonObject imgData = new JsonObject();
 				imgData.addProperty( "name", i + "" );
@@ -540,16 +540,31 @@ public class PratilipiDocUtil {
 		
 		List<Object[]> pageletList = new LinkedList<>();
 		
-		Node prevNode = null;
-		Object[] pagelet = null;
+		Object[] currPagelet = null;
 		for( Node childNode : node.childNodes() ) {
 			
 			if( childNode.nodeName().equals( "body" )
 					|| childNode.nodeName().equals( "div" )
 					|| childNode.nodeName().equals( "p" ) ) {
 				
-				pagelet = null;
-				pageletList.addAll( _createPageletList( pratilipi, childNode ) );
+				currPagelet = null;
+
+				List<Object[]> pList = _createPageletList( pratilipi, childNode );
+				
+				if( pList.size() == 0 ) {
+					pageletList.add( new Object[] { PratilipiContentDoc.PageletType.HTML, "<br/>", null } );
+				} else {
+					AlignmentType alignment = null;
+					if( childNode.hasAttr( "style" ) && ! childNode.attr( "style" ).trim().isEmpty() )
+						for( String style : childNode.attr( "style" ).split( ";" ) )
+							if( style.substring( 0, style.indexOf( ":" ) ).trim().equals( "text-align" ) )
+								alignment = AlignmentType.valueOf( style.substring( style.indexOf( ":" ) + 1 ).trim().toUpperCase() );
+					if( alignment != null )
+						for( Object[] pagelet : pList )
+							if( pagelet[2] == null && ( pagelet[0] == PratilipiContentDoc.PageletType.TEXT || pagelet[0] == PratilipiContentDoc.PageletType.HTML ) )
+								pagelet[2] = alignment;
+					pageletList.addAll( pList );
+				}
 				
 			} else if( childNode.nodeName().equals( "h1" ) || childNode.nodeName().equals( "h2" ) ) {
 				
@@ -557,16 +572,16 @@ public class PratilipiDocUtil {
 				if( text == null )
 					continue;
 				
-				if( pagelet != null && pagelet[0] == PratilipiContentDoc.PageletType.HEAD ) {
-					pagelet[1] = pagelet[1] + " - " + text;
+				if( currPagelet != null && currPagelet[0] == PratilipiContentDoc.PageletType.HEAD ) {
+					currPagelet[1] = currPagelet[1] + " - " + text;
 				} else {
-					pagelet = new Object[] { PratilipiContentDoc.PageletType.HEAD, text };
-					pageletList.add( pagelet );
+					currPagelet = new Object[] { PratilipiContentDoc.PageletType.HEAD, text, null };
+					pageletList.add( currPagelet );
 				}
 				
 			} else if( childNode.nodeName().equals( "img" ) ) {
 				
-				pagelet = null;
+				currPagelet = null;
 				
 				BlobAccessor blobAccessor = DataAccessorFactory.getBlobAccessor();
 				BlobEntry blobEntry = null;
@@ -627,32 +642,34 @@ public class PratilipiDocUtil {
 				imgData.addProperty( "height", ImageUtil.getHeight( blobEntry.getData() ) );
 				imgData.addProperty( "width", ImageUtil.getWidth( blobEntry.getData() ) );
 				
-				pageletList.add( new Object[] { PratilipiContentDoc.PageletType.IMAGE, imgData } );
+				pageletList.add( new Object[] { PratilipiContentDoc.PageletType.IMAGE, imgData, null } );
 				
 			} else if( childNode.nodeName().equals( "br" ) ) {
 				
-				// Create new pagelet after 2 consecutive line breaks.
-				if( prevNode != null && prevNode.nodeName().equals( "br" ) )
-					pagelet = null;
+				if( currPagelet != null && currPagelet[0] == PratilipiContentDoc.PageletType.HTML )
+					currPagelet[1] = currPagelet[1] + "<br/>";
 				
 			} else {
 				
-				String text  = _extractText( childNode );
+				String text = _extractText( childNode );
 				if( text == null )
 					continue;
-				if( pagelet == null || pagelet[0] != PratilipiContentDoc.PageletType.TEXT ) {
-					pagelet = new Object[] { PratilipiContentDoc.PageletType.TEXT, text };
-					pageletList.add( pagelet );
-				} else if( prevNode != null && prevNode.nodeName().equals( "br" ) ) {
-					pagelet[1] = pagelet[1] + "\n" + text;
+				if( childNode.nodeName().equals( "b" )
+						|| childNode.nodeName().equals( "strong" )
+						|| childNode.nodeName().equals( "h3" )
+						|| childNode.nodeName().equals( "h4" )
+						|| childNode.nodeName().equals( "h5" )
+						|| childNode.nodeName().equals( "h6" ) )
+					text = "<b>" + text + "</b>";
+				
+				if( currPagelet == null || currPagelet[0] != PratilipiContentDoc.PageletType.HTML ) {
+					currPagelet = new Object[] { PratilipiContentDoc.PageletType.HTML, text, null };
+					pageletList.add( currPagelet );
 				} else {
-					pagelet[1] = pagelet[1] + " " + text;
+					currPagelet[1] = currPagelet[1] + " " + text;
 				}
 				
 			}
-			
-			
-			prevNode = childNode;
 			
 		}
 		
