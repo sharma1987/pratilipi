@@ -508,6 +508,8 @@ public class PratilipiDocUtil {
 				
 				if( pratilipi.getId() == 5639838220943360L && i <= 5 )
 					continue; // Skipping first 5 pages as per Shally's request
+				else if( pratilipi.getId() == 5749258686824448L && i <= 4 )
+					continue; // Skipping first 4 pages as per Shally's request
 				else if( blobEntry == null && pratilipi.getId() == 5768181499035648L )
 					continue; // Skipping missing pages as per Dileepan's request
 				
