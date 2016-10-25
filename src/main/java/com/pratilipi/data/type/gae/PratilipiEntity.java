@@ -58,6 +58,10 @@ public class PratilipiEntity implements Pratilipi {
 	private PratilipiState STATE;
 	
 	@Index
+	private String COVER_IMAGE;
+	
+	@Deprecated
+	@Index
 	private Boolean CUSTOM_COVER;
 
 	@Index
@@ -105,11 +109,11 @@ public class PratilipiEntity implements Pratilipi {
 	@Index
 	private Long FB_LIKE_SHARE_COUNT;
 
-	
+
 	private Boolean OLD_CONTENT;
-	
-	
-	
+
+
+
 	public PratilipiEntity() {}
 	
 	public PratilipiEntity( Long id ) {
@@ -220,13 +224,13 @@ public class PratilipiEntity implements Pratilipi {
 	}
 	
 	@Override
-	public Boolean hasCustomCover() {
-		return CUSTOM_COVER == null ? false : CUSTOM_COVER;
+	public String getCoverImage() {
+		return COVER_IMAGE;
 	}
 
 	@Override
-	public void setCustomCover( Boolean customCover ) {
-		this.CUSTOM_COVER = customCover;
+	public void setCoverImage( String coverImage ) {
+		this.COVER_IMAGE = coverImage;
 	}
 	
 	@Override
@@ -371,15 +375,15 @@ public class PratilipiEntity implements Pratilipi {
 	public void setFbLikeShareCount( Long fbLikeShareCount ) {
 		this.FB_LIKE_SHARE_COUNT = fbLikeShareCount;
 	}
-	
+
 	@Override
 	public Boolean isOldContent() {
-		return OLD_CONTENT == null ? false : OLD_CONTENT;
+		return OLD_CONTENT == null ? true : OLD_CONTENT;
 	}
 
 	@Override
 	public void setOldContent( Boolean oldContent ) {
 		this.OLD_CONTENT = oldContent;
 	}
-	
+
 }
