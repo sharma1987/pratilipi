@@ -9,6 +9,9 @@ public interface AppProperty extends GenericOfyType {
 	
 	String SERVICE_ACCOUNT_FIREBASE = "ServiceAccount.Firebase.Key";
 	
+	String GOOGLE_WEB_CLIENT_ID = "Google.WebClient.Id";
+	String GOOGLE_ANDROID_CLIENT_ID = "Google.AndroidClient.Id";
+	
 	String FACEBOOK_CREDENTIALS = "Facebook.Credentials";
 	
 	String FCM_SERVER_KEY = "Firebase.CloudMessaging.ServerKey";

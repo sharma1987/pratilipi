@@ -156,6 +156,7 @@ write_select_type			= Please select the type.
 user_sign_in				= Sign In
 user_to_sign_in				= To Sign In
 user_sign_in_with_facebook	= Sign In with Facebook
+user_sign_in_with_google	= Sign In with Google
 user_sign_in_to_pratilipi	= Sign in to Pratilipi
 user_sign_out				= Sign Out
 user_sign_up				= Sign Up !
@@ -353,6 +354,7 @@ writer_read_copyright = Read copyright policy here
 writer_to_next_screen = Next
 writer_publish = Publish
 writer_save = Save
+writer_dont_save = Don't save
 writer_preview = Preview
 writer_changes_saved = All changes saved
 writer_add_new_chapter = New Chapter
@@ -384,6 +386,7 @@ writer_accept_copyright = I accept Copyright Policy and Terms of Services
 writer_error_title_required = Please enter a title
 writer_error_category_required = Please select a category
 writer_error_copyright_required = Please accept Copyright Policy and Terms of Services
+writer_save_changes_confirmation = Do you want to save these changes before going forward?
 pratilipi_add_summary = Please click here to add summary
 
 # Android App launch

@@ -304,6 +304,33 @@
 										</paper-item>
 									</a>
 								</li>
+								<template is="dom-if" if="{{ switchReaderOptions }}">
+									<template is="dom-if" if="{{ isVersion2 }}">
+										<li>
+											<a style="padding: 5px; margin: 0;" target="_blank" href="/read?id={{ pratilipi.pratilipiId }}&_apiVer=1">
+												<paper-item>
+													<paper-item-body>Go To Old Reader</paper-item-body>
+												</paper-item>
+											</a>
+										</li>
+										<li>
+											<a style="padding: 5px; margin: 0;" on-click="finaliseV2Version">
+												<paper-item>
+													<paper-item-body>Everything seems Okay!</paper-item-body>
+												</paper-item>
+											</a>
+										</li>
+									</template>
+									<template is="dom-if" if="{{ isVersion1 }}">
+										<li>
+											<a style="padding: 5px; margin: 0;" target="_blank" href="/read?id={{ pratilipi.pratilipiId }}&_apiVer=2">
+												<paper-item>
+													<paper-item-body>Go To New Reader</paper-item-body>
+												</paper-item>
+											</a>
+										</li>
+									</template>
+								</template>
 							</ul>
 						</div>
 					</td>
@@ -311,6 +338,15 @@
 				</tr>
 			</table>
 		</paper-card>
+		<iron-ajax
+				id="PratilipiApi"
+				url="/api/pratilipi"
+				method="POST"
+				content-type="application/x-www-form-urlencoded"
+				handle-as="json"
+				on-response="_handlePratilipiApiResponse"
+				on-error="_handlePratilipiApiError"
+				></iron-ajax>
 	</template>
 
 	<script>
@@ -327,7 +363,9 @@
 				showEditContent: { type: Boolean, value: false },
 				index: { type: Array },
 				pageNo: { type: Number },
-				contentType: { type: String }
+				contentType: { type: String },
+				stage: { type: String },
+				version: { type: String }
 			},
 			
 			_entryClicked: function( event ) {
@@ -353,6 +391,11 @@
 				jQuery( "#navigationdropdown" ).css( 'max-height', Math.min( 500, height - 75 ) + "px", "important" );
 				jQuery( "#navigationdropdown" ).css( 'min-width', Math.min( 300, width - 20 ) + "px", "important" );
 				jQuery( "#navigationdropdown" ).css( 'max-width', ( width - 20 ) + "px", "important" );
+				
+				
+				this.set( "switchReaderOptions", this.stage == "gamma" && this.pratilipi.oldContent );
+				this.set( "isVersion1", this.version == "1" );
+				this.set( "isVersion2", this.version == "2" );
 			},
 			
 			shareOnFacebook: function() {
@@ -417,7 +460,23 @@
 
 			sepiaReadingMode: function() {
 				document.querySelector( 'pratilipi-reader-page' ).sepiaReadingMode();
+			},
+			
+			
+			finaliseV2Version: function() {
+				this.$.PratilipiApi.body = jQuery.param( { "pratilipiId": this.pratilipi.pratilipiId, "oldContent": false } );
+				this.$.PratilipiApi.generateRequest();
+			},
+			
+			_handlePratilipiApiResponse: function( event ) {
+				alert( "Success!" );
+				window.location.reload();
+			},
+			
+			_handlePratilipiApiError: function( event ) {
+				alert( "Some Exception at server! Please try again!" );
 			}
+			
 			
 		});
 	</script>

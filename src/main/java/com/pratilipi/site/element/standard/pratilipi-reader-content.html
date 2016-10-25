@@ -81,9 +81,7 @@
 	<template>
 	
 		<paper-card id="pager">
-			<div id="reader-content">
-				{{ content }}
-			</div>
+			<div id="reader-content"></div>
 			<template is="dom-if" if="{{ lastPage }}">
 				<div id="reader-alert-box" class="alert alert-success hvr-bounce-in" role="alert">
 					<h3 class="text-center" style="margin-top: 24px;">${ _strings.reader_enjoyed_reading_part1 }</h3>
@@ -122,7 +120,7 @@
 			is: 'pratilipi-reader-content',
 			
 			properties: {
-				content: { type: String, observer: "_onContentChange", value: "<paper-spinner class=\"pratilipi-spinner-center\" active></paper-spinner>" },
+				content: { type: String, observer: "_onContentChange" },
 				contentType: { type: String },
 				contentMap: { type: Object, value: {} },
 
@@ -132,6 +130,7 @@
 
 				pageNo: { type: Number, observer: "_onPageNoChange" },
 				pageCount: { type: Number },
+				version: { type: String },
 
 				lastPage: { type: Boolean }
 
@@ -140,12 +139,22 @@
 			
 			// Attached
 			attached: function() {
+
 				jQuery( "#pager" ).css( 'min-height', window.innerHeight + "px" );
-				this.contentMap[ this.pageNo ] = this.content;
 				this.set( 'lastPage', this.pageNo == this.pageCount );
 
-				if( this.contentType == "IMAGE" )
+				if( this.contentType == "PRATILIPI" ) {
+					this.contentMap[ this.pageNo ] = this.content;					
+
+				} else if( this.contentType == "IMAGE" ) {
+					var chapters = jQuery.parseJSON( this.content )["chapters"];
+					for( var i = 1; i <= chapters.length; i++ )
+						this.contentMap[ i ] = chapters[i-1].pages[0].pagelets[0].data.name;
+
+					this.set( 'content', this.getImageUrl( this.pageNo ) );
 					this._setImageSize();
+
+				}
 
 				this._precache();
 			},
@@ -208,6 +217,10 @@
 
 			// Content
 			_onContentChange: function() {
+				if( this.contentType == "IMAGE" && ( this.contentMap == null || jQuery.isEmptyObject( this.contentMap ) ) ) {
+					jQuery( this.querySelector( '#reader-content' ) ).html( "<paper-spinner class=\"pratilipi-spinner-center\" active></paper-spinner>" );
+					return;
+				}
 				jQuery( this.querySelector( '#reader-content' ) ).html( this.content );
 				this.async( function() {
 					if( this.contentType == "PRATILIPI" ) {
@@ -230,8 +243,7 @@
 			getImageUrl: function( pageNo ) {
 				return "<img src='/api/pratilipi/content/image?pratilipiId=" + 
 							this.pratilipiId + "&" + 
-							"pageNo=" + pageNo + 
-							"&" + "chapterNo=" + pageNo + "' />";
+							"name=" + this.contentMap[ pageNo ] + "' />";
 			},
 
 			_precache: function() {
@@ -284,7 +296,7 @@
 				ajaxGet.params.pratilipiId = this.pratilipiId;
 				ajaxGet.params.chapterNo = pageNo;
 				ajaxGet.params.contentType = this.contentType;
-				ajaxGet.params._apiVer = getUrlParameter( "_apiVer" ) != null ? getUrlParameter( "_apiVer" ) : "1"; 
+				ajaxGet.params._apiVer = this.version; 
 				ajaxGet.generateRequest();
 			},
 

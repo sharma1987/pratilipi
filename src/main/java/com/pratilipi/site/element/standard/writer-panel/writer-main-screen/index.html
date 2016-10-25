@@ -127,6 +127,25 @@
 		</div>
 	</div>
 
+	<#-- Modal for leaving without saving changes -->
+	<div class="modal fade" id="saveChangesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">${ _strings.writer_save }</h4>
+	      </div>
+	      <div class="modal-body">
+	        ${ _strings.writer_save_changes_confirmation }
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" data-behaviour="cancel" class="btn btn-default" data-dismiss="modal">${ _strings.writer_dont_save }</button>
+	        <button type="button" class="pratilipi-red-background-modal-button" data-behaviour="save" class="btn btn-primary">${ _strings.writer_save }</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+
 	<#-- Modal for publishing content -->
 	<div class="modal fade" id="publishModal" role="dialog" aria-labelledby="publishContent">
 		<div class="modal-dialog" role="document">
