@@ -46,9 +46,9 @@ public interface Pratilipi extends GenericOfyType {
 	
 	void setState( PratilipiState state );
 	
-	Boolean hasCustomCover();
+	String getCoverImage();
 
-	void setCustomCover( Boolean customCover );
+	void setCoverImage( String coverImage );
 
 	Date getListingDate();
 	
@@ -110,7 +110,8 @@ public interface Pratilipi extends GenericOfyType {
 	Long getFbLikeShareCount();
 
 	void setFbLikeShareCount( Long fbLikeShareCount );
-	
+
+
 	Boolean isOldContent();
 
 	void setOldContent( Boolean oldContent );
