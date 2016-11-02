@@ -21,8 +21,12 @@ public class UserPratilipiApi extends GenericApi {
 	
 	public static class GetRequest extends GenericRequest {
 
-		@Validate( required = true )
+		@Validate( required = true, minLong = 1L )
 		private Long pratilipiId;
+
+		public void setPratilipiId( Long pratilipiId ) {
+			this.pratilipiId = pratilipiId;
+		}
 
 	}
 	
@@ -57,44 +61,66 @@ public class UserPratilipiApi extends GenericApi {
 		private Boolean isLiked;
 
 		
-		@SuppressWarnings("unused")
 		private Response() {}
 		
-		// TODO: Change access to package level ASAP
-		public Response( UserPratilipiData userPratilipiData ) {
+		private Response( UserPratilipiData userPratilipiData ) {
 			
-			this( userPratilipiData, true );
-			
-			userId = userPratilipiData.getUserId();
-			pratilipiId = userPratilipiData.getPratilipiId();
-			
-			addedToLib = userPratilipiData.isAddedToLib();
-			
-			hasAccessToReview = userPratilipiData.hasAccessToReview();
+			this( userPratilipiData, UserPratilipiApi.class );
 			
 		}
 		
-		// TODO: Change access to package level ASAP
-		public Response( UserPratilipiData userPratilipiData, boolean asReview ) {
+		public Response( UserPratilipiData userPratilipiData, Class<? extends GenericApi> clazz ) {
 
-			userPratilipiId = userPratilipiData.getId();
-			
-			userName = userPratilipiData.getUserName();
-			userImageUrl = userPratilipiData.getUserImageUrl();
-			userProfilePageUrl = userPratilipiData.getUserProfilePageUrl();
+			if( clazz == UserPratilipiApi.class || clazz == UserPratilipiReviewApi.class
+					|| clazz == UserPratilipiLibraryApi.class ) {
+				
+				userPratilipiId = userPratilipiData.getId();
+				
+				userId = userPratilipiData.getUserId();
+				pratilipiId = userPratilipiData.getPratilipiId();
+				
+				userName = userPratilipiData.getUserName();
+				userImageUrl = userPratilipiData.getUserImageUrl();
+				userProfilePageUrl = userPratilipiData.getUserProfilePageUrl();
 
-			user = new UserApi.Response( userPratilipiData.getUser(), UserPratilipiApi.class );
-			
-			rating = userPratilipiData.getRating();
-			review = userPratilipiData.getReview();
-			reviewState = userPratilipiData.getReviewState();
-			reviewDateMillis = userPratilipiData.getReviewDate() == null ? null : userPratilipiData.getReviewDate().getTime();
+				user = new UserApi.Response( userPratilipiData.getUser(), UserPratilipiApi.class );
+				
+				rating = userPratilipiData.getRating();
+				review = userPratilipiData.getReview();
+				reviewState = userPratilipiData.getReviewState();
+				reviewDateMillis = userPratilipiData.getReviewDate() == null ? null : userPratilipiData.getReviewDate().getTime();
 
-			commentCount = userPratilipiData.getCommentCount();
-			likeCount = userPratilipiData.getLikeCount();
-			
-			isLiked = userPratilipiData.isLiked();
-			
+				likeCount = userPratilipiData.getLikeCount();
+				commentCount = userPratilipiData.getCommentCount();
+				
+				addedToLib = userPratilipiData.isAddedToLib();
+				
+				hasAccessToReview = userPratilipiData.hasAccessToReview();
+
+				isLiked = userPratilipiData.isLiked();
+				
+			} else if( clazz == UserPratilipiReviewListApi.class ) {
+				
+				userPratilipiId = userPratilipiData.getId();
+				
+				userName = userPratilipiData.getUserName();
+				userImageUrl = userPratilipiData.getUserImageUrl();
+				userProfilePageUrl = userPratilipiData.getUserProfilePageUrl();
+	
+				user = new UserApi.Response( userPratilipiData.getUser(), UserPratilipiApi.class );
+				
+				rating = userPratilipiData.getRating();
+				review = userPratilipiData.getReview();
+				reviewState = userPratilipiData.getReviewState();
+				reviewDateMillis = userPratilipiData.getReviewDate() == null ? null : userPratilipiData.getReviewDate().getTime();
+	
+				commentCount = userPratilipiData.getCommentCount();
+				likeCount = userPratilipiData.getLikeCount();
+				
+				isLiked = userPratilipiData.isLiked();
+				
+			}
+
 		}
 
 		
@@ -170,7 +196,7 @@ public class UserPratilipiApi extends GenericApi {
 		}
 		
 
-		public Boolean getHasAccessToReview() {
+		public Boolean hasAccessToReview() {
 			return hasAccessToReview;
 		}
 
@@ -188,8 +214,8 @@ public class UserPratilipiApi extends GenericApi {
 		UserPratilipiData userPratilipiData = UserPratilipiDataUtil.getUserPratilipi(
 				AccessTokenFilter.getAccessToken().getUserId(),
 				request.pratilipiId );
-
-		return new Response( userPratilipiData );
+		
+		return userPratilipiData == null ? new Response() : new Response( userPratilipiData );
 		
 	}		
 
