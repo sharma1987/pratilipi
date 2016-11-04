@@ -134,7 +134,7 @@ public class UxModeFilter implements Filter {
 			
 			boolean basicBrowser = false;
 			
-			if( isWebApp && SystemProperty.STAGE.equals( "prod" ) ) {
+			if( isWebApp ) {
 				
 				if( userAgent == null || userAgent.isEmpty() ) {
 					basicBrowser = true;
