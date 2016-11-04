@@ -51,12 +51,12 @@
             		titleEn: form.find("#titleEn").val(),
             		type: form.find("#type").val(),
             		language: "${ pratilipi.getLanguage() }",
-            		summary: form.find("#summary").val(),	            		
+            		summary: form.find("#summary").val(),
+					_apiVer: "2"
 	               },
             success:function(response){
             	
             	var parsed_data = jQuery.parseJSON( response );
-            	console.log(parsed_data);
       			window.location = ( window.location.href.split("/")[0] + parsed_data.pageUrl );
             },
             error: function(data){
