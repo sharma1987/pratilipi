@@ -60,13 +60,10 @@
 		            contentType: false,
 		            processData: false,
 		            success:function(data){
-		                console.log("success");
-		                console.log(data);
 		                location.reload();
 		            },
 		            error: function(data){
-		                console.log("error");
-		                console.log(data);
+		                alert( "${ _strings.server_error_message }" );
 		            }
 		        });
 		    }));
@@ -120,7 +117,7 @@
 	</div>
 	
 	<div style="padding-top: 20px; padding-bottom: 20px;">
-		<a class="pratilipi-light-blue-button" href="${ pratilipi.readPageUrl }&ret=${ pratilipi.getPageUrl() }">${ _strings.read }</a>
+		<a class="pratilipi-light-blue-button" onClick="trackPixelEvents( 'ReadOnSummaryPage' );" href="${ pratilipi.readPageUrl }&ret=${ pratilipi.getPageUrl() }">${ _strings.read }</a>
 		<br />
 		<#if userpratilipi?? && userpratilipi.isAddedtoLib()??>
 			<button style="margin-top: 15px;" type="button" class="pratilipi-grey-button" onclick="addToOrRemoveFromLibrary()">

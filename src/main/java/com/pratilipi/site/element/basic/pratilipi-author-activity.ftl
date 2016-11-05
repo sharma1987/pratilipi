@@ -16,17 +16,10 @@
 	}
 	
 	function changePratilipiState(bookId, state) {
-		console.log("Inside change pratilipi state");
-		console.log(bookId);
-		console.log(state);
 		    $.ajax({type: "POST",
 		            url: "/api/pratilipi",
-		            data: { pratilipiId: bookId, state: state },
+		            data: { pratilipiId: bookId, state: state, _apiVer: "2" },
 		            success:function(response){
-		            	console.log("I am here");
-		            	console.log(response);
-		            	console.log(typeof response);
-		            	
 		            	var parsed_data = jQuery.parseJSON( response );
 		      			if ( parsed_data.state == state ) {
 		      				window.location.reload();
