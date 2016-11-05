@@ -98,8 +98,6 @@ PublishModal.prototype.attachCoverImageListeners = function() {
 		                _this.lastCoverUrl = image_url;
 		            },
 		            error: function(data){
-		                console.log("error");
-		                console.log(data);
 		                $img.removeClass("blur-image").attr("src", _this.lastCoverUrl);
 		            }
 		        });    
@@ -146,7 +144,8 @@ PublishModal.prototype.ajaxSubmitForm = function() {
 			pratilipiId: ${ pratilipiId?c },
 			type: this.$category_select.val() ,
     		summary: this.$summary.val(),
-    		state: "PUBLISHED",            		
+    		state: "PUBLISHED",
+			_apiVer: "2"
     	   };
     $.ajax({type: "POST",
         url: "/api/pratilipi",

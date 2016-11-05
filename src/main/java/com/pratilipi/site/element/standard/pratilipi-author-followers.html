@@ -1,12 +1,15 @@
 <dom-module id="pratilipi-author-followers">
 
 	<template>
+		<#-- Do not remove the noDisplay flag. Used in following and followers page -->
 		<template is="dom-if" if="{{ !noDisplay }}">
 			<pratilipi-follow-author-grid 
 				follow-list="{{ followList }}"
 				number-found="{{ numberFound }}"
 				title="${ _strings.author_followers_heading }"
+				empty-list="{{ emptyList }}"
 				empty-list-message="${ _strings.author_no_followers }"
+				show-modal-button="{{ showModalButton }}"
 				is-finished="{{ isFinished }}"></pratilipi-follow-author-grid>
 		</template>
 
@@ -35,11 +38,10 @@
 				followList: { type: Array, value: function() { return []; } },
 				cursor: { type: String },
 				numberFound: { type: Number },
+				resultCount: { type: Number, value: 20 },
 				isFinished: { type: Boolean, value: false },
-				noDisplay: { type: Boolean, value: false },
-
-				// local variable
-				refreshFollowList: { type: Boolean, value: false }
+				emptyList: { type: Boolean, value: true },
+				noDisplay: { type: Boolean, value: false }
 			},
 
 			_authorObserver: function() {
@@ -76,12 +78,13 @@
 					this.push( 'followList', followList[i] );
 				this.set( 'cursor', followListObject.cursor );
 				this.set( 'numberFound', followListObject.numberFound );
-				this.set( 'isFinished', followListObject.cursor == null || followList.length < 20 );
+				this.set( 'isFinished', followListObject.cursor == null || followList.length < this.resultCount );
+				this.set( "emptyList", followListObject.numberFound == 0 );
+				this.set( "showModalButton", followListObject.numberFound > 4 );
 			},
 			
 			attached: function() {
-				if( this.userList != null )
-					this._pushToFollowList( this.processUserListObject( this.userList ) );
+				this.loadMore();
 			},
 			
 			resetList: function() {
@@ -89,22 +92,21 @@
 				this.set( 'cursor', null );
 				this.set( 'numberFound', 0 );
 				this.set( 'isFinished', false );
-				this.set( 'refreshFollowList', true );
 				this.loadMore();
 			},
 			
 			loadMore: function() {
 				this.$.UserAuthorFollowListApi.params.authorId = this.authorId;
-				this.$.UserAuthorFollowListApi.params.cursor = this.cursor;
+				if( this.cursor != null )
+					this.$.UserAuthorFollowListApi.params.cursor = this.cursor;
+				else
+					delete this.$.UserAuthorFollowListApi.params.cursor;
+				this.$.UserAuthorFollowListApi.params.resultCount = this.resultCount;
 				this.$.UserAuthorFollowListApi.generateRequest();
 			},
 
 			_userAuthorFollowListApiResponse: function( response ) {
 				this._pushToFollowList( this.processUserListObject( response.detail.response ) );
-				if( this.refreshFollowList ) {
-					this.set( 'refreshFollowList', false );
-					this.querySelector( 'pratilipi-follow-author-grid' ).updateReducedFollowList();
-				}
 			},
 
 			_userAuthorFollowListApiError: function( response ) {

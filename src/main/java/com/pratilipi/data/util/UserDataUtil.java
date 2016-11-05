@@ -345,6 +345,9 @@ public class UserDataUtil {
 		if( user.getPassword() == null && user.getFacebookId() != null )
 			throw new InvalidArgumentException( GenericRequest.ERR_EMAIL_REGISTERED_WITH_FB );
 		
+		if( user.getPassword() == null && user.getGoogleId() != null )
+			throw new InvalidArgumentException( GenericRequest.ERR_EMAIL_REGISTERED_WITH_GOOGLE );
+
 		if( PasswordUtil.check( password, user.getPassword() ) ) {
 			_loginUser( AccessTokenFilter.getAccessToken(), user );
 			return createUserData( user );
@@ -370,7 +373,7 @@ public class UserDataUtil {
 		// * Users having Facebook or google Id can never be in GUEST or REFERRAL state.
 		// * No action required for REGISTERED or ACTIVE users.
 
-		if( user == null ) {
+		if( user == null || user.getState() == UserState.DELETED ) {
 
 			if( apiUserData.getEmail() != null )
 				user = dataAccessor.getUserByEmail( apiUserData.getEmail() );
@@ -411,14 +414,11 @@ public class UserDataUtil {
 				auditLog.setEventDataOld( gson.toJson( user ) );
 
 				user.setState( UserState.ACTIVE ); // Counting on Facebook / google for e-mail/user verification
-				user.setLastUpdated( new Date() );
 
 			} else { // user.getState() == UserState.ACTIVE || user.getState() == UserState.BLOCKED
 
 				auditLog.setAccessType( AccessType.USER_UPDATE );
 				auditLog.setEventDataOld( gson.toJson( user ) );
-
-				user.setLastUpdated( new Date() );
 
 			}
 
@@ -430,6 +430,8 @@ public class UserDataUtil {
 
 			auditLog.setEventDataNew( gson.toJson( user ) );
 
+			user.setLastUpdated( new Date() );
+			
 			user = dataAccessor.createOrUpdateUser( user, auditLog );
 
 		}

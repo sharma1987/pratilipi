@@ -64,23 +64,16 @@
 				</template>
 
 				<pratilipi-author-published-contents 
-						pratilipi-list-object="[[ publishedPratilipiList ]]" 
 						author="[[ author ]]"></pratilipi-author-published-contents>
-
-				<#--
-				<template is="dom-if" if="{{ hasAccessToUpdate }}">
-					<pratilipi-author-library-contents></pratilipi-author-library-contents>
-				</template>
-				-->
 
 			</div>
 			<div role="tabpanel" class="tab-pane fade" id="author-about">
 				<pratilipi-author-biography author="[[ author ]]"></pratilipi-author-biography>
 				<#-- For Authors without user profile -->
 				<template is="dom-if" if="{{ hasUserId }}">
-					<pratilipi-author-following author="[[ author ]]" author-list="{{ followingList }}" user-id="{{ userId }}"></pratilipi-author-following>
+					<pratilipi-author-following author="[[ author ]]" user-id="{{ userId }}"></pratilipi-author-following>
 				</template>
-				<pratilipi-author-followers author="[[ author ]]" user-list="{{ followersList }}" author-id="{{ authorId }}"></pratilipi-author-followers>
+				<pratilipi-author-followers author="[[ author ]]" author-id="{{ authorId }}"></pratilipi-author-followers>
 			</div>
 		</div>
 		<iron-ajax
@@ -100,11 +93,6 @@
 		
 		properties: {
 			author: { type: Object, observer: "_authorObserver" },
-
-			publishedPratilipiList: { type: Object },
-
-			followingList: { type: Object },
-			followersList: { type: Object }
 		},
 		
 		_authorObserver: function() {
@@ -118,22 +106,22 @@
 			var pratilipi = this.querySelector( 'pratilipi-author-published-contents' ).getPratilipiById( pratilipiId );
 			this.querySelector( 'pratilipi-author-published-contents' ).removeFromPratilipiList( pratilipiId );
 			this.querySelector( 'pratilipi-author-drafted-contents' ).addToPratilipiList( pratilipi );
-			this._pratilipiApiGetCall( pratilipiId, "DRAFTED" );
+			this._pratilipiApiPostCall( pratilipiId, "DRAFTED" );
 		},
 
 		publishContent: function( pratilipiId ) {
 			var pratilipi = this.querySelector( 'pratilipi-author-drafted-contents' ).getPratilipiById( pratilipiId );
 			this.querySelector( 'pratilipi-author-drafted-contents' ).removeFromPratilipiList( pratilipiId );
 			this.querySelector( 'pratilipi-author-published-contents' ).addToPratilipiList( pratilipi );
-			this._pratilipiApiGetCall( pratilipiId, "PUBLISHED" );
+			this._pratilipiApiPostCall( pratilipiId, "PUBLISHED" );
 		},
 
 		deleteContent: function( pratilipiId ) {
-			this._pratilipiApiGetCall( pratilipiId, "DELETED" );
+			this._pratilipiApiPostCall( pratilipiId, "DELETED" );
 		},
 
-		_pratilipiApiGetCall: function( pratilipiId, state ) {
-			this.$.PratilipiApi.body = jQuery.param( { "pratilipiId": pratilipiId, "state": state } );
+		_pratilipiApiPostCall: function( pratilipiId, state ) {
+			this.$.PratilipiApi.body = jQuery.param( { "pratilipiId": pratilipiId, "state": state, "_apiVer": "2" } );
 			this.$.PratilipiApi.generateRequest();
 		},
 
@@ -146,19 +134,16 @@
 		},
 
 		_pratilipiApiError: function( response ) {
-			if( response != null && response.detail.request.xhr.response.message != null ) {
-				document.querySelector( 'pratilipi-alert' ).alert( response.detail.request.xhr.response.message, false );
-			} else {
-				document.querySelector( 'pratilipi-alert' ).alert( "${ _strings.server_error_message }", false );
-				console.log( response );
-			}
+			document.querySelector( 'pratilipi-alert' ).alert( response != null && response.detail.request.xhr.response.message != null ? 
+						response.detail.request.xhr.response.message : "${ _strings.server_error_message }", false );
 			this.async( function() { window.location.reload(); }, 2000 );
 		},
 
-		attached: function() {
-			if( ( this.publishedPratilipiList == null || this.publishedPratilipiList.numberFound == 0 )
-					&& ! this.hasAccessToUpdate ) {
+		switchTabs: function() {
+			if( jQuery( ".nav-tabs li.active" ).attr( 'id' ) == "author-activity-tab" ) {
 				jQuery( '.nav-tabs a[href="#author-about"]' ).tab( 'show' );
+			} else if( jQuery( ".nav-tabs li.active" ).attr( 'id' ) == "author-about-tab" ) {
+				jQuery( '.nav-tabs a[href="#author-activity"]' ).tab( 'show' );
 			}
 		}
 		
