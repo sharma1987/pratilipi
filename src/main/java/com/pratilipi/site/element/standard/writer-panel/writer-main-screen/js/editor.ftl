@@ -185,7 +185,33 @@ Editor.prototype.toggleBlockquote = function() {
     }
     else {
         document.execCommand("formatBlock", false, "p");
+    } 
+    
+    <#-- if( this.content_object.isSelectionInsideElement( "blockquote" ) ) {
+		var $blockquote = $( this.content_object.getClosestElementToSelection("blockquote") );
+		var ptext;
+		var $block_p = $blockquote.find("p");
+		if( $block_p.length ) {
+			ptext = $block_p.html();
+		}
+		else {
+			ptext = $blockquote.html();
+		}
+		var $p = $("<p>").html( ptext );
+		$blockquote.replaceWith( $p );
     }
+    else {
+    	var ptarget = $( this.content_object.getClosestElementToSelection("p") );
+    	if( ptarget ) {
+    		var $p = $( ptarget );
+	    	var $blockquote = $("<blockquote>").html( $p.html() );
+	        $p.replaceWith( $blockquote );    		
+    	}
+    	else {
+    		document.execCommand("formatBlock", false, "blockquote");
+    	}
+
+    } -->
 };
 
 Editor.prototype.addImageListener = function() {
